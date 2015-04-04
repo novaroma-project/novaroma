@@ -1,0 +1,23 @@
+﻿<controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Novaroma.Win.Views.SettingsWindow"
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1 0 1 1" Padding="5" 
+        Icon="pack://application:,,,/Novaroma;component/Images/Img_Logo_Window.ico"
+        Title="{Binding Title}" TitleCaps="False"
+        SizeToContent="WidthAndHeight" MaxHeight="900" MaxWidth="900" d:DesignWidth="400" d:DesignHeight="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TabControl x:Name="ControlsTabControl">
+        </TabControl>
+        <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button IsDefault="True" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Save}" Click="SaveClick" />
+            <Button IsCancel="True" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Cancel}" Click="CancelClick" />
+        </StackPanel>
+    </Grid>
+</controls:MetroWindow>

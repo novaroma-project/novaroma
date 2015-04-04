@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Novaroma.Win.UserControls.AdvancedSearchUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:userControls="clr-namespace:Novaroma.Win.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="110.666" d:DesignWidth="1104"
+             PreviewKeyDown="AdvancedSearchUserControl_OnPreviewKeyDown">
+    <Grid>
+        <DockPanel>
+            <StackPanel HorizontalAlignment="Stretch">
+                <WrapPanel>
+                    <DockPanel Margin="10 10 0 10" Width="260">
+                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Title}" Width="60"/>
+                        <TextBox Name="SearchTextBox" MinWidth="100"
+                             Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
+                    </DockPanel>
+                    <DockPanel Margin="10 10 0 10" Width="260">
+                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Year}" Width="60"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                            <controls:NumericUpDown Name="ReleaseYearStartTextBox" Minimum="1886" Maximum="9999" Width="89"
+                                                Value="{Binding ReleaseYearStart, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                            <controls:NumericUpDown Name="ReleaseYearEndTextBox" Minimum="1886" Maximum="9999" Width="89"
+                                                Value="{Binding ReleaseYearEnd, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel Margin="10 10 0 10" Width="260">
+                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Rating}" Width="60"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                            <Label Content="{Binding RatingMin}" Width="25"/>
+                            <controls:RangeSlider Minimum="0" LowerValue="{Binding RatingMin}" Maximum="10" UpperValue="{Binding RatingMax}" 
+                                              Width="150" IsMoveToPointEnabled="True"
+                                              IsSnapToTickEnabled="True" TickFrequency="0.1" MinRangeWidth="2" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"  />
+                            <Label Content="{Binding RatingMax}" Width="25"/>
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel Margin="10 10 0 10" Width="260">
+                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Vote}" Width="60"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                            <controls:NumericUpDown Name="NumberOfVotesMinTextBox" Minimum="0"
+                                                Value="{Binding NumberOfVotesMin, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                            <controls:NumericUpDown Name="NumberOfVotesMaxTextBox" Minimum="1"
+                                                Value="{Binding NumberOfVotesMax, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel Margin="10 10 0 10" Width="260">
+                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Runtime}" Width="60"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                            <controls:NumericUpDown Name="RuntimeMinTextBox" Minimum="0"
+                                                Value="{Binding RuntimeMin, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                            <controls:NumericUpDown Name="RuntimeMaxTextBox" Minimum="1"
+                                                Value="{Binding RuntimeMax, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel Margin="10 10 0 10" Width="260">
+                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Genre}" Width="60"/>
+                        <userControls:MultiSelectComboBox VerticalAlignment="Top" ItemsSource="{Binding Path=Genres.Selections}" />
+                    </DockPanel>
+                    <DockPanel Margin="10 10 0 10" Width="260">
+                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=MediaTypes}" Width="60"/>
+                        <userControls:MultiSelectComboBox VerticalAlignment="Top" ItemsSource="{Binding Path=MediaTypes.Selections}" />
+                    </DockPanel>
+                    <DockPanel Margin="10 10 0 10" Width="150">
+                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=ExcludeExisting}" VerticalAlignment="Center"
+                               IsChecked="{Binding ExcludeExisting, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DockPanel>
+                </WrapPanel>
+            </StackPanel>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 10 0 0">
+            <Button Margin="0 0 5 0" Command="{Binding ClearFiltersCommand}" ToolTip="{Binding Source={StaticResource Resources}, Path=Clear}"
+                    Style="{StaticResource MetroCircleButtonStyle}" Width="50" Height="50">
+                <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_clean}" Fill="{StaticResource BlackBrush}" />
+            </Button>
+            <Button Margin="0 0 5 0" Command="{Binding SearchCommand}" ToolTip="{Binding Source={StaticResource Resources}, Path=Clear}"
+                    Style="{StaticResource MetroCircleButtonStyle}" Width="50" Height="50">
+                <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_search}" Fill="{StaticResource BlackBrush}" />
+            </Button>
+        </DockPanel>
+    </Grid>
+</UserControl>

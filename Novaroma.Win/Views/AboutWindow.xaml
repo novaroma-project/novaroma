@@ -1,0 +1,70 @@
+﻿<controls:MetroWindow x:Class="Novaroma.Win.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:converters="clr-namespace:Novaroma.Win.Converters"
+        xmlns:userControls="clr-namespace:Novaroma.Win.UserControls"
+        WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowMinButton="False"
+        BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1 0 1 1" Padding="5" 
+        Icon="pack://application:,,,/Novaroma;component/Images/Img_Logo_Window.ico"
+        Title="{Binding Source={StaticResource Resources}, Path=About, Converter={converters:ToLowerConverter}}" TitleCaps="False"
+        PreviewKeyDown="AboutWindow_OnPreviewKeyDown"
+        Width="500" SizeToContent="Height" ResizeMode="NoResize">
+    <StackPanel Margin="10">
+        <TextBlock Margin="0 0 0 10" Height="75" HorizontalAlignment="Center">
+            <Hyperlink TextDecorations="None" NavigateUri="http://www.novaroma.net" RequestNavigate="Hyperlink_OnRequestNavigate">
+            <Image Source="../Resources/Images/Img_Logo_128x128.png"  />
+        </Hyperlink>
+        </TextBlock>
+        <DockPanel HorizontalAlignment="Center" Margin="10 0 0 0" VerticalAlignment="Center">
+            <TextBlock Name="ProductTextBlock" FontSize="30" FontWeight="Bold" Margin="10 0 5 0" />
+            <TextBlock Name="VersionTextBlock" />
+        </DockPanel>
+        <TextBlock Name="CopyrightTextBlock" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 20" />
+        <TextBlock Name="DescriptionTextBlock" FontSize="15" FontStyle="Italic" Margin="0 0 0 20" HorizontalAlignment="Center" />
+        <DockPanel HorizontalAlignment="Center" Margin="5">
+            <TextBlock>
+                <Hyperlink TextDecorations="None" NavigateUri="https://www.facebook.com/pages/Novaroma/673551616124660"
+                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <Image Source="../Resources/Images/Img_Facebook_48x48.png" Width="30" Height="30" Margin="0 0 5 0" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock>
+                <Hyperlink TextDecorations="None" NavigateUri="https://twitter.com/novaromainc"
+                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <Image Source="../Resources/Images/Img_Twitter_48x48.png" Width="30" Height="30" Margin="0 0 5 0" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock>
+                <Hyperlink TextDecorations="None" NavigateUri="https://plus.google.com/115738461020023785308"
+                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <Image Source="../Resources/Images/Img_GooglePlus_48x48.png" Width="30" Height="30" Margin="0 0 5 0" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock>
+                <Hyperlink TextDecorations="None" NavigateUri="https://www.youtube.com/channel/UCTGP5I7OGFqQe-dCIwbUztw"
+                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <Image Source="../Resources/Images/Img_Youtube_48x48.png" Width="30" Height="30" Margin="0 0 5 0" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock>
+                <Hyperlink TextDecorations="None" NavigateUri="https://github.com/novaroma-project/novaroma"
+                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                    <Image Source="../Resources/Images/Img_Github_48x48.png" Width="30" Height="30" Margin="0 0 5 0" />
+                </Hyperlink>
+            </TextBlock>
+        </DockPanel>
+        <Border BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1 1 1 1">
+            <Grid>
+                <StackPanel Margin="5">
+                    <TextBlock Name="QuoteTextBlock" FontWeight="Bold" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="0 0 50 5" />
+                    <TextBlock Name="QuoteDetailTextBlock" FontStyle="Italic" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="50 0 0 0" />
+                </StackPanel>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Height="25"
+                        Style="{StaticResource MetroCircleButtonStyle}" Click="RefreshQuoteClick">
+                    <userControls:IconUserControl Visual="{StaticResource ni_refresh}" Width="10" />
+                </Button>
+            </Grid>
+        </Border>
+    </StackPanel>
+</controls:MetroWindow>

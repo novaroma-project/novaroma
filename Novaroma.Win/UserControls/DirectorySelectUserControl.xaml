@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="Novaroma.Win.UserControls.DirectorySelectUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel MinWidth="150">
+        <Button x:Name="Button" Margin="0" Padding="0" DockPanel.Dock="Right" Width="Auto" Click="BrowseFolder" Content="..." MinWidth="20" />
+        <TextBox x:Name="TextBox" Height="Auto" HorizontalAlignment="Stretch" DockPanel.Dock="Right" 
+                 Text="{Binding Text, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+    </DockPanel>
+</UserControl>

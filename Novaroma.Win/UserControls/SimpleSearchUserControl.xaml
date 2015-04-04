@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Novaroma.Win.UserControls.SimpleSearchUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d">
+    <Grid>
+        <TextBox Name="SearchTextBox" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" 
+                 Style="{StaticResource SearchMetroTextBox}"
+                 controls:TextBoxHelper.IsWaitingForData="{Binding IsBusy}"
+                 controls:TextBoxHelper.ButtonCommand="{Binding SearchCommand}"
+                 IsEnabled="{Binding IsNotBusy}"/>
+        <Button Name="SearchButton" HorizontalAlignment="Right" Width="0"
+                Command="{Binding SearchCommand}"
+                IsDefault="{Binding ElementName=SearchTextBox, Path=IsKeyboardFocused}">
+        </Button>
+    </Grid>
+</UserControl>

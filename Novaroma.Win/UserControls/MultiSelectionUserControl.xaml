@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Novaroma.Win.UserControls.MultiSelectionUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             MinWidth="250" MinHeight="50" 
+             MaxHeight ="150"
+             d:DesignHeight="150" d:DesignWidth="300">
+    <Border BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1 1 1 1">
+        <Grid DataContext="{Binding}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ListView x:Name="NotSelectedListView" 
+                  ItemsSource="{Binding TmpNotSelectedItems}" 
+                  MouseDoubleClick="NotSelectedListView_OnMouseDoubleClick">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="{Binding Source={StaticResource Resources}, Path=NotSelected}" 
+                                    CellTemplate="{StaticResource ItemSelectionDataTemplate}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="SelectedListView" Grid.Column="1"
+                  ItemsSource="{Binding TmpSelectedItems}"
+                  AllowDrop="True"
+                  MouseDoubleClick="SelectedListView_OnMouseDoubleClick">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="{Binding Source={StaticResource Resources}, Path=Selected}" CellTemplate="{StaticResource ItemSelectionDataTemplate}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Border>
+</UserControl>

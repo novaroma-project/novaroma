@@ -1,0 +1,47 @@
+﻿<controls:MetroWindow x:Class="Novaroma.Win.Views.ScriptServicesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:converters="clr-namespace:Novaroma.Win.Converters"
+        xmlns:userControls="clr-namespace:Novaroma.Win.UserControls"
+        BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1 0 1 1" Padding="5" 
+        Icon="pack://application:,,,/Novaroma;component/Images/Img_Logo_Window.ico"
+        Title="{Binding Source={StaticResource Resources}, Path=ScriptServices, Converter={converters:ToLowerConverter}}" TitleCaps="False"
+        WindowStartupLocation="CenterScreen" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="5" Orientation="Horizontal">
+            <Button Name="AddButton" MinWidth="60" Margin="5" Content="{Binding Source={StaticResource Resources}, Path=Add}" 
+                    Style="{DynamicResource SquareButtonStyle}" Click="AddButton_OnClick" />
+        </StackPanel>
+        <DataGrid Name="ScriptServicesDataGrid" Grid.Row="1" ItemsSource="{Binding ScriptServices}" IsReadOnly="True" AutoGenerateColumns="False" Margin="15"
+                  SelectedItem="{Binding SelectedScriptService}" MouseDoubleClick="ScriptServicesDataGrid_OnMouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{Binding Source={StaticResource Resources}, Path=Name}" Binding="{Binding Name}" MinWidth="150" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Delete}" 
+                                    Margin="0 0 5 0" Width="40" Height="40"
+                                    Style="{StaticResource MetroCircleButtonStyle}"
+                                    Command="{Binding DeleteScriptServiceCommand, RelativeSource={RelativeSource AncestorType=controls:MetroWindow}}"
+                                    CommandParameter="{Binding}">
+                                <userControls:IconUserControl Width="16" Height="16" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_delete}" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" >
+            <Button Name="RestartNovaromaButton" Margin="0 0 10 0" MinWidth="60" 
+                    Content="{Binding Source={StaticResource Resources}, Path=RestartNovaroma}" 
+                    IsEnabled="{Binding IsModified}"
+                    Style="{DynamicResource SquareButtonStyle}" Click="RestartNovaromaButton_Click" />
+        </StackPanel>
+    </Grid>
+</controls:MetroWindow>

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Novaroma.Win.UserControls.VideoSearchInfoUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:utilities="clr-namespace:Novaroma.Win.Utilities"
+             mc:Ignorable="d">
+    <WrapPanel Visibility="{Binding Visibility, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}">
+        <DockPanel Margin="0 0 10 0">
+            <TextBlock Text="{Binding Source={StaticResource Resources}, Path=VideoQuality}" 
+                       ToolTip="{Binding Source={StaticResource Resources}, Path=VideoQuality}"
+                       Margin="0 0 0 5" Width="{Binding LabelWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" TextTrimming="WordEllipsis"
+                       VerticalAlignment="Center"/>
+            <ComboBox  MinWidth="100" Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"
+                  ItemsSource="{Binding VideoQualityEnumInfo, Source={x:Static utilities:StaticSource.Instance}}" 
+                  DisplayMemberPath="DisplayName" SelectedValue="{Binding VideoQuality}" 
+                  SelectedValuePath="Item" Margin="5 0 0 5" />
+        </DockPanel>
+        <DockPanel Margin="0 0 10 0">
+            <TextBlock Text="{Binding Source={StaticResource Resources}, Path=ExtraKeywords}" 
+                       Width="{Binding LabelWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
+                       ToolTip="{Binding Source={StaticResource Resources}, Path=ExtraKeywordsDescription}" Margin="0 0 0 5" />
+            <TextBox Text="{Binding ExtraKeywords}" Margin="5 0 0 5" Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" MinWidth="100"/>
+        </DockPanel>
+        <DockPanel Margin="0 0 10 0">
+            <TextBlock Text="{Binding Source={StaticResource Resources}, Path=ExcludeKeywords}" 
+                       Width="{Binding LabelWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
+                       ToolTip="{Binding Source={StaticResource Resources}, Path=ExcludeKeywordsDescription}" Margin="0 0 0 5" />
+            <TextBox Text="{Binding ExcludeKeywords}" Margin="5 0 0 5" Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" MinWidth="100" />
+        </DockPanel>
+    </WrapPanel>
+</UserControl>

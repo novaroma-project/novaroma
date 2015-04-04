@@ -1,0 +1,264 @@
+﻿<controls:MetroWindow x:Class="Novaroma.Win.Views.NewMediaWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Novaroma.Win.Converters"
+        xmlns:userControls="clr-namespace:Novaroma.Win.UserControls"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:utilities="clr-namespace:Novaroma.Win.Utilities"
+        BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1 0 1 1" Padding="5" 
+        WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/Novaroma;component/Images/Img_Logo_Window.ico"
+        Title="{Binding Source={StaticResource Resources}, Path=New, Converter={converters:ToLowerConverter}}" TitleCaps="False"
+        Height="700" Width="900">
+    <Window.Resources>
+        <utilities:SearchResultTemplateSelector x:Key="SearchResultTemplateSelector"/>
+    </Window.Resources>
+    <Grid>
+        <TabControl x:Name="TabControl" Margin="10" VerticalContentAlignment="Stretch" SelectedIndex="{Binding SelectedTabIndex}">
+            <TabItem Name="DirectoryTabItem" Header="{Binding Source={StaticResource Resources}, Path=Directory, Converter={converters:ToLowerConverter}}"
+                     Visibility="{Binding DirectorySelectionAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <userControls:DirectorySelectUserControl x:Name="DirectorySelectUserControl" Margin="10" Text="{Binding SelectedDirectory}" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button IsDefault="True" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Next}" Click="Next_Button_Click" />
+                        <Button IsCancel="true" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Cancel}" Click="Cancel_Button_Click" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="SelectTabItem" Header="{Binding Source={StaticResource Resources}, Path=Select, Converter={converters:ToLowerConverter}}"
+                     Visibility="{Binding SelectionAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer>
+                        <DataGrid ItemsSource="{Binding Searches}" AutoGenerateColumns="False" PreviewMouseWheel="DataGrid_PreviewMouseWheel" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <DockPanel>
+                                                <TextBlock Text="{Binding Source={StaticResource Resources}, Path=Select}" Margin="5"/>
+                                                <CheckBox Margin="5" IsThreeState="True"
+                                                          IsChecked="{Binding DataContext.AllSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"  />
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Binding="{Binding Directory}"
+                                                    Header="{Binding Source={StaticResource Resources}, Path=Directory}"/>
+                                <DataGridTemplateColumn Width="Auto" Header="{Binding Source={StaticResource Resources}, Path=FoundMedia}">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel DataContext="{Binding OriginalMedia}">
+                                                <userControls:PosterUserControl Width="50"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <controls:ProgressRing IsActive="{Binding Searches, Converter={converters:ObjectToBooleanReverseConverter}}" Grid.Row="0" x:Name="SelectProgressRing" Margin="5" />
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button Margin="0 0 10 0" MinWidth="60" Click="Prev_Button_Click"
+                                Visibility="{Binding DirectorySelectionAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Content="{Binding Source={StaticResource Resources}, Path=Previous}" />
+                        <Button IsDefault="True" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Next}" Click="Next_Button_Click" />
+                        <Button IsCancel="true" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Cancel}" Click="Cancel_Button_Click" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="SearchTabItem" Header="{Binding Source={StaticResource Resources}, Path=Search, Converter={converters:ToLowerConverter}}"
+                     Visibility="{Binding SearchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer>
+                        <ItemsControl x:Name="SearchItemsControl" FocusVisualStyle="{x:Null}"
+                                      ItemsSource="{Binding SelectedSearches}" 
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid DataContext="{Binding Search}" Margin="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <userControls:SimpleSearchUserControl x:Name="SimpleSearchUserControl" />
+                                        <Grid Grid.Row="1" Margin="0 10 0 0" >
+                                            <ComboBox ItemsSource="{Binding Results}" controls:TextBoxHelper.ClearTextButton="True" SelectedItem="{Binding SelectedResult}" 
+                                                      Visibility="{Binding Results, Converter={converters:ObjectToVisibilityConverter}}"
+                                                      ItemTemplateSelector="{StaticResource SearchResultTemplateSelector}">
+                                            </ComboBox>
+                                            <controls:ProgressRing Margin="5" IsActive="{Binding IsBusy, Mode=OneWay}" />
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0.333,0">
+                        <Button Margin="0 0 10 0" MinWidth="60" Click="Prev_Button_Click"
+                                Visibility="{Binding SelectionAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Content="{Binding Source={StaticResource Resources}, Path=Previous}" />
+                        <Button Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Next}" Click="Next_Button_Click" />
+                        <Button IsCancel="true" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Cancel}" Click="Cancel_Button_Click" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="DiscoverTabItem" Header="{Binding Source={StaticResource Resources}, Path=Discover, Converter={converters:ToLowerConverter}}"
+                     Visibility="{Binding DiscoverAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer>
+                        <ItemsControl x:Name="DiscoverItemsControl"
+                                      ItemsSource="{Binding SelectedSearches}" 
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid DataContext="{Binding Search}" Margin="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Expander IsExpanded="True" Tag="{Binding Source={StaticResource Resources}, Path=Filters}" 
+                                                  HeaderTemplate="{StaticResource ExpanderClickableHeaderTemplate}">
+                                            <userControls:AdvancedSearchUserControl x:Name="AdvancedSearchUserControl" />
+                                        </Expander>
+                                        <Grid Grid.Row="1" Margin="0 10 0 0">
+                                            <ListView ItemsSource="{Binding Path=ResultSelections.Selections}" BorderThickness="0"
+                                                      Visibility="{Binding IsNotBusy, Converter={converters:BooleanToVisibilityConverter}}"
+                                                      PreviewMouseWheel="DataGrid_PreviewMouseWheel">
+                                                <ListView.Resources>
+                                                    <Style TargetType="{x:Type ListViewItem}">
+                                                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}"/>
+                                                        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}" />
+                                                    </Style>
+                                                </ListView.Resources>
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <userControls:AdvancedSearchResultUserControl DataContext="{Binding Path=Item.SearchResult}" />
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                            <controls:ProgressRing Margin="5" IsActive="{Binding IsBusy, Mode=OneWay}" />
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0.333,0">
+                        <Button Margin="0 0 10 0" MinWidth="60" Click="Prev_Button_Click"
+                                Visibility="{Binding SelectionAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Content="{Binding Source={StaticResource Resources}, Path=Previous}" />
+                        <Button Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Next}" Click="Next_Button_Click" />
+                        <Button IsCancel="true" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Cancel}" Click="Cancel_Button_Click" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="EditTabItem" Header="{Binding Source={StaticResource Resources}, Path=Edit, Converter={converters:ToLowerConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding EditList}" 
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl Margin="10" 
+                                                    BorderBrush="{StaticResource AccentColorBrush}"
+                                                    BorderThickness="1"
+                                                    DataContext="{Binding}" 
+                                                    Content="{Binding Media}">
+                                        <ContentControl.Style>
+                                            <Style TargetType="{x:Type ContentControl}">
+                                                <Setter Property="ContentTemplate" Value="{StaticResource LoadingTemplate}" />
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Media, Converter={converters:EntityToTypeNameConverter}}" Value="TvShow">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource TvShowEditTemplate}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Media, Converter={converters:EntityToTypeNameConverter}}" Value="Movie">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource MovieEditTemplate}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Media, Converter={converters:EntityToTypeNameConverter}}" Value="{x:Null}">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource LoadingTemplate}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Previous}" Click="Prev_Button_Click"
+                                Visibility="{Binding SearchDiscoverAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <Button IsDefault="True" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Next}" Click="Next_Button_Click" />
+                        <Button IsCancel="true" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Cancel}" Click="Cancel_Button_Click" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="SaveTabItem" Header="{Binding Source={StaticResource Resources}, Path=Save, Converter={converters:ToLowerConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding AddedDirectory}" Foreground="Red" FontSize="16" FontWeight="Bold" Margin="5 5 0 5"
+                               Visibility="{Binding SelectedDirectory, Converter={converters:StringToVisibilityConverter}}" />
+                    <ScrollViewer Grid.Row="1">
+                        <DataGrid ItemsSource="{Binding SaveList}" AutoGenerateColumns="False" PreviewMouseWheel="DataGrid_PreviewMouseWheel" IsReadOnly="True">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="Auto" Header="{Binding Source={StaticResource Resources}, Path=Poster}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <userControls:PosterUserControl Width="50"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding Title}" 
+                                                Header="{Binding Source={StaticResource Resources}, Path=Title}" />
+                                    <DataGridTextColumn Binding="{Binding Directory}"
+                                                Header="{Binding Source={StaticResource Resources}, Path=Directory}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Previous}" Click="Prev_Button_Click"></Button>
+                        <Button IsDefault="True" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Save}" 
+                                IsEnabled="{Binding CanSave}" Click="Save_Button_Click"></Button>
+                        <Button IsCancel="true" Margin="0 0 10 0" MinWidth="60" Content="{Binding Source={StaticResource Resources}, Path=Cancel}" Click="Cancel_Button_Click"></Button>
+                    </StackPanel>
+                    <controls:ProgressRing Grid.Row="1"  x:Name="SaveProgressRing" Margin="5" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</controls:MetroWindow>

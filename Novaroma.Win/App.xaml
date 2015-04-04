@@ -1,0 +1,304 @@
+﻿<Application x:Class="Novaroma.Win.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:converters="clr-namespace:Novaroma.Win.Converters"
+             xmlns:userControls="clr-namespace:Novaroma.Win.UserControls"
+             xmlns:novaroma="clr-namespace:Novaroma;assembly=Novaroma"
+             Startup="App_OnStartup"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <ObjectDataProvider x:Key="Resources" ObjectType="{x:Type novaroma:ResourceHelper}" MethodName="GetInstance"/>
+                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="/Resources/NotifyIconResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="ExpanderClickableHeaderTemplate">
+                <ToggleButton Background="Transparent" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=Expander}, Path=IsExpanded}"
+                              BorderThickness="0" Cursor="Hand">
+                    <ToggleButton.Template>
+                        <ControlTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Expander}, Path=Tag}" 
+                                           Foreground="{StaticResource WhiteBrush}"
+                                           FontSize="15" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ItemSelectionDataTemplate">
+                <DockPanel>
+                    <TextBlock HorizontalAlignment="Stretch" Text="{Binding Converter={converters:NovaromaNameConverter}}" />
+                    <Button Width="20" Margin="10 0 0 0" HorizontalAlignment="Right" Background="Transparent"
+                            Visibility="{Binding Converter={converters:ConfigurableToVisibilityConverter}}" 
+                            DataContext="{Binding}" 
+                            Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.EditServiceSettingsCommand}"
+                            CommandParameter="{Binding}"
+                            Style="{DynamicResource SquareButtonStyle}">
+                        <userControls:IconUserControl Width="10" Height="10" Visual="{StaticResource appbar_settings}" 
+                                Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                    </Button>
+                </DockPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="SearchResultDataTemplate">
+                <userControls:SearchResultUserControl DataContext="{Binding SearchResult}"
+                                                      Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ComboBox}, Path=ActualWidth}" />
+            </DataTemplate>
+            <DataTemplate x:Key="AdvancedSearchResultDataTemplate">
+                <userControls:AdvancedSearchResultUserControl DataContext="{Binding SearchResult}"
+                                                              Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ComboBox}, Path=ActualWidth}" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="LoadingTemplate">
+                <controls:ProgressRing IsActive="True" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="MovieEditTemplate">
+                <Grid DataContext="{Binding}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <userControls:PosterUserControl Width="70" Height="104" Margin="5" />
+                        <userControls:RatingUserControl  Width="30" RatingSize ="9" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="1" Margin="5 0 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 5">
+                            <TextBlock  ToolTip="{Binding Title}">
+                                <Hyperlink TextDecorations="None" NavigateUri="{Binding ServiceUrl}" RequestNavigate=" Hyperlink_OnRequestNavigate">
+                                    <Run Text="{Binding Title}" FontWeight="Bold"/>
+                                    (<Run Text="{Binding Year}"/>)
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock Visibility="{Binding ImdbUrl, Converter={converters:StringToVisibilityConverter}}">
+                                <Hyperlink TextDecorations="None" NavigateUri="{Binding ImdbUrl}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    <Image Margin="10 0 0 0" Height="14" Width="31" Source="../Resources/Images/Img_Imdb_46x22.png" />
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <TextBlock Grid.Row="1" Text="{Binding Outline}" ToolTip="{Binding Outline}" TextTrimming="WordEllipsis" Margin="0 0 0 5"/>
+                        <Grid Grid.Row="2" Margin="0 0 0 5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <userControls:DirectorySelectUserControl Grid.Column="0" Grid.Row="0" Text="{Binding Directory}" Height="30"/>
+                            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Margin="5 0 5 0"
+                                            Visibility="{Binding Directory, Converter= {converters:StringToVisibilityConverter}}">
+                                    <Button  Cursor="Hand" Width="40" Height="40" 
+                                        ToolTip="{Binding Source={StaticResource Resources}, Path=GoToDirectory}"
+                                        Command="{Binding Path=DataContext.MovieGoToDirectoryCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource MetroCircleButtonStyle}">
+                                        <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_folder_open}" 
+                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                                    </Button>
+                                    <Button  Cursor="Hand" Width="40" Height="40"
+                                        ToolTip="{Binding Source={StaticResource Resources}, Path=CheckAndUpdateDirectoryFiles}"
+                                        Command="{Binding Path=DataContext.MovieDiscoverFilesCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource MetroCircleButtonStyle}">
+                                        <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_folder_refresh}" 
+                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                    </Button>
+                                </StackPanel>
+                                <Button  Width="40" Height="40" Cursor="Hand"
+                                         Command="{Binding Path=DataContext.MovieDownloadCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                         CommandParameter="{Binding}"
+                                         Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=ManualDownload}">
+                                    <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_movie_download}"
+                                                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                                </Button>
+                                <Button Width="40" Height="40" Cursor="Hand"
+                                        IsEnabled="{Binding Path=FilePath, Converter={converters:PathToBoolConverter}}"
+                                        Command="{Binding Path=DataContext.MovieSubtitleDownloadCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="{Binding}"
+                                                            ToolTip="{Binding Source={StaticResource Resources}, Path=ManualSubtitleDownload}">
+                                    <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_file_download}"
+                                                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroCircleButtonStyle}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter Property="Foreground" Value="{StaticResource GrayBrush3}" />
+                                                </Trigger>
+                                                <Trigger Property="IsEnabled" Value="True">
+                                                    <Setter Property="Foreground" Value="{StaticResource BlackBrush}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" >
+                                <CheckBox IsChecked="{Binding BackgroundDownload}" Margin="0 0 10 0"
+                                          Content="{Binding Source={StaticResource Resources}, Path=BackgroundDownload}"
+                                          Command="{Binding DataContext.MovieDownloadCheckCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          CommandParameter="{Binding}" />
+                                <CheckBox IsChecked="{Binding BackgroundSubtitleDownload}" Margin="0 0 10 0"
+                                          Content="{Binding Source={StaticResource Resources}, Path=BackgroundSubtitleDownload}" />
+                                <CheckBox IsChecked="{Binding IsWatched}" Margin="0 0 10 0"
+                                  Content="{Binding Source={StaticResource Resources}, Path=IsWatched}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <userControls:VideoSearchInfoUserControl Grid.Column="2"  Margin="5 10 0 0" ItemWidth="150" LabelWidth="120" Width="300"
+                                Visibility="{Binding Path=DataContext.BackgroundDownload, Converter={converters:BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Grid}}" />
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TvShowEditTemplate">
+                <StackPanel DataContext="{Binding}">
+                    <Grid DataContext="{Binding}" Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <userControls:PosterUserControl Width="70" Height="103" Margin="5"  />
+                            <userControls:RatingUserControl  Width="30" RatingSize ="9" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1" Margin="5 0 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 5">
+                                <TextBlock ToolTip="{Binding Title}">
+                                    <Hyperlink TextDecorations="None" NavigateUri="{Binding ServiceUrl}" RequestNavigate=" Hyperlink_OnRequestNavigate">
+                                        <Run Text="{Binding Title}" FontWeight="Bold"/>
+                                        (<Run Text="{Binding Year}"/>)
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock Visibility="{Binding ImdbUrl, Converter={converters:StringToVisibilityConverter}}">
+                                    <Hyperlink TextDecorations="None" NavigateUri="{Binding ImdbUrl}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                        <Image Margin="10 0 0 0" Height="14" Width="31" Source="../Resources/Images/Img_Imdb_46x22.png" />
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Row="1" Text="{Binding Outline}" ToolTip="{Binding Outline}" TextTrimming="WordEllipsis" Margin="0 0 0 5"/>
+                            <Grid Grid.Row="2" Margin="0 0 0 5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <userControls:DirectorySelectUserControl Text="{Binding Directory}" Height="30" />
+                                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="5 0 5 0"
+                                            Visibility="{Binding Directory, Converter= {converters:StringToVisibilityConverter}}">
+                                    <Button  Cursor="Hand" Width="40" Height="40" 
+                                        ToolTip="{Binding Source={StaticResource Resources}, Path=GoToDirectory}"
+                                        Command="{Binding Path=DataContext.TvShowGoToDirectoryCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource MetroCircleButtonStyle}">
+                                        <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_folder_open}" 
+                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                                    </Button>
+                                    <Button  Cursor="Hand" Width="40" Height="40"
+                                        ToolTip="{Binding Source={StaticResource Resources}, Path=CheckAndUpdateDirectoryFiles}"
+                                        Command="{Binding Path=DataContext.TvShowDiscoverFilesCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource MetroCircleButtonStyle}">
+                                        <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_folder_refresh}" 
+                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                    </Button>
+                                </StackPanel>
+                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding AutoDownload}" 
+                                  Content="{Binding Source={StaticResource Resources}, Path=AutoDownloadNewEpisodes}" />
+                            </Grid>
+                        </Grid>
+                        <userControls:VideoSearchInfoUserControl Grid.Column="2"  Margin="5 10 0 0" ItemWidth="150" LabelWidth="120" Width="300" />
+                    </Grid>
+                    <userControls:TvShowSeasonsUserControl />
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MediaInfoFlyoutTemplate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <userControls:PosterUserControl Width="180" Height="265" Margin="10" />
+                    <StackPanel Grid.Column="1" Margin="10" Name="MediaFlyoutInfoPanel">
+                        <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Width="{Binding Path=ActualWidth, ElementName=MediaFlyoutInfoPanel}">
+                            <Hyperlink TextDecorations="None" NavigateUri="{Binding ServiceUrl}" RequestNavigate=" Hyperlink_OnRequestNavigate" Foreground="{StaticResource WhiteBrush}">
+                                <Run Text="{Binding Title}" FontSize="{StaticResource FlyoutHeaderFontSize}" FontWeight="Bold"/>
+                                <Run Text=" "/>(<Run Text="{Binding Year}"  FontWeight="Medium"/>)
+                            </Hyperlink>
+                        </TextBlock>
+                        <Separator Margin="0 10 0 10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource appbar_clock}" Fill="{Binding RelativeSource={RelativeSource AncestorType=controls:Flyout}, Path=Foreground}"  Margin="0 0 5 0"/>
+                                <TextBlock Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:Flyout}, Path=Foreground}">
+                                <Run Text="{Binding Runtime}" />
+                                <Run Text="{Binding Source={StaticResource Resources}, Path=MinuteReduced, Mode=OneWay}" />
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding Genres, Converter={converters:ListToStringConverter}}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <Separator Margin="0 10 0 10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <userControls:RatingUserControl Width="40" VerticalAlignment="Center" />
+                            <TextBlock VerticalAlignment="Center" Margin="5 0 0 0">
+                                <Run Text="{Binding VoteCount}" />
+                                <Run Text="{Binding Source={StaticResource Resources}, Path=Votes, Mode=OneWay, Converter={converters:ToLowerConverter}}"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <Separator Margin="0 10 0 10"/>
+                        <TextBlock Text="{Binding Outline}" TextWrapping="Wrap"/>
+                        <Separator Margin="0 10 0 10"/>
+                        <TextBlock Visibility="{Binding ImdbUrl, Converter={converters:StringToVisibilityConverter}}">
+                            <Hyperlink TextDecorations="None" NavigateUri="{Binding ImdbUrl}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                <Image Height="22" Width="46" Source="../Resources/Images/Img_Imdb_46x22.png" />
+                            </Hyperlink>
+                        </TextBlock>
+                        <Separator Margin="0 10 0 10"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,222 @@
+﻿<UserControl x:Class="Novaroma.Win.UserControls.TvShowSeasonsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Novaroma.Win.Converters"
+             xmlns:userControls="clr-namespace:Novaroma.Win.UserControls"
+             mc:Ignorable="d">
+    <Grid>
+        <Expander Name="SeasonExpander" Background="{StaticResource GrayBrush9}" Foreground="{StaticResource BlackBrush}" IsExpanded="True">
+            <Expander.Header>
+                <ToggleButton Background="Transparent" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=Expander}, Path=IsExpanded}"
+                              BorderThickness="0" Cursor="Hand">
+                    <ToggleButton.Template>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"
+                                        DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType=Expander}}">
+                                <TextBlock Text="{Binding Source={StaticResource Resources}, Path=Seasons}" Foreground="{StaticResource BlackBrush}"
+                                           FontSize="15" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                <CheckBox Content="{Binding Source={StaticResource Resources}, Path=BackgroundDownload}" Margin="15 0 0 0" FontSize="10"
+                                          IsThreeState="True" IsChecked="{Binding AllBackgroundDownload}" Foreground="{StaticResource BlackBrush}"
+                                          Command="{Binding DataContext.AllTvDownloadCheckCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          CommandParameter="{Binding}" />
+                                <CheckBox Content="{Binding Source={StaticResource Resources}, Path=BackgroundSubtitleDownload}" Margin="15 0 0 0" FontSize="10"
+                                          IsThreeState="True" IsChecked="{Binding AllBackgroundSubtitleDownload}" Foreground="{StaticResource BlackBrush}" />
+                                <CheckBox Content="{Binding Source={StaticResource Resources}, Path=IsWatched}" Margin="15 0 0 0" FontSize="10"
+                                          IsThreeState="True" IsChecked="{Binding AllWatched}" Foreground="{StaticResource BlackBrush}"/>
+                            </StackPanel>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
+            </Expander.Header>
+            <ItemsControl ItemsSource="{Binding Seasons}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander Name="EpisodeExpander" Background="{StaticResource GrayBrush9}" Foreground="{StaticResource BlackBrush}">
+                            <Expander.Header>
+                                <ToggleButton Background="Transparent" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=Expander}, Path=IsExpanded}"
+                                              BorderThickness="0" Cursor="Hand">
+                                    <ToggleButton.Template>
+                                        <ControlTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"
+                                                        DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType=Expander}}">
+                                                <TextBlock FontSize="15" FontWeight="Bold" Foreground="{StaticResource BlackBrush}">
+                                                        S.<Run Text="{Binding Season}"/>
+                                                </TextBlock>
+                                                <CheckBox Content="{Binding Source={StaticResource Resources}, Path=BackgroundDownload}" Margin="15 0 0 0" FontSize="10"
+                                                          IsThreeState="True" IsChecked="{Binding AllBackgroundDownload}" Foreground="{StaticResource BlackBrush}"
+                                                          Command="{Binding DataContext.AllSeasonDownloadCheckCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                          CommandParameter="{Binding}" />
+                                                <CheckBox Content="{Binding Source={StaticResource Resources}, Path=BackgroundSubtitleDownload}" Margin="15 0 0 0" FontSize="10"
+                                                          IsThreeState="True" IsChecked="{Binding AllBackgroundSubtitleDownload}" Foreground="{StaticResource BlackBrush}" />
+                                                <CheckBox Content="{Binding Source={StaticResource Resources}, Path=IsWatched}" Margin="15 0 0 0" FontSize="10"
+                                                          IsThreeState="True" IsChecked="{Binding AllWatched}" Foreground="{StaticResource BlackBrush}"/>
+                                            </StackPanel>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                </ToggleButton>
+                            </Expander.Header>
+                            <DataGrid ItemsSource="{Binding Episodes}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"
+                                  PreviewMouseWheel="DataGrid_PreviewMouseWheel">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Source={StaticResource Resources}, Path=BackgroundDownload, Converter={converters:ToUpperConverter}}" 
+                                                       FontWeight="DemiBold" TextWrapping="Wrap" MaxWidth="80"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox HorizontalAlignment="Center" ClickMode="Press"
+                                                      IsChecked="{Binding Path=BackgroundDownload, UpdateSourceTrigger=PropertyChanged}"
+                                                      Command="{Binding DataContext.EpisodeDownloadCheckCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                      CommandParameter="{Binding}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Source={StaticResource Resources}, Path=BackgroundSubtitleDownload, Converter={converters:ToUpperConverter}}" 
+                                                       FontWeight="DemiBold" MaxWidth="80" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox HorizontalAlignment="Center" ClickMode="Press"
+                                                      IsChecked="{Binding Path=BackgroundSubtitleDownload, UpdateSourceTrigger=PropertyChanged}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="{Binding Source={StaticResource Resources}, Path=IsWatched}">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Source={StaticResource Resources}, Path=IsWatched, Converter={converters:ToUpperConverter}}"
+                                                       FontWeight="DemiBold" TextWrapping="Wrap" MaxWidth="80"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox HorizontalAlignment="Center" ClickMode="Press"
+                                                      IsChecked="{Binding Path=IsWatched, UpdateSourceTrigger=PropertyChanged}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn IsReadOnly="True" 
+                                                        Header="{Binding Source={StaticResource Resources}, Path=Episode}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Episode}" TextAlignment="Center"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn IsReadOnly="True"
+                                                    Header="{Binding Source={StaticResource Resources}, Path=EpisodeName}">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" ToolTip="{Binding Overview}" TextTrimming="CharacterEllipsis" MaxWidth="135"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding AirDate, Converter={converters:ToShortDateConverter}}" IsReadOnly="True"
+                                                    Header="{Binding Source={StaticResource Resources}, Path=AirDate}"/>
+                                </DataGrid.Columns>
+                                <DataGrid.RowDetailsTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="0 1 0 0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5 0 0 0">
+                                                    <Button IsEnabled="False" Style="{StaticResource MetroCircleButtonStyle}" 
+                                                        Background="{StaticResource GrayBrush1}" Width="40" Height="40" 
+                                                        Visibility="{Binding FilePath, Converter={converters:StringToVisibilityConverter}}" 
+                                                        ToolTip="{Binding Source={StaticResource Resources}, Path=Downloaded}"
+                                                        ToolTipService.ShowOnDisabled="True">
+                                                        <userControls:IconUserControl Visual="{StaticResource ni_movie_ok}" Fill="{StaticResource WhiteBrush}" Width="16" Height="16"/>
+                                                    </Button>
+                                                    <Button IsEnabled="False" Style="{StaticResource MetroCircleButtonStyle}" 
+                                                        Background="{StaticResource GrayBrush1}" Width="40" Height="40" Margin="0 0 5 0"
+                                                        Visibility="{Binding Path=NotFound, Converter={converters:BooleanToVisibilityConverter}}" 
+                                                        ToolTip="{Binding Source={StaticResource Resources}, Path=SearchResultNotFound}"
+                                                        ToolTipService.ShowOnDisabled="True">
+                                                        <userControls:IconUserControl  Width="16" Height="16" Visual="{StaticResource ni_download_error}" Fill="{StaticResource WhiteBrush}" />
+                                                    </Button>
+                                                    <Button IsEnabled="False" Style="{StaticResource MetroCircleButtonStyle}" 
+                                                        Background="{StaticResource GrayBrush1}" Width="40" Height="40" Margin="0 0 5 0"
+                                                        Visibility="{Binding Path=SubtitleDownloaded, Converter={converters:BooleanToVisibilityConverter}}" 
+                                                        ToolTip="{Binding Source={StaticResource Resources}, Path=SubtitleDownloaded}"
+                                                        ToolTipService.ShowOnDisabled="True">
+                                                        <userControls:IconUserControl Width="16" Height="16" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_file_ok}" />
+                                                    </Button>
+                                                    <Button IsEnabled="False" Style="{StaticResource MetroCircleButtonStyle}" 
+                                                        Background="{StaticResource GrayBrush1}" Width="40" Height="40" Margin="0 0 5 0"
+                                                        Visibility="{Binding Path=SubtitleNotFound, Converter={converters:BooleanToVisibilityConverter}}" 
+                                                        ToolTip="{Binding Source={StaticResource Resources}, Path=SearchResultNotFoundForSubtitle}"
+                                                        ToolTipService.ShowOnDisabled="True">
+                                                        <userControls:IconUserControl Width="16" Height="16" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_warning}" />
+                                                    </Button>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" Margin="0 0 5 0">
+                                                    <Button Cursor="Hand" Width="40" Height="40"
+                                                        ToolTip="{Binding Source={StaticResource Resources}, Path=Play}"
+                                                        Command="{Binding DataContext.TvShowEpisodePlayCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                                        CommandParameter="{Binding}" Visibility="{Binding FilePath, Converter={converters:StringToVisibilityConverter}}"
+                                                        Style="{StaticResource MetroCircleButtonStyle}">
+                                                        <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_play}" 
+                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                    </Button>
+                                                    <Button Cursor="Hand" Width="40" Height="40"
+                                                        ToolTip="{Binding Source={StaticResource Resources}, Path=Delete}"
+                                                        Command="{Binding DataContext.TvShowEpisodeDeleteCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                                        CommandParameter="{Binding}" Visibility="{Binding FilePath, Converter={converters:StringToVisibilityConverter}}"
+                                                        Style="{StaticResource MetroCircleButtonStyle}">
+                                                        <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_delete}" 
+                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                    </Button>
+                                                    <Button Command="{Binding DataContext.TvShowEpisodeDownloadCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                                        CommandParameter="{Binding}" Style="{StaticResource MetroCircleButtonStyle}" Width="40" Height="40" Cursor="Hand" >
+                                                        <Button.ToolTip>
+                                                            <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource Resources}, Path=ManualDownload}" />
+                                                        </Button.ToolTip>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <userControls:IconUserControl Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" Visual="{StaticResource ni_movie_download}" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                    <Button Command="{Binding DataContext.TvShowEpisodeSubtitleDownloadCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                                        CommandParameter="{Binding}" Style="{StaticResource MetroCircleButtonStyle}" Width="40" Height="40"
+                                                        IsEnabled="{Binding Path=FilePath, Converter={converters:PathToBoolConverter}}" Cursor="Hand">
+                                                        <Button.ToolTip>
+                                                            <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource Resources}, Path=ManualSubtitleDownload}" />
+                                                        </Button.ToolTip>
+                                                        <userControls:IconUserControl Width="16" Height="16" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" Visual="{StaticResource ni_file_download}" />
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
+                            </DataGrid>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Expander>
+    </Grid>
+</UserControl>

@@ -1,0 +1,971 @@
+﻿<Controls:MetroWindow x:Class="Novaroma.Win.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:converters="clr-namespace:Novaroma.Win.Converters"
+        xmlns:userControls="clr-namespace:Novaroma.Win.UserControls"
+        xmlns:utilities="clr-namespace:Novaroma.Win.Utilities"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="novaroma" TitleCaps="False" Height="600" Width="970"
+        BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1 0 1 1" Padding="5" 
+        Icon="pack://application:,,,/Novaroma;component/Images/Img_Logo_Window.ico"
+        WindowState="Maximized" Closing="MainWindow_OnClosing">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Command="{Binding SettingsCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteColorBrush}" Visual="{StaticResource appbar_settings}" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Foreground="{StaticResource WhiteColorBrush}"
+                               Text="{Binding Source={StaticResource Resources}, Path=Settings, Converter={converters:ToLowerConverter}}" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding BuyCoffeeCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_coffee}" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Foreground="{StaticResource WhiteBrush}"
+                               Text="{Binding Source={StaticResource Resources}, Path=BuyCoffee, Converter={converters:ToLowerConverter}}" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding AboutCommand}">
+                <TextBlock Foreground="{StaticResource WhiteBrush}" Text="{Binding Source={StaticResource Resources}, Path=About, Converter={converters:ToLowerConverter}}" />
+            </Button>
+            <Button Name="FeedbackButton" ToolTip="{Binding Source={StaticResource Resources}, Path=Feedback}">
+                <i:Interaction.Behaviors>
+                    <utilities:ContextMenuOnLeftClickBehavior />
+                </i:Interaction.Behaviors>
+                <Button.ContextMenu>
+                    <ContextMenu BorderThickness="0">
+                        <MenuItem Background="{StaticResource AccentColorBrush}" Foreground="{StaticResource WhiteColorBrush}"
+                                  Command="{Binding SendASmileCommand}">
+                            <MenuItem.Icon>
+                                <StackPanel Orientation="Horizontal">
+                                    <userControls:IconUserControl Visual="{StaticResource ni_happy}" Fill="{StaticResource WhiteBrush}" Width="20" Height="20" Margin="5 0 0 0" />
+                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=SendASmile}" />
+                                </StackPanel>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Background="{StaticResource AccentColorBrush}" Foreground="{StaticResource WhiteColorBrush}"
+                                  Command="{Binding SendAFrownCommand}">
+                            <MenuItem.Icon>
+                                <StackPanel Orientation="Horizontal">
+                                    <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_sad}" Margin="5 0 0 0" />
+                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=SendAFrown}" />
+                                </StackPanel>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+                <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_message}" />
+            </Button>
+            <Button ToolTip="{Binding Source={StaticResource Resources}, Path=VisitWebSite}">
+                <TextBlock>
+                    <Hyperlink NavigateUri="www.novaroma.net" RequestNavigate="Hyperlink_OnRequestNavigate" TextDecorations="None">
+                        <userControls:IconUserControl Width="24" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_website}" />
+                    </Hyperlink>
+                </TextBlock>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding NewCommand}" />
+        <KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding WatchDirectoryCommand}" />
+        <KeyBinding Key="D" Modifiers="Ctrl" Command="{Binding DiscoverCommand}" />
+        <KeyBinding Key="Escape" Command="{Binding EscapeKeyCommand}" />
+    </Window.InputBindings>
+    <Grid Name="MainGrid">
+        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5">
+            <Button x:Name="NewMediaButton" Margin="0 0 5 0" Command="{Binding NewCommand}" Background="Transparent"
+                    Style="{StaticResource MetroCircleButtonStyle}" Width="60" Height="60" >
+                <Button.ToolTip>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource Resources}, Path=New}" />
+                </Button.ToolTip>
+                <userControls:IconUserControl Height="25" Width="25" Visual="{StaticResource ni_add}" Fill="{StaticResource BlackBrush}" />
+            </Button>
+            <Button HorizontalAlignment="Right" Margin="0 0 5 0" Command="{Binding WatchDirectoryCommand}" Background="Transparent"
+                    Style="{StaticResource MetroCircleButtonStyle}" Width="60" Height="60" >
+                <Button.ToolTip>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource Resources}, Path=AddSubdirectories}" />
+                </Button.ToolTip>
+                <userControls:IconUserControl Width="30" Height="25" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_directory_add}" />
+            </Button>
+            <Button HorizontalAlignment="Right" Margin="0 0 5 0" Command="{Binding DiscoverCommand}" Background="Transparent"
+                    Style="{StaticResource MetroCircleButtonStyle}" Width="60" Height="60" >
+                <Button.ToolTip>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource Resources}, Path=Discover}" />
+                </Button.ToolTip>
+                <userControls:IconUserControl Width="30" Height="25" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_movie_search}" />
+            </Button>
+            <Button HorizontalAlignment="Right" Margin="0 0 5 0" Command="{Binding ManualDownloadCommand}" Background="Transparent"
+                    Style="{StaticResource MetroCircleButtonStyle}" Width="60" Height="60" >
+                <Button.ToolTip>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource Resources}, Path=ManualDownload}" />
+                </Button.ToolTip>
+                <userControls:IconUserControl Width="30" Height="25" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_manual_download}" />
+            </Button>
+            <Button HorizontalAlignment="Right" Margin="0 0 5 0" Background="Transparent"
+                    Visibility="{Binding HasPlugin, Converter={converters:BooleanToVisibilityConverter}}"
+                    Style="{StaticResource MetroCircleButtonStyle}" Width="60" Height="60">
+                <i:Interaction.Behaviors>
+                    <utilities:ContextMenuOnLeftClickBehavior />
+                </i:Interaction.Behaviors>
+                <Button.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding PluginServices}">
+                        <ContextMenu.ItemTemplate>
+                            <DataTemplate>
+                                <MenuItem Background="{StaticResource TransparentWhiteBrush}" Foreground="{StaticResource BlackBrush}"
+                                          Command="{Binding DataContext.ExecutePluginServiceCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Controls:MetroWindow}}" 
+                                          CommandParameter="{Binding}"
+                                          Header="{Binding DisplayName}">
+                                </MenuItem>
+                            </DataTemplate>
+                        </ContextMenu.ItemTemplate>
+                    </ContextMenu>
+                </Button.ContextMenu>
+                <userControls:IconUserControl Width="30" Height="25" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_plugin}" />
+            </Button>
+            <Button HorizontalAlignment="Right" Margin="0 0 5 0" Background="Transparent"
+                    Style="{StaticResource MetroCircleButtonStyle}" Width="60" Height="60" >
+                <i:Interaction.Behaviors>
+                    <utilities:ContextMenuOnLeftClickBehavior />
+                </i:Interaction.Behaviors>
+                <Button.ContextMenu>
+                    <ContextMenu BorderThickness="0">
+                        <MenuItem Background="{StaticResource TransparentWhiteBrush}" Foreground="{StaticResource BlackBrush}"
+                                  Command="{Binding ExecuteDownloadsCommand}">
+                            <MenuItem.Icon>
+                                <StackPanel Orientation="Horizontal">
+                                    <userControls:IconUserControl Height="20" Width="20" Margin="5 0 0 0" Visual="{StaticResource ni_download}" Fill="{StaticResource BlackBrush}" />
+                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=ExecuteBackgroundDownloads}" />
+                                </StackPanel>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Background="{StaticResource TransparentWhiteBrush}" Foreground="{StaticResource BlackBrush}"
+                                  Command="{Binding ExecuteTvShowUpdatesCommand}">
+                            <MenuItem.Icon>
+                                <StackPanel Orientation="Horizontal">
+                                    <userControls:IconUserControl Height="20" Width="20" Margin="5 0 0 0" Visual="{StaticResource ni_television}" Fill="{StaticResource BlackBrush}" />
+                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=ExecuteBackgroundTvShowUpdates}" />
+                                </StackPanel>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Background="{StaticResource TransparentWhiteBrush}" Foreground="{StaticResource BlackBrush}"
+                                  Command="{Binding BackupDatabaseCommand}">
+                            <MenuItem.Icon>
+                                <StackPanel Orientation="Horizontal">
+                                    <userControls:IconUserControl Height="20" Width="20" Margin="5 0 0 0" Visual="{StaticResource ni_save_as}" Fill="{StaticResource BlackBrush}" />
+                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=BackupDatabase}" />
+                                </StackPanel>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Background="{StaticResource TransparentWhiteBrush}" Foreground="{StaticResource BlackBrush}"
+                                  Command="{Binding ManageRuntimeServicesCommand}">
+                            <MenuItem.Icon>
+                                <StackPanel Orientation="Horizontal">
+                                    <userControls:IconUserControl Height="20" Width="20" Margin="5 0 0 0" Visual="{StaticResource ni_operation}" Fill="{StaticResource BlackBrush}" />
+                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=ScriptServices}" />
+                                </StackPanel>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Background="{StaticResource TransparentWhiteBrush}" Foreground="{StaticResource BlackBrush}"
+                                  Command="{Binding ClearLogsAndActivitiesCommand}">
+                            <MenuItem.Icon>
+                                <StackPanel Orientation="Horizontal">
+                                    <userControls:IconUserControl Height="20" Width="20" Margin="5 0 0 0" Visual="{StaticResource ni_clean}" Fill="{StaticResource BlackBrush}" />
+                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=ClearActvitiesAndLogs}" />
+                                </StackPanel>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+                <userControls:IconUserControl Width="30" Height="25" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_operation}" />
+            </Button>
+        </DockPanel>
+        <TabControl HorizontalAlignment="Stretch" Margin="10 15 0 0" VerticalAlignment="Stretch" >
+            <TabItem Header="{Binding Source={StaticResource Resources}, Path=TvShows, Converter={converters:ToLowerConverter}}">
+                <Grid Margin="0 10 5 5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Name="TvShowSearchPanel" DataContext="{Binding TvShowSearchModel}">
+                        <Expander Name="TvShowFilterExpander"  Margin="0 0 0 10" 
+                                  IsExpanded="{Binding DataContext.HasTvShows, RelativeSource={RelativeSource AncestorType=TabItem}, Mode=OneWay}"
+                                  Tag="{Binding Source={StaticResource Resources}, Path=Filters}"
+                                  HeaderTemplate="{StaticResource ExpanderClickableHeaderTemplate}">
+                            <Grid>
+                                <WrapPanel Name="TvShowFilterPanel" HorizontalAlignment="Stretch" PreviewKeyDown="TvShowFilterPanel_OnPreviewKeyDown">
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Title}" Width="60"/>
+                                        <TextBox Name="SearchTextBox" MinWidth="100" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Year}" Width="60"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                            <Controls:NumericUpDown Name="ReleaseYearStartTextBox" Minimum="1886" Maximum="9999" Width="89"
+                                                                Value="{Binding ReleaseYearStart, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                                            <Controls:NumericUpDown Name="ReleaseYearEndTextBox" Minimum="1886" Maximum="9999" Width="89"
+                                                                Value="{Binding ReleaseYearEnd, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Rating}" Width="60"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                            <Label Content="{Binding RatingMin}" Width="25"/>
+                                            <Controls:RangeSlider Minimum="0" LowerValue="{Binding RatingMin}" Maximum="10" UpperValue="{Binding RatingMax}" 
+                                              Width="150" IsMoveToPointEnabled="True"
+                                              IsSnapToTickEnabled="True" TickFrequency="0.1" MinRangeWidth="2" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"  />
+                                            <Label Content="{Binding RatingMax}" Width="25"/>
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Vote}" Width="60"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                            <Controls:NumericUpDown Name="NumberOfVotesMinTextBox" Minimum="0"
+                                                Value="{Binding NumberOfVotesMin, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                                            <Controls:NumericUpDown Name="NumberOfVotesMaxTextBox" Minimum="1"
+                                                Value="{Binding NumberOfVotesMax, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Runtime}" Width="60"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                            <Controls:NumericUpDown Name="RuntimeMinTextBox" Minimum="0"
+                                                Value="{Binding RuntimeMin, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                                            <Controls:NumericUpDown Name="RuntimeMaxTextBox" Minimum="1"
+                                                Value="{Binding RuntimeMax, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Genre}" Width="60"/>
+                                        <userControls:MultiSelectComboBox VerticalAlignment="Top" ItemsSource="{Binding Path=Genres.Selections}" Width="200" />
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=NotWatched}" IsThreeState="True" VerticalAlignment="Center"
+                                               IsChecked="{Binding NotWatched, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=Downloaded}" IsThreeState="True" VerticalAlignment="Center"
+                                                IsChecked="{Binding Downloaded, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0"/>
+
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=SubtitleDownloaded}" IsThreeState="True" VerticalAlignment="Center"
+                                                IsChecked="{Binding SubtitleDownloaded, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=NotFound}" IsThreeState="True" VerticalAlignment="Center"
+                                                IsChecked="{Binding NotFound, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0"/>
+
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=SubtitleNotFound}" IsThreeState="True" VerticalAlignment="Center"
+                                                IsChecked="{Binding SubtitleNotFound, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DockPanel>
+                                </WrapPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Bottom">
+                                    <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Clear}" Margin="0 0 5 0" 
+                                            Style="{StaticResource MetroCircleButtonStyle}" Width="50" Height="50"
+                                            Command="{Binding Path=DataContext.ClearTvShowSearchModelCommand, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}">
+                                        <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_clean}" />
+                                    </Button>
+                                    <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Filter}" 
+                                            Style="{StaticResource MetroCircleButtonStyle}" Width="50" Height="50"
+                                            Command="{Binding Path=DataContext.TvShowSearchCommand, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}">
+                                        <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_search}" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Expander>
+                        <Border BorderBrush="{StaticResource AccentColorBrush}" Margin="0 0 0 10" BorderThickness="1" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ItemsControl ItemsSource="{Binding OrderList}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
+                                                <TextBlock>
+                                            <Hyperlink Name="TvShowOrderLink" Foreground="{StaticResource LabelTextBrush}" FontSize="{StaticResource ContentFontSize}" 
+                                                       TextDecorations="None" Click="TvShowOrderLink_OnClick" 
+                                                       FontWeight="{Binding IsSelected, Converter={converters:BooleanToBoldFontWeightConverter}}">
+                                                <TextBlock Text="{Binding Order.DisplayName}"/>
+                                            </Hyperlink>
+                                        </TextBlock>
+                                                <Grid Visibility="{Binding IsSelected, Converter={converters:BooleanToVisibilityConverter}}">
+                                                    <Path x:Name="DownArrow" Margin="2 0 0 0" Fill="{StaticResource BlackColorBrush}" HorizontalAlignment="Center" 
+                                                    Visibility="{Binding IsDescending, Converter={converters:BooleanToVisibilityConverter}}"
+                                                    VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                                    <Path x:Name="UpArrow" Margin="2 0 0 0" Fill="{StaticResource BlackColorBrush}" HorizontalAlignment="Center" 
+                                                    Visibility="{Binding IsAscending, Converter={converters:BooleanToVisibilityConverter}}"
+                                                    VerticalAlignment="Center" Data="M 0 4 L 4 0 L 8 4 Z"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" PreviewKeyDown="TvShowFilterPanel_OnPreviewKeyDown">
+                                    <TextBlock VerticalAlignment="Center" FontWeight="Bold" Margin="0 0 5 0">
+                                        <Run Text="{Binding Source={StaticResource Resources}, Path=Page, Mode=OneWay}"/> :
+                                    </TextBlock>
+                                    <Controls:NumericUpDown Name="TvShowPageNumericUpDown" Margin="0 0 5 0" Height="25" Value="{Binding Page, UpdateSourceTrigger=PropertyChanged}"
+                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Minimum="1" ValueChanged="TvShowPageNumericUpDown_OnValueChanged"
+                                        Maximum="{Binding Path = DataContext.TvShowMaxPage, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}"/>
+                                    <TextBlock Text=" - " VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                    <ComboBox Margin="0 0 5 0" Height="25" SelectedValue="{Binding PageSize}" SelectedValuePath="Content" Background="Transparent">
+                                        <ComboBoxItem Content="20"/>
+                                        <ComboBoxItem Content="50"/>
+                                        <ComboBoxItem Content="100"/>
+                                    </ComboBox>
+                                    <TextBlock Text="{Binding Source={StaticResource Resources}, Path=ItemsPerPage, Mode=OneWay, Converter={converters:ToLowerConverter}}" 
+                                               VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                    <Grid Grid.Row="1" Name="TvShowListPanel">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="TvShowPreviousPageButton" Width="40" Height="40" Cursor="Hand" Style="{StaticResource MetroCircleButtonStyle}" 
+                                HorizontalAlignment="Left" Click="TvShowPreviousPageButton_OnClick" IsEnabled="{Binding EnableTvShowPreviousButton}">
+                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_navigate_previous}"
+                                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                        </Button>
+                        <ScrollViewer Grid.Column="1">
+                            <Grid>
+                                <ListView Name="TvShowListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0"
+                                      ItemsSource="{Binding TvShows.Results}" SelectedItem="{Binding SelectedTvShow}" SelectionMode="Single"
+                                      PreviewMouseWheel="ListView_OnPreviewMouseWheel" HorizontalAlignment="Stretch">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel IsItemsHost="True" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Margin="5" Width="120" >
+                                                <Grid Name="TvShowPosterView" MouseEnter="TvShowPosterView_OnMouseEnter" MouseLeave="TvShowPosterView_OnMouseLeave">
+                                                    <userControls:PosterUserControl HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="175"/>
+                                                    <StackPanel Name="TvShowOperationView" Orientation="Horizontal" Visibility="Hidden"
+                                                        VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                                                        <Button Width="40" Height="40" Background="{StaticResource AccentColorBrush}" Cursor="Hand"
+                                                            Command="{Binding Path=DataContext.TvShowPlayCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource MetroCircleButtonStyle}">
+                                                            <Button.ToolTip>
+                                                                <TextBlock>
+                                                                    <Run Text="{Binding Source={StaticResource Resources}, Path=Play, Mode=OneWay}" />
+                                                                    - <Run Text="{Binding Source={StaticResource Resources}, Path=Season, Mode=OneWay}" />:
+                                                                     <Run Text="{Binding UnseenEpisode.TvShowSeason.Season}" />
+                                                                    <Run Text="{Binding Source={StaticResource Resources}, Path=Episode, Mode=OneWay}" />:
+                                                                     <Run Text="{Binding UnseenEpisode.Episode}" />
+                                                                    - <Run Text="{Binding UnseenEpisode.AirDate, Converter={converters:DateToShortDateStringConverter}}" />
+                                                                    - <Run Text="{Binding UnseenEpisode.Name}" />
+                                                                </TextBlock>
+                                                            </Button.ToolTip>
+                                                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_play}"
+                                                                                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                        </Button>
+                                                        <Button Width="40" Height="40" Background="{StaticResource AccentColorBrush}" Cursor="Hand"
+                                                            Command="{Binding Path=DataContext.TvShowMarkEpisodeWatchedCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                            CommandParameter="{Binding}" 
+                                                            Style="{StaticResource MetroCircleButtonStyle}">
+                                                            <Button.ToolTip>
+                                                                <TextBlock>
+                                                                    <Run Text="{Binding Source={StaticResource Resources}, Path=MarkAsWatched, Mode=OneWay}" />
+                                                                    - <Run Text="{Binding Source={StaticResource Resources}, Path=Season, Mode=OneWay}" />:
+                                                                     <Run Text="{Binding UnseenEpisode.TvShowSeason.Season}" />
+                                                                    <Run Text="{Binding Source={StaticResource Resources}, Path=Episode, Mode=OneWay}" />:
+                                                                     <Run Text="{Binding UnseenEpisode.Episode}" />
+                                                                    - <Run Text="{Binding UnseenEpisode.AirDate, Converter={converters:DateToShortDateStringConverter}}" />
+                                                                    - <Run Text="{Binding UnseenEpisode.Name}" />
+                                                                </TextBlock>
+                                                            </Button.ToolTip>
+                                                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_check}" 
+                                                                                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                                                        </Button>
+                                                        <Button Name="TvShowDeleteButton"  Width="40" Height="40" Background="{StaticResource AccentColorBrush}" Cursor="Hand"
+                                                            Command="{Binding Path=DataContext.TvShowDeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=Delete}">
+                                                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_delete}"
+                                                                                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" >
+                                                        <userControls:RatingUserControl Width="40" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Background="{StaticResource BlackColorBrush}" 
+                                    Opacity="0.6" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 10 3 0">
+                                                        <userControls:IconUserControl Width="16" Height="16" Fill="{StaticResource WhiteColorBrush}" Visual="{StaticResource appbar_clock}" Margin="2" />
+                                                        <TextBlock Foreground="{StaticResource WhiteColorBrush}" Margin="2">
+                                <Run Text="{Binding Runtime}" />
+                                <Run Text="{Binding Source={StaticResource Resources}, Path=MinuteReduced, Mode=OneWay}" />
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Grid>
+
+                                                <StackPanel HorizontalAlignment="Center">
+                                                    <TextBlock TextTrimming="CharacterEllipsis" HorizontalAlignment="Center">
+                                <Run Text="{Binding Title}" FontWeight="Bold"/>
+                                (<Run Text="{Binding Year}" />)
+                                                    </TextBlock>
+                                                    <TextBlock TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" Text="{Binding Genres, Converter={converters:ListToStringConverter}}" />
+
+                                                    <StackPanel.ToolTip>
+                                                        <StackPanel>
+                                                            <TextBlock>
+                                    <Run Text="{Binding Title}" FontWeight="Bold"/>
+                                    (<Run Text="{Binding Year}" />)
+                                                            </TextBlock>
+                                                            <TextBlock Text="{Binding Genres, Converter={converters:ListToStringConverter}}" />
+                                                        </StackPanel>
+                                                    </StackPanel.ToolTip>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <Controls:ProgressRing Margin="5" IsActive="{Binding IsTvShowsBusy}" />
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding TvShows.Results.Count, Converter={converters:IntegerToVisibilityConverter}, ConverterParameter=N}">
+                                    <Hyperlink TextDecorations="None" NavigateUri="{Binding Source={StaticResource Resources}, Path=Url_HowToAddTvShow}"
+                                            RequestNavigate="Hyperlink_OnRequestNavigate">
+                                        <userControls:IconUserControl Visual="{StaticResource ni_card_add}" Width="20" Fill="{StaticResource GrayBrush5}"/>
+                                        <TextBlock Text="{Binding Source={StaticResource Resources}, Path=HowToAddTvShow}" FontSize="24" Foreground="{StaticResource GrayBrush5}" />
+                                    </Hyperlink>
+                                </TextBlock>
+                            </Grid>
+                        </ScrollViewer>
+                        <Button Name="TvShowNextPageButton" Grid.Column="2" Width="40" Height="40" Cursor="Hand" Click="TvShowNextPageButton_OnClick"
+                                Style="{StaticResource MetroCircleButtonStyle}" IsEnabled="{Binding EnableTvShowNextButton}">
+                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_navigate_next}"
+                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                        </Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{Binding Source={StaticResource Resources}, Path=Movies, Converter={converters:ToLowerConverter}}">
+                <Grid Margin="0 10 5 5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel DataContext="{Binding MovieSearchModel}">
+                        <Expander Name="MovieFilterExpander"  Margin="0 0 0 10"
+                                  IsExpanded="{Binding DataContext.HasMovies, RelativeSource={RelativeSource AncestorType=TabItem}, Mode=OneWay}"
+                                  Tag="{Binding Source={StaticResource Resources}, Path=Filters}"
+                                  HeaderTemplate="{StaticResource ExpanderClickableHeaderTemplate}">
+                            <Grid>
+                                <WrapPanel Name="MovieFilterPanel" HorizontalAlignment="Stretch" PreviewKeyDown="MovieFilterPanel_OnPreviewKeyDown">
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Title}" Width="60"/>
+                                        <TextBox Name="MovieSearchTextBox" MinWidth="100" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Year}" Width="60"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                            <Controls:NumericUpDown Name="MovieReleaseYearStartTextBox" Minimum="1886" Maximum="9999" Width="89"
+                                                                Value="{Binding ReleaseYearStart, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                                            <Controls:NumericUpDown Name="MovieReleaseYearEndTextBox" Minimum="1886" Maximum="9999" Width="89"
+                                                                Value="{Binding ReleaseYearEnd, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Rating}" Width="60"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                            <Label Content="{Binding RatingMin}" Width="25"/>
+                                            <Controls:RangeSlider Minimum="0" LowerValue="{Binding RatingMin}" Maximum="10" UpperValue="{Binding RatingMax}" 
+                                              Width="150" IsMoveToPointEnabled="True"
+                                              IsSnapToTickEnabled="True" TickFrequency="0.1" MinRangeWidth="2" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"  />
+                                            <Label Content="{Binding RatingMax}" Width="25"/>
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Vote}" Width="60"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                            <Controls:NumericUpDown Name="MovieNumberOfVotesMinTextBox" Minimum="0"
+                                                Value="{Binding NumberOfVotesMin, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                                            <Controls:NumericUpDown Name="MovieNumberOfVotesMaxTextBox" Minimum="1"
+                                                Value="{Binding NumberOfVotesMax, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Runtime}" Width="60"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                            <Controls:NumericUpDown Name="MovieRuntimeMinTextBox" Minimum="0"
+                                                Value="{Binding RuntimeMin, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
+                                            <Controls:NumericUpDown Name="MovieRuntimeMaxTextBox" Minimum="1"
+                                                Value="{Binding RuntimeMax, UpdateSourceTrigger=PropertyChanged}" Width="89" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Genre}" Width="60"/>
+                                        <userControls:MultiSelectComboBox VerticalAlignment="Top" ItemsSource="{Binding Path=Genres.Selections}" Width="200" />
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=NotWatched}" IsThreeState="True" VerticalAlignment="Center"
+                                               IsChecked="{Binding NotWatched, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=Downloaded}" IsThreeState="True" VerticalAlignment="Center"
+                                                IsChecked="{Binding Downloaded, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0"/>
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=SubtitleDownloaded}" IsThreeState="True" VerticalAlignment="Center"
+                                                IsChecked="{Binding SubtitleDownloaded, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DockPanel>
+                                    <DockPanel Margin="10 10 0 10">
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=NotFound}" IsThreeState="True" VerticalAlignment="Center"
+                                                IsChecked="{Binding NotFound, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0"/>
+                                        <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=SubtitleNotFound}" IsThreeState="True" VerticalAlignment="Center"
+                                                IsChecked="{Binding SubtitleNotFound, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DockPanel>
+                                </WrapPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Bottom">
+                                    <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Clear}" Margin="0 0 5 0" Style="{StaticResource MetroCircleButtonStyle}"
+                                            Command="{Binding Path=DataContext.ClearMovieSearchModelCommand, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}"
+                                            Width="50" Height="50">
+                                        <userControls:IconUserControl Width="20" Height="20" HorizontalAlignment="Right" Visual="{StaticResource ni_clean}"
+                                                       Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                    </Button>
+                                    <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Filter}" Style="{StaticResource MetroCircleButtonStyle}"
+                                    Command="{Binding Path=DataContext.MovieSearchCommand, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}"
+                                            Width="50" Height="50">
+                                        <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_search}"
+                                              Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Expander>
+                        <Border BorderBrush="{StaticResource AccentColorBrush}" Margin="0 0 0 10" BorderThickness="1" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ItemsControl ItemsSource="{Binding OrderList}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
+                                                <TextBlock>
+                                            <Hyperlink Name="MovieOrderLink" Foreground="{StaticResource LabelTextBrush}" FontSize="{StaticResource ContentFontSize}" 
+                                                       TextDecorations="None" Click="MovieOrderLink_OnClick" 
+                                                       FontWeight="{Binding IsSelected, Converter={converters:BooleanToBoldFontWeightConverter}}">
+                                                <TextBlock Text="{Binding Order.DisplayName}"/>
+                                            </Hyperlink>
+                                        </TextBlock>
+                                                <Grid Visibility="{Binding IsSelected, Converter={converters:BooleanToVisibilityConverter}}">
+                                                    <Path x:Name="DownArrow" Margin="2 0 0 0" Fill="{StaticResource BlackColorBrush}" HorizontalAlignment="Center" 
+                                                    Visibility="{Binding IsDescending, Converter={converters:BooleanToVisibilityConverter}}"
+                                                    VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                                    <Path x:Name="UpArrow" Margin="2 0 0 0" Fill="{StaticResource BlackColorBrush}" HorizontalAlignment="Center" 
+                                                    Visibility="{Binding IsAscending, Converter={converters:BooleanToVisibilityConverter}}"
+                                                    VerticalAlignment="Center" Data="M 0 4 L 4 0 L 8 4 Z"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" PreviewKeyDown="MovieFilterPanel_OnPreviewKeyDown">
+                                    <TextBlock VerticalAlignment="Center" FontWeight="Bold" Margin="0 0 5 0">
+                                        <Run Text="{Binding Source={StaticResource Resources}, Path=Page, Mode=OneWay}"/> :
+                                    </TextBlock>
+                                    <Controls:NumericUpDown Name="MoviePageNumericUpDown" Margin="0 0 5 0" Height="25" Value="{Binding Page, UpdateSourceTrigger=PropertyChanged}" 
+                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Minimum="1" ValueChanged="MoviePageNumericUpDown_OnValueChanged"
+                                        Maximum="{Binding Path = DataContext.MovieMaxPage, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}"/>
+                                    <TextBlock Text=" - " VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                    <ComboBox Margin="0 0 5 0" Height="25" SelectedValue="{Binding PageSize}" SelectedValuePath="Content" Background="Transparent">
+                                        <ComboBoxItem Content="20"/>
+                                        <ComboBoxItem Content="50"/>
+                                        <ComboBoxItem Content="100"/>
+                                    </ComboBox>
+                                    <TextBlock Text="{Binding Source={StaticResource Resources}, Path=ItemsPerPage, Mode=OneWay, Converter={converters:ToLowerConverter}}" 
+                                               VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                    <Grid Grid.Row="1" Name="MovieListPanel">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="MoviePreviousPageButton" Width="40" Height="40" Cursor="Hand" Style="{StaticResource MetroCircleButtonStyle}" 
+                                HorizontalAlignment="Left" Click="MoviePreviousPageButton_OnClick" IsEnabled="{Binding EnableMoviePreviousButton}">
+                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_navigate_previous}"
+                                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                        </Button>
+                        <ScrollViewer Grid.Column="1">
+                            <Grid>
+                                <ListView Name="MovieListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0"
+                                      ItemsSource="{Binding Movies.Results}" SelectedItem="{Binding SelectedMovie}" SelectionMode="Single"
+                                      PreviewMouseWheel="ListView_OnPreviewMouseWheel" HorizontalAlignment="Stretch">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel IsItemsHost="True" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Name="MovieListItem"  Margin="5" Width="120">
+                                                <Grid Name="MoviePosterView" MouseEnter="MoviePosterView_OnMouseEnter" MouseLeave="MoviePosterView_OnMouseLeave">
+                                                    <userControls:PosterUserControl HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="175"/>
+                                                    <StackPanel Name="MovieOperationView" Orientation="Horizontal" Visibility="Hidden"
+                                                            VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                                                        <Button  Width="40" Height="40" Background="{StaticResource AccentColorBrush}" Cursor="Hand"
+                                                             Command="{Binding Path=DataContext.MoviePlayCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                             CommandParameter="{Binding}"
+                                                             Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=Play}">
+                                                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_play}"
+                                                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                        </Button>
+                                                        <Button Name="MovieUpdateButton"  Width="40" Height="40" Background="{StaticResource AccentColorBrush}" Cursor="Hand"
+                                                            Command="{Binding Path=DataContext.MovieMarkWatchedCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=MarkAsWatched}">
+                                                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_check}" 
+                                                                                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                        </Button>
+                                                        <Button Name="MovieDeleteButton"  Width="40" Height="40" Background="{StaticResource AccentColorBrush}" Cursor="Hand" 
+                                                            Command="{Binding Path=DataContext.MovieDeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=Delete}">
+                                                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_delete}"
+                                                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" >
+                                                        <userControls:RatingUserControl Width="40" Tag="false"/>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Background="{StaticResource BlackColorBrush}" 
+                                    Opacity="0.6" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 10 3 0">
+
+                                                        <userControls:IconUserControl Width="16" Height="16" Fill="{StaticResource WhiteColorBrush}"
+                                                            Visual="{StaticResource appbar_clock}" Margin="2"/>
+                                                        <TextBlock Foreground="{StaticResource WhiteColorBrush}" Margin="2">
+                                <Run Text="{Binding Runtime}" />
+                                <Run Text="{Binding Source={StaticResource Resources}, Path=MinuteReduced, Mode=OneWay}" />
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </Grid>
+
+                                                <StackPanel HorizontalAlignment="Center">
+                                                    <TextBlock TextTrimming="CharacterEllipsis" HorizontalAlignment="Center">
+                                <Run Text="{Binding Title}" FontWeight="Bold"/>
+                                (<Run Text="{Binding Year}" />)
+                                                    </TextBlock>
+                                                    <TextBlock TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" Text="{Binding Genres, Converter={converters:ListToStringConverter}}" />
+                                                    <StackPanel.ToolTip>
+                                                        <StackPanel>
+                                                            <TextBlock>
+                                    <Run Text="{Binding Title}" FontWeight="Bold"/>
+                                    (<Run Text="{Binding Year}" />)
+                                                            </TextBlock>
+                                                            <TextBlock Text="{Binding Genres, Converter={converters:ListToStringConverter}}" />
+                                                        </StackPanel>
+                                                    </StackPanel.ToolTip>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <Controls:ProgressRing Margin="5" IsActive="{Binding IsMoviesBusy}" />
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding Movies.Results.Count, Converter={converters:IntegerToVisibilityConverter}, ConverterParameter=N}">
+                                    <Hyperlink TextDecorations="None" NavigateUri="{Binding Source={StaticResource Resources}, Path=Url_HowToAddMovie}"
+                                            RequestNavigate="Hyperlink_OnRequestNavigate">
+                                        <userControls:IconUserControl Visual="{StaticResource ni_card_add}" Width="20" Fill="{StaticResource GrayBrush5}"/>
+                                        <TextBlock Text="{Binding Source={StaticResource Resources}, Path=HowToAddMovie}" FontSize="24" Foreground="{StaticResource GrayBrush5}" />
+                                    </Hyperlink>
+                                </TextBlock>
+                            </Grid>
+                        </ScrollViewer>
+                        <Button Name="MovieNextPageButton" Grid.Column="2" Width="40" Height="40" Cursor="Hand" Click="MovieNextPageButton_OnClick"
+                                Style="{StaticResource MetroCircleButtonStyle}" IsEnabled="{Binding EnableMovieNextButton}">
+                            <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_navigate_next}"
+                                           Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                        </Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem IsSelected="{Binding IsActivitiesSelected}">
+                <TabItem.Style>
+                    <Style TargetType="TabItem" BasedOn="{StaticResource MetroTabItem}">
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate DataType="{x:Type TabItem}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Name="ActivitiesTabHeaderText" Text="{Binding Source={StaticResource Resources}, Path=Activities, Converter={converters:ToLowerConverter}}" />
+                                        <Grid Grid.Column="1" Margin="1 0 0 0"
+                                              Visibility="{Binding Path=DataContext.NotReadActivityCount,RelativeSource={RelativeSource AncestorType=Window},Converter={converters:IntegerToVisibilityConverter}}">
+                                            <Ellipse Width="18" Height="18" Fill="{StaticResource AccentColorBrush}" StrokeThickness="2" Stroke="{StaticResource GrayNormalBrush}" />
+                                            <TextBlock Text="{Binding Path=DataContext.NotReadActivityCount,RelativeSource={RelativeSource AncestorType=Window}}" 
+                                                   FontSize="10" VerticalAlignment="Center" FontWeight="Bold"
+                                                   HorizontalAlignment="Center" Foreground="{StaticResource WhiteBrush}"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Style>
+                <ScrollViewer Margin="0 10 5 5">
+                    <DataGrid ItemsSource="{Binding Activities.Results}" AutoGenerateColumns="False" IsReadOnly="True"
+                              PreviewMouseWheel="DataGrid_PreviewMouseWheel">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsRead}" Value="False">
+                                        <Setter Property="FontWeight" Value="Bold"></Setter>
+                                    </DataTrigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource AccentColorBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick" 
+                                          Command="{Binding ActivityPlayCommand}" 
+                                          CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </DataGrid.InputBindings>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Description}" 
+                                            Header="{Binding Source={StaticResource Resources}, Path=Description}" />
+                            <DataGridTextColumn Binding="{Binding ActivityDate}" 
+                                            Header="{Binding Source={StaticResource Resources}, Path=Date}"/>
+                            <DataGridTextColumn Binding="{Binding Path}" 
+                                            Header="{Binding Source={StaticResource Resources}, Path=Path}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Name="MovieDetailFlyout" TitleVisibility="Collapsed" IsModal="True" IsPinned="False" Position="Right" Width="500"
+                             IsOpen="{Binding SelectedMovie, Converter={converters:ObjectToBooleanConverter}}" Theme="Dark" IsOpenChanged="MovieDetailFlyout_OnIsOpenChanged">
+                <ScrollViewer Visibility="{Binding SelectedMovie, Converter={converters:ObjectToVisibilityConverter}}" DataContext="{Binding SelectedMovie}">
+                    <StackPanel Margin="10">
+                        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource MediaInfoFlyoutTemplate}"/>
+                        <StackPanel Margin="10">
+                            <CheckBox IsChecked="{Binding BackgroundDownload}" Foreground="{StaticResource WhiteColorBrush}" Margin="0 0 0 10"
+                                      Command="{Binding DataContext.MovieDownloadCheckCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}"
+                                      CommandParameter="{Binding}">
+                                <DockPanel>
+                                    <TextBlock Text="{Binding Source={StaticResource Resources}, Path=BackgroundDownload}" Height="20" VerticalAlignment="Center" />
+                                    <StackPanel Visibility="{Binding FilePath, Converter={converters:StringToVisibilityConverter}}" >
+                                        <userControls:IconUserControl Width="20" Height="20" Margin="5"
+                                            Visual="{StaticResource ni_movie_ok}" Fill="{StaticResource WhiteBrush}"
+                                               ToolTip="{Binding Source={StaticResource Resources}, Path=Downloaded}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Visibility="{Binding NotFound, Converter={converters:BooleanToVisibilityConverter}}">
+                                        <userControls:IconUserControl Width="16" Height="16" Margin="5" 
+                                            Visual="{StaticResource ni_warning}" Fill="{StaticResource WhiteBrush}"
+                                               ToolTip="{Binding Source={StaticResource Resources}, Path=SearchResultNotFound}"/>
+                                    </StackPanel>
+                                </DockPanel>
+                            </CheckBox>
+                            <Grid Visibility="{Binding BackgroundDownload, Converter={converters:BooleanToVisibilityConverter}}">
+                                <userControls:VideoSearchInfoUserControl Margin="0 0 0 10" ItemWidth="200" LabelWidth="150" />
+                            </Grid>
+                            <CheckBox IsChecked="{Binding BackgroundSubtitleDownload}" Foreground="{StaticResource WhiteColorBrush}" Margin="0 0 0 10">
+                                <DockPanel>
+                                    <TextBlock Text="{Binding Source={StaticResource Resources}, Path=BackgroundSubtitleDownload}" Height="20" VerticalAlignment="Center" />
+                                    <StackPanel Visibility="{Binding SubtitleDownloaded, Converter={converters:BooleanToVisibilityConverter}}">
+                                        <userControls:IconUserControl Margin="5" Width="16" Height="16" 
+                                                Fill="{StaticResource WhiteColorBrush}" Visual="{StaticResource ni_file_ok}"
+                                               ToolTip="{Binding Source={StaticResource Resources}, Path=SubtitleDownloaded}" />
+                                    </StackPanel>
+                                    <StackPanel Visibility="{Binding SubtitleNotFound, Converter={converters:BooleanToVisibilityConverter}}">
+                                        <userControls:IconUserControl Margin="5" Width="16" Height="16" 
+                                                Fill="{StaticResource WhiteColorBrush}" Visual="{StaticResource ni_warning}"
+                                            ToolTip="{Binding Source={StaticResource Resources}, Path=SearchResultNotFoundForSubtitle}" />
+                                    </StackPanel>
+
+                                </DockPanel>
+                            </CheckBox>
+                            <CheckBox IsChecked="{Binding IsWatched}" Foreground="{StaticResource WhiteColorBrush}" Margin="0 0 0 10"
+                                  Content="{Binding Source={StaticResource Resources}, Path=IsWatched}" />
+                            <Grid Margin="0 0 0 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <userControls:DirectorySelectUserControl Text="{Binding Directory}" Height="30" />
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5 0 5 0" Visibility="{Binding Directory, Converter= {converters:StringToVisibilityConverter}}">
+                                    <Button Cursor="Hand" Width="40" Height="40" 
+                                            ToolTip="{Binding Source={StaticResource Resources}, Path=GoToDirectory}"
+                                            Command="{Binding Path=DataContext.MovieGoToDirectoryCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource MetroCircleButtonStyle}">
+                                        <userControls:IconUserControl Width="20" Height="16" Fill="{StaticResource WhiteColorBrush}" Visual="{StaticResource ni_folder_open}" />
+                                    </Button>
+                                    <Button Cursor="Hand" Width="40" Height="40"
+                                            ToolTip="{Binding Source={StaticResource Resources}, Path=CheckAndUpdateDirectoryFiles}"
+                                            Command="{Binding Path=DataContext.MovieDiscoverFilesCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource MetroCircleButtonStyle}">
+                                        <userControls:IconUserControl Width="20" Height="16" Fill="{StaticResource WhiteColorBrush}" Visual="{StaticResource ni_folder_refresh}" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button  Width="50" Height="50" Cursor="Hand"
+                                         Command="{Binding Path=DataContext.MoviePlayCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                         CommandParameter="{Binding}"
+                                         Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=Play}">
+                                    <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_play}"
+                                                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                </Button>
+                                <Button  Width="50" Height="50" Cursor="Hand"
+                                         Command="{Binding Path=DataContext.MovieUpdateInfoCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                         CommandParameter="{Binding}"
+                                         Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=UpdateMovieInfo}">
+                                    <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_refresh}" 
+                                                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                                </Button>
+                                <Button Width="50" Height="50" Cursor="Hand"
+                                        Command="{Binding Path=DataContext.MovieDeleteCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=Delete}">
+                                    <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_delete}"
+                                                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button  Width="50" Height="50" Cursor="Hand"
+                                         Command="{Binding Path=DataContext.MovieDownloadCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                         CommandParameter="{Binding}"
+                                         Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=ManualDownload}">
+                                    <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_movie_download}"
+                                                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                                </Button>
+                                <Button Width="50" Height="50" Cursor="Hand"
+                                        IsEnabled="{Binding Path=DataContext.SelectedMovie.FilePath, Converter={converters:PathToBoolConverter}, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}"
+                                        Command="{Binding Path=DataContext.MovieSubtitleDownloadCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                        CommandParameter="{Binding}"
+                                        ToolTip="{Binding Source={StaticResource Resources}, Path=ManualSubtitleDownload}">
+                                    <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_file_download}"
+                                                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroCircleButtonStyle}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter Property="Foreground" Value="{StaticResource GrayBrush3}" />
+                                                </Trigger>
+                                                <Trigger Property="IsEnabled" Value="True">
+                                                    <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Controls:Flyout>
+
+            <Controls:Flyout Name="TvShowDetailFlyout" Position="Right" TitleVisibility="Collapsed" IsModal="True" IsPinned="{Binding PinTvShowFlyout}" Width="610"
+                             IsOpen="{Binding SelectedTvShow, Converter={converters:ObjectToBooleanConverter}}" Theme="Dark" IsOpenChanged="TvShowDetailFlyout_OnIsOpenChanged">
+                <ScrollViewer Visibility="{Binding SelectedTvShow, Converter={converters:ObjectToVisibilityConverter}}" DataContext="{Binding SelectedTvShow}" >
+                    <StackPanel Margin="10">
+                        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource MediaInfoFlyoutTemplate}" Margin="0 0 0 10"/>
+                        <StackPanel Margin="10">
+                            <CheckBox IsChecked="{Binding AutoDownload}" Margin="0 0 0 10"
+                                  Content="{Binding Source={StaticResource Resources}, Path=AutoDownloadNewEpisodes}" />
+                            <userControls:VideoSearchInfoUserControl Margin="0 0 0 10" ItemWidth="200" LabelWidth="150" />
+                            <Grid Margin="0 0 0 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <userControls:DirectorySelectUserControl Text="{Binding Directory}" Height="30" />
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5 0 5 0"
+                                            Visibility="{Binding Directory, Converter= {converters:StringToVisibilityConverter}}">
+                                    <Button  Cursor="Hand" Width="40" Height="40" 
+                                             ToolTip="{Binding Source={StaticResource Resources}, Path=GoToDirectory}"
+                                             Command="{Binding Path=DataContext.TvShowGoToDirectoryCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                             CommandParameter="{Binding}"
+                                             Style="{StaticResource MetroCircleButtonStyle}">
+                                        <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_folder_open}" 
+                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                    </Button>
+                                    <Button Width="40" Height="40"
+                                            ToolTip="{Binding Source={StaticResource Resources}, Path=CheckAndUpdateDirectoryFiles}"
+                                            Command="{Binding Path=DataContext.TvShowDiscoverFilesCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource MetroCircleButtonStyle}">
+                                        <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_folder_refresh}" 
+                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                    </Button>
+                                </StackPanel>
+
+                            </Grid>
+                            <userControls:TvShowSeasonsUserControl Margin="0 5 0 10" FontSize="10"/>
+                        </StackPanel>
+                        <DockPanel HorizontalAlignment="Left">
+                            <Button  Width="50" Height="50" Cursor="Hand"
+                                     Command="{Binding Path=DataContext.TvShowPlayCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                     CommandParameter="{Binding}"
+                                     Style="{StaticResource MetroCircleButtonStyle}">
+                                <Button.ToolTip>
+                                    <TextBlock>
+                                        <Run Text="{Binding Source={StaticResource Resources}, Path=Play, Mode=OneWay}" />
+                                         - <Run Text="{Binding Source={StaticResource Resources}, Path=Season, Mode=OneWay}" />
+                                        : <Run Text="{Binding UnseenEpisode.TvShowSeason.Season}" />
+                                        <Run Text="{Binding Source={StaticResource Resources}, Path=Episode, Mode=OneWay}" />
+                                        : <Run Text="{Binding UnseenEpisode.Episode}" />
+                                    </TextBlock>
+                                </Button.ToolTip>
+                                <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_play}"
+                                                              Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                            </Button>
+                            <Button Width="50" Height="50" Cursor="Hand" ToolTip="{Binding Source={StaticResource Resources}, Path=UpdateTvShowInfo}"
+                                    Command="{Binding Path=DataContext.TvShowUpdateInfoCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource MetroCircleButtonStyle}">
+                                <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_refresh}"
+                                                              Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                            </Button>
+                            <Button Width="50" Height="50" Cursor="Hand" 
+                                    Command="{Binding Path=DataContext.TvShowDeleteCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=Delete}">
+                                <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_delete}"
+                                                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                            </Button>
+                        </DockPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+</Controls:MetroWindow>

@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AdvancedInfoProvider" xml:space="preserve">
+    <value>Advanced Info Provider</value>
+  </data>
+  <data name="AdvancedSearchResultCount" xml:space="preserve">
+    <value>Advanced Search Result Count</value>
+  </data>
+  <data name="AirDate" xml:space="preserve">
+    <value>Air Date</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="AutoDownloadNewEpisodes" xml:space="preserve">
+    <value>Auto Download New Episodes</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Directory" xml:space="preserve">
+    <value>Directory</value>
+  </data>
+  <data name="Downloader" xml:space="preserve">
+    <value>Downloader</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Episode" xml:space="preserve">
+    <value>Episode</value>
+  </data>
+  <data name="EpisodeName" xml:space="preserve">
+    <value>Episode Name</value>
+  </data>
+  <data name="Episodes" xml:space="preserve">
+    <value>Episodes</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="FoundMedia" xml:space="preserve">
+    <value>Found Media</value>
+  </data>
+  <data name="Genre" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="ImdbId" xml:space="preserve">
+    <value>Imdb Id</value>
+  </data>
+  <data name="InfoProvider" xml:space="preserve">
+    <value>Info Provider</value>
+  </data>
+  <data name="IsDeleted" xml:space="preserve">
+    <value>Deleted?</value>
+  </data>
+  <data name="IsWatched" xml:space="preserve">
+    <value>Watched?</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="MontyNi" xml:space="preserve">
+    <value>Ni!</value>
+  </data>
+  <data name="MontyNudgeNudge" xml:space="preserve">
+    <value>Nudge, nudge, wink, wink. Know what I mean?</value>
+  </data>
+  <data name="MovieDirectory" xml:space="preserve">
+    <value>Movie Directory</value>
+  </data>
+  <data name="MovieProviders" xml:space="preserve">
+    <value>Movie Providers</value>
+  </data>
+  <data name="Movies" xml:space="preserve">
+    <value>Movies</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NotWatched" xml:space="preserve">
+    <value>Not Watched</value>
+  </data>
+  <data name="Outline" xml:space="preserve">
+    <value>Outline</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Poster" xml:space="preserve">
+    <value>Poster</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="ReleaseYear" xml:space="preserve">
+    <value>Release Year</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="StopWatching" xml:space="preserve">
+    <value>Stop Watching</value>
+  </data>
+  <data name="Runtime" xml:space="preserve">
+    <value>Runtime</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Season" xml:space="preserve">
+    <value>Season</value>
+  </data>
+  <data name="Seasons" xml:space="preserve">
+    <value>Seasons</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ShowTracker" xml:space="preserve">
+    <value>Show Tracker</value>
+  </data>
+  <data name="SubtitleDownloaders" xml:space="preserve">
+    <value>Subtitle Downloaders</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TvShowDirectory" xml:space="preserve">
+    <value>Tv Show Directory</value>
+  </data>
+  <data name="TvShowProviders" xml:space="preserve">
+    <value>Tv Show Providers</value>
+  </data>
+  <data name="TvShows" xml:space="preserve">
+    <value>Tv Shows</value>
+  </data>
+  <data name="TvShowSeasonDirectoryTemplate" xml:space="preserve">
+    <value>Season Directory Template</value>
+  </data>
+  <data name="UseAdvancedSearch" xml:space="preserve">
+    <value>Use Advanced Search</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="Vote" xml:space="preserve">
+    <value>Vote</value>
+  </data>
+  <data name="VoteCount" xml:space="preserve">
+    <value>Vote Count</value>
+  </data>
+  <data name="Watched" xml:space="preserve">
+    <value>Watched</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="DownloadInterval" xml:space="preserve">
+    <value>Download Interval (mins)</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="SubtitleLanguages" xml:space="preserve">
+    <value>Subtitle Languages</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Turkish" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="NotSelected" xml:space="preserve">
+    <value>Not Selected</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="TvShowUpdateInterval" xml:space="preserve">
+    <value>Tv Show Update Interval (hours)</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Activities</value>
+  </data>
+  <data name="MovieDownloaded" xml:space="preserve">
+    <value>'{0}' download completed</value>
+  </data>
+  <data name="MovieSubtitleDownloaded" xml:space="preserve">
+    <value>'{0}' subtitle downloaded</value>
+  </data>
+  <data name="TvShowEpisodeDownloaded" xml:space="preserve">
+    <value>'{0}' season {1} episode {2} download completed</value>
+  </data>
+  <data name="TvShowEpisodeSubtitleDownloaded" xml:space="preserve">
+    <value>'{0}' season {1} episode {2} subtitle downloaded</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="MovieDownloadStarted" xml:space="preserve">
+    <value>'{0}' download started</value>
+  </data>
+  <data name="TvShowEpisodeDownloadStarted" xml:space="preserve">
+    <value>'{0}' season {1} episode {2} download started</value>
+  </data>
+  <data name="BackgroundDownload" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="MinuteReduced" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Img_Logo_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_logo_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BaseUrl" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="MovieDetails" xml:space="preserve">
+    <value>Movie Details</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Dutch" xml:space="preserve">
+    <value>Dutch</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="Italian" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Order By</value>
+  </data>
+  <data name="Discover" xml:space="preserve">
+    <value>Discover</value>
+  </data>
+  <data name="ExcludeExisting" xml:space="preserve">
+    <value>Exclude Existing</value>
+  </data>
+  <data name="MovieSearchPattern" xml:space="preserve">
+    <value>Movie Search Pattern</value>
+  </data>
+  <data name="MovieSearchPatternDescription" xml:space="preserve">
+    <value>Available parameters: %movieName%, %year%, %imdbId%</value>
+  </data>
+  <data name="TvShowEpisodeSearchPattern" xml:space="preserve">
+    <value>Tv Show Episode Search Pattern</value>
+  </data>
+  <data name="TvShowEpisodeSearchPatternDescription" xml:space="preserve">
+    <value>Available parameters: %showName%, %imdbId%, %season%, %episode%</value>
+  </data>
+  <data name="ExecuteBackgroundDownloads" xml:space="preserve">
+    <value>Execute Downloads</value>
+  </data>
+  <data name="ExecuteBackgroundTvShowUpdates" xml:space="preserve">
+    <value>Execute Tv Show Updates</value>
+  </data>
+  <data name="MediaTypes" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="SendAFrown" xml:space="preserve">
+    <value>Send a Frown</value>
+  </data>
+  <data name="SendASmile" xml:space="preserve">
+    <value>Send a Smile</value>
+  </data>
+  <data name="TellUsWhatYouThink" xml:space="preserve">
+    <value>Tell us what you think</value>
+  </data>
+  <data name="IncludeEmail" xml:space="preserve">
+    <value>Include email address</value>
+  </data>
+  <data name="FrownWatermark" xml:space="preserve">
+    <value>Tell us what you didn't like or what went wrong</value>
+  </data>
+  <data name="SmileWatermark" xml:space="preserve">
+    <value>Tell us what you liked</value>
+  </data>
+  <data name="ItemsPerPage" xml:space="preserve">
+    <value>Items Per Page</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="ErrorLogs" xml:space="preserve">
+    <value>Error Logs</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Img_AddMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_addmedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_DownloadSubtitle_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_downloadsubtitle_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_Download_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_download_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_NewMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_newmedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_Watch_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_watch_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_StopWatching_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_stopwatching_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NotifyIconToolTip" xml:space="preserve">
+    <value>Double-click for window, right-click for menu</value>
+  </data>
+  <data name="Img_Exit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_exit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_DiscoverMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_discovermedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_TvShowUpdate_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_tvshowupdate_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExcludeKeywords" xml:space="preserve">
+    <value>Exclude Keywords</value>
+  </data>
+  <data name="ExcludeKeywordsDescription" xml:space="preserve">
+    <value>Search results containing at least one of these will be extracted from the list</value>
+  </data>
+  <data name="VideoQuality" xml:space="preserve">
+    <value>Video Quality</value>
+  </data>
+  <data name="DefaultTvShowExtraKeywords" xml:space="preserve">
+    <value>Default Tv Show Extra Keywords</value>
+  </data>
+  <data name="ExtraKeywordsDescription" xml:space="preserve">
+    <value>Will be added to provider search query</value>
+  </data>
+  <data name="DefaultMovieVideoQuality" xml:space="preserve">
+    <value>Default Movie Video Quality</value>
+  </data>
+  <data name="DefaultTvShowVideoQuality" xml:space="preserve">
+    <value>Default Tv Show Video Quality</value>
+  </data>
+  <data name="DefaultMovieExcludeKeywords" xml:space="preserve">
+    <value>Default Movie Exclude Keywords</value>
+  </data>
+  <data name="DefaultTvShowExcludeKeywords" xml:space="preserve">
+    <value>Default Tv Show Exclude Keywords</value>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>Any</value>
+  </data>
+  <data name="P1080" xml:space="preserve">
+    <value>1080p</value>
+  </data>
+  <data name="P480" xml:space="preserve">
+    <value>480p</value>
+  </data>
+  <data name="P720" xml:space="preserve">
+    <value>720p</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="Documentary" xml:space="preserve">
+    <value>Documentary</value>
+  </data>
+  <data name="UpdateMovieInfo" xml:space="preserve">
+    <value>Update Movie Info</value>
+  </data>
+  <data name="UpdateTvShowInfo" xml:space="preserve">
+    <value>Update Tv Show Info</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PlayUnseenEpisode" xml:space="preserve">
+    <value>Play Unseen Episode</value>
+  </data>
+  <data name="DefaultMovieExtraKeywords" xml:space="preserve">
+    <value>Default Movie Extra Keywords</value>
+  </data>
+  <data name="ExtraKeywords" xml:space="preserve">
+    <value>Extra Keywords</value>
+  </data>
+  <data name="BackgroundSubtitleDownload" xml:space="preserve">
+    <value>Subtitle Download</value>
+  </data>
+  <data name="Votes" xml:space="preserve">
+    <value>Votes</value>
+  </data>
+  <data name="UpdateTvShow" xml:space="preserve">
+    <value>Update Tv Show</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>Downloaded</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="SubtitleDownloaded" xml:space="preserve">
+    <value>Subtitle Downloaded</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="FileCount" xml:space="preserve">
+    <value>File Count</value>
+  </data>
+  <data name="Leech" xml:space="preserve">
+    <value>Leech</value>
+  </data>
+  <data name="Seed" xml:space="preserve">
+    <value>Seed</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Provider</value>
+  </data>
+  <data name="DownloadSubtitle" xml:space="preserve">
+    <value>Download Subtitle</value>
+  </data>
+  <data name="DiscoverFiles" xml:space="preserve">
+    <value>Discover Files</value>
+  </data>
+  <data name="DownloadCount" xml:space="preserve">
+    <value>Download Count</value>
+  </data>
+  <data name="SearchResultNotFound" xml:space="preserve">
+    <value>Search result is not found. You can search again manually</value>
+  </data>
+  <data name="SearchResultNotFoundForSubtitle" xml:space="preserve">
+    <value>Search result is not found for subtitle. You can search again manually</value>
+  </data>
+  <data name="SubtitleSearch" xml:space="preserve">
+    <value>Subtitle Search</value>
+  </data>
+  <data name="CheckAndUpdateDirectoryFiles" xml:space="preserve">
+    <value>Check and Update Directory Files</value>
+  </data>
+  <data name="GoToDirectory" xml:space="preserve">
+    <value>Go To Directory</value>
+  </data>
+  <data name="ManualDownload" xml:space="preserve">
+    <value>Manual Download</value>
+  </data>
+  <data name="ManualSubtitleDownload" xml:space="preserve">
+    <value>Manual Subtitle Download</value>
+  </data>
+  <data name="ImdbIdNotFound" xml:space="preserve">
+    <value>Imdb Id not found</value>
+  </data>
+  <data name="ServiceIdNotFound" xml:space="preserve">
+    <value>{0} Id not found</value>
+  </data>
+  <data name="UnsupportedSearchResult" xml:space="preserve">
+    <value>Unsupported search result</value>
+  </data>
+  <data name="ServiceUnavailable" xml:space="preserve">
+    <value>Service Unavailable: {0}</value>
+  </data>
+  <data name="DeleteExtensions" xml:space="preserve">
+    <value>Delete Extensions</value>
+  </data>
+  <data name="DeleteExtensionsDescription" xml:space="preserve">
+    <value>Files with these extensions will be deleted after each download complete (; separated)</value>
+  </data>
+  <data name="LogDate" xml:space="preserve">
+    <value>Log Date</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Not Found</value>
+  </data>
+  <data name="SubtitleNotFound" xml:space="preserve">
+    <value>Subtitle Not Found</value>
+  </data>
+  <data name="Img_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_Logo_Window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_logo_window.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="SelectAFile" xml:space="preserve">
+    <value>Select a file</value>
+  </data>
+  <data name="BackupDatabase" xml:space="preserve">
+    <value>Backup Database</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ScriptServices" xml:space="preserve">
+    <value>Script Services</value>
+  </data>
+  <data name="MovieTorrentProvider" xml:space="preserve">
+    <value>Movie Torrent Provider</value>
+  </data>
+  <data name="TvShowTorrentProvider" xml:space="preserve">
+    <value>Tv Show Torrent Provider</value>
+  </data>
+  <data name="DownloadEventHandlers" xml:space="preserve">
+    <value>Download Event Handlers</value>
+  </data>
+  <data name="LoadDefaultCode" xml:space="preserve">
+    <value>Load Default Code</value>
+  </data>
+  <data name="Build" xml:space="preserve">
+    <value>Build</value>
+  </data>
+  <data name="CompiledCodeNovaromaServiceRequired" xml:space="preserve">
+    <value>Cannot find any Novaroma Service in compiled code</value>
+  </data>
+  <data name="Errors" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="Warnings" xml:space="preserve">
+    <value>Warnings</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="RestartNovaroma" xml:space="preserve">
+    <value>Restart Novaroma</value>
+  </data>
+  <data name="CompiledCodeParameterlessCtorRequired" xml:space="preserve">
+    <value>All exposed service types must have a parameterless public constructor</value>
+  </data>
+  <data name="ScriptService" xml:space="preserve">
+    <value>Script Service</value>
+  </data>
+  <data name="DownloadEventHandler" xml:space="preserve">
+    <value>Download Event Handler</value>
+  </data>
+  <data name="SubtitleDownloader" xml:space="preserve">
+    <value>Subtitle Downloader</value>
+  </data>
+  <data name="ClearActvitiesAndLogs" xml:space="preserve">
+    <value>Clear Actvities and Logs</value>
+  </data>
+  <data name="MovieSubtitleNotFound" xml:space="preserve">
+    <value>'{0}' subtitle could not be found</value>
+  </data>
+  <data name="TvShowEpisodeSubtitleNotFound" xml:space="preserve">
+    <value>'{0}' season {1} episode {2} subtitle could not be found</value>
+  </data>
+  <data name="SubtitleNotDownloaded_DownloadersNotSelected" xml:space="preserve">
+    <value>Could not download subtitle: downloaders are not selected. You can select downloaders from Settings</value>
+  </data>
+  <data name="SubtitleNotDownloaded_LanguagesNotSelected" xml:space="preserve">
+    <value>Could not download subtitle: languages are not selected. You can select languages from Settings</value>
+  </data>
+  <data name="SubtitleNotDownloaded_FileNotFound" xml:space="preserve">
+    <value>Could not download subtitle: '{0}' file not found</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>File not found: '{0}'</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="UtorrentWebUISettings" xml:space="preserve">
+    <value>μTorrent Web UI Settings</value>
+  </data>
+  <data name="VideoFiles" xml:space="preserve">
+    <value>Video Files</value>
+  </data>
+  <data name="Img_Logo_48x48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_logo_48x48.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_Edit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_edit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BuyCoffee" xml:space="preserve">
+    <value>Buy us a coffee</value>
+  </data>
+  <data name="AddSubdirectories" xml:space="preserve">
+    <value>Add Sub-Directories</value>
+  </data>
+  <data name="Img_AddSubdirectories_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_addsubdirectories_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_NovaromaFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_novaromafolder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MakeSpecialFolder" xml:space="preserve">
+    <value>Customize Folders</value>
+  </data>
+  <data name="MakeSpecialFolderDescription" xml:space="preserve">
+    <value>Novaroma folders will have novaroma icon, tv show and movie folders will have poster on windows explorer</value>
+  </data>
+  <data name="PluginService" xml:space="preserve">
+    <value>Plug-in Service</value>
+  </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Plug-ins</value>
+  </data>
+  <data name="DirectoryToAdd" xml:space="preserve">
+    <value>'{0}' will be added to novaroma directory watch list</value>
+  </data>
+  <data name="DeleteDirectoriesAlso" xml:space="preserve">
+    <value>Delete Directories Also</value>
+  </data>
+  <data name="DeleteDirectoriesAlsoDescription" xml:space="preserve">
+    <value>After deleting a movie or tv show, also delete it's directory</value>
+  </data>
+  <data name="MarkAsWatched" xml:space="preserve">
+    <value>Mark as Watched</value>
+  </data>
+  <data name="Movie" xml:space="preserve">
+    <value>Movie</value>
+  </data>
+  <data name="TvShow" xml:space="preserve">
+    <value>Tv Show</value>
+  </data>
+  <data name="NovaromaSlogan" xml:space="preserve">
+    <value>Sit back, relax and just watch!</value>
+  </data>
+  <data name="VisitWebSite" xml:space="preserve">
+    <value>Visit Website</value>
+  </data>
+  <data name="HowToAddMovie" xml:space="preserve">
+    <value>How to add movie ?</value>
+  </data>
+  <data name="HowToAddTvShow" xml:space="preserve">
+    <value>How to add tv show ?</value>
+  </data>
+  <data name="HowTo" xml:space="preserve">
+    <value>How to</value>
+  </data>
+  <data name="Url_HowToAddMovie" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-add-movie.html</value>
+  </data>
+  <data name="Url_HowToAddTvShow" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-add-tv-show.html</value>
+  </data>
+  <data name="Url_HowToConfigureUtorrentWebUISettings" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-configure-utorrent-web-ui-settings.html</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Invalid email address</value>
+  </data>
+</root>
