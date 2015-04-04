@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -128,19 +129,13 @@ namespace Novaroma.Win.Views {
                 EmailTextBox.Focus();
         }
 
-        private static void CheckEmail(string mail) {
-            // ReSharper disable once ObjectCreationAsStatement
-            new MailAddress(mail);
+        private static void CheckEmail(string email) {
+            if (!IsValidEmail(email))
+                throw new NovaromaException(Properties.Resources.InvalidEmail);
         }
 
-        private bool IsValidEmail(string mail) {
-            try {
-                CheckEmail(mail);
-                return true;
-            }
-            catch {
-                return false;
-            }
+        private static bool IsValidEmail(string email) {
+            return !string.IsNullOrEmpty(email) && Regex.IsMatch(email, Constants.EmailRegex);
         }
 
         #region INotifyPropertyChanged Members

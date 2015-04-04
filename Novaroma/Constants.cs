@@ -13,6 +13,9 @@ namespace Novaroma {
         public const string DefaultTvShowEpisodeSearchPattern = "%showName% S%season%E%episode%";
         public const string ImdbTitleUrl = "http://www.imdb.com/title/{0}/";
 
+        public const string EmailRegex =
+            @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+
         private static readonly Lazy<EnumInfo<Language>[]> _languagesEnumInfo =
             new Lazy<EnumInfo<Language>[]>(() => Helper.GetEnumInfo<Language>().OrderBy(l => l.Item, new CultureLanguageComparer()).ToArray());
 
