@@ -18,7 +18,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBox Name="MessageTextBox" Margin="5" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap"
-                controls:TextBoxHelper.Watermark="{Binding FeedbackWatermark}" />
+                 Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
+                 controls:TextBoxHelper.Watermark="{Binding FeedbackWatermark}" />
         <Grid Grid.Row="1" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -48,11 +49,11 @@
         <DockPanel Grid.Row="2" Margin="5">
             <CheckBox x:Name="IncludeEmailCheckBox" Content="{Binding Source={StaticResource Resources}, Path=IncludeEmail}" 
                     Margin="0 0 10 0" Height="26" VerticalAlignment="Top" Click="IncludeEmailCheckBox_Click" />
-            <TextBox Name="EmailTextBox" IsEnabled="False" Text="{Binding Email, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
+            <TextBox Name="EmailTextBox" IsEnabled="False" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                      controls:TextBoxHelper.Watermark="{Binding Source={StaticResource Resources}, Path=EmailAddress}" />
         </DockPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5">
-            <Button Margin="0 0 10 0" MinWidth="60" Content="{Binding SendButtonText}" Click="DoSendFeedback" />
+            <Button Name="SendButton" Margin="0 0 10 0" MinWidth="60" Content="{Binding SendButtonText}" Click="DoSendFeedback" IsEnabled="False" />
         </StackPanel>
     </Grid>
     <controls:ProgressRing x:Name="ProgressRing" Margin="5" IsActive="False" />

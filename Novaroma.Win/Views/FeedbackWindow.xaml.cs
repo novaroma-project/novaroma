@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,14 +10,14 @@ using Novaroma.Interface;
 
 namespace Novaroma.Win.Views {
 
-    public partial class FeedbackWindow : INotifyPropertyChanged {
+    public partial class FeedbackWindow : INotifyPropertyChanged, IDataErrorInfo {
         private static readonly Uri _feedbackUrl = new Uri("http://novaroma.azurewebsites.net/FeedbackHandler.ashx");
         private readonly IExceptionHandler _exceptionHandler;
         private readonly ILogger _logger;
         private readonly IDialogService _dialogService;
         private readonly bool _isFrown;
+        private string _message;
         private MultiCheckSelection<ILogItem> _logs;
-        private string _email;
 
         public FeedbackWindow(IExceptionHandler exceptionHandler, ILogger logger, IDialogService dialogService, bool isFrown) {
             _exceptionHandler = exceptionHandler;
@@ -53,8 +52,9 @@ namespace Novaroma.Win.Views {
         private async Task SendFeedback() {
             var mailCheck = IncludeEmailCheckBox.IsChecked.HasValue && IncludeEmailCheckBox.IsChecked.Value;
 
-            if (mailCheck && !IsValidEmail(_email)) {
-                await _dialogService.Error(Properties.Resources.MontyNi, Properties.Resources.InvalidEmail);
+            var err = Error;
+            if (!string.IsNullOrEmpty(err)) {
+                await _dialogService.Error(Properties.Resources.MontyNi, err);
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace Novaroma.Win.Views {
             using (var client = new NovaromaWebClient()) {
                 var feedback = new {
                     IsFrown,
-                    Message = MessageTextBox.Text,
+                    Message,
                     Logs = _logs.SelectedItems,
                     Email = mailCheck ? EmailTextBox.Text : string.Empty
                 };
@@ -103,6 +103,15 @@ namespace Novaroma.Win.Views {
             }
         }
 
+        public string Message {
+            get { return _message; }
+            set {
+                _message = value;
+
+                SendButton.IsEnabled = !string.IsNullOrEmpty(_message);
+            }
+        }
+
         public MultiCheckSelection<ILogItem> Logs {
             get { return _logs; }
             set {
@@ -113,29 +122,13 @@ namespace Novaroma.Win.Views {
             }
         }
 
-        public string Email {
-            get { return _email; }
-            set {
-                _email = value;
-
-                CheckEmail(value);
-            }
-        }
+        public string Email { get; set; }
 
         private void IncludeEmailCheckBox_Click(object sender, RoutedEventArgs e) {
             var emailChecked = IncludeEmailCheckBox.IsChecked.HasValue && IncludeEmailCheckBox.IsChecked.Value;
             EmailTextBox.IsEnabled = emailChecked;
             if (emailChecked)
                 EmailTextBox.Focus();
-        }
-
-        private static void CheckEmail(string email) {
-            if (!IsValidEmail(email))
-                throw new NovaromaException(Properties.Resources.InvalidEmail);
-        }
-
-        private static bool IsValidEmail(string email) {
-            return !string.IsNullOrEmpty(email) && Regex.IsMatch(email, Constants.EmailRegex);
         }
 
         #region INotifyPropertyChanged Members
@@ -145,6 +138,30 @@ namespace Novaroma.Win.Views {
         protected virtual void RaisePropertyChanged(string propertyName) {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        #region IDataErrorInfo Members
+
+        public string Error {
+            get {
+                return this["Email"];
+            }
+        }
+
+        public string this[string propertyName] {
+            get {
+                switch (propertyName) {
+                    case "Email":
+                        var emailChecked = IncludeEmailCheckBox.IsChecked.HasValue && IncludeEmailCheckBox.IsChecked.Value;
+                        if (emailChecked && (string.IsNullOrEmpty(Email) || !Regex.IsMatch(Email, Constants.EmailRegex)))
+                            return Properties.Resources.InvalidEmail;
+                        return string.Empty;
+                    default:
+                        return string.Empty;
+                }
+            }
         }
 
         #endregion
