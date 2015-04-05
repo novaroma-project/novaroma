@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://www.novaroma.net/</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/index.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/features.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/screenshots.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/how-to.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/download.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/share.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/promote.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/translate.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/suggest.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/development.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/donate.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.novaroma.net/contact.html</loc>
+  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+</urlset>
