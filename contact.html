@@ -102,13 +102,6 @@
         </div>
 
     </section>
-	
-	<form action="//formspree.io/novaroma.project@gmail.com" method="POST">
-    <input type="text" name="name">
-    <input type="email" name="_replyto">
-    <input type="submit" value="Send">
-</form>
-    <!-- /privacy-policy -->
     <!--Footer-->
     <footer id="footer">
         <div class="container">
@@ -161,7 +154,7 @@
                     dataType: "json"
                 })
                     .done(function (response) {
-                        if (response != null && response.isSuccess != null && response.success.indexOf("sent") >= 0) {
+                        if (response != null && response.success != null && response.success.indexOf("sent") >= 0) {
                             alert("Thanks. Your message sent");
                         } else {
                             alert("There is an error. Please try again.");

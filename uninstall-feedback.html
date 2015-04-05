@@ -175,7 +175,7 @@
                     dataType: "json"
                 })
                     .done(function (response) {
-                        if (response != null && response.isSuccess != null && response.success.indexOf("sent") >= 0) {
+                        if (response != null && response.success != null && response.success.indexOf("sent") >= 0) {
                             alert("Thanks. Your feedback sent");
                         } else {
                             alert("There is an error. Please try again.");
