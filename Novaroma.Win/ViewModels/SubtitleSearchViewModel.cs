@@ -30,7 +30,7 @@ namespace Novaroma.Win.ViewModels {
             _subtitleLanguages = new MultiCheckSelection<EnumInfo<Language>>(Constants.LanguagesEnumInfo);
             foreach (var subtitleLanguage in engine.SubtitleLanguages)
                 _subtitleLanguages.Selections.First(s => s.Item.Item == subtitleLanguage).IsSelected = true;
-            _searchCommand = new RelayCommand(DoSearch);
+            _searchCommand = new RelayCommand(DoSearch, CanSearch);
         }
 
         public Task InitSearch(string searchQuery) {
@@ -53,6 +53,10 @@ namespace Novaroma.Win.ViewModels {
                 );
                 IsBusy = false;
             }
+        }
+
+        private bool CanSearch() {
+            return !IsBusy;
         }
 
         public async Task Download() {

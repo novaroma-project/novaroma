@@ -26,7 +26,7 @@ namespace Novaroma.Win.ViewModels {
             _exceptionHandler = exceptionHandler;
             _downloadable = downloadable;
             _directory = directory;
-            _searchCommand = new RelayCommand(DoSearch);
+            _searchCommand = new RelayCommand(DoSearch, CanSearch);
         }
 
         public Task InitSearch(string searchQuery, VideoQuality videoQuality, string excludeKeywords) {
@@ -51,6 +51,10 @@ namespace Novaroma.Win.ViewModels {
                 );
                 IsBusy = false;
             }
+        }
+
+        private bool CanSearch() {
+            return !IsBusy;
         }
 
         public async Task Download() {
