@@ -90,11 +90,11 @@
                         <br>
                         <span style="color: #000; font-size: 12px;">Windows - version 0.9.0</span>
                     </a>
-					<div id="total-download" style="float:right; width:205px; display:none;">
-						<div style="text-align:center; font-size:10px;">
-							Total Download: <span id="download-count"></span>
-						</div>
-					</div>
+                    <div id="total-download" style="float:right; width:205px; display:none;">
+                        <div style="text-align:center; font-size:10px;">
+                            Total Download: <span id="download-count"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -185,17 +185,13 @@
     <script src="js/main.js"></script>
 
     <script type="text/javascript">
-        window.doorbellOptions = {
-            appKey: '98WLBZhLMLth5pGcSgK9TeI5HRb6kyrxo89iqhSzNurMDxNwUdhvadNTcvi8XpmY'
-        };
-        (function (d, t) {
-            var g = d.createElement(t);
-            g.id = 'doorbellScript';
-            g.type = 'text/javascript';
-            g.async = true;
-            g.src = 'https://embed.doorbell.io/button/1035?t=' + (new Date().getTime());
-            (d.getElementsByTagName('head')[0] || d.getElementsByTagName('body')[0]).appendChild(g);
-        }(document, 'script'));
+        var _urq = _urq || [];
+        _urq.push(['initSite', '6a4cdb84-8953-4eb3-b3a3-d44fff572cde']);
+        (function () {
+            var ur = document.createElement('script'); ur.type = 'text/javascript'; ur.async = true;
+            ur.src = ('https:' == document.location.protocol ? 'https://cdn.userreport.com/userreport.js' : 'http://cdn.userreport.com/userreport.js');
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ur, s);
+        })();
     </script>
 
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5519b812523dcc45" async="async"></script>
@@ -212,19 +208,19 @@
         ga('send', 'pageview');
 
     </script>
-	
-	<script>
-		var url = "https://api.github.com/repos/novaroma-project/novaroma/releases";
-		var downloadCount =0;
-		$.getJSON(url, function(data){
-			$.each(data, function(i,item){
-				$.each(item.assets, function(y,asset){
-					downloadCount+=asset.download_count;
-				});
-			});
-			$("#download-count").html(downloadCount);
-			$("#total-download").show();
-		});
-	</script>
+
+    <script>
+        var url = "https://api.github.com/repos/novaroma-project/novaroma/releases";
+        var downloadCount = 0;
+        $.getJSON(url, function (data) {
+            $.each(data, function (i, item) {
+                $.each(item.assets, function (y, asset) {
+                    downloadCount += asset.download_count;
+                });
+            });
+            $("#download-count").html(downloadCount);
+            $("#total-download").show();
+        });
+    </script>
 </body>
 </html>
