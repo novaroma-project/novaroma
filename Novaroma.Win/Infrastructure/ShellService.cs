@@ -46,7 +46,7 @@ namespace Novaroma.Win.Infrastructure {
                 else {
                     var searchQuery = Helper.ParseArg(arg, "novaroma:");
                     if (!string.IsNullOrEmpty(searchQuery))
-                        Helper.AddFromSearch(_engine, _exceptionHandler, _dialogService, searchQuery);
+                        tasks.Add(Helper.AddFromSearch(_engine, _exceptionHandler, _dialogService, searchQuery));
                 }
             }
 
