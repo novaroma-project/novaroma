@@ -72,12 +72,8 @@ namespace Novaroma.Engine {
             _settings = new EngineSettings(serviceList);
             _imdbIdConverters = serviceList.OfType<IImdbIdConverter>();
 
-            if (watchDirectories.Any()) {
-                foreach (var watchDirectory in watchDirectories) {
-                    if (Directory.Exists(watchDirectory.Directory))
-                        AddDirectoryWatcher(watchDirectory.Directory);
-                }
-            }
+            foreach (var watchDirectory in watchDirectories)
+                AddDirectoryWatcher(watchDirectory.Directory);
 
             _isInitialized = settingStrings.Any(s => s.SettingName == ((IConfigurable)this).SettingName);
             foreach (var configurable in serviceList.OfType<IConfigurable>().Union(new[] { this })) {
@@ -117,6 +113,12 @@ namespace Novaroma.Engine {
                     OnLanguageChanged(language);
                 }
             };
+            Settings.MovieDirectory.PropertyChanged += async (sender, args) => {
+                await WatchDirectory(Settings.MovieDirectory.Path);
+            };
+            Settings.TvShowDirectory.PropertyChanged += async (sender, args) => {
+                await WatchDirectory(Settings.TvShowDirectory.Path);
+            };
         }
 
         #region Methods
@@ -132,7 +134,11 @@ namespace Novaroma.Engine {
         }
 
         private void AddDirectoryWatcher(string directory) {
+            if (string.IsNullOrEmpty(directory) || !Directory.Exists(directory)) return;
+
             if (directory.EndsWith(@"\")) directory = directory.Substring(0, directory.Length - 1);
+            if (_watchers.Any(w => string.Equals(w.Path, directory, StringComparison.OrdinalIgnoreCase))) return;
+
             var fsw = new FileSystemWatcher(directory) { IncludeSubdirectories = true, EnableRaisingEvents = true };
             fsw.Created += DirectoryWatcherOnCreated;
             fsw.Deleted += DirectoryWatcherOnDeleted;
@@ -142,6 +148,7 @@ namespace Novaroma.Engine {
 
         private void RemoveDirectoryWatcher(string directory) {
             if (directory.EndsWith(@"\")) directory = directory.Substring(0, directory.Length - 1);
+
             var watcher = _watchers.FirstOrDefault(fsw => string.Equals(fsw.Path, directory, StringComparison.OrdinalIgnoreCase));
             if (watcher != null) {
                 _watchers.Remove(watcher);

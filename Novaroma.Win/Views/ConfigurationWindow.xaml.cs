@@ -73,8 +73,6 @@ namespace Novaroma.Win.Views {
             if (string.Equals(directory, initialDir, StringComparison.OrdinalIgnoreCase)) return;
             if (string.IsNullOrEmpty(directory) || !Directory.Exists(directory)) return;
 
-            await _engine.WatchDirectory(directory);
-
             var subDirectories = Directory.GetDirectories(directory).ToArray();
             if (subDirectories.Any()) {
                 var wizardViewModel = new NewMediaWizardViewModel(_engine, _exceptionHandler, _dialogService);
