@@ -85,7 +85,7 @@ namespace Novaroma {
 
             var name = fileInfo.Name;
             var titleRegex = tvShow.Title.Replace(" ", ".");
-            name = Regex.Replace(name, titleRegex, string.Empty);
+            name = Regex.Replace(name, titleRegex, string.Empty, RegexOptions.IgnoreCase);
             var match = Regex.Match(name, @"(\d{1,2}).?(\d{1,2})");
 
             int tmpSeason, tmpEpisode;
