@@ -79,22 +79,14 @@ namespace Novaroma {
                 .FirstOrDefault();
         }
 
-        public static void DetectEpisodeInfo(FileInfo fileInfo, out int? season, out int? episode) {
+        public static void DetectEpisodeInfo(FileInfo fileInfo, TvShow tvShow, out int? season, out int? episode) {
             season = null;
             episode = null;
 
-            var matches = Regex.Matches(fileInfo.Name, @"(\d{1,2}).?(\d{1,2})");
-            Match match = null;
-            for (var i = 0; i < matches.Count; i++) {
-                var m = matches[i];
-                var g = m.Groups[0].Value;
-                int y;
-                if (!int.TryParse(g, out y) || (y > 1800 && y < DateTime.UtcNow.Year + 2)) {
-                    match = m;
-                    break;
-                }
-            }
-            if (match == null) return;
+            var name = fileInfo.Name;
+            var titleRegex = tvShow.Title.Replace(" ", ".");
+            name = Regex.Replace(name, titleRegex, string.Empty);
+            var match = Regex.Match(name, @"(\d{1,2}).?(\d{1,2})");
 
             int tmpSeason, tmpEpisode;
             var tmpSeasonStr = string.Empty;
@@ -262,7 +254,7 @@ namespace Novaroma {
 
             foreach (var videoFile in videoFiles) {
                 int? season, episode;
-                DetectEpisodeInfo(videoFile, out season, out episode);
+                DetectEpisodeInfo(videoFile, tvShow, out season, out episode);
                 if (!season.HasValue || !episode.HasValue) continue;
 
                 var tvEpisode = episodes.FirstOrDefault(e => e.TvShowSeason.Season == season && e.Episode == episode.Value);
