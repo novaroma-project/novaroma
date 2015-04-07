@@ -1085,7 +1085,8 @@ namespace Novaroma.Engine {
                 var downloader = Settings.Downloader.SelectedItem;
                 if (downloader == null) return string.Empty;
 
-                var downloadKey = await downloader.DownloadMovie(movie.Directory, movie.OriginalTitle, movie.Year, movie.ImdbId);
+                var downloadKey = await downloader.DownloadMovie(movie.Directory, movie.OriginalTitle, movie.Year, movie.ImdbId, 
+                                                                 movie.VideoQuality, movie.ExtraKeywords, movie.ExcludeKeywords);
                 Helper.SetDownloadProperties(downloadKey, movie);
 
                 if (!string.IsNullOrEmpty(downloadKey)) {
@@ -1112,7 +1113,8 @@ namespace Novaroma.Engine {
                 var show = season.TvShow;
                 var directory = Helper.GetTvShowSeasonDirectory(Settings.TvShowSeasonDirectoryTemplate, episode);
 
-                var downloadKey = await downloader.DownloadTvShowEpisode(directory, show.OriginalTitle, season.Season, episode.Episode, episode.Name, show.ImdbId);
+                var downloadKey = await downloader.DownloadTvShowEpisode(directory, show.OriginalTitle, season.Season, episode.Episode, episode.Name, show.ImdbId,
+                                                                         show.VideoQuality, show.ExtraKeywords, show.ExcludeKeywords);
                 Helper.SetDownloadProperties(downloadKey, episode);
 
                 if (!string.IsNullOrEmpty(downloadKey)) {
@@ -1129,7 +1131,8 @@ namespace Novaroma.Engine {
         }
 
         public Task RefreshDownloaders() {
-            return Settings.Downloader.SelectedItem.Refresh();
+            var tasks = Settings.Downloader.Items.RunTasks(d => d.Refresh(), _exceptionHandler);
+            return Task.WhenAll(tasks);
         }
 
         public async Task<bool> DownloadSubtitleForMovie(Movie movie) {
