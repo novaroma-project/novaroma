@@ -369,6 +369,9 @@
                                                                      <Run Text="{Binding UnseenEpisode.Episode}" />
                                                                     - <Run Text="{Binding UnseenEpisode.AirDate, Converter={converters:DateToShortDateStringConverter}}" />
                                                                     - <Run Text="{Binding UnseenEpisode.Name}" />
+                                                                    <LineBreak />
+                                                                    <LineBreak />
+                                                                    <Run Text="{Binding UnseenEpisode.FilePath}" />
                                                                 </TextBlock>
                                                             </Button.ToolTip>
                                                             <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_play}"
@@ -628,11 +631,16 @@
                                                     <StackPanel Name="MovieOperationView" Orientation="Horizontal" Visibility="Hidden"
                                                             VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
                                                         <Button  Width="40" Height="40" Background="{StaticResource AccentColorBrush}" Cursor="Hand"
-                                                             Command="{Binding Path=DataContext.MoviePlayCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
-                                                             CommandParameter="{Binding}"
-                                                             Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=Play}">
+                                                                 Command="{Binding Path=DataContext.MoviePlayCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                                 CommandParameter="{Binding}" Style="{StaticResource MetroCircleButtonStyle}">
+                                                            <Button.ToolTip>
+                                                                <TextBlock>
+                                                                    <Run Text="{Binding Source={StaticResource Resources}, Path=Play, Mode=OneWay}" />
+                                                                    - <Run Text="{Binding FilePath}" />
+                                                                </TextBlock>
+                                                            </Button.ToolTip>
                                                             <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_play}"
-                                                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                                                          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
                                                         </Button>
                                                         <Button Name="MovieUpdateButton"  Width="40" Height="40" Background="{StaticResource AccentColorBrush}" Cursor="Hand"
                                                             Command="{Binding Path=DataContext.MovieMarkWatchedCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
@@ -840,9 +848,15 @@
                                 <Button  Width="50" Height="50" Cursor="Hand"
                                          Command="{Binding Path=DataContext.MoviePlayCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
                                          CommandParameter="{Binding}"
-                                         Style="{StaticResource MetroCircleButtonStyle}" ToolTip="{Binding Source={StaticResource Resources}, Path=Play}">
+                                         Style="{StaticResource MetroCircleButtonStyle}">
+                                    <Button.ToolTip>
+                                        <TextBlock>
+                                            <Run Text="{Binding Source={StaticResource Resources}, Path=Play, Mode=OneWay}" />
+                                            - <Run Text="{Binding FilePath}" />
+                                        </TextBlock>
+                                    </Button.ToolTip>
                                     <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_play}"
-                                                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
                                 </Button>
                                 <Button  Width="50" Height="50" Cursor="Hand"
                                          Command="{Binding Path=DataContext.MovieUpdateInfoCommand, RelativeSource={RelativeSource AncestorType=Controls:Flyout}}" 
@@ -939,10 +953,15 @@
                                 <Button.ToolTip>
                                     <TextBlock>
                                         <Run Text="{Binding Source={StaticResource Resources}, Path=Play, Mode=OneWay}" />
-                                         - <Run Text="{Binding Source={StaticResource Resources}, Path=Season, Mode=OneWay}" />
-                                        : <Run Text="{Binding UnseenEpisode.TvShowSeason.Season}" />
-                                        <Run Text="{Binding Source={StaticResource Resources}, Path=Episode, Mode=OneWay}" />
-                                        : <Run Text="{Binding UnseenEpisode.Episode}" />
+                                        - <Run Text="{Binding Source={StaticResource Resources}, Path=Season, Mode=OneWay}" />:
+                                            <Run Text="{Binding UnseenEpisode.TvShowSeason.Season}" />
+                                        <Run Text="{Binding Source={StaticResource Resources}, Path=Episode, Mode=OneWay}" />:
+                                            <Run Text="{Binding UnseenEpisode.Episode}" />
+                                        - <Run Text="{Binding UnseenEpisode.AirDate, Converter={converters:DateToShortDateStringConverter}}" />
+                                        - <Run Text="{Binding UnseenEpisode.Name}" />
+                                        <LineBreak />
+                                        <LineBreak />
+                                        <Run Text="{Binding UnseenEpisode.FilePath}" />
                                     </TextBlock>
                                 </Button.ToolTip>
                                 <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_play}"

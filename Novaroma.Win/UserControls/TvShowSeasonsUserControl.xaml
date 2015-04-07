@@ -175,12 +175,17 @@
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" Margin="0 0 5 0">
                                                     <Button Cursor="Hand" Width="40" Height="40"
-                                                        ToolTip="{Binding Source={StaticResource Resources}, Path=Play}"
-                                                        Command="{Binding DataContext.TvShowEpisodePlayCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                                                        CommandParameter="{Binding}" Visibility="{Binding FilePath, Converter={converters:StringToVisibilityConverter}}"
-                                                        Style="{StaticResource MetroCircleButtonStyle}">
+                                                            Command="{Binding DataContext.TvShowEpisodePlayCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                                            CommandParameter="{Binding}" Visibility="{Binding FilePath, Converter={converters:StringToVisibilityConverter}}"
+                                                            Style="{StaticResource MetroCircleButtonStyle}">
+                                                        <Button.ToolTip>
+                                                            <TextBlock>
+                                                                <Run Text="{Binding Source={StaticResource Resources}, Path=Play, Mode=OneWay}" />
+                                                                - <Run Text="{Binding FilePath}" />
+                                                            </TextBlock>
+                                                        </Button.ToolTip>
                                                         <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_play}" 
-                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                                                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
                                                     </Button>
                                                     <Button Cursor="Hand" Width="40" Height="40"
                                                         ToolTip="{Binding Source={StaticResource Resources}, Path=Delete}"

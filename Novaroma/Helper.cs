@@ -83,30 +83,30 @@ namespace Novaroma {
             season = null;
             episode = null;
 
-            var match = Regex.Match(fileInfo.Name, @"(\d{1,2}).*?(\d{1,2})");
-            int tmpSeason, tmpEpisode;
-            string tmpSeasonStr = null, tmpEpisodeStr = null;
-            if (match.Groups.Count == 3 || match.Groups.Count == 2) {
-                var result = string.Empty;
-                for (var i = 1; i < match.Groups.Count; i++)
-                    result += match.Groups[i];
+            var matches = Regex.Matches(fileInfo.Name, @"(\d{1,2}).?(\d{1,2})");
+            if (matches.Count == 0) return;
 
-                if (result.Length >= 4) {
-                    tmpSeasonStr = match.Groups[1].Value;
-                    tmpEpisodeStr = result.Substring(tmpSeasonStr.Length);
+            var match = matches[matches.Count - 1];
+            int tmpSeason, tmpEpisode;
+            var tmpSeasonStr = string.Empty;
+            string tmpEpisodeStr;
+            var matchStr = match.Groups[0].Value;
+
+            if (matchStr.Length < 3) {
+                if (fileInfo.Directory != null) {
+                    var seasonResult = Regex.Match(fileInfo.Directory.Name, @"(\d{1,2})");
+                    if (seasonResult.Success)
+                        tmpSeasonStr = seasonResult.Groups[0].Value;
                 }
-                else if (result.Length == 3) {
-                    tmpSeasonStr = result.Substring(0, 1);
-                    tmpEpisodeStr = result.Substring(1, 2);
-                }
-                else if (result.Length < 3) {
-                    if (!string.IsNullOrEmpty(fileInfo.DirectoryName)) {
-                        var seasonResult = Regex.Match(fileInfo.DirectoryName, @"(\d{1,2})");
-                        if (seasonResult.Groups.Count == 1)
-                            tmpSeasonStr = seasonResult.Groups[0].Value;
-                    }
-                    tmpEpisodeStr = result;
-                }
+                tmpEpisodeStr = matchStr;
+            }
+            else if (matchStr.Length == 3) {
+                tmpSeasonStr = matchStr.Substring(0, 1);
+                tmpEpisodeStr = matchStr.Substring(1);
+            }
+            else {
+                tmpSeasonStr = match.Groups[1].Value;
+                tmpEpisodeStr = match.Groups[2].Value;
             }
 
             if (!string.IsNullOrEmpty(tmpSeasonStr) && int.TryParse(tmpSeasonStr, out tmpSeason))
