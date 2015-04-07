@@ -84,9 +84,18 @@ namespace Novaroma {
             episode = null;
 
             var matches = Regex.Matches(fileInfo.Name, @"(\d{1,2}).?(\d{1,2})");
-            if (matches.Count == 0) return;
+            Match match = null;
+            for (var i = 0; i < matches.Count; i++) {
+                var m = matches[i];
+                var g = m.Groups[0].Value;
+                int y;
+                if (!int.TryParse(g, out y) || (y > 1800 && y < DateTime.UtcNow.Year + 2)) {
+                    match = m;
+                    break;
+                }
+            }
+            if (match == null) return;
 
-            var match = matches[matches.Count - 1];
             int tmpSeason, tmpEpisode;
             var tmpSeasonStr = string.Empty;
             string tmpEpisodeStr;

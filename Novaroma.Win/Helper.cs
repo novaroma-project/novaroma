@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
+using Hardcodet.Wpf.TaskbarNotification;
 using Novaroma.Interface;
 using Novaroma.Interface.Model;
 using Novaroma.Model;
@@ -166,6 +168,7 @@ namespace Novaroma.Win {
         public static void ExitApplication() {
             IoCContainer.Resolve<IScheduler>().Shutdown(false);
             App.ServiceHost.Close();
+            App.NotifyIcon.Dispose();
             Application.Current.Shutdown();
         }
     }

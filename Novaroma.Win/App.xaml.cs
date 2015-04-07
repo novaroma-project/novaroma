@@ -17,7 +17,7 @@ namespace Novaroma.Win {
     public partial class App {
         private static readonly Lazy<ObjectDataProvider> _resourceProvider = new Lazy<ObjectDataProvider>(() => (ObjectDataProvider)Current.FindResource("Resources"));
         private static ServiceHost _serviceHost;
-        public static TaskbarIcon NotifyIcon;
+        private static TaskbarIcon _notifyIcon;
 
         private async void App_OnStartup(object sender, StartupEventArgs e) {
             var client = Novaroma.Helper.CreateShellServiceClient();
@@ -61,9 +61,9 @@ namespace Novaroma.Win {
             if (!e.Args.Contains("StartHidden"))
                 mainWindow.Show();
 
-            NotifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
-            if (NotifyIcon != null)
-                NotifyIcon.DataContext = IoCContainer.Resolve<NotifyIconViewModel>();
+            _notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
+            if (_notifyIcon != null)
+                _notifyIcon.DataContext = IoCContainer.Resolve<NotifyIconViewModel>();
 
             if (e.Args.Length > 0) {
                 var service = IoCContainer.Resolve<IShellService>();
@@ -81,6 +81,10 @@ namespace Novaroma.Win {
 
         public static ServiceHost ServiceHost {
             get { return _serviceHost; }
+        }
+
+        public static TaskbarIcon NotifyIcon {
+            get { return _notifyIcon; }
         }
     }
 }
