@@ -1,0 +1,18 @@
+;aiu;
+        
+[Novaroma0.9.1]
+Name = MyApplication 0.9.1
+Description = Bugs fixed and improvements.
+URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.1/Novaroma.v0.9.1.setup.exe
+Size = 10513334
+FilePath = [APPDIR]Novaroma.exe
+Version = 0.9.1
+Replaces = All
+      
+[Novaroma0.9.0]
+Name = MyApplication 2.0
+Description = First release.
+URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.0/Novaroma.v0.9.0.setup.exe
+Size = 10506902
+FilePath = [APPDIR]Novaroma.exe
+Version = 0.9.0
