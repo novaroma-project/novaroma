@@ -1149,9 +1149,8 @@ namespace Novaroma.Engine {
 
                     Helper.SetSubtitleDownloadProperties(true, movie);
                     var activity = CreateActivity(string.Format(Resources.MovieSubtitleDownloaded, movie.Title), movie.FilePath);
-                    await SaveChanges(new[] { activity }, new[] { movie });
-
                     OnMovieSubtitleDownloadCompleted(movie);
+                    await SaveChanges(new[] { activity }, new[] { movie });
                     return true;
                 }
 
@@ -1183,9 +1182,8 @@ namespace Novaroma.Engine {
                     Helper.SetSubtitleDownloadProperties(true, episode);
                     var description = string.Format(Resources.TvShowEpisodeSubtitleDownloaded, show.Title, season.Season, episode.Episode);
                     var activity = CreateActivity(description, episode.FilePath);
-                    await SaveChanges(new[] { activity }, new[] { episode.TvShowSeason.TvShow });
-
                     OnTvShowEpisodeSubtitleDownloadCompleted(episode);
+                    await SaveChanges(new[] { activity }, new[] { episode.TvShowSeason.TvShow });
                     return true;
                 }
 

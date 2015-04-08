@@ -75,10 +75,15 @@ namespace Novaroma.Model {
 
         public bool? AllBackgroundDownload {
             get {
-                var downloadCount = Seasons.Count(s => s.AllBackgroundDownload.HasValue && !s.AllBackgroundDownload.Value);
-                if (downloadCount == 0) return true;
-                if (downloadCount == Seasons.Count) return false;
-                return null;
+                int nc = 0, tc = 0;
+                var seasons = Seasons.ToList();
+                seasons.ForEach(s => {
+                    var d = s.AllBackgroundDownload;
+                    if (!d.HasValue) nc++;
+                    else if (d.Value) tc++;
+                });
+                if (nc > 0) return null;
+                return tc == seasons.Count;
             }
             set {
                 Seasons.ToList().ForEach(e => e.AllBackgroundDownload = value.HasValue && value.Value);
@@ -88,10 +93,15 @@ namespace Novaroma.Model {
 
         public bool? AllBackgroundSubtitleDownload {
             get {
-                var downloadCount = Seasons.Count(s => s.AllBackgroundSubtitleDownload.HasValue && !s.AllBackgroundSubtitleDownload.Value);
-                if (downloadCount == 0) return true;
-                if (downloadCount == Seasons.Count) return false;
-                return null;
+                int nc = 0, tc = 0;
+                var seasons = Seasons.ToList();
+                seasons.ForEach(s => {
+                    var d = s.AllBackgroundSubtitleDownload;
+                    if (!d.HasValue) nc++;
+                    else if (d.Value) tc++;
+                });
+                if (nc > 0) return null;
+                return tc == seasons.Count;
             }
             set {
                 Seasons.ToList().ForEach(e => e.AllBackgroundSubtitleDownload = value.HasValue && value.Value);
@@ -101,10 +111,15 @@ namespace Novaroma.Model {
 
         public bool? AllWatched {
             get {
-                var watchedCount = Seasons.Count(e => e.AllWatched.HasValue && !e.AllWatched.Value);
-                if (watchedCount == 0) return true;
-                if (watchedCount == Seasons.Count) return false;
-                return null;
+                int nc = 0, tc = 0;
+                var seasons = Seasons.ToList();
+                seasons.ForEach(s => {
+                    var d = s.AllWatched;
+                    if (!d.HasValue) nc++;
+                    else if (d.Value) tc++;
+                });
+                if (nc > 0) return null;
+                return tc == seasons.Count;
             }
             set {
                 Seasons.ToList().ForEach(e => e.AllWatched = value.HasValue && value.Value);
