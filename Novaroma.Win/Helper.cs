@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
-using Hardcodet.Wpf.TaskbarNotification;
 using Novaroma.Interface;
 using Novaroma.Interface.Model;
 using Novaroma.Model;
@@ -134,9 +131,7 @@ namespace Novaroma.Win {
             var tvShow = prm as TvShow;
             if (tvShow == null || !tvShow.AllBackgroundDownload.HasValue) return;
 
-            tvShow.AllBackgroundSubtitleDownload = tvShow.AllBackgroundDownload.Value
-                && engine.SubtitlesEnabled
-                && (tvShow.Language == null || !engine.SubtitleLanguages.Contains(tvShow.Language.Value));
+            tvShow.AllBackgroundSubtitleDownload = tvShow.AllBackgroundDownload.Value && engine.SubtitlesNeeded(tvShow.Language);
         }
 
         internal static void AllSeasonDownloadCheck(object prm, INovaromaEngine engine) {
@@ -144,8 +139,7 @@ namespace Novaroma.Win {
             if (season == null || !season.AllBackgroundDownload.HasValue) return;
 
             var tvShow = season.TvShow;
-            season.AllBackgroundSubtitleDownload = season.AllBackgroundDownload.Value && engine.SubtitlesEnabled
-                && (tvShow.Language == null || !engine.SubtitleLanguages.Contains(tvShow.Language.Value));
+            season.AllBackgroundSubtitleDownload = season.AllBackgroundDownload.Value && engine.SubtitlesNeeded(tvShow.Language);
         }
 
         internal static void EpisodeDownloadCheck(object prm, INovaromaEngine engine) {
@@ -153,16 +147,14 @@ namespace Novaroma.Win {
             if (episode == null) return;
 
             var tvShow = episode.TvShowSeason.TvShow;
-            episode.BackgroundSubtitleDownload = episode.BackgroundDownload && engine.SubtitlesEnabled
-                && (tvShow.Language == null || !engine.SubtitleLanguages.Contains(tvShow.Language.Value));
+            episode.BackgroundSubtitleDownload = episode.BackgroundDownload && engine.SubtitlesNeeded(tvShow.Language);
         }
 
         internal static void MovieDownloadCheck(object prm, INovaromaEngine engine) {
             var movie = prm as Movie;
             if (movie == null) return;
 
-            movie.BackgroundSubtitleDownload = movie.BackgroundDownload && engine.SubtitlesEnabled
-                && (movie.Language == null || !engine.SubtitleLanguages.Contains(movie.Language.Value));
+            movie.BackgroundSubtitleDownload = movie.BackgroundDownload && engine.SubtitlesNeeded(movie.Language);
         }
 
         public static void ExitApplication() {

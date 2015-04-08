@@ -81,7 +81,9 @@ namespace Novaroma.Interface {
         Task BackupDatabase(string path);
         Task ClearActivities();
 
+        bool SubtitlesNeeded(Language? videoLanguage);
         bool SubtitlesEnabled { get; }
+        
         ObservableCollection<string> MediaGenres { get; }
         string MovieDirectory { get; }
         string TvShowDirectory { get; }

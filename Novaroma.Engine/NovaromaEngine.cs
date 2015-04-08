@@ -168,15 +168,18 @@ namespace Novaroma.Engine {
                     if (media != null) {
                         media.IsDeleted = true;
 
+                        var tvShow = media as TvShow;
+                        var movie = media as Movie;
+                        if (tvShow != null)
+                            tvShow.Seasons.ToList().ForEach(s => s.Episodes.ToList().ForEach(e => e.FilePath = string.Empty));
+                        else if (movie != null)
+                            movie.FilePath = string.Empty;
+
                         context.Update(media);
                         await context.SaveChanges();
 
-                        var movie = media as Movie;
-                        if (movie != null) OnMoviesChanged();
-                        else {
-                            var tvShow = media as TvShow;
-                            if (tvShow != null) OnTvShowsChanged();
-                        }
+                        if (tvShow != null) OnTvShowsChanged();
+                        else if (movie != null) OnMoviesChanged();
                     }
 
                     OnDirectoryDeleted(args.FullPath);
@@ -194,14 +197,12 @@ namespace Novaroma.Engine {
                         var tvShowEpisode = context.TvShows.Episodes().FirstOrDefault(e => string.Equals(e.FilePath, args.FullPath, StringComparison.OrdinalIgnoreCase));
                         if (tvShowEpisode != null) {
                             tvShowEpisode.FilePath = string.Empty;
-
                             context.Update(tvShowEpisode.TvShowSeason.TvShow);
                             await context.SaveChanges();
 
                             OnTvShowsChanged();
                         }
                     }
-
                 }
             }
         }
@@ -277,12 +278,11 @@ namespace Novaroma.Engine {
                     context.Update(episode.TvShowSeason.TvShow);
                     context.SaveChanges().Wait();
 
-                    if (SubtitlesEnabled)
-                        DownloadSubtitleForTvShowEpisode(episode).Wait();
-                    else {
-                        OnTvShowsChanged();
-                        OnActivitiesChanged();
-                    }
+                    OnTvShowsChanged();
+                    OnActivitiesChanged();
+
+                    if (episode.BackgroundSubtitleDownload) { }
+                    DownloadSubtitleForTvShowEpisode(episode).Wait();
                 }
                 else {
                     var movie = context.Movies.FirstOrDefault(m => m.DownloadKey == args.DownloadKey);
@@ -303,12 +303,11 @@ namespace Novaroma.Engine {
                         context.Update(movie);
                         context.SaveChanges().Wait();
 
-                        if (SubtitlesEnabled)
+                        OnMoviesChanged();
+                        OnActivitiesChanged();
+
+                        if (movie.BackgroundSubtitleDownload)
                             DownloadSubtitleForMovie(movie).Wait();
-                        else {
-                            OnMoviesChanged();
-                            OnActivitiesChanged();
-                        }
                     }
                     else if (SubtitlesEnabled) {
                         var files = Directory.GetFiles(args.DownloadDirectory).Where(Helper.IsVideoFile).ToList();
@@ -549,6 +548,18 @@ namespace Novaroma.Engine {
                         .AsEnumerable();
                 }
             });
+        }
+
+        private static void DetectChanges(IEntity entity, ICollection<Media> modifiedMediaList, ref bool hasMovie, ref bool hasTvShow, ref bool hasActivity) {
+            var media = entity as Media;
+            if (media != null) {
+                modifiedMediaList.Add(media);
+
+                if (media is Movie) hasMovie = true;
+                else hasTvShow = true;
+            }
+            else if (entity is Activity)
+                hasActivity = true;
         }
 
         #endregion
@@ -809,30 +820,14 @@ namespace Novaroma.Engine {
                         foreach (var entity in add) {
                             context.Insert(entity);
 
-                            var media = entity as Media;
-                            if (media != null) {
-                                modifiedMediaList.Add(media);
-
-                                if (media is Movie) movieAdd = true;
-                                else tvShowAdd = true;
-                            }
-                            else if (entity is Activity)
-                                activityAdd = true;
+                            DetectChanges(entity, modifiedMediaList, ref movieAdd, ref tvShowAdd, ref activityAdd);
                         }
 
                     if (update != null)
                         foreach (var entity in update) {
                             context.Update(entity);
 
-                            var media = entity as Media;
-                            if (media != null) {
-                                modifiedMediaList.Add(media);
-
-                                if (media is Movie) movieModify = true;
-                                else tvShowModify = true;
-                            }
-                            else if (entity is Activity)
-                                activityModify = true;
+                            DetectChanges(entity, modifiedMediaList, ref movieModify, ref tvShowModify, ref activityModify);
                         }
 
                     var deletedMediaList = new List<Media>();
@@ -840,18 +835,10 @@ namespace Novaroma.Engine {
                         foreach (var entity in delete) {
                             context.Delete(entity);
 
-                            var media = entity as Media;
-                            if (media != null) {
-                                deletedMediaList.Add(media);
-
-                                if (entity is Movie) movieDelete = true;
-                                else if (entity is TvShow) tvShowDelete = true;
-                            }
-                            else if (entity is Activity) activityDelete = true;
+                            DetectChanges(entity, deletedMediaList, ref movieDelete, ref tvShowDelete, ref activityDelete);
                         }
 
                     await context.SaveChanges();
-
 
                     foreach (var media in modifiedMediaList) {
                         if (Settings.MakeSpecialFolder) {
@@ -1085,7 +1072,7 @@ namespace Novaroma.Engine {
                 var downloader = Settings.Downloader.SelectedItem;
                 if (downloader == null) return string.Empty;
 
-                var downloadKey = await downloader.DownloadMovie(movie.Directory, movie.OriginalTitle, movie.Year, movie.ImdbId, 
+                var downloadKey = await downloader.DownloadMovie(movie.Directory, movie.OriginalTitle, movie.Year, movie.ImdbId,
                                                                  movie.VideoQuality, movie.ExtraKeywords, movie.ExcludeKeywords);
                 Helper.SetDownloadProperties(downloadKey, movie);
 
@@ -1148,8 +1135,9 @@ namespace Novaroma.Engine {
                     if (!result) continue;
 
                     Helper.SetSubtitleDownloadProperties(true, movie);
-                    var activity = CreateActivity(string.Format(Resources.MovieSubtitleDownloaded, movie.Title), movie.FilePath);
                     OnMovieSubtitleDownloadCompleted(movie);
+
+                    var activity = CreateActivity(string.Format(Resources.MovieSubtitleDownloaded, movie.Title), movie.FilePath);
                     await SaveChanges(new[] { activity }, new[] { movie });
                     return true;
                 }
@@ -1180,9 +1168,10 @@ namespace Novaroma.Engine {
                     if (!result) continue;
 
                     Helper.SetSubtitleDownloadProperties(true, episode);
+                    OnTvShowEpisodeSubtitleDownloadCompleted(episode);
+
                     var description = string.Format(Resources.TvShowEpisodeSubtitleDownloaded, show.Title, season.Season, episode.Episode);
                     var activity = CreateActivity(description, episode.FilePath);
-                    OnTvShowEpisodeSubtitleDownloadCompleted(episode);
                     await SaveChanges(new[] { activity }, new[] { episode.TvShowSeason.TvShow });
                     return true;
                 }
@@ -1387,8 +1376,14 @@ namespace Novaroma.Engine {
             });
         }
 
+        public bool SubtitlesNeeded(Language? videoLanguage) {
+            return SubtitlesEnabled && (videoLanguage == null || !SubtitleLanguages.Contains(videoLanguage.Value));
+        }
+
         public bool SubtitlesEnabled {
-            get { return SubtitleLanguages.Any() && Settings.SubtitleDownloaders.SelectedItems.Any(); }
+            get {
+                return SubtitleLanguages.Any() && Settings.SubtitleDownloaders.SelectedItems.Any();
+            }
         }
 
         public ObservableCollection<string> MediaGenres {

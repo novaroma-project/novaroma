@@ -329,12 +329,13 @@ namespace Novaroma.Services.Imdb {
         private static void AddLimitParameter<T>(ICollection<string> searchParams, string paramName, T? min, T? max) where T : struct {
             var prm = string.Empty;
             if (min.HasValue)
-                prm += min.Value;
+                prm += AsString(min.Value);
             prm += ",";
             if (max.HasValue)
-                prm += max.Value;
+                prm += AsString(max.Value);
 
-            searchParams.Add(paramName + "=" + prm);
+            if (prm != ",")
+                searchParams.Add(paramName + "=" + prm);
         }
 
         private static Language? GetLanguage(string text) {
@@ -364,6 +365,13 @@ namespace Novaroma.Services.Imdb {
 
         public ImdbSettings Settings {
             get { return _settings; }
+        }
+
+        private static string AsString(object o) {
+            if (o == null) return string.Empty;
+            if (o is float || o is double || o is decimal)
+                return ((float) o).ToString(CultureInfo.InvariantCulture);
+            return o.ToString();
         }
 
         #region IInfoProvider Members

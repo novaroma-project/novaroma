@@ -240,13 +240,14 @@ namespace Novaroma {
                     movie.SubtitleDownloaded = true;
                 }
                 else {
-                    movie.BackgroundSubtitleDownload = engine.SubtitlesEnabled && (movie.Language == null || !engine.SubtitleLanguages.Contains(movie.Language.Value));
+                    movie.BackgroundSubtitleDownload = engine.SubtitlesNeeded(movie.Language);
                     movie.SubtitleDownloaded = false;
                 }
             }
             else {
                 movie.BackgroundDownload = true;
-                movie.BackgroundSubtitleDownload = engine.SubtitlesEnabled && (movie.Language == null || !engine.SubtitleLanguages.Contains(movie.Language.Value));
+                movie.FilePath = string.Empty;
+                movie.BackgroundSubtitleDownload = engine.SubtitlesNeeded(movie.Language);
                 movie.SubtitleDownloaded = false;
             }
         }
@@ -254,10 +255,12 @@ namespace Novaroma {
         public static void InitTvShow(TvShow tvShow, INovaromaEngine engine) {
             var episodes = tvShow.Seasons.SelectMany(s => s.Episodes).ToList();
             episodes.ForEach(e => {
+                if (!string.IsNullOrEmpty(e.FilePath) && !File.Exists(e.FilePath))
+                    e.FilePath = string.Empty;
                 if (e.IsWatched) return;
 
                 e.BackgroundDownload = true;
-                e.BackgroundSubtitleDownload = engine.SubtitlesEnabled && (tvShow.Language == null || !engine.SubtitleLanguages.Contains(tvShow.Language.Value));
+                e.BackgroundSubtitleDownload = engine.SubtitlesNeeded(tvShow.Language);
                 e.SubtitleDownloaded = false;
             });
 
