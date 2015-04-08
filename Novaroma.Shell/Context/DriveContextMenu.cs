@@ -41,10 +41,6 @@ namespace Novaroma.Shell.Context {
 
             var singleSelection = SelectedItemPaths.Single();
 
-            var dirStatusTask = client.GetDirectoryWatchStatus(singleSelection);
-            dirStatusTask.Wait();
-            var dirStatus = dirStatusTask.Result;
-
             var newMedia = new ToolStripMenuItem {
                 Text = Resources.New,
                 Image = Resources.Img_NewMedia_16x16
@@ -52,6 +48,7 @@ namespace Novaroma.Shell.Context {
             newMedia.Click += (sender, args) => NewMedia(singleSelection);
             menuRoot.DropDownItems.Add(newMedia);
 
+            var dirStatus = client.GetDirectoryWatchStatus(singleSelection).Result;
             if (dirStatus == DirectoryWatchStatus.None) {
                 if (Directory.GetDirectories(singleSelection).Any()) {
                     var watchDirectory = new ToolStripMenuItem {

@@ -42,11 +42,9 @@ namespace Novaroma.Shell.Context {
             if (SelectedItemPaths.Count() == 1) {
                 var singleSelection = SelectedItemPaths.First();
 
-                var mediaTask = client.GetMedia(singleSelection);
-                mediaTask.Wait();
-                var media = mediaTask.Result;
-                var movie = media as Movie;
+                var media = client.GetMedia(singleSelection).Result;
 
+                var movie = media as Movie;
                 if (movie != null) {
                     var updateWatchStatus = new ToolStripMenuItem {
                         Text = Resources.IsWatched,
@@ -82,10 +80,7 @@ namespace Novaroma.Shell.Context {
                         menuRoot.DropDownItems.Add(editMedia);
                     }
 
-                    var dirStatusTask = client.GetDirectoryWatchStatus(singleSelection);
-                    dirStatusTask.Wait();
-                    var dirStatus = dirStatusTask.Result;
-
+                    var dirStatus = client.GetDirectoryWatchStatus(singleSelection).Result;
                     if (media == null) {
                         if (dirStatus != DirectoryWatchStatus.Direct) {
                             var addMedia = new ToolStripMenuItem {

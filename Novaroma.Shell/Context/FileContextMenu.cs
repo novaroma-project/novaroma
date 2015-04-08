@@ -32,18 +32,14 @@ namespace Novaroma.Shell.Context {
             Helper.SetCulture(client);
 
             var path = SelectedItemPaths.First();
-
-            var downloadableTask = client.GetDownloadable(path);
-            downloadableTask.Wait();
-            var downloadable = downloadableTask.Result;
-
+            
             var menu = new ContextMenuStrip();
-
             var menuRoot = new ToolStripMenuItem {
                 Text = Constants.Novaroma,
                 Image = Resources.Img_Logo_16x16
             };
 
+            var downloadable = client.GetDownloadable(path).Result;
             if (downloadable != null) {
                 var updateWatchStatus = new ToolStripMenuItem {
                     Text = Resources.IsWatched,
