@@ -783,4 +783,7 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>Geçersiz mail adresi</value>
   </data>
+  <data name="TvShowFileNameFormatInfo" xml:space="preserve">
+    <value>Video dosyası bulunamadıysa video ismini aşağıdaki örnekteki gibi değiştirebilirsiniz</value>
+  </data>
 </root>

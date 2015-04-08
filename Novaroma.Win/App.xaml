@@ -235,12 +235,20 @@
                                                                       Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
                                     </Button>
                                     <Button  Cursor="Hand" Width="40" Height="40"
-                                        ToolTip="{Binding Source={StaticResource Resources}, Path=CheckAndUpdateDirectoryFiles}"
                                         Command="{Binding Path=DataContext.TvShowDiscoverFilesCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
                                         CommandParameter="{Binding}"
                                         Style="{StaticResource MetroCircleButtonStyle}">
                                         <userControls:IconUserControl Width="20" Height="16" Visual="{StaticResource ni_folder_refresh}" 
                                                                       Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                        <Button.ToolTip>
+                                            <TextBlock>
+                                                <Run Text="{Binding Source={StaticResource Resources}, Path=CheckAndUpdateDirectoryFiles, Mode=OneWay}" />
+                                                <LineBreak /><LineBreak />
+                                                <Run Text="{Binding Source={StaticResource Resources}, Path=TvShowFileNameFormatInfo, Mode=OneWay}"/>
+                                                 <LineBreak /><LineBreak />
+                                                <Run Text="Rick.and.Morty.S01E01"/>
+                                            </TextBlock>
+                                        </Button.ToolTip>
                                     </Button>
                                 </StackPanel>
                                 <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding AutoDownload}" 

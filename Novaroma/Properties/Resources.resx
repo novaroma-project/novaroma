@@ -832,4 +832,7 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>Invalid email address</value>
   </data>
+  <data name="TvShowFileNameFormatInfo" xml:space="preserve">
+    <value>If video files are not found, you can change file name like the example below</value>
+  </data>
 </root>

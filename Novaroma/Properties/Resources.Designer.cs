@@ -2003,6 +2003,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If video files are not found, you can change file name like the example below.
+        /// </summary>
+        public static string TvShowFileNameFormatInfo {
+            get {
+                return ResourceManager.GetString("TvShowFileNameFormatInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tv Show Providers.
         /// </summary>
         public static string TvShowProviders {
