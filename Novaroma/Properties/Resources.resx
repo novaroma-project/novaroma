@@ -832,7 +832,19 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>Invalid email address</value>
   </data>
+  <data name="GoToPluginDirectory" xml:space="preserve">
+    <value>Go to plugin directory</value>
+  </data>
   <data name="TvShowFileNameFormatInfo" xml:space="preserve">
     <value>If video files are not found, you can change file name like the example below</value>
+  </data>
+  <data name="AddScriptService" xml:space="preserve">
+    <value>Add Script Service</value>
+  </data>
+  <data name="PluginAddInfo" xml:space="preserve">
+    <value>You should restart novaroma after you have added plugin</value>
+  </data>
+  <data name="PluginDirectory" xml:space="preserve">
+    <value>Plugin Directory</value>
   </data>
 </root>

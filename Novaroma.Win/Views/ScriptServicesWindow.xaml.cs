@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -44,6 +46,12 @@ namespace Novaroma.Win.Views {
                 ScriptServices.Add(scriptService);
                 IsModified = true;
             }
+        }
+
+        private void PluginButton_OnClick(object sender, RoutedEventArgs e) {
+            var pluginDirectory = Path.Combine(Environment.CurrentDirectory, "Plugins");
+            if (Directory.Exists(pluginDirectory))
+                Process.Start(pluginDirectory);
         }
 
         private async void ScriptServicesDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) {

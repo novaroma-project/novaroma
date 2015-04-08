@@ -88,6 +88,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Script Service.
+        /// </summary>
+        public static string AddScriptService {
+            get {
+                return ResourceManager.GetString("AddScriptService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Sub-Directories.
         /// </summary>
         public static string AddSubdirectories {
@@ -817,6 +826,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to plugin directory.
+        /// </summary>
+        public static string GoToPluginDirectory {
+            get {
+                return ResourceManager.GetString("GoToPluginDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How to.
         /// </summary>
         public static string HowTo {
@@ -1504,6 +1522,24 @@ namespace Novaroma.Properties {
         public static string PlayUnseenEpisode {
             get {
                 return ResourceManager.GetString("PlayUnseenEpisode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You should restart novaroma after you have added plugin.
+        /// </summary>
+        public static string PluginAddInfo {
+            get {
+                return ResourceManager.GetString("PluginAddInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plugin Directory.
+        /// </summary>
+        public static string PluginDirectory {
+            get {
+                return ResourceManager.GetString("PluginDirectory", resourceCulture);
             }
         }
         

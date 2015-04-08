@@ -14,10 +14,22 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Margin="5" Orientation="Horizontal">
+        <Grid Margin="5">
             <Button Name="AddButton" MinWidth="60" Margin="5" Content="{Binding Source={StaticResource Resources}, Path=Add}" 
-                    Style="{DynamicResource SquareButtonStyle}" Click="AddButton_OnClick" />
-        </StackPanel>
+                    Style="{DynamicResource SquareButtonStyle}" Click="AddButton_OnClick" HorizontalAlignment="Left"
+                    ToolTip="{Binding Source={StaticResource Resources}, Path=AddScriptService}"/>
+            <Button Name="PluginButton" MinWidth="60" Margin="5" Content="{Binding Source={StaticResource Resources}, Path=PluginDirectory}" 
+                    Style="{DynamicResource SquareButtonStyle}" Click="PluginButton_OnClick" HorizontalAlignment="Right">
+                <Button.ToolTip>
+                    <TextBlock>
+                        <Run Text="{Binding Source={StaticResource Resources}, Path=GoToPluginDirectory, Mode=OneWay}" />
+                        <LineBreak /><LineBreak />
+                        <Run Text="{Binding Source={StaticResource Resources}, Path=PluginAddInfo, Mode=OneWay}" />
+                    </TextBlock>
+                </Button.ToolTip>
+            </Button>
+
+        </Grid>
         <DataGrid Name="ScriptServicesDataGrid" Grid.Row="1" ItemsSource="{Binding ScriptServices}" IsReadOnly="True" AutoGenerateColumns="False" Margin="15"
                   SelectedItem="{Binding SelectedScriptService}" MouseDoubleClick="ScriptServicesDataGrid_OnMouseDoubleClick">
             <DataGrid.Columns>
@@ -39,8 +51,7 @@
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" >
             <Button Name="RestartNovaromaButton" Margin="0 0 10 0" MinWidth="60" 
-                    Content="{Binding Source={StaticResource Resources}, Path=RestartNovaroma}" 
-                    IsEnabled="{Binding IsModified}"
+                    Content="{Binding Source={StaticResource Resources}, Path=RestartNovaroma}"
                     Style="{DynamicResource SquareButtonStyle}" Click="RestartNovaromaButton_Click" />
         </StackPanel>
     </Grid>

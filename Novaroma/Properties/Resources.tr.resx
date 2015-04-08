@@ -783,7 +783,19 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>Geçersiz mail adresi</value>
   </data>
+  <data name="GoToPluginDirectory" xml:space="preserve">
+    <value>Eklenti klasörünü aç</value>
+  </data>
   <data name="TvShowFileNameFormatInfo" xml:space="preserve">
     <value>Video dosyası bulunamadıysa video ismini aşağıdaki örnekteki gibi değiştirebilirsiniz</value>
+  </data>
+  <data name="AddScriptService" xml:space="preserve">
+    <value>Çalışma Zamanı Servisi Ekle</value>
+  </data>
+  <data name="PluginAddInfo" xml:space="preserve">
+    <value>Eklenti ekledikten sonra Novaroma'yeniden başlatmanız gerekmektedir.</value>
+  </data>
+  <data name="PluginDirectory" xml:space="preserve">
+    <value>Eklenti Klasörü</value>
   </data>
 </root>
