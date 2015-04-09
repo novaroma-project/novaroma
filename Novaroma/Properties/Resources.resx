@@ -847,4 +847,7 @@
   <data name="PluginDirectory" xml:space="preserve">
     <value>Plugin Directory</value>
   </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Check for Updates</value>
+  </data>
 </root>

@@ -101,6 +101,14 @@
             </MenuItem.Icon>
         </MenuItem>
         <Separator />
+        <MenuItem Command="{Binding CheckForUpdatesCommand}">
+            <MenuItem.Icon>
+                <StackPanel Orientation="Horizontal">
+                    <userControls:IconUserControl Height="20" Width="20" Margin="5 0 0 0" Visual="{StaticResource ni_reload}" Fill="{StaticResource BlackBrush}" />
+                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=CheckForUpdates}" />
+                </StackPanel>
+            </MenuItem.Icon>
+        </MenuItem>
         <MenuItem Command="{Binding ExitApplicationCommand}">
             <MenuItem.Icon>
                 <StackPanel Orientation="Horizontal">

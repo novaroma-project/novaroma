@@ -798,4 +798,7 @@
   <data name="PluginDirectory" xml:space="preserve">
     <value>Eklenti Klasörü</value>
   </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Güncellemeleri Denetle</value>
+  </data>
 </root>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Novaroma.Interface;
@@ -25,6 +27,7 @@ namespace Novaroma.Win.ViewModels {
         private readonly RelayCommand _backupDatabaseCommand;
         private readonly RelayCommand _manageRuntimeServicesCommand;
         private readonly RelayCommand _clearLogsAndActivitiesCommand;
+        private readonly RelayCommand _checkForUpdatesCommand;
         private readonly RelayCommand _exitApplicationCommand;
 
         public NotifyIconViewModel(INovaromaEngine engine, IExceptionHandler exceptionHandler, ILogger logger, IDialogService dialogService)
@@ -45,6 +48,7 @@ namespace Novaroma.Win.ViewModels {
             _backupDatabaseCommand = new RelayCommand(DoBackupDatabase);
             _manageRuntimeServicesCommand = new RelayCommand(ManageRuntimeServices);
             _clearLogsAndActivitiesCommand = new RelayCommand(DoClearLogsAndActivities);
+            _checkForUpdatesCommand = new RelayCommand(CheckForUpdates);
             _exitApplicationCommand = new RelayCommand(ExitApplication);
         }
 
@@ -82,8 +86,7 @@ namespace Novaroma.Win.ViewModels {
         private async Task ExecutePluginService(IPluginService plugin) {
             try {
                 await plugin.Activate();
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 _exceptionHandler.HandleException(ex);
             }
         }
@@ -118,6 +121,12 @@ namespace Novaroma.Win.ViewModels {
         private async Task ClearLogsAndActivities() {
             await _logger.Clear();
             await _engine.ClearActivities();
+        }
+
+        private static void CheckForUpdates() {
+            var updaterPath = Path.Combine(Environment.CurrentDirectory, "Novaroma.Updater.exe");
+            if (File.Exists(updaterPath))
+                Process.Start(updaterPath,"/checknow");
         }
 
         private static void ExitApplication() {
@@ -176,10 +185,12 @@ namespace Novaroma.Win.ViewModels {
             get { return _clearLogsAndActivitiesCommand; }
         }
 
+        public RelayCommand CheckForUpdatesCommand {
+            get { return _checkForUpdatesCommand; }
+        }
+
         public RelayCommand ExitApplicationCommand {
-            get {
-                return _exitApplicationCommand;
-            }
+            get { return _exitApplicationCommand; }
         }
     }
 }
