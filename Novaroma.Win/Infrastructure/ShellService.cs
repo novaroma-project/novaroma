@@ -140,15 +140,13 @@ namespace Novaroma.Win.Infrastructure {
             if (downloadable != null) {
                 var downloaded = false;
 
-                if (_engine.SubtitlesEnabled) {
-                    var movie = downloadable as Movie;
-                    if (movie != null)
-                        downloaded = await _engine.DownloadSubtitleForMovie(movie);
-                    else {
-                        var episode = downloadable as TvShowEpisode;
-                        if (episode != null)
-                            downloaded = await _engine.DownloadSubtitleForTvShowEpisode(episode);
-                    }
+                var movie = downloadable as Movie;
+                if (movie != null)
+                    downloaded = await _engine.DownloadSubtitleForMovie(movie);
+                else {
+                    var episode = downloadable as TvShowEpisode;
+                    if (episode != null)
+                        downloaded = await _engine.DownloadSubtitleForTvShowEpisode(episode);
                 }
 
                 if (!downloaded) {

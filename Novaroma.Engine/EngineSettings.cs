@@ -27,7 +27,7 @@ namespace Novaroma.Engine {
         private readonly SettingSingleSelection<IDownloader> _downloader;
         private readonly SettingMultiSelection<ISubtitleDownloader> _subtitleDownloaders;
         private readonly SettingMultiSelection<IDownloadEventHandler> _downloadEventHandlers;
-        private bool _makeSpecialFolder;
+        private bool _makeSpecialFolder = true;
         private int _downloadInterval;
         private string _deleteExtensions = ".nfo;.srt";
         private int _tvShowUpdateInterval;

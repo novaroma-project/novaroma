@@ -26,6 +26,7 @@ namespace Novaroma {
     public static class Helper {
         public static string[] VideoExtensions = { ".avi", ".mkv", ".mp4", ".m4p", ".m4v", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".m2v", ".wmv" };
         public static string[] SubtitleExtensions = { ".srt", ".sub" };
+        private static readonly IEnumerable<char> _paranthesis = new List<char> {'(', '[', '{'}; 
 
         public static void SetCulture(Language language) {
             var cultureCode = GetTwoLetterLanguageCode(language);
@@ -162,6 +163,16 @@ namespace Novaroma {
             query = Regex.Replace(query, "%imdbId%", imdbId, RegexOptions.IgnoreCase);
 
             return query;
+        }
+
+        public static string GetDirectorySearchQuery(string directory) {
+            if (string.IsNullOrEmpty(directory)) return directory;
+
+            var minIdx = _paranthesis.Select(p => directory.IndexOf(p)).Where(i => i > -1).OrderBy(i => i).FirstOrDefault();
+            if (minIdx > 0)
+                directory = directory.Substring(0, minIdx);
+
+            return directory.Replace(".", " ").Replace("_", " ");
         }
 
         public static string GetTvShowSeasonDirectory(string template, TvShowEpisode episode) {
@@ -495,39 +506,36 @@ InfoTip={1}", iconPath, description);
                 [CallerMemberName] string callerName = null,
                 [CallerFilePath] string callerFilePath = null,
                 [CallerLineNumber] int callerLine = -1) {
-            Exception exception;
             try {
                 await taskGetter();
-                return;
             }
             catch (Exception ex) {
-                exception = ex;
                 if (exceptionHandler == null)
                     throw;
-            }
 
-            // ReSharper disable ExplicitCallerInfoArgument
-            exceptionHandler.HandleException(exception, callerName, callerFilePath, callerLine);
-            // ReSharper restore ExplicitCallerInfoArgument
+                // ReSharper disable ExplicitCallerInfoArgument
+                exceptionHandler.HandleException(ex, callerName, callerFilePath, callerLine);
+                // ReSharper restore ExplicitCallerInfoArgument
+            }
         }
 
         public async static Task<TResult> RunTask<TResult>(Func<Task<TResult>> taskGetter, IExceptionHandler exceptionHandler,
                 [CallerMemberName] string callerName = null,
                 [CallerFilePath] string callerFilePath = null,
                 [CallerLineNumber] int callerLine = -1) {
-            Exception exception;
             try {
                 var result = await taskGetter();
                 return result;
             }
             catch (Exception ex) {
-                exception = ex;
-                if (exceptionHandler == null) throw;
+                if (exceptionHandler == null) 
+                    throw;
+
+                // ReSharper disable ExplicitCallerInfoArgument
+                exceptionHandler.HandleException(ex, callerName, callerFilePath, callerLine);
+                // ReSharper restore ExplicitCallerInfoArgument
             }
 
-            // ReSharper disable ExplicitCallerInfoArgument
-            exceptionHandler.HandleException(exception, callerName, callerFilePath, callerLine);
-            // ReSharper restore ExplicitCallerInfoArgument
             return default(TResult);
         }
 

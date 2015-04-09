@@ -141,8 +141,6 @@ namespace Novaroma.Win.ViewModels {
                 })
                 .ToList();
             SubscribeSearches();
-
-            _lastSelectedDirectory = SelectedDirectory;
         }
 
         private void SubscribeSearches() {
@@ -157,6 +155,7 @@ namespace Novaroma.Win.ViewModels {
         private async Task PrepareDirectories() {
             if (!DirectorySelectionAvailable) return;
             if (_lastSelectedDirectory == SelectedDirectory) return;
+            _lastSelectedDirectory = SelectedDirectory;
 
             if (!Directory.Exists(SelectedDirectory)) {
                 Searches = Enumerable.Empty<NewMediaViewModel>();

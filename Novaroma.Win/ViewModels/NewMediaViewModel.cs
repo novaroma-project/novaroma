@@ -28,7 +28,8 @@ namespace Novaroma.Win.ViewModels {
             _directoryInfo = directory;
             _originalMedia = originalMedia;
 
-            _search = new SimpleInfoSearchViewModel(_engine, _exceptionHandler, DialogService, directory.Name, directory.FullName);
+            var search = Novaroma.Helper.GetDirectorySearchQuery(directory.Name);
+            _search = new SimpleInfoSearchViewModel(_engine, _exceptionHandler, DialogService, search, directory.FullName);
 
             _isSelected = originalMedia == null;
         }

@@ -462,11 +462,9 @@ namespace Novaroma.Engine {
             var fileInfo = new FileInfo(filePath);
             if (!fileInfo.Exists)
                 activity = CreateActivity(string.Format(Resources.SubtitleNotDownloaded_FileNotFound, filePath), filePath);
-
-            if (!SubtitleLanguages.Any())
+            else if (!SubtitleLanguages.Any())
                 activity = CreateActivity(Resources.SubtitleNotDownloaded_LanguagesNotSelected, string.Empty);
-
-            if (!Settings.SubtitleDownloaders.SelectedItems.Any())
+            else if (!Settings.SubtitleDownloaders.SelectedItems.Any())
                 activity = CreateActivity(Resources.SubtitleNotDownloaded_DownloadersNotSelected, string.Empty);
 
             if (activity != null) {
@@ -841,15 +839,6 @@ namespace Novaroma.Engine {
                     await context.SaveChanges();
 
                     foreach (var media in modifiedMediaList) {
-                        if (Settings.MakeSpecialFolder) {
-                            try {
-                                modifiedMediaList.ForEach(Helper.MakeSpecialFolder);
-                            }
-                            catch (Exception ex) {
-                                _exceptionHandler.HandleException(ex);
-                            }
-                        }
-
                         try {
                             Helper.CreateMediaInfo(media);
                         }
