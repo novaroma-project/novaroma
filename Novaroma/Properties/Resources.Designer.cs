@@ -1526,7 +1526,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You should restart novaroma after you have added plugin.
+        ///   Looks up a localized string similar to You must restart novaroma after any changes to plugin folder to be effective.
         /// </summary>
         public static string PluginAddInfo {
             get {

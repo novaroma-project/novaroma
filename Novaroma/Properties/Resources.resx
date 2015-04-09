@@ -842,7 +842,7 @@
     <value>Add Script Service</value>
   </data>
   <data name="PluginAddInfo" xml:space="preserve">
-    <value>You should restart novaroma after you have added plugin</value>
+    <value>You must restart novaroma after any changes to plugin folder to be effective</value>
   </data>
   <data name="PluginDirectory" xml:space="preserve">
     <value>Plugin Directory</value>

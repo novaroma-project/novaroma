@@ -793,7 +793,7 @@
     <value>Çalışma Zamanı Servisi Ekle</value>
   </data>
   <data name="PluginAddInfo" xml:space="preserve">
-    <value>Eklenti ekledikten sonra Novaroma'yeniden başlatmanız gerekmektedir.</value>
+    <value>Eklenti klasöründeki değişikliklerin etkili olması için Novaroma'yı yeniden başlatmanız gerekmektedir</value>
   </data>
   <data name="PluginDirectory" xml:space="preserve">
     <value>Eklenti Klasörü</value>
