@@ -13,20 +13,20 @@
                        VerticalAlignment="Center"/>
             <ComboBox  MinWidth="100" Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"
                   ItemsSource="{Binding VideoQualityEnumInfo, Source={x:Static utilities:StaticSource.Instance}}" 
-                  DisplayMemberPath="DisplayName" SelectedValue="{Binding VideoQuality}" 
+                  DisplayMemberPath="DisplayName" SelectedValue="{Binding VideoQuality, UpdateSourceTrigger=PropertyChanged}" 
                   SelectedValuePath="Item" Margin="5 0 0 5" />
         </DockPanel>
         <DockPanel Margin="0 0 10 0">
             <TextBlock Text="{Binding Source={StaticResource Resources}, Path=ExtraKeywords}" 
                        Width="{Binding LabelWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
                        ToolTip="{Binding Source={StaticResource Resources}, Path=ExtraKeywordsDescription}" Margin="0 0 0 5" />
-            <TextBox Text="{Binding ExtraKeywords}" Margin="5 0 0 5" Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" MinWidth="100"/>
+            <TextBox Text="{Binding ExtraKeywords, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 5" Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" MinWidth="100"/>
         </DockPanel>
         <DockPanel Margin="0 0 10 0">
             <TextBlock Text="{Binding Source={StaticResource Resources}, Path=ExcludeKeywords}" 
                        Width="{Binding LabelWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
                        ToolTip="{Binding Source={StaticResource Resources}, Path=ExcludeKeywordsDescription}" Margin="0 0 0 5" />
-            <TextBox Text="{Binding ExcludeKeywords}" Margin="5 0 0 5" Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" MinWidth="100" />
+            <TextBox Text="{Binding ExcludeKeywords, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 5" Width="{Binding ItemWidth, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" MinWidth="100" />
         </DockPanel>
     </WrapPanel>
 </UserControl>
