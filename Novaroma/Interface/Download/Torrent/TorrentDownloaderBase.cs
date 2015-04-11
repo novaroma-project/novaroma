@@ -38,8 +38,9 @@ namespace Novaroma.Interface.Download.Torrent {
             );
 
             await Task.WhenAll(tasks);
+            var seasonStr = season.ToString(CultureInfo.InvariantCulture);
             var episodeStr = episode.ToString(CultureInfo.InvariantCulture);
-            return results.OrderByDescending(r => r.Seed).Where(r => r.Name.Contains(episodeStr));
+            return results.OrderByDescending(r => r.Seed).Where(r => r.Name.Contains(seasonStr) && r.Name.Contains(episodeStr));
         }
 
         public virtual async Task<IEnumerable<ITorrentSearchResult>> Search(string query, VideoQuality videoQuality,
