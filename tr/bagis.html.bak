@@ -8,14 +8,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Novaroma | Çeviri</title>
-    <meta name="description" content="Novaroma Çeviri. Türkçe, İngilizce, Diğer Diller. Çeviri için bizle iletişime geçin.">
+    <title>Novaroma | Bağış</title>
+    <meta name="description" content="Novaroma'ya Bağış Yap. Kahve Ismarla. Novaroma Paypal.">
     <meta name="viewport" content="width=device-width">
 
-    <meta property="og:title" content="Novaroma | Çeviri" />
+    <meta property="og:title" content="Novaroma | Bağış" />
     <meta property="og:image" content="http://www.novaroma.net/tr/images/screenshots/1.jpg" />
-    <meta property="og:description" content="Novaroma Çeviri. Türkçe, İngilizce, Diğer Diller. Çeviri için bizle iletişime geçin." />
-    <meta property="og:url" content="http://www.novaroma.net/tr/ceviri.html">
+    <meta property="og:description" content="Novaroma'ya Bağış Yap. Kahve Ismarla. Novaroma Paypal." />
+    <meta property="og:url" content="http://www.novaroma.net/tr/bagis.html">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -46,17 +46,17 @@
                         <li><a href="index.html">Anasayfa</a></li>
                         <li><a href="ozellikler.html">Özellikler</a></li>
                         <li><a href="ekran-goruntuleri.html">Ekran Görüntüleri</a></li>
-                        <li><a href="nasil-yapilir.html">Nasıl Yapılır</a></li>
+                        <li><a href="nasıl-yapilir.html">Nasıl Yapılır</a></li>
                         <li><a href="indir.html">Indir</a></li>
                         <li class="dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Destek Ol <i class="icon-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="paylas.html">Paylaş</a></li>
                                 <li><a href="tanitim.html">Tanıtım Yap</a></li>
-                                <li class="active"><a href="ceviri.html">Çeviri Yap</a></li>
+                                <li><a href="ceviri.html">Çeviri Yap</a></li>
                                 <li><a href="oneri.html">Öneride Bulun</a></li>
                                 <li><a href="kod.html">Kod Yaz</a></li>
-                                <li><a href="bagis.html">Bağış Yap</a></li>
+                                <li class="active"><a href="bagis.html">Bağış Yap</a></li>
                             </ul>
                         </li>
                         <li><a href="iletisim.html">iletisim</a></li>
@@ -70,7 +70,7 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span6">
-                    <h1>Çeviri</h1>
+                    <h1>Bağış</h1>
                 </div>
             </div>
         </div>
@@ -81,31 +81,14 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span12">
-                    <h4>Destek olmak için Novaroma'ya çevrilmeyen diğer dillere çevirebilirsiniz.</h4>
-                    <p class="no-margin">You should contact us to translate.</p>
-                    <div style="margin-top: 20px;">
-                        <h4>Çeviri Tablosu</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Dil</th>
-                                    <th>Çeviren</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Türkçe</td>
-                                    <td>Novaroma</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>İngilizce</td>
-                                    <td>Novaroma</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <h4>Destek olmak için Novaroma'ya bağış yapabilirsiniz</h4>
+                    <div style="margin-left: 10px;">
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            <input type="hidden" name="cmd" value="_s-xclick">
+                            <input type="hidden" name="hosted_button_id" value="KDXMB5S5HHGQS">
+                            <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+                            <img alt="" border="0" src="https://www.paypalobjects.com/tr_TR/i/scr/pixel.gif" width="1" height="1">
+                        </form>
                     </div>
                 </div>
             </div>

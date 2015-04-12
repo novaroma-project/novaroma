@@ -8,14 +8,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Novaroma | Çeviri</title>
-    <meta name="description" content="Novaroma Çeviri. Türkçe, İngilizce, Diğer Diller. Çeviri için bizle iletişime geçin.">
+    <title>Novaroma | uTorrent Web UI Ayarları Nasıl Yapılır?</title>
+    <meta name="description" content="Novaroma | uTorrent Web UI Ayarları Nasıl Yapılır? Video">
     <meta name="viewport" content="width=device-width">
 
-    <meta property="og:title" content="Novaroma | Çeviri" />
+    <meta property="og:title" content="Novaroma | uTorrent Web UI Ayarları Nasıl Yapılır?" />
     <meta property="og:image" content="http://www.novaroma.net/tr/images/screenshots/1.jpg" />
-    <meta property="og:description" content="Novaroma Çeviri. Türkçe, İngilizce, Diğer Diller. Çeviri için bizle iletişime geçin." />
-    <meta property="og:url" content="http://www.novaroma.net/tr/ceviri.html">
+    <meta property="og:description" content="Novaroma | uTorrent Web UI Ayarları Nasıl Yapılır? Video" />
+    <meta property="og:url" content="http://www.novaroma.net/tr/utorrent-web-ui-ayarlari-nasil-yapilir.html">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -32,7 +32,7 @@
 </head>
 <body>
     <!--Header-->
-<header class="navbar navbar-fixed-top">
+    <header class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -46,14 +46,14 @@
                         <li><a href="index.html">Anasayfa</a></li>
                         <li><a href="ozellikler.html">Özellikler</a></li>
                         <li><a href="ekran-goruntuleri.html">Ekran Görüntüleri</a></li>
-                        <li><a href="nasil-yapilir.html">Nasıl Yapılır</a></li>
+                        <li class="active"><a href="nasıl-yapilir.html">Nasıl Yapılır</a></li>
                         <li><a href="indir.html">Indir</a></li>
-                        <li class="dropdown active">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Destek Ol <i class="icon-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="paylas.html">Paylaş</a></li>
                                 <li><a href="tanitim.html">Tanıtım Yap</a></li>
-                                <li class="active"><a href="ceviri.html">Çeviri Yap</a></li>
+                                <li><a href="ceviri.html">Çeviri Yap</a></li>
                                 <li><a href="oneri.html">Öneride Bulun</a></li>
                                 <li><a href="kod.html">Kod Yaz</a></li>
                                 <li><a href="bagis.html">Bağış Yap</a></li>
@@ -70,43 +70,28 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span6">
-                    <h1>Çeviri</h1>
+                    <h1>uTorrent Web UI Ayarları Nasıl Yapılır?</h1>
                 </div>
             </div>
         </div>
     </section>
     <!-- / .title -->
     <!-- Privacy-policy -->
-    <section id="privacy-policy" class="container">
+    <section class="container">
         <div class="container">
             <div class="row-fluid">
-                <div class="span12">
-                    <h4>Destek olmak için Novaroma'ya çevrilmeyen diğer dillere çevirebilirsiniz.</h4>
-                    <p class="no-margin">You should contact us to translate.</p>
-                    <div style="margin-top: 20px;">
-                        <h4>Çeviri Tablosu</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Dil</th>
-                                    <th>Çeviren</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Türkçe</td>
-                                    <td>Novaroma</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>İngilizce</td>
-                                    <td>Novaroma</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="span12 center">
+                    <iframe width="900" height="500" src="https://www.youtube.com/embed/PlN7yna_eEY" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span12 center">
+                    <a href="nasil-yapilir.html">Diğer videoları izlemek için tıklayınız</a>
                 </div>
             </div>
         </div>

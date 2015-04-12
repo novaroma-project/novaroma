@@ -8,14 +8,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Novaroma | Çeviri</title>
-    <meta name="description" content="Novaroma Çeviri. Türkçe, İngilizce, Diğer Diller. Çeviri için bizle iletişime geçin.">
+    <title>Novaroma | İndir</title>
+    <meta name="description" content="Novaroma Ücretsiz İndir. Novaroma'yı yükle. Film, dizi ve altyazıları otomatik indir.">
     <meta name="viewport" content="width=device-width">
 
-    <meta property="og:title" content="Novaroma | Çeviri" />
+    <meta property="og:title" content="Novaroma | İndir" />
     <meta property="og:image" content="http://www.novaroma.net/tr/images/screenshots/1.jpg" />
-    <meta property="og:description" content="Novaroma Çeviri. Türkçe, İngilizce, Diğer Diller. Çeviri için bizle iletişime geçin." />
-    <meta property="og:url" content="http://www.novaroma.net/tr/ceviri.html">
+    <meta property="og:description" content="Novaroma Ücretsiz İndir. Novaroma'yı yükle. Film, dizi ve altyazıları otomatik indir." />
+    <meta property="og:url" content="http://www.novaroma.net/tr/indir.html">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -32,7 +32,7 @@
 </head>
 <body>
     <!--Header-->
-<header class="navbar navbar-fixed-top">
+    <header class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -46,14 +46,14 @@
                         <li><a href="index.html">Anasayfa</a></li>
                         <li><a href="ozellikler.html">Özellikler</a></li>
                         <li><a href="ekran-goruntuleri.html">Ekran Görüntüleri</a></li>
-                        <li><a href="nasil-yapilir.html">Nasıl Yapılır</a></li>
-                        <li><a href="indir.html">Indir</a></li>
-                        <li class="dropdown active">
+                        <li><a href="nasıl-yapilir.html">Nasıl Yapılır</a></li>
+                        <li class="active"><a href="indir.html">Indir</a></li>
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Destek Ol <i class="icon-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="paylas.html">Paylaş</a></li>
                                 <li><a href="tanitim.html">Tanıtım Yap</a></li>
-                                <li class="active"><a href="ceviri.html">Çeviri Yap</a></li>
+                                <li><a href="ceviri.html">Çeviri Yap</a></li>
                                 <li><a href="oneri.html">Öneride Bulun</a></li>
                                 <li><a href="kod.html">Kod Yaz</a></li>
                                 <li><a href="bagis.html">Bağış Yap</a></li>
@@ -70,7 +70,7 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span6">
-                    <h1>Çeviri</h1>
+                    <h1>İndir</h1>
                 </div>
             </div>
         </div>
@@ -80,36 +80,94 @@
     <section id="privacy-policy" class="container">
         <div class="container">
             <div class="row-fluid">
-                <div class="span12">
-                    <h4>Destek olmak için Novaroma'ya çevrilmeyen diğer dillere çevirebilirsiniz.</h4>
-                    <p class="no-margin">You should contact us to translate.</p>
-                    <div style="margin-top: 20px;">
-                        <h4>Çeviri Tablosu</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Dil</th>
-                                    <th>Çeviren</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Türkçe</td>
-                                    <td>Novaroma</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>İngilizce</td>
-                                    <td>Novaroma</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="span9">
+                    <h4>Novaroma, ücretsiz, açık kaynak kodlu bir programdır. Dizileri, filmleri ve altyazıları arayabilir veya otomatik indirebilirsiniz.</h4>
+                    <p class="no-margin">Ayrıca Novaroma'yı dlna server'lar (XMBC, Plex, Servio, PS3 vb.) ile kullanabilirsiniz. Novaroma otomatik indirir, bilgisayar başına oturmadan tv'nizden izlersiniz.</p>
+                    <p></p>
+                    <p></p>
+                    <h4>Kaynak Kod</h4>
+                    <p>
+                        Novaroma kodlarını incelemek isterseniz github sayfamıza göz atabilirsiniz. <a href="https://github.com/novaroma-project/Novaroma">Novaroma Github respository</a>
+                    </p>
+                </div>
+                <div class="span3">
+                    <a class="btn btn-success btn-large pull-right" href="https://github.com/novaroma-project/novaroma/releases/download/v0.9.2/Novaroma.v0.9.2.setup.exe">
+                        Novaroma'yı İndir
+                        <br>
+                        <span style="color: #000; font-size: 12px;">Windows - version 0.9.2</span>
+                    </a>
+                    <div id="total-download" style="float:right; width:180px; display:none;">
+                        <div style="text-align: center; font-size: 10px;">
+                            Total Download: <span id="download-count"></span>
+                        </div>
+                        <div style="text-align: center;">
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                <input type="hidden" name="cmd" value="_s-xclick">
+                                <input type="hidden" name="hosted_button_id" value="PMNFM9J2XHA9A">
+                                <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+                                <img alt="" border="0" src="https://www.paypalobjects.com/tr_TR/i/scr/pixel.gif" width="1" height="1">
+                            </form>
+                        </div>
+                        </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <section id="portfolio" class="container main">
+        <ul class="gallery col-4">
+            <!--Item 1-->
+            <li>
+                <div class="preview">
+                    <a href="https://github.com/novaroma-project/novaroma/releases/download/v0.9.2/Novaroma.v0.9.2.setup.exe">
+                        <img alt="Novaroma'yı İndir" src="images/download/thumb/1.jpg">
+                    </a>
+                </div>
+                <div class="desc center">
+                    <h6>Novaroma'yı İndir</h6>
+                </div>
+            </li>
+            <!--/Item 1-->
+            <!--Item 2-->
+            <li>
+                <div class="preview">
+                    <img alt="Novaroma'yı Yükle" src="images/download/thumb/2.jpg" class="thumbnail">
+                </div>
+                <div class="desc center">
+                    <h6>Yükle</h6>
+                </div>
+            </li>
+            <!--/Item 2-->
+            <!--Item 3-->
+            <li>
+                <div class="preview">
+                    <a data-toggle="modal" href="#modal-3">
+                        <img alt="Novaroma Ayarlarını Yap" src="images/download/thumb/3.jpg" class="thumbnail">
+                    </a>
+                </div>
+                <div class="desc center">
+                    <h6>Ayarları Yap</h6>
+                </div>
+                <div id="modal-3" class="modal hide fade">
+                    <a class="close-modal" href="javascript:;" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></a>
+                    <div class="modal-body">
+                        <img src="images/download/3.png" alt="Novaroma Ayarlarını Yap" height="100%">
+                    </div>
+                </div>
+            </li>
+            <!--/Item 3-->
+            <!--Item 4-->
+            <li>
+                <div class="preview">
+                    <img alt="Novaroma" src="images/download/thumb/4.jpg" class="thumbnail">
+                </div>
+                <div class="desc center">
+                    <h6>Geri yaslan, rahatla ve sevdiğin filmleri dizileri izle.</h6>
+                </div>
+            </li>
+            <!--/Item 4-->
+        </ul>
+
     </section>
     <!-- /privacy-policy -->
     <!--Footer-->
@@ -152,8 +210,6 @@
         })();
     </script>
 
-
-
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5519b812523dcc45" async="async"></script>
 
     <script>
@@ -169,5 +225,18 @@
 
     </script>
 
+    <script>
+        var url = "https://api.github.com/repos/novaroma-project/novaroma/releases";
+        var downloadCount = 0;
+        $.getJSON(url, function (data) {
+            $.each(data, function (i, item) {
+                $.each(item.assets, function (y, asset) {
+                    downloadCount += asset.download_count;
+                });
+            });
+            $("#download-count").html(downloadCount);
+            $("#total-download").show();
+        });
+    </script>
 </body>
 </html>

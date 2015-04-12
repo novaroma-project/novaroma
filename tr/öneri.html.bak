@@ -8,14 +8,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Novaroma | Çeviri</title>
-    <meta name="description" content="Novaroma Çeviri. Türkçe, İngilizce, Diğer Diller. Çeviri için bizle iletişime geçin.">
+    <title>Novaroma | Öneri - Geri Bildirim</title>
+    <meta name="description" content="Novaroma'ya öneride ve geri bildirimde bulun. Yeni özellikler öner, hataları bildir.">
     <meta name="viewport" content="width=device-width">
 
-    <meta property="og:title" content="Novaroma | Çeviri" />
+    <meta property="og:title" content="Novaroma | Öneri - Geri Bildirim" />
     <meta property="og:image" content="http://www.novaroma.net/tr/images/screenshots/1.jpg" />
-    <meta property="og:description" content="Novaroma Çeviri. Türkçe, İngilizce, Diğer Diller. Çeviri için bizle iletişime geçin." />
-    <meta property="og:url" content="http://www.novaroma.net/tr/ceviri.html">
+    <meta property="og:description" content="Novaroma'ya öneride ve geri bildirimde bulun. Yeni özellikler öner, hataları bildir." />
+    <meta property="og:url" content="http://www.novaroma.net/tr/oneri.html">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -46,15 +46,15 @@
                         <li><a href="index.html">Anasayfa</a></li>
                         <li><a href="ozellikler.html">Özellikler</a></li>
                         <li><a href="ekran-goruntuleri.html">Ekran Görüntüleri</a></li>
-                        <li><a href="nasil-yapilir.html">Nasıl Yapılır</a></li>
+                        <li><a href="nasıl-yapilir.html">Nasıl Yapılır</a></li>
                         <li><a href="indir.html">Indir</a></li>
                         <li class="dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Destek Ol <i class="icon-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="paylas.html">Paylaş</a></li>
                                 <li><a href="tanitim.html">Tanıtım Yap</a></li>
-                                <li class="active"><a href="ceviri.html">Çeviri Yap</a></li>
-                                <li><a href="oneri.html">Öneride Bulun</a></li>
+                                <li><a href="ceviri.html">Çeviri Yap</a></li>
+                                <li class="active"><a href="oneri.html">Öneride Bulun</a></li>
                                 <li><a href="kod.html">Kod Yaz</a></li>
                                 <li><a href="bagis.html">Bağış Yap</a></li>
                             </ul>
@@ -70,7 +70,7 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span6">
-                    <h1>Çeviri</h1>
+                    <h1>Öneri</h1>
                 </div>
             </div>
         </div>
@@ -80,33 +80,12 @@
     <section id="privacy-policy" class="container">
         <div class="container">
             <div class="row-fluid">
-                <div class="span12">
-                    <h4>Destek olmak için Novaroma'ya çevrilmeyen diğer dillere çevirebilirsiniz.</h4>
-                    <p class="no-margin">You should contact us to translate.</p>
-                    <div style="margin-top: 20px;">
-                        <h4>Çeviri Tablosu</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Dil</th>
-                                    <th>Çeviren</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Türkçe</td>
-                                    <td>Novaroma</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>İngilizce</td>
-                                    <td>Novaroma</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="span9">
+                    <h4>Novaroma'nın gelişmesine katkıda bulunmak için önerilerde bulunabilirsiniz.</h4>
+                    <p class="no-margin">Suggest new features and <a href="http://feedback.userreport.com/6a4cdb84-8953-4eb3-b3a3-d44fff572cde/" target="_blank">feedback</a> to us.</p>
+                </div>
+                <div class="span3">
+                    <div id="feedback-button"></div>
                 </div>
             </div>
         </div>
@@ -158,16 +137,20 @@
 
     <script>
         (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-61445874-1', 'auto');
         ga('send', 'pageview');
 
     </script>
-
 </body>
 </html>
