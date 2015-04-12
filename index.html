@@ -17,6 +17,13 @@
     <meta property="og:description" content="Novaroma.Auto Download Tv Shows, Movies and Subtitles. Track your tv shows. Discover new Movies, Tv Shows." />
     <meta property="og:url" content="http://www.novaroma.net">
 
+    <script>
+        var language = window.navigator.userLanguage || window.navigator.language;
+        if (language == "tr-TR") {
+            window.location = "http://www.novaroma.net/tr/index.html";
+        }
+    </script>
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -31,7 +38,8 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <body>
-    <!--Header-->
+<!--Header-->
+<div class="language-box"><a href="http://www.novaroma.net/tr/index.html">TR</a></div>
     <header class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -419,13 +427,12 @@
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-61445874-1', 'auto');
         ga('send', 'pageview');
 
     </script>
-
 </body>
 </html>
