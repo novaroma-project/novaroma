@@ -8,14 +8,21 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Novaroma | Dizi, Film ve Altyazıları Otomatik İndir, İzle.</title>
-    <meta name="description" content="Novaroma. Dizi, Film ve Altyazıları Otomatik İndir, İzle.. Dizileri takip et. Yeni diziler, filmler keşfet.">
+    <title>Novaroma | Auto Download Tv Shows, Movies and Subtitles</title>
+    <meta name="description" content="Novaroma.Auto Download Tv Shows, Movies and Subtitles. Track your tv shows. Discover new Movies, Tv Shows.">
     <meta name="viewport" content="width=device-width">
 
-    <meta property="og:title" content="Novaroma | Dizi, Film ve Altyazıları Otomatik İndir, İzle." />
-    <meta property="og:image" content="http://www.novaroma.net/tr/images/screenshots/1.jpg" />
-    <meta property="og:description" content="Novaroma. Dizi, Film ve Altyazıları Otomatik İndir, İzle.. Dizileri takip et. Yeni diziler, filmler keşfet." />
-    <meta property="og:url" content="http://www.novaroma.net/tr/index.hml">
+    <meta property="og:title" content="Novaroma | Auto Download Tv Shows, Movies and Subtitles" />
+    <meta property="og:image" content="http://www.novaroma.net/images/screenshots/1.jpg" />
+    <meta property="og:description" content="Novaroma.Auto Download Tv Shows, Movies and Subtitles. Track your tv shows. Discover new Movies, Tv Shows." />
+    <meta property="og:url" content="http://www.novaroma.net">
+
+    <script>
+        var language = window.navigator.userLanguage || window.navigator.language;
+        if (language == "tr-TR") {
+            window.location = "http://www.novaroma.net/tr/index.html";
+        }
+    </script>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -31,8 +38,8 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <body>
-    <div class="language-box"><a href="http://www.novaroma.net">EN</a></div>
-    <!--Header-->
+<!--Header-->
+<div class="language-box"><a href="http://www.novaroma.net/tr">TR</a></div>
     <header class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -44,23 +51,23 @@
                 <a id="logo" class="pull-left" href="index.html"></a>
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav">
-                        <li class="active"><a href="index.html">Anasayfa</a></li>
-                        <li><a href="ozellikler.html">Özellikler</a></li>
-                        <li><a href="ekran-goruntuleri.html">Ekran Görüntüleri</a></li>
-                        <li><a href="nasıl-yapilir.html">Nasıl Yapılır</a></li>
-                        <li><a href="indir.html">Indir</a></li>
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="screenshots.html">Screenshots</a></li>
+                        <li><a href="how-to.html">How to</a></li>
+                        <li><a href="download.html">Download</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Destek Ol <i class="icon-angle-down"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contribute <i class="icon-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="paylas.html">Paylaş</a></li>
-                                <li><a href="tanitim.html">Tanıtım Yap</a></li>
-                                <li><a href="ceviri.html">Çeviri Yap</a></li>
-                                <li><a href="oneri.html">Öneride Bulun</a></li>
-                                <li><a href="kod.html">Kod Yaz</a></li>
-                                <li><a href="bagis.html">Bağış Yap</a></li>
+                                <li><a href="share.html">Share</a></li>
+                                <li><a href="promote.html">Promote</a></li>
+                                <li><a href="translate.html">Translate</a></li>
+                                <li><a href="suggest.html">Suggest</a></li>
+                                <li><a href="development.html">Development</a></li>
+                                <li><a href="donate.html">Donate</a></li>
                             </ul>
                         </li>
-                        <li><a href="iletisim.html">iletisim</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -76,10 +83,10 @@
                 <div class="sl-slide item1" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                     <div class="sl-slide-inner">
                         <div class="container">
-                            <img class="pull-right" src="images/slider/1.png" alt="Novaroma Dizi, Film, Altyazı" />
-                            <h2>Dizi, Film ve Altyazıları</h2>
-                            <h3 class="gap">Otomatik indir</h3>
-                            <a class="btn btn-large btn-transparent" href="ozellikler.html">Daha Fazlası...</a>
+                            <img class="pull-right" src="images/slider/1.png" alt="Novaroma Tv Show" />
+                            <h2>Auto Download</h2>
+                            <h3 class="gap">Tv shows, Movies and Subtitles</h3>
+                            <a class="btn btn-large btn-transparent" href="features.html">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -88,10 +95,10 @@
                 <div class="sl-slide item1" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
                     <div class="sl-slide-inner">
                         <div class="container">
-                            <img class="pull-right" src="images/slider/2.png" alt="Novaroma Dizi" />
-                            <h2>Sevdigin Dizileri</h2>
-                            <h3 class="gap">Takip et ve Yönet</h3>
-                            <a class="btn btn-large btn-transparent" href="ozellikler.html">Daha Fazlası...</a>
+                            <img class="pull-right" src="images/slider/2.png" alt="Novaroma Movies" />
+                            <h2>Track and Manage</h2>
+                            <h3 class="gap">Tv Shows</h3>
+                            <a class="btn btn-large btn-transparent" href="features.html">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -101,9 +108,9 @@
                     <div class="sl-slide-inner">
                         <div class="container">
                             <img class="pull-right" src="images/slider/3.png" alt="" />
-                            <h2>Kesfet</h2>
-                            <h3 class="gap">Ne izleyecegim diye düsünme</h3>
-                            <a class="btn btn-large btn-transparent" href="ozellikler.html">Daha Fazlası...</a>
+                            <h2>Discover</h2>
+                            <h3 class="gap">New Tv Shows and Movies</h3>
+                            <a class="btn btn-large btn-transparent" href="features.html">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -124,11 +131,11 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span9">
-                    <h4>Novaroma, ücretsiz, açık kaynak kodlu bir programdır. Dizileri, filmleri ve altyazıları arayabilir veya otomatik indirebilirsiniz.</h4>
-                    <p class="no-margin">Ayrıca Novaroma'yı dlna server'lar (XMBC, Plex, Servio, PS3 vb.) ile kullanabilirsiniz. Novaroma otomatik indirir, bilgisayar başına oturmadan tv'nizden izlersiniz.</p>
+                    <h4>Novaroma is free open source software. You can search and download tv shows, movies and subtitles automatically. </h4>
+                    <p class="no-margin">Also you can use Novaroma with dlna media servers (XMBC, Plex, Servio, PS3 etc.) </p>
                 </div>
                 <div class="span3">
-                    <a class="btn btn-success btn-large pull-right" href="indir.html">Novaroma'yı Ücretsiz İndir</a>
+                    <a class="btn btn-success btn-large pull-right" href="download.html">Free Download Novaroma</a>
                 </div>
             </div>
         </div>
@@ -137,8 +144,8 @@
     <section id="services">
         <div class="container">
             <div class="center gap">
-                <h3>Özellikler</h3>
-                <p class="lead">Novaroma işinizi kolaylaştıracak birçok özelliği barındırır.</p>
+                <h3>Feature List</h3>
+                <p class="lead">Novaroma has many useful feautures</p>
             </div>
             <div class="row-fluid">
                 <div class="span4">
@@ -147,8 +154,8 @@
                             <i class="icon-download icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Otomatik indirme</h4>
-                            <p>Dizileri, filmleri ve altyazıları otomatik indirebilirsiniz.</p>
+                            <h4 class="media-heading">Auto Download</h4>
+                            <p>You can download tv shows, movies and subtitles automatically.</p>
                         </div>
                     </div>
                 </div>
@@ -159,8 +166,8 @@
                             <i class="icon-eye-open icon-medium icon-rounded"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Dizi Takip</h4>
-                            <p>Sevdiğiniz dizileri takip edebilir, izledikleriniz izledim diye işaretleyebilir, izlenmeyen bölümleri izleyebilirsiniz.</p>
+                            <h4 class="media-heading">Track Tv Shows</h4>
+                            <p>You can track your tv shows, marked as watched and play unwatched last episode</p>
                         </div>
                     </div>
                 </div>
@@ -171,8 +178,8 @@
                             <i class="icon-file-text-alt icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Altyazı indirme</h4>
-                            <p>Novaroma uygun altyazıyı bulur, indirir ve ismini otomatik olarak değiştirir.</p>
+                            <h4 class="media-heading">Subtitle Download</h4>
+                            <p>Novaroma finds available subtitle, downloads and changes titles automatically.</p>
                         </div>
                     </div>
                 </div>
@@ -186,8 +193,8 @@
                             <i class="icon-search icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Keşfet</h4>
-                            <p>Ne izleyeceğinizi bilemediğinizde, kararsız kaldığınızda Novaroma'nın Keşfet özelliğini kullanabilirsiniz. İsim, puan, oy sayısı, tür, yıl gibi bilgileri girerek önerileri görebilirsiniz. Yeni filmler, diziler keşfedebilirsiniz.</p>
+                            <h4 class="media-heading">Discover</h4>
+                            <p>When you don't know what you want watch, you can search with title, rating, votes, genres etc. parameters for new tv shows and movies</p>
                         </div>
                     </div>
                 </div>
@@ -197,8 +204,8 @@
                             <i class="icon-film icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Dizi ve Film Bilgileri</h4>
-                            <p>Dizi ve filmler hakkında bilgileri (Poster, Imdb Puanı, Oy, Açıklama vb.) görebilirsiniz.</p>
+                            <h4 class="media-heading">Tv Show and Movie Info</h4>
+                            <p>You can see tv show and movie info (Poster, Imdb Rating, Votes, Description etc.) </p>
                         </div>
                     </div>
                 </div>
@@ -209,8 +216,8 @@
                             <i class="icon-download-alt icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Manuel indirme</h4>
-                            <p>Manuel olarak dizi, film, altyazı araması yapabilir, istediğinizi seçip indirebilirsiniz.</p>
+                            <h4 class="media-heading">Manual Download</h4>
+                            <p>You can search, select and download tv shows, movies, subtitles manually.</p>
                         </div>
                     </div>
                 </div>
@@ -225,8 +232,8 @@
                             <i class="icon-align-justify icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Aktiviteler</h4>
-                            <p>İndirilmeye başlayan, biten, bulunamayan film, dizi gibi bilgileri aktivitelerden takip edebilirsiniz.</p>
+                            <h4 class="media-heading">Activities</h4>
+                            <p>You can see activities, started and finished downloads.</p>
                         </div>
                     </div>
                 </div>
@@ -237,8 +244,8 @@
                             <i class="icon-folder-open icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Klasör Ekleme</h4>
-                            <p>Dizi ve film arşiv klasörlerinizi toplu olarak Novaroma'ya ekleyebilirsiniz.</p>
+                            <h4 class="media-heading">Add Folder</h4>
+                            <p>You can add your movies, tv shows folder to Novaroma.</p>
                         </div>
                     </div>
                 </div>
@@ -249,8 +256,8 @@
                             <i class="icon-cloud-download icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Yedekleme</h4>
-                            <p>Novaroma veritabanını bilgisarınıza veya bilgisayarınızdaki google drive, onedrive, dropbox vb. klasörlerine yedekleyebilirsiniz.</p>
+                            <h4 class="media-heading">Back up</h4>
+                            <p>You can back up Novaroma database to your local folders or local google drive, onedrive, dropbox etc. folders</p>
                         </div>
                     </div>
                 </div>
@@ -264,8 +271,8 @@
                             <i class="icon-filter icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Filtreleme</h4>
-                            <p>Novaroma'ya eklemiş olduğunuz dizi ve filmlerinizi istediğiniz gibi filtreleyebilir, ekledikleriniz içinde aramalar yapabilirsiniz.</p>
+                            <h4 class="media-heading">Filter</h4>
+                            <p>You can filter and search your added movies and tv shows</p>
                         </div>
                     </div>
                 </div>
@@ -276,8 +283,8 @@
                             <i class="icon-align-justify icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Sağ Tık Menü</h4>
-                            <p>Klasör ve video dosyalarınızı sağ tıkla Novaroma'ya ekleyebilir, altyazısını indirebilir ve izlendi olarak işaretleyebilirsiniz.</p>
+                            <h4 class="media-heading">Right Click Context Menu</h4>
+                            <p>You can control folders, video files etc. and add movies and tv shows , download subtitles with novaroma right click context menu. </p>
                         </div>
                     </div>
                 </div>
@@ -288,8 +295,8 @@
                             <i class="icon-terminal icon-medium"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Yazılımcılar için Script Servisler</h4>
-                            <p>Novaroma içinde kodunuzu yazar, compile eder ve script'inizi hemen çalıştırabilirsiniz.</p>
+                            <h4 class="media-heading">Script Services For Developers</h4>
+                            <p>You can write, compile and run new script services in novaroma. </p>
                         </div>
                     </div>
                 </div>
@@ -339,7 +346,7 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span5 cp">
-                    &copy; 2015 <a href="http://www.novaroma.net/" title="Novaroma">Novaroma</a>. Her Hakkı Saklıdır. Tema: <a target="_blank" href="http://www.shapebootstrap.com/" title="ShapeBootstrap">ShapeBootstrap</a>
+                    &copy; 2015 <a href="http://www.novaroma.net/" title="Novaroma">Novaroma</a>. All Rights Reserved. Theme: <a target="_blank" href="http://www.shapebootstrap.com/" title="ShapeBootstrap">ShapeBootstrap</a>
                 </div>
                 <!--/Copyright-->
                 <div class="span6">
@@ -420,13 +427,12 @@
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-61445874-1', 'auto');
         ga('send', 'pageview');
 
     </script>
-
 </body>
 </html>
