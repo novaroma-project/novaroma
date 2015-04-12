@@ -5,69 +5,229 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-<url>
-  <loc>http://www.novaroma.net/</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/index.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/features.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/screenshots.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/how-to.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/download.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/share.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/promote.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/translate.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/suggest.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/development.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/donate.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.novaroma.net/contact.html</loc>
-  <lastmod>2015-04-05T18:50:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+  <url>
+    <loc>http://www.novaroma.net/</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/index.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/features.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/screenshots.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/how-to.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/download.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/share.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/promote.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/translate.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/suggest.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/development.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/donate.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/contact.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/index.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/features.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/screenshots.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/how-to.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/download.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/share.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/promote.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/translate.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/suggest.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/development.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/donate.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/contact.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/how-to-add-movie.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/how-to-add-tv-show.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/how-to-configure-utorrent-web-ui-settings.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/index.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/ozellikler.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/ekran-goruntuleri.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/nasil-yapilir.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/indir.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/paylas.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/tanitim.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/ceviri.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/oneri.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/kod.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/bagis.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/iletisim.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/film-nasil-eklenir.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/dizi-nasil-eklenir.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>http://www.novaroma.net/tr/utorrent-web-ui-ayarlari-nasil-yapilir.html</loc>
+    <lastmod>2015-04-12T18:50:10+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
 </urlset>
