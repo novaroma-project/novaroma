@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Novaroma.Interface.Download.Torrent.Provider;
 using Novaroma.Properties;
@@ -9,6 +9,7 @@ using Novaroma.Properties;
 namespace Novaroma.Interface.Download.Torrent {
 
     public abstract class TorrentDownloaderBase : ITorrentDownloader {
+        private const string EpisodeCheckRegex = @"{0}.*?{1}";
         protected readonly IExceptionHandler ExceptionHandler;
 
         protected TorrentDownloaderBase(IExceptionHandler exceptionHandler) {
@@ -38,9 +39,11 @@ namespace Novaroma.Interface.Download.Torrent {
             );
 
             await Task.WhenAll(tasks);
-            var seasonStr = season.ToString(CultureInfo.InvariantCulture);
-            var episodeStr = episode.ToString(CultureInfo.InvariantCulture);
-            return results.OrderByDescending(r => r.Seed).Where(r => r.Name.Contains(seasonStr) && r.Name.Contains(episodeStr));
+            var checkRegex = string.Format(EpisodeCheckRegex, season, episode);
+            return  results
+                .Where(r => Regex.IsMatch(r.Name, checkRegex))
+                .OrderByDescending(r => r.Seed)
+                .ToList();
         }
 
         public virtual async Task<IEnumerable<ITorrentSearchResult>> Search(string query, VideoQuality videoQuality,

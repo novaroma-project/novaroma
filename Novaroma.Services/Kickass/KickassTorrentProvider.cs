@@ -39,6 +39,7 @@ namespace Novaroma.Services.Kickass {
                 imdbId = imdbId.Replace("tt", "");
 
             query = Helper.PopulateMovieSearchQuery(query, name, year, imdbId, extraKeywords);
+            query += " category:movies";
             return Search(query, videoQuality, excludeKeywords, service);
         }
 
@@ -50,6 +51,7 @@ namespace Novaroma.Services.Kickass {
                                                                            string extraKeywords = null, string excludeKeywords = null, ITorrentDownloader service = null) {
             var query = Settings.TvShowEpisodeSearchPattern;
             query = Helper.PopulateTvShowEpisodeSearchQuery(query, name, season, episode, imdbId, extraKeywords);
+            query += " category:tv";
             return Search(query, videoQuality, excludeKeywords, service);
         }
 
