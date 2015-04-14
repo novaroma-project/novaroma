@@ -18,9 +18,12 @@
     <meta property="og:url" content="http://www.novaroma.net">
 
     <script>
-        var language = window.navigator.userLanguage || window.navigator.language;
-        if (language == "tr" || language == "tr-TR") {
-            window.location = "http://www.novaroma.net/tr";
+        var prm = location.search.split('?')[1];
+        if (!prm) {
+            var language = window.navigator.userLanguage || window.navigator.language;
+            if (language == "tr" || language == "tr-TR") {
+                window.location = "http://www.novaroma.net/tr";
+            }
         }
     </script>
 
