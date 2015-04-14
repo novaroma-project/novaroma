@@ -79,7 +79,7 @@ namespace Novaroma.Services.UTorrent {
                     var currentDirectory = Directory.GetCurrentDirectory();
                     path = Path.Combine(currentDirectory, "uTorrent\\uTorrent.exe");
                 }
-                Process.Start(path);
+                Process.Start(path,"/minimized");
             }
 
             return Settings.Port.HasValue
