@@ -5,7 +5,7 @@ using Novaroma.Properties;
 namespace Novaroma.Services.Imdb {
 
     public class ImdbSettings : ModelBase {
-        private bool _useAdvancedSearch;
+        private bool _useAdvancedSearch = true;
         private int _advancedSearchResultCount = 42;
 
         [Display(Name = "UseAdvancedSearch", ResourceType = typeof(Resources))]

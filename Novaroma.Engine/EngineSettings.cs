@@ -29,6 +29,7 @@ namespace Novaroma.Engine {
         private readonly SettingMultiSelection<IDownloadEventHandler> _downloadEventHandlers;
         private bool _makeSpecialFolder = true;
         private int _downloadInterval;
+        private int _subtitleDownloadInterval;
         private string _deleteExtensions = ".nfo;.srt";
         private int _tvShowUpdateInterval;
 
@@ -50,6 +51,7 @@ namespace Novaroma.Engine {
                 : new[] { languages[0].DisplayName };
 
             _downloadInterval = 10;
+            _subtitleDownloadInterval = 60;
             _tvShowUpdateInterval = 4;
             _infoProvider = new SettingSingleSelection<IInfoProvider>(serviceList.OfType<IInfoProvider>());
             _advancedInfoProvider = new SettingSingleSelection<IAdvancedInfoProvider>(serviceList.OfType<IAdvancedInfoProvider>());
@@ -150,6 +152,17 @@ namespace Novaroma.Engine {
 
                 _downloadInterval = value;
                 RaisePropertyChanged("DownloadInterval");
+            }
+        }
+
+        [Display(Name = "SubtitleDownloadInterval", GroupName = "Advanced", ResourceType = typeof(Resources))]
+        public int SubtitleDownloadInterval {
+            get { return _subtitleDownloadInterval; }
+            set {
+                if (_subtitleDownloadInterval == value) return;
+
+                _subtitleDownloadInterval = value;
+                RaisePropertyChanged("SubtitleDownloadInterval");
             }
         }
 

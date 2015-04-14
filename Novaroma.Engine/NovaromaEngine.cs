@@ -35,6 +35,8 @@ namespace Novaroma.Engine {
         private readonly IEnumerable<INovaromaService> _services;
         private const string DownloadJobName = "DownloadJob";
         private const string DownloadJobDefaultTriggerName = "DownloadJobTrigger";
+        private const string SubtitleDownloadJobName = "SubtitleDownloadJob";
+        private const string SubtitleDownloadJobDefaultTriggerName = "SubtitleDownloadJobTrigger";
         private const string TvShowUpdateJobName = "TvShowUpdateJob";
         private const string TvShowUpdateJobDefaultTriggerName = "TvShowUpdateJobTrigger";
         private readonly Semaphore _infoSemaphore = new Semaphore(20, 20);
@@ -89,6 +91,10 @@ namespace Novaroma.Engine {
             var downloadJob = JobBuilder.Create<DownloadJob>().WithIdentity(DownloadJobName).Build();
             var downloadJobTrigger = CreateIntervalTrigger(DownloadJobDefaultTriggerName, Settings.DownloadInterval);
             scheduler.ScheduleJob(downloadJob, downloadJobTrigger);
+
+            var subtitleDownloadJob = JobBuilder.Create<SubtitleDownloadJob>().WithIdentity(SubtitleDownloadJobName).Build();
+            var subtitleDownloadJobTrigger = CreateIntervalTrigger(SubtitleDownloadJobDefaultTriggerName, Settings.SubtitleDownloadInterval);
+            scheduler.ScheduleJob(subtitleDownloadJob, subtitleDownloadJobTrigger);
 
             var tvShowUpdateJob = JobBuilder.Create<TvShowUpdateJob>().WithIdentity(TvShowUpdateJobName).Build();
             var tvShowUpdateJobTrigger = CreateIntervalTrigger(TvShowUpdateJobDefaultTriggerName, Settings.TvShowUpdateInterval * 60);
@@ -1191,6 +1197,14 @@ namespace Novaroma.Engine {
             var episodes = await GetTvShowEpisodesToDownload();
             await Task.WhenAll(episodes.RunTasks(DownloadTvShowEpisode, _exceptionHandler));
 
+            await Helper.RunTask(RefreshDownloaders, _exceptionHandler);
+        }
+
+        public void ExecuteDownloadJob() {
+            _scheduler.TriggerJob(new JobKey(DownloadJobName));
+        }
+
+        public async Task ExecuteSubtitleDownloads() {
             if (SubtitlesEnabled) {
                 var moviesSubtitles = await GetMoviesForSubtitleDownload();
                 await Task.WhenAll(moviesSubtitles.RunTasks(DownloadSubtitleForMovie, _exceptionHandler));
@@ -1198,12 +1212,10 @@ namespace Novaroma.Engine {
                 var episodesSubtitles = await GetTvShowEpisodesForSubtitleDownload();
                 await Task.WhenAll(episodesSubtitles.RunTasks(DownloadSubtitleForTvShowEpisode, _exceptionHandler));
             }
-
-            await Helper.RunTask(RefreshDownloaders, _exceptionHandler);
         }
 
-        public void ExecuteDownloadJob() {
-            _scheduler.TriggerJob(new JobKey(DownloadJobName));
+        public void ExecuteSubtitleDownloadJob() {
+            _scheduler.TriggerJob(new JobKey(SubtitleDownloadJobName));
         }
 
         public async Task ExecuteTvShowUpdates() {
@@ -1503,16 +1515,20 @@ namespace Novaroma.Engine {
                 MovieDirectory = Settings.MovieDirectory.Path,
                 TvShowDirectory = Settings.TvShowDirectory.Path,
                 Settings.TvShowSeasonDirectoryTemplate,
+                Settings.MakeSpecialFolder,
                 Settings.DownloadInterval,
+                Settings.SubtitleDownloadInterval,
+                Settings.TvShowUpdateInterval,
+                Settings.DeleteDirectoriesAlso,
+                Settings.DeleteExtensions,
+
                 SubtitleLanguages = Settings.SubtitleLanguages.SelectedItemNames,
                 InfoProvider = Settings.InfoProvider.SelectedItemName,
                 AdvancedInfoProvider = Settings.AdvancedInfoProvider.SelectedItemName,
                 ShowTracker = Settings.ShowTracker.SelectedItemName,
                 Downloader = Settings.Downloader.SelectedItemName,
                 SubtitleDownloaders = Settings.SubtitleDownloaders.SelectedItemNames,
-                DownloadEventHandlers = Settings.DownloadEventHandlers.SelectedItemNames,
-                Settings.MakeSpecialFolder,
-                Settings.DeleteDirectoriesAlso
+                DownloadEventHandlers = Settings.DownloadEventHandlers.SelectedItemNames
             };
 
             return JsonConvert.SerializeObject(o);
@@ -1529,7 +1545,24 @@ namespace Novaroma.Engine {
             Settings.MovieDirectory.Path = (string)o["MovieDirectory"];
             Settings.TvShowDirectory.Path = (string)o["TvShowDirectory"];
             Settings.TvShowSeasonDirectoryTemplate = (string)o["TvShowSeasonDirectoryTemplate"];
+            var makeSpecialFolder = o["MakeSpecialFolder"];
+            if (makeSpecialFolder != null)
+                Settings.MakeSpecialFolder = (bool)makeSpecialFolder;
             Settings.DownloadInterval = Convert.ToInt32(o["DownloadInterval"]);
+            var subtitleDownloadInterval = o["SubtitleDownloadInterval"];
+            if (subtitleDownloadInterval != null)
+                Settings.SubtitleDownloadInterval = Convert.ToInt32(subtitleDownloadInterval);
+            var tvShowUpdateInterval = o["TvShowUpdateInterval"];
+            if (tvShowUpdateInterval != null)
+                Settings.TvShowUpdateInterval = Convert.ToInt32(tvShowUpdateInterval);
+            var deleteDirectoriesAlso = o["DeleteDirectoriesAlso"];
+            if (deleteDirectoriesAlso != null)
+                Settings.DeleteDirectoriesAlso = (bool)deleteDirectoriesAlso;
+            var deleteExtensions = o["DeleteExtensions"];
+            if (deleteExtensions != null)
+                Settings.DeleteExtensions = (string)deleteExtensions;
+
+
             var subtitleLanguages = (JArray)o["SubtitleLanguages"];
             if (subtitleLanguages != null)
                 Settings.SubtitleLanguages.SelectedItemNames = subtitleLanguages.Select(x => x.ToString());
@@ -1543,12 +1576,6 @@ namespace Novaroma.Engine {
             var downloadEventHandlers = (JArray)o["DownloadEventHandlers"];
             if (downloadEventHandlers != null)
                 Settings.DownloadEventHandlers.SelectedItemNames = downloadEventHandlers.Select(x => x.ToString());
-            var makeSpecialFolder = o["MakeSpecialFolder"];
-            if (makeSpecialFolder != null)
-                Settings.MakeSpecialFolder = (bool)makeSpecialFolder;
-            var deleteDirectoriesAlso = o["DeleteDirectoriesAlso"];
-            if (deleteDirectoriesAlso != null)
-                Settings.DeleteDirectoriesAlso = (bool)deleteDirectoriesAlso;
         }
 
         #endregion

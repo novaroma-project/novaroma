@@ -68,6 +68,9 @@ namespace Novaroma.Interface {
         Task ExecuteDownloads();
         void ExecuteDownloadJob();
 
+        Task ExecuteSubtitleDownloads();
+        void ExecuteSubtitleDownloadJob();
+
         Task ExecuteTvShowUpdates();
         void ExecuteTvShowUpdateJob();
 

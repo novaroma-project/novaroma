@@ -93,6 +93,7 @@ namespace Novaroma.Win.ViewModels {
 
         private void ExecuteDownloads() {
             _engine.ExecuteDownloadJob();
+            _engine.ExecuteSubtitleDownloadJob();
         }
 
         private void ExecuteTvShowUpdates() {

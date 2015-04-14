@@ -850,4 +850,7 @@
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Check for Updates</value>
   </data>
+  <data name="SubtitleDownloadInterval" xml:space="preserve">
+    <value>Subtitle Download Interval (mins.)</value>
+  </data>
 </root>

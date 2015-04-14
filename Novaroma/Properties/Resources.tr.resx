@@ -801,4 +801,7 @@
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Güncellemeleri Denetle</value>
   </data>
+  <data name="SubtitleDownloadInterval" xml:space="preserve">
+    <value>Altyazı İndirme Aralığı (dk.)</value>
+  </data>
 </root>

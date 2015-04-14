@@ -60,6 +60,7 @@
     <Compile Include="DbLogger.cs" />
     <Compile Include="Jobs\DownloadJob.cs" />
     <Compile Include="EngineSettings.cs" />
+    <Compile Include="Jobs\SubtitleDownloadJob.cs" />
     <Compile Include="Jobs\TvShowUpdateJob.cs" />
     <Compile Include="NovaromaDb4OContext.cs" />
     <Compile Include="NovaromaEngine.cs" />
