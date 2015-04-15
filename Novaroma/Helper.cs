@@ -359,7 +359,7 @@ namespace Novaroma {
             return langInfo.ThreeLetterCode;
         }
 
-        public static void MoveDirectory(string source, string destination, string deleteExtensionsStr, IEnumerable<string> files = null) {
+        public static void CopyDirectory(string source, string destination, string deleteExtensionsStr, IEnumerable<string> files = null) {
             var sourceInfo = new DirectoryInfo(source);
             if (!sourceInfo.Exists) return;
 
@@ -381,7 +381,7 @@ namespace Novaroma {
             foreach (var file in sourceFiles) {
                 var destinationFilePath = Path.Combine(destination, file.Name);
                 if (!File.Exists(destinationFilePath))
-                    file.MoveTo(destinationFilePath);
+                    file.CopyTo(destinationFilePath);
             }
         }
 

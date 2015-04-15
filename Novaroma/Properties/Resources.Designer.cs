@@ -574,6 +574,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete Completed Torrents.
+        /// </summary>
+        public static string DeleteCompletedTorrents {
+            get {
+                return ResourceManager.GetString("DeleteCompletedTorrents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete Directories Also.
         /// </summary>
         public static string DeleteDirectoriesAlso {
@@ -2134,6 +2143,15 @@ namespace Novaroma.Properties {
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching.
+        /// </summary>
+        public static string Searching {
+            get {
+                return ResourceManager.GetString("Searching", resourceCulture);
             }
         }
         

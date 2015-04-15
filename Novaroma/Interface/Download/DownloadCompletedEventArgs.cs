@@ -26,6 +26,6 @@ namespace Novaroma.Interface.Download {
             get { return _downloadDirectory; }
         }
 
-        public bool Delete { get; set; }
+        public bool Found { get; set; }
     }
 }

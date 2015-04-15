@@ -1048,4 +1048,10 @@
   <data name="Url_Help" xml:space="preserve">
     <value>http://www.novaroma.net/help.html</value>
   </data>
+  <data name="DeleteCompletedTorrents" xml:space="preserve">
+    <value>Delete Completed Torrents</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>Searching</value>
+  </data>
 </root>

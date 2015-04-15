@@ -264,15 +264,19 @@ namespace Novaroma.Engine {
                     var directory = Helper.GetTvShowSeasonDirectory(Settings.TvShowSeasonDirectoryTemplate, episode);
                     if (Directory.Exists(args.DownloadDirectory)) {
                         if (args.DownloadDirectory != directory) {
-                            Helper.MoveDirectory(args.DownloadDirectory, directory, Settings.DeleteExtensions,
-                                args.Files);
-                            args.Delete = true;
+                            Helper.CopyDirectory(args.DownloadDirectory, directory, Settings.DeleteExtensions, args.Files);
+                            args.Found = true;
                         }
 
                         if (!string.IsNullOrEmpty(fileName))
                             episode.FilePath = Directory.GetFiles(directory, fileName).FirstOrDefault();
                     }
-                    OnTvShowEpisodeDownloadCompleted(episode);
+                    episode.DownloadKey = string.Empty;
+                    try {
+                        OnTvShowEpisodeDownloadCompleted(episode);
+                    }
+                    // ReSharper disable once EmptyGeneralCatchClause
+                    catch { }
 
                     var season = episode.TvShowSeason;
                     var show = season.TvShow;
@@ -296,13 +300,18 @@ namespace Novaroma.Engine {
                     if (movie != null) {
                         if (Directory.Exists(args.DownloadDirectory)) {
                             if (args.DownloadDirectory != movie.Directory) {
-                                Helper.MoveDirectory(args.DownloadDirectory, movie.Directory, Settings.DeleteExtensions, args.Files);
-                                args.Delete = true;
+                                Helper.CopyDirectory(args.DownloadDirectory, movie.Directory, Settings.DeleteExtensions, args.Files);
+                                args.Found = true;
                             }
 
                             movie.FilePath = Directory.GetFiles(movie.Directory, fileName).FirstOrDefault();
                         }
-                        OnMovieDownloadCompleted(movie);
+                        movie.DownloadKey = string.Empty;
+                        try {
+                            OnMovieDownloadCompleted(movie);
+                        }
+                        // ReSharper disable once EmptyGeneralCatchClause
+                        catch { }
 
                         var activity = CreateActivity(string.Format(Resources.MovieDownloaded, movie.Title), movie.FilePath);
                         context.Insert(activity);

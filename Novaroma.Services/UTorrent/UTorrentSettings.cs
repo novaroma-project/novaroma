@@ -10,6 +10,7 @@ namespace Novaroma.Services.UTorrent {
         private string _userName = "novaroma";
         private string _password = "421337";
         private int? _port = 8080;
+        private bool _deleteCompletedTorrents = true;
         private readonly SettingMultiSelection<ITorrentMovieProvider> _movieProviderSelection;
         private readonly SettingMultiSelection<ITorrentTvShowProvider> _tvShowProviderSelection;
         private readonly SettingSingleSelection<EnumInfo<VideoQuality>> _defaultMovieVideoQuality;
@@ -60,6 +61,17 @@ namespace Novaroma.Services.UTorrent {
             }
         }
 
+        [Display(Name = "DeleteCompletedTorrents", ResourceType = typeof(Resources))]
+        public bool DeleteCompletedTorrents {
+            get { return _deleteCompletedTorrents; }
+            set {
+                if (_deleteCompletedTorrents == value) return;
+
+                _deleteCompletedTorrents = value;
+                RaisePropertyChanged("DeleteCompletedTorrents");
+            }
+        }
+
         [Display(Name = "MovieProviders", ResourceType = typeof(Resources))]
         public SettingMultiSelection<ITorrentMovieProvider> MovieProviderSelection {
             get { return _movieProviderSelection; }
@@ -70,12 +82,12 @@ namespace Novaroma.Services.UTorrent {
             get { return _tvShowProviderSelection; }
         }
 
-        [Display(Name = "DefaultMovieVideoQuality", GroupName = "Search", ResourceType = typeof(Resources))]
+        [Display(Name = "DefaultMovieVideoQuality", GroupName = "Searching", ResourceType = typeof(Resources))]
         public SettingSingleSelection<EnumInfo<VideoQuality>> DefaultMovieVideoQuality {
             get { return _defaultMovieVideoQuality; }
         }
 
-        [Display(Name = "DefaultMovieExtraKeywords", Description = "ExtraKeywordsDescription", GroupName = "Search", ResourceType = typeof(Resources))]
+        [Display(Name = "DefaultMovieExtraKeywords", Description = "ExtraKeywordsDescription", GroupName = "Searching", ResourceType = typeof(Resources))]
         public string DefaultMovieExtraKeywords {
             get { return _defaultMovieExtraKeywords; }
             set {
@@ -86,7 +98,7 @@ namespace Novaroma.Services.UTorrent {
             }
         }
 
-        [Display(Name = "DefaultMovieExcludeKeywords", Description = "ExcludeKeywordsDescription", GroupName = "Search", ResourceType = typeof(Resources))]
+        [Display(Name = "DefaultMovieExcludeKeywords", Description = "ExcludeKeywordsDescription", GroupName = "Searching", ResourceType = typeof(Resources))]
         public string DefaultMovieExcludeKeywords {
             get { return _defaultMovieExcludeKeywords; }
             set {
@@ -97,12 +109,12 @@ namespace Novaroma.Services.UTorrent {
             }
         }
 
-        [Display(Name = "DefaultTvShowVideoQuality", GroupName = "Search", ResourceType = typeof(Resources))]
+        [Display(Name = "DefaultTvShowVideoQuality", GroupName = "Searching", ResourceType = typeof(Resources))]
         public SettingSingleSelection<EnumInfo<VideoQuality>> DefaultTvShowVideoQuality {
             get { return _defaultTvShowVideoQuality; }
         }
 
-        [Display(Name = "DefaultTvShowExtraKeywords", Description = "ExtraKeywordsDescription", GroupName = "Search", ResourceType = typeof(Resources))]
+        [Display(Name = "DefaultTvShowExtraKeywords", Description = "ExtraKeywordsDescription", GroupName = "Searching", ResourceType = typeof(Resources))]
         public string DefaultTvShowExtraKeywords {
             get { return _defaultTvShowExtraKeywords; }
             set {
@@ -113,7 +125,7 @@ namespace Novaroma.Services.UTorrent {
             }
         }
 
-        [Display(Name = "DefaultTvShowExcludeKeywords", Description = "ExcludeKeywordsDescription", GroupName = "Search", ResourceType = typeof(Resources))]
+        [Display(Name = "DefaultTvShowExcludeKeywords", Description = "ExcludeKeywordsDescription", GroupName = "Searching", ResourceType = typeof(Resources))]
         public string DefaultTvShowExcludeKeywords {
             get { return _defaultTvShowExcludeKeywords; }
             set {

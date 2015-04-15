@@ -999,4 +999,10 @@
   <data name="Url_Help" xml:space="preserve">
     <value>http://www.novaroma.net/tr/yardim.html</value>
   </data>
+  <data name="DeleteCompletedTorrents" xml:space="preserve">
+    <value>Tamamlanmış Torrentleri Sil</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>Arama</value>
+  </data>
 </root>

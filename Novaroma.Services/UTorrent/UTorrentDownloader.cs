@@ -29,7 +29,7 @@ namespace Novaroma.Services.UTorrent {
 
             AddUrlResponse result;
             try {
-                result = await client.AddUrlTorrentAsync(uri, string.IsNullOrEmpty(path) ? searchResult.Name : Guid.NewGuid().ToString());
+                result = await client.AddUrlTorrentAsync(uri, searchResult.Name);
             }
             catch (ServerUnavailableException) {
                 throw new ServiceUnavailableException(ServiceName);
@@ -52,15 +52,9 @@ namespace Novaroma.Services.UTorrent {
 
                 var args = new DownloadCompletedEventArgs(hash, sourcePath, files);
                 OnDownloadCompleted(args);
-                if (args.Delete) {
-                    var directory = new DirectoryInfo(sourcePath);
-                    Guid guid;
-                    while (directory != null && !Guid.TryParse(directory.Name, out guid))
-                        directory = directory.Parent;
-
+                if (args.Found && Settings.DeleteCompletedTorrents) {
                     await client.DeleteTorrentAsync(hash);
-                    if (directory != null)
-                        directory.Delete(true);
+                    Directory.Delete(sourcePath, true);
                 }
             }
         }
@@ -142,8 +136,15 @@ namespace Novaroma.Services.UTorrent {
                 Settings.UserName,
                 Settings.Password,
                 Settings.Port,
+                Settings.DeleteCompletedTorrents,
                 MovieProviders = Settings.MovieProviderSelection.SelectedItemNames,
-                TvShowProviders = Settings.TvShowProviderSelection.SelectedItemNames
+                TvShowProviders = Settings.TvShowProviderSelection.SelectedItemNames,
+                Settings.DefaultMovieExcludeKeywords,
+                Settings.DefaultMovieExtraKeywords,
+                DefaultMovieVideoQuality = Settings.DefaultMovieVideoQuality.SelectedItem.Name,
+                Settings.DefaultTvShowExcludeKeywords,
+                Settings.DefaultTvShowExtraKeywords,
+                DefaultTvShowVideoQuality = Settings.DefaultTvShowVideoQuality.SelectedItem.Name
             };
             return JsonConvert.SerializeObject(o);
         }
@@ -156,10 +157,37 @@ namespace Novaroma.Services.UTorrent {
             int port;
             if (Int32.TryParse(o["Port"].ToString(), out port))
                 Settings.Port = port;
+            var deleteCompletedTorrents = o["DeleteCompletedTorrents"];
+            if (deleteCompletedTorrents != null)
+                Settings.DeleteCompletedTorrents = (bool) deleteCompletedTorrents;
             var movieProviders = (JArray)o["MovieProviders"];
             Settings.MovieProviderSelection.SelectedItemNames = movieProviders.Select(x => x.ToString());
             var tvShowProviders = (JArray)o["TvShowProviders"];
             Settings.TvShowProviderSelection.SelectedItemNames = tvShowProviders.Select(x => x.ToString());
+
+            var defaultMovieExcludeKeywords = o["DefaultMovieExcludeKeywords"];
+            if (defaultMovieExcludeKeywords != null)
+                Settings.DefaultMovieExcludeKeywords = (string)defaultMovieExcludeKeywords;
+            var defaultMovieExtraKeywords = o["DefaultMovieExtraKeywords"];
+            if (defaultMovieExtraKeywords != null)
+                Settings.DefaultMovieExtraKeywords = (string)defaultMovieExtraKeywords;
+            var defaultMovieVideoQuality = o["DefaultMovieVideoQuality"];
+            if (defaultMovieVideoQuality != null) {
+                var defaultMovieVideoQualityStr = (string) defaultMovieVideoQuality;
+                Settings.DefaultMovieVideoQuality.SelectedItem = Settings.DefaultMovieVideoQuality.Items.First(vq => vq.Name == defaultMovieVideoQualityStr);
+            }
+
+            var defaultTvShowExcludeKeywords = o["DefaultTvShowExcludeKeywords"];
+            if (defaultTvShowExcludeKeywords != null)
+                Settings.DefaultTvShowExcludeKeywords = (string)defaultTvShowExcludeKeywords;
+            var defaultTvShowExtraKeywords = o["DefaultTvShowExtraKeywords"];
+            if (defaultTvShowExtraKeywords != null)
+                Settings.DefaultTvShowExtraKeywords = (string)defaultTvShowExtraKeywords;
+            var defaultTvShowVideoQuality = o["DefaultTvShowVideoQuality"];
+            if (defaultTvShowVideoQuality != null) {
+                var defaultTvShowVideoQualityStr = defaultTvShowVideoQuality.ToString();
+                Settings.DefaultTvShowVideoQuality.SelectedItem = Settings.DefaultTvShowVideoQuality.Items.First(vq => vq.Name == defaultTvShowVideoQualityStr);
+            }
         }
 
         #endregion
