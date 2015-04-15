@@ -28,6 +28,10 @@ namespace Novaroma {
             get { return _value; }
         }
 
+        public string Name {
+            get { return _name; }
+        }
+
         public string DisplayName {
             get { return _displayAttribute == null ? _name : _displayAttribute.GetName(); }
         }

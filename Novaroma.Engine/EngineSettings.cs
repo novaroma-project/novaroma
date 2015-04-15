@@ -14,7 +14,7 @@ using Novaroma.Properties;
 
 namespace Novaroma.Engine {
 
-    public class EngineSettings: ModelBase {
+    public class EngineSettings : ModelBase {
         private readonly SettingSingleSelection<EnumInfo<Language>> _languageSelection;
         private readonly DirectorySelection _movieDirectory;
         private readonly DirectorySelection _tvShowDirectory;
@@ -37,8 +37,13 @@ namespace Novaroma.Engine {
             var serviceList = services as IList<INovaromaService> ?? services.ToList();
 
             var languages = Constants.LanguagesEnumInfo.ToList();
-            _languageSelection = new SettingSingleSelection<EnumInfo<Language>>(languages);
-            
+            var languageEnumType = typeof(Language);
+            var uiLanguages = languages.Where(l => {
+                var lanInfo = Helper.GetMemberAttribute<LanguageInfoAttribute>(languageEnumType, l.Name);
+                return lanInfo != null && lanInfo.UISupported;
+            });
+            _languageSelection = new SettingSingleSelection<EnumInfo<Language>>(uiLanguages);
+
             _movieDirectory = new DirectorySelection();
             _movieDirectory.Path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), Resources.Movies);
             _tvShowDirectory = new DirectorySelection();
@@ -47,7 +52,7 @@ namespace Novaroma.Engine {
 
             _subtitleLanguages = new SettingMultiSelection<EnumInfo<Language>>(languages);
             _subtitleLanguages.SelectedItemNames = languages[0].Item == Language.English
-                ? Enumerable.Empty<string>() 
+                ? Enumerable.Empty<string>()
                 : new[] { languages[0].DisplayName };
 
             _downloadInterval = 10;
@@ -66,12 +71,12 @@ namespace Novaroma.Engine {
             get { return _languageSelection; }
         }
 
-        [Display(Name = "MovieDirectory", GroupName = "Main", ResourceType = typeof (Resources))]
+        [Display(Name = "MovieDirectory", GroupName = "Main", ResourceType = typeof(Resources))]
         public DirectorySelection MovieDirectory {
             get { return _movieDirectory; }
         }
 
-        [Display(Name = "TvShowDirectory", GroupName = "Main", ResourceType = typeof (Resources))]
+        [Display(Name = "TvShowDirectory", GroupName = "Main", ResourceType = typeof(Resources))]
         public DirectorySelection TvShowDirectory {
             get { return _tvShowDirectory; }
         }

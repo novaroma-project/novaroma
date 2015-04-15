@@ -22,7 +22,7 @@ namespace Novaroma {
             if (string.Equals(langCode2, "en", StringComparison.OrdinalIgnoreCase))
                 return 1;
 
-            return 0;
+            return string.Compare(x.ToString(), y.ToString(), StringComparison.OrdinalIgnoreCase);
         }
     }
 }

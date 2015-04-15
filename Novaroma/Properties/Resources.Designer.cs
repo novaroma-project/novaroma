@@ -133,6 +133,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Afrikaans.
+        /// </summary>
+        public static string Afrikaans {
+            get {
+                return ResourceManager.GetString("Afrikaans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Age.
         /// </summary>
         public static string Age {
@@ -147,6 +156,15 @@ namespace Novaroma.Properties {
         public static string AirDate {
             get {
                 return ResourceManager.GetString("AirDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Albanian.
+        /// </summary>
+        public static string Albanian {
+            get {
+                return ResourceManager.GetString("Albanian", resourceCulture);
             }
         }
         
@@ -169,11 +187,29 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arabic.
+        /// </summary>
+        public static string Arabic {
+            get {
+                return ResourceManager.GetString("Arabic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure?.
         /// </summary>
         public static string AreYouSure {
             get {
                 return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Armenian.
+        /// </summary>
+        public static string Armenian {
+            get {
+                return ResourceManager.GetString("Armenian", resourceCulture);
             }
         }
         
@@ -241,11 +277,74 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basque.
+        /// </summary>
+        public static string Basque {
+            get {
+                return ResourceManager.GetString("Basque", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Belarusian.
+        /// </summary>
+        public static string Belarusian {
+            get {
+                return ResourceManager.GetString("Belarusian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bengali.
+        /// </summary>
+        public static string Bengali {
+            get {
+                return ResourceManager.GetString("Bengali", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bosnian.
+        /// </summary>
+        public static string Bosnian {
+            get {
+                return ResourceManager.GetString("Bosnian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breton.
+        /// </summary>
+        public static string Breton {
+            get {
+                return ResourceManager.GetString("Breton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Build.
         /// </summary>
         public static string Build {
             get {
                 return ResourceManager.GetString("Build", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulgarian.
+        /// </summary>
+        public static string Bulgarian {
+            get {
+                return ResourceManager.GetString("Bulgarian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Burmese.
+        /// </summary>
+        public static string Burmese {
+            get {
+                return ResourceManager.GetString("Burmese", resourceCulture);
             }
         }
         
@@ -268,6 +367,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Catalan.
+        /// </summary>
+        public static string Catalan {
+            get {
+                return ResourceManager.GetString("Catalan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check and Update Directory Files.
         /// </summary>
         public static string CheckAndUpdateDirectoryFiles {
@@ -282,6 +390,33 @@ namespace Novaroma.Properties {
         public static string CheckForUpdates {
             get {
                 return ResourceManager.GetString("CheckForUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese (Bilingual).
+        /// </summary>
+        public static string ChineseBilingual {
+            get {
+                return ResourceManager.GetString("ChineseBilingual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese (Simplified).
+        /// </summary>
+        public static string ChineseSimplified {
+            get {
+                return ResourceManager.GetString("ChineseSimplified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese (Traditional).
+        /// </summary>
+        public static string ChineseTraditional {
+            get {
+                return ResourceManager.GetString("ChineseTraditional", resourceCulture);
             }
         }
         
@@ -336,6 +471,33 @@ namespace Novaroma.Properties {
         public static string Configuration {
             get {
                 return ResourceManager.GetString("Configuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Croatian.
+        /// </summary>
+        public static string Croatian {
+            get {
+                return ResourceManager.GetString("Croatian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czech.
+        /// </summary>
+        public static string Czech {
+            get {
+                return ResourceManager.GetString("Czech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Danish.
+        /// </summary>
+        public static string Danish {
+            get {
+                return ResourceManager.GetString("Danish", resourceCulture);
             }
         }
         
@@ -655,6 +817,24 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Esperanto.
+        /// </summary>
+        public static string Esperanto {
+            get {
+                return ResourceManager.GetString("Esperanto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estonian.
+        /// </summary>
+        public static string Estonian {
+            get {
+                return ResourceManager.GetString("Estonian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exclude Existing.
         /// </summary>
         public static string ExcludeExisting {
@@ -781,6 +961,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finnish.
+        /// </summary>
+        public static string Finnish {
+            get {
+                return ResourceManager.GetString("Finnish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found Media.
         /// </summary>
         public static string FoundMedia {
@@ -790,7 +979,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Français.
+        ///   Looks up a localized string similar to French.
         /// </summary>
         public static string French {
             get {
@@ -808,6 +997,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Galician.
+        /// </summary>
+        public static string Galician {
+            get {
+                return ResourceManager.GetString("Galician", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Genre.
         /// </summary>
         public static string Genre {
@@ -817,7 +1015,16 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deutsch.
+        ///   Looks up a localized string similar to Georgian.
+        /// </summary>
+        public static string Georgian {
+            get {
+                return ResourceManager.GetString("Georgian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to German.
         /// </summary>
         public static string German {
             get {
@@ -840,6 +1047,42 @@ namespace Novaroma.Properties {
         public static string GoToPluginDirectory {
             get {
                 return ResourceManager.GetString("GoToPluginDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Greek.
+        /// </summary>
+        public static string Greek {
+            get {
+                return ResourceManager.GetString("Greek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hebrew.
+        /// </summary>
+        public static string Hebrew {
+            get {
+                return ResourceManager.GetString("Hebrew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hindi.
+        /// </summary>
+        public static string Hindi {
+            get {
+                return ResourceManager.GetString("Hindi", resourceCulture);
             }
         }
         
@@ -867,6 +1110,24 @@ namespace Novaroma.Properties {
         public static string HowToAddTvShow {
             get {
                 return ResourceManager.GetString("HowToAddTvShow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hungarian.
+        /// </summary>
+        public static string Hungarian {
+            get {
+                return ResourceManager.GetString("Hungarian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icelandic.
+        /// </summary>
+        public static string Icelandic {
+            get {
+                return ResourceManager.GetString("Icelandic", resourceCulture);
             }
         }
         
@@ -1058,6 +1319,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indonesian.
+        /// </summary>
+        public static string Indonesian {
+            get {
+                return ResourceManager.GetString("Indonesian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Info Provider.
         /// </summary>
         public static string InfoProvider {
@@ -1094,7 +1364,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Italiano.
+        ///   Looks up a localized string similar to Italian.
         /// </summary>
         public static string Italian {
             get {
@@ -1112,11 +1382,56 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Japanese.
+        /// </summary>
+        public static string Japanese {
+            get {
+                return ResourceManager.GetString("Japanese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kazakh.
+        /// </summary>
+        public static string Kazakh {
+            get {
+                return ResourceManager.GetString("Kazakh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Khmer.
+        /// </summary>
+        public static string Khmer {
+            get {
+                return ResourceManager.GetString("Khmer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korean.
+        /// </summary>
+        public static string Korean {
+            get {
+                return ResourceManager.GetString("Korean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latvian.
+        /// </summary>
+        public static string Latvian {
+            get {
+                return ResourceManager.GetString("Latvian", resourceCulture);
             }
         }
         
@@ -1139,6 +1454,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lithuanian.
+        /// </summary>
+        public static string Lithuanian {
+            get {
+                return ResourceManager.GetString("Lithuanian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load Default Code.
         /// </summary>
         public static string LoadDefaultCode {
@@ -1153,6 +1477,24 @@ namespace Novaroma.Properties {
         public static string LogDate {
             get {
                 return ResourceManager.GetString("LogDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Luxembourgish.
+        /// </summary>
+        public static string Luxembourgish {
+            get {
+                return ResourceManager.GetString("Luxembourgish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Macedonian.
+        /// </summary>
+        public static string Macedonian {
+            get {
+                return ResourceManager.GetString("Macedonian", resourceCulture);
             }
         }
         
@@ -1180,6 +1522,33 @@ namespace Novaroma.Properties {
         public static string MakeSpecialFolderDescription {
             get {
                 return ResourceManager.GetString("MakeSpecialFolderDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Malay.
+        /// </summary>
+        public static string Malay {
+            get {
+                return ResourceManager.GetString("Malay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Malayalam.
+        /// </summary>
+        public static string Malayalam {
+            get {
+                return ResourceManager.GetString("Malayalam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manipuri.
+        /// </summary>
+        public static string Manipuri {
+            get {
+                return ResourceManager.GetString("Manipuri", resourceCulture);
             }
         }
         
@@ -1234,6 +1603,24 @@ namespace Novaroma.Properties {
         public static string MinuteReduced {
             get {
                 return ResourceManager.GetString("MinuteReduced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mongolian.
+        /// </summary>
+        public static string Mongolian {
+            get {
+                return ResourceManager.GetString("Mongolian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Montenegrin.
+        /// </summary>
+        public static string Montenegrin {
+            get {
+                return ResourceManager.GetString("Montenegrin", resourceCulture);
             }
         }
         
@@ -1391,6 +1778,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Norwegian.
+        /// </summary>
+        public static string Norwegian {
+            get {
+                return ResourceManager.GetString("Norwegian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Found.
         /// </summary>
         public static string NotFound {
@@ -1432,6 +1828,15 @@ namespace Novaroma.Properties {
         public static string NovaromaSlogan {
             get {
                 return ResourceManager.GetString("NovaromaSlogan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Occitan.
+        /// </summary>
+        public static string Occitan {
+            get {
+                return ResourceManager.GetString("Occitan", resourceCulture);
             }
         }
         
@@ -1517,6 +1922,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Persian.
+        /// </summary>
+        public static string Persian {
+            get {
+                return ResourceManager.GetString("Persian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Play.
         /// </summary>
         public static string Play {
@@ -1571,11 +1985,29 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Polish.
+        /// </summary>
+        public static string Polish {
+            get {
+                return ResourceManager.GetString("Polish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Port.
         /// </summary>
         public static string Port {
             get {
                 return ResourceManager.GetString("Port", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portuguese.
+        /// </summary>
+        public static string Portuguese {
+            get {
+                return ResourceManager.GetString("Portuguese", resourceCulture);
             }
         }
         
@@ -1643,6 +2075,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Romanian.
+        /// </summary>
+        public static string Romanian {
+            get {
+                return ResourceManager.GetString("Romanian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Runtime.
         /// </summary>
         public static string Runtime {
@@ -1652,7 +2093,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Русский.
+        ///   Looks up a localized string similar to Russian.
         /// </summary>
         public static string Russian {
             get {
@@ -1796,6 +2237,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Serbian.
+        /// </summary>
+        public static string Serbian {
+            get {
+                return ResourceManager.GetString("Serbian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Id not found.
         /// </summary>
         public static string ServiceIdNotFound {
@@ -1841,6 +2291,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sinhalese.
+        /// </summary>
+        public static string Sinhalese {
+            get {
+                return ResourceManager.GetString("Sinhalese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Size.
         /// </summary>
         public static string Size {
@@ -1850,11 +2309,38 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slovak.
+        /// </summary>
+        public static string Slovak {
+            get {
+                return ResourceManager.GetString("Slovak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slovenian.
+        /// </summary>
+        public static string Slovenian {
+            get {
+                return ResourceManager.GetString("Slovenian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tell us what you liked.
         /// </summary>
         public static string SmileWatermark {
             get {
                 return ResourceManager.GetString("SmileWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spanish.
+        /// </summary>
+        public static string Spanish {
+            get {
+                return ResourceManager.GetString("Spanish", resourceCulture);
             }
         }
         
@@ -1958,11 +2444,74 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Swahili.
+        /// </summary>
+        public static string Swahili {
+            get {
+                return ResourceManager.GetString("Swahili", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swedish.
+        /// </summary>
+        public static string Swedish {
+            get {
+                return ResourceManager.GetString("Swedish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Syriac.
+        /// </summary>
+        public static string Syriac {
+            get {
+                return ResourceManager.GetString("Syriac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tagalog.
+        /// </summary>
+        public static string Tagalog {
+            get {
+                return ResourceManager.GetString("Tagalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tamil.
+        /// </summary>
+        public static string Tamil {
+            get {
+                return ResourceManager.GetString("Tamil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tell us what you think.
         /// </summary>
         public static string TellUsWhatYouThink {
             get {
                 return ResourceManager.GetString("TellUsWhatYouThink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telugu.
+        /// </summary>
+        public static string Telugu {
+            get {
+                return ResourceManager.GetString("Telugu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thai.
+        /// </summary>
+        public static string Thai {
+            get {
+                return ResourceManager.GetString("Thai", resourceCulture);
             }
         }
         
@@ -1976,7 +2525,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Türkçe.
+        ///   Looks up a localized string similar to Turkish.
         /// </summary>
         public static string Turkish {
             get {
@@ -2111,6 +2660,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ukrainian.
+        /// </summary>
+        public static string Ukrainian {
+            get {
+                return ResourceManager.GetString("Ukrainian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unsupported search result.
         /// </summary>
         public static string UnsupportedSearchResult {
@@ -2143,6 +2701,24 @@ namespace Novaroma.Properties {
         public static string UpdateTvShowInfo {
             get {
                 return ResourceManager.GetString("UpdateTvShowInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Urdu.
+        /// </summary>
+        public static string Urdu {
+            get {
+                return ResourceManager.GetString("Urdu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.novaroma.net/help.html.
+        /// </summary>
+        public static string Url_Help {
+            get {
+                return ResourceManager.GetString("Url_Help", resourceCulture);
             }
         }
         
@@ -2215,6 +2791,15 @@ namespace Novaroma.Properties {
         public static string VideoQuality {
             get {
                 return ResourceManager.GetString("VideoQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vietnamese.
+        /// </summary>
+        public static string Vietnamese {
+            get {
+                return ResourceManager.GetString("Vietnamese", resourceCulture);
             }
         }
         

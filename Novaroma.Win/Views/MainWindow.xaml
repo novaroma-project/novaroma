@@ -27,7 +27,18 @@
                 </StackPanel>
             </Button>
             <Button Command="{Binding AboutCommand}">
-                <TextBlock Foreground="{StaticResource WhiteBrush}" Text="{Binding Source={StaticResource Resources}, Path=About, Converter={converters:ToLowerConverter}}" />
+                <StackPanel Orientation="Horizontal">
+                    <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_info}" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Foreground="{StaticResource WhiteBrush}"
+                               Text="{Binding Source={StaticResource Resources}, Path=About, Converter={converters:ToLowerConverter}}" />
+                </StackPanel>
+            </Button>
+            <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Help}">
+                <TextBlock>
+                    <Hyperlink NavigateUri="{Binding Source={StaticResource Resources}, Path=Url_Help}" RequestNavigate="Hyperlink_OnRequestNavigate" TextDecorations="None">
+                        <userControls:IconUserControl Width="24" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_help}" />
+                    </Hyperlink>
+                </TextBlock>
             </Button>
             <Button Name="FeedbackButton" ToolTip="{Binding Source={StaticResource Resources}, Path=Feedback}">
                 <i:Interaction.Behaviors>

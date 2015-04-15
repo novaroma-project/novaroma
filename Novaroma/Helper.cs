@@ -334,37 +334,29 @@ namespace Novaroma {
             foreach (var memberName in memberNames) {
                 var enumItem = (TEnum)Enum.Parse(enumType, memberName);
                 var enumValue = Convert.ToInt32(enumItem);
-                var member = enumType.GetMember(memberName).First();
-                var display = member.GetAttribute<DisplayAttribute>();
-                infos.Add(new EnumInfo<TEnum>(enumItem, enumValue, member.Name, display));
+                var display = GetMemberAttribute<DisplayAttribute>(enumType, memberName);
+                infos.Add(new EnumInfo<TEnum>(enumItem, enumValue, memberName, display));
             }
             return infos;
         }
 
+        public static TAttribute GetMemberAttribute<TType, TAttribute>(string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute: Attribute {
+            return GetMemberAttribute<TAttribute>(typeof (TType), memberName, checkMetadataType, inherit);
+        }
+
+        public static TAttribute GetMemberAttribute<TAttribute>(Type type, string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute : Attribute {
+            var member = type.GetMember(memberName).First();
+            return member.GetAttribute<TAttribute>(checkMetadataType, inherit);
+        }
+
         public static string GetTwoLetterLanguageCode(Language language) {
-            switch (language) {
-                case Language.Turkish: return "tr";
-                case Language.English: return "en";
-                case Language.German: return "de";
-                case Language.French: return "fr";
-                case Language.Italian: return "it";
-                case Language.Dutch: return "nl";
-                case Language.Russian: return "ru";
-                default: return "en";
-            }
+            var langInfo = GetMemberAttribute<LanguageInfoAttribute>(typeof (Language), language.ToString());
+            return langInfo.TwoLetterCode;
         }
 
         public static string GetThreeLetterLanguageCode(Language language) {
-            switch (language) {
-                case Language.Turkish: return "tur";
-                case Language.English: return "eng";
-                case Language.German: return "deu";
-                case Language.French: return "fra";
-                case Language.Italian: return "ita";
-                case Language.Dutch: return "nld";
-                case Language.Russian: return "rus";
-                default: return "eng";
-            }
+            var langInfo = GetMemberAttribute<LanguageInfoAttribute>(typeof(Language), language.ToString());
+            return langInfo.ThreeLetterCode;
         }
 
         public static void MoveDirectory(string source, string destination, string deleteExtensionsStr, IEnumerable<string> files = null) {

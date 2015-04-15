@@ -53,10 +53,12 @@ namespace Novaroma {
         }
 
         public static IEnumerable<Task> RunTasks<T>(this IEnumerable<T> items, Func<T, Task> taskGetter, IExceptionHandler exceptionHandler,
-                [CallerMemberName] string callerName = null, 
-                [CallerFilePath] string callerFilePath = null, 
+                [CallerMemberName] string callerName = null,
+                [CallerFilePath] string callerFilePath = null,
                 [CallerLineNumber] int callerLine = -1) {
+            // ReSharper disable ExplicitCallerInfoArgument
             return items.Select(i => Helper.RunTask(() => taskGetter(i), exceptionHandler, callerName, callerFilePath, callerLine));
+            // ReSharper restore ExplicitCallerInfoArgument
         }
 
         public static List<TAttribute> GetAttributes<TAttribute>(this MemberInfo member, bool checkMetadataType = false,
