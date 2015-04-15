@@ -772,13 +772,13 @@
     <value>Nasıl Yapılır?</value>
   </data>
   <data name="Url_HowToAddMovie" xml:space="preserve">
-    <value>http://www.novaroma.net/how-to-add-movie.html</value>
+    <value>http://www.novaroma.net/tr/film-nasil-eklenir.html</value>
   </data>
   <data name="Url_HowToAddTvShow" xml:space="preserve">
-    <value>http://www.novaroma.net/how-to-add-tv-show.html</value>
+    <value>http://www.novaroma.net/tr/dizi-nasil-eklenir.html</value>
   </data>
   <data name="Url_HowToConfigureUtorrentWebUISettings" xml:space="preserve">
-    <value>http://www.novaroma.net/how-to-configure-utorrent-web-ui-settings.html</value>
+    <value>http://www.novaroma.net/tr/utorrent-web-ui-ayarlari-nasil-yapilir.html</value>
   </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>Geçersiz mail adresi</value>

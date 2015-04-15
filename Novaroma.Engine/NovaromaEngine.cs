@@ -287,8 +287,8 @@ namespace Novaroma.Engine {
                     OnTvShowsChanged();
                     OnActivitiesChanged();
 
-                    if (episode.BackgroundSubtitleDownload) { }
-                    DownloadSubtitleForTvShowEpisode(episode).Wait();
+                    if (episode.BackgroundSubtitleDownload)
+                        DownloadSubtitleForTvShowEpisode(episode).Wait();
                 }
                 else {
                     var movie = context.Movies.FirstOrDefault(m => m.DownloadKey == args.DownloadKey);

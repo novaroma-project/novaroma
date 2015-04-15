@@ -50,7 +50,6 @@ namespace Novaroma.Services.UTorrent {
                 var files = (await client.GetFilesAsync(hash)).Result.Files.SelectMany(fc => fc.Value.Select(f => f.Name));
                 var sourcePath = completed.Path;
 
-                await client.StopTorrentAsync(hash);
                 var args = new DownloadCompletedEventArgs(hash, sourcePath, files);
                 OnDownloadCompleted(args);
                 if (args.Delete) {
@@ -80,7 +79,7 @@ namespace Novaroma.Services.UTorrent {
                     var currentDirectory = Directory.GetCurrentDirectory();
                     path = Path.Combine(currentDirectory, "uTorrent\\uTorrent.exe");
                 }
-                Process.Start(path);
+                Process.Start(path,"/minimized");
             }
 
             return Settings.Port.HasValue
