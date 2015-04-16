@@ -24,7 +24,6 @@ namespace Novaroma.Win.ViewModels {
         private readonly ILogger _logger;
         private readonly IEnumerable<IPluginService> _pluginServices;
         private readonly RelayCommand _aboutCommand;
-        private readonly RelayCommand _buyCoffeeCommand;
         private readonly RelayCommand _newCommand;
         private readonly RelayCommand _watchDirectoryCommand;
         private readonly RelayCommand _discoverCommand;
@@ -108,7 +107,6 @@ namespace Novaroma.Win.ViewModels {
             _activitySearchModel = new ActivitySearchModel();
 
             _aboutCommand = new RelayCommand(About);
-            _buyCoffeeCommand = new RelayCommand(BuyCoffee);
             _newCommand = new RelayCommand(NewMedia);
             _watchDirectoryCommand = new RelayCommand(WatchDirectory);
             _discoverCommand = new RelayCommand(Discover);
@@ -173,10 +171,6 @@ namespace Novaroma.Win.ViewModels {
 
         private static void About() {
             new AboutWindow().ShowDialog();
-        }
-
-        private static void BuyCoffee() {
-            Process.Start("http://www.novaroma.net/donate.html");
         }
 
         private void NewMedia() {
@@ -678,10 +672,6 @@ namespace Novaroma.Win.ViewModels {
 
         public RelayCommand AboutCommand {
             get { return _aboutCommand; }
-        }
-
-        public RelayCommand BuyCoffeeCommand {
-            get { return _buyCoffeeCommand; }
         }
 
         public RelayCommand NewCommand {

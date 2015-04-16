@@ -2732,6 +2732,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://www.novaroma.net/donate.html.
+        /// </summary>
+        public static string Url_Donate {
+            get {
+                return ResourceManager.GetString("Url_Donate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://www.novaroma.net/help.html.
         /// </summary>
         public static string Url_Help {

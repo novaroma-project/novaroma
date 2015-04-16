@@ -12,21 +12,25 @@
         WindowState="Maximized" Closing="MainWindow_OnClosing">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Command="{Binding SettingsCommand}">
+            <Button Command="{Binding SettingsCommand}" Cursor="Hand">
                 <StackPanel Orientation="Horizontal">
                     <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteColorBrush}" Visual="{StaticResource appbar_settings}" />
                     <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Foreground="{StaticResource WhiteColorBrush}"
                                Text="{Binding Source={StaticResource Resources}, Path=Settings, Converter={converters:ToLowerConverter}}" />
                 </StackPanel>
             </Button>
-            <Button Command="{Binding BuyCoffeeCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_coffee}" />
-                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Foreground="{StaticResource WhiteBrush}"
-                               Text="{Binding Source={StaticResource Resources}, Path=BuyCoffee, Converter={converters:ToLowerConverter}}" />
-                </StackPanel>
+            <Button>
+                <TextBlock>
+                    <Hyperlink NavigateUri="{Binding Source={StaticResource Resources}, Path=Url_Donate}" RequestNavigate="Hyperlink_OnRequestNavigate" TextDecorations="None">
+                        <StackPanel Orientation="Horizontal">
+                            <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_coffee}" />
+                            <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Foreground="{StaticResource WhiteBrush}"
+                                   Text="{Binding Source={StaticResource Resources}, Path=BuyCoffee, Converter={converters:ToLowerConverter}}" />
+                        </StackPanel>
+                    </Hyperlink>
+                </TextBlock>
             </Button>
-            <Button Command="{Binding AboutCommand}">
+            <Button Command="{Binding AboutCommand}" Cursor="Hand">
                 <StackPanel Orientation="Horizontal">
                     <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_info}" />
                     <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Foreground="{StaticResource WhiteBrush}"
@@ -40,14 +44,14 @@
                     </Hyperlink>
                 </TextBlock>
             </Button>
-            <Button Name="FeedbackButton" ToolTip="{Binding Source={StaticResource Resources}, Path=Feedback}">
+            <Button Name="FeedbackButton" ToolTip="{Binding Source={StaticResource Resources}, Path=Feedback}" Cursor="Hand">
                 <i:Interaction.Behaviors>
                     <utilities:ContextMenuOnLeftClickBehavior />
                 </i:Interaction.Behaviors>
                 <Button.ContextMenu>
                     <ContextMenu BorderThickness="0">
                         <MenuItem Background="{StaticResource AccentColorBrush}" Foreground="{StaticResource WhiteColorBrush}"
-                                  Command="{Binding SendASmileCommand}">
+                                  Command="{Binding SendASmileCommand}" Cursor="Hand">
                             <MenuItem.Icon>
                                 <StackPanel Orientation="Horizontal">
                                     <userControls:IconUserControl Visual="{StaticResource ni_happy}" Fill="{StaticResource WhiteBrush}" Width="20" Height="20" Margin="5 0 0 0" />
@@ -56,7 +60,7 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Background="{StaticResource AccentColorBrush}" Foreground="{StaticResource WhiteColorBrush}"
-                                  Command="{Binding SendAFrownCommand}">
+                                  Command="{Binding SendAFrownCommand}" Cursor="Hand">
                             <MenuItem.Icon>
                                 <StackPanel Orientation="Horizontal">
                                     <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteBrush}" Visual="{StaticResource ni_sad}" Margin="5 0 0 0" />

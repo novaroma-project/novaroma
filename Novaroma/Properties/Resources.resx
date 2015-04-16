@@ -1054,4 +1054,7 @@
   <data name="Searching" xml:space="preserve">
     <value>Searching</value>
   </data>
+  <data name="Url_Donate" xml:space="preserve">
+    <value>http://www.novaroma.net/donate.html</value>
+  </data>
 </root>
