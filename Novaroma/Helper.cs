@@ -172,7 +172,8 @@ namespace Novaroma {
         public static string GetDirectorySearchQuery(string directory) {
             if (string.IsNullOrEmpty(directory)) return directory;
 
-            var minIdx = _paranthesis.Select(p => directory.IndexOf(p)).Where(i => i > -1).OrderBy(i => i).FirstOrDefault();
+            var dir = directory;
+            var minIdx = _paranthesis.Select(p => dir.IndexOf(p)).Where(i => i > -1).OrderBy(i => i).FirstOrDefault();
             if (minIdx > 0)
                 directory = directory.Substring(0, minIdx);
 
@@ -270,8 +271,10 @@ namespace Novaroma {
         public static void InitTvShow(TvShow tvShow, INovaromaEngine engine) {
             var episodes = tvShow.Seasons.SelectMany(s => s.Episodes).ToList();
             episodes.ForEach(e => {
-                if (!string.IsNullOrEmpty(e.FilePath) && !File.Exists(e.FilePath))
+                if (!string.IsNullOrEmpty(e.FilePath) && !File.Exists(e.FilePath)) {
                     e.FilePath = string.Empty;
+                    e.SubtitleDownloaded = false;
+                }
                 if (e.IsWatched) return;
 
                 e.BackgroundDownload = true;
