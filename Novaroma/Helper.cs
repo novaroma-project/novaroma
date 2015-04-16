@@ -89,8 +89,8 @@ namespace Novaroma {
             name = Regex.Replace(name, titleRegex, string.Empty, RegexOptions.IgnoreCase);
 
             Match match = null;
-            var matches = Regex.Matches(name, @"(\d{1,2}).?(\d{1,2})");
-            if (tvShow.Seasons.Max(s => s.Season) < 19) {
+            var matches = Regex.Matches(name, @"(\d{1,2})\D*(\d{1,2})");
+            if (matches.Count > 1 && tvShow.Seasons.Max(s => s.Season) < 19) {
                 for (var i = 0; i < matches.Count; i++) {
                     var r = matches[i].Groups[0].Value;
                     int y;
@@ -119,6 +119,10 @@ namespace Novaroma {
             else if (matchStr.Length == 3) {
                 tmpSeasonStr = matchStr.Substring(0, 1);
                 tmpEpisodeStr = matchStr.Substring(1);
+            }
+            else if (matchStr.Length == 4) {
+                tmpSeasonStr = matchStr.Substring(0, 2);
+                tmpEpisodeStr = matchStr.Substring(2);
             }
             else {
                 tmpSeasonStr = match.Groups[1].Value;
