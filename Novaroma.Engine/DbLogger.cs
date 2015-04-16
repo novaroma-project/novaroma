@@ -28,6 +28,7 @@ namespace Novaroma.Engine {
                 [CallerLineNumber] int callerLine = -1) {
             switch (logType) {
                 case LogType.Info:
+                    // ReSharper disable ExplicitCallerInfoArgument
                     return LogInfo(message, detail, callerName, callerFilePath, callerLine);
                 case LogType.Warning:
                     return LogWarning(message, detail, callerName, callerFilePath, callerLine);
@@ -35,6 +36,7 @@ namespace Novaroma.Engine {
                     return LogError(message, detail, callerName, callerFilePath, callerLine);
                 default:
                     return LogInfo(message, detail, callerName, callerFilePath, callerLine);
+                // ReSharper restore ExplicitCallerInfoArgument
             }
         }
 
@@ -67,10 +69,12 @@ namespace Novaroma.Engine {
                         q = q.Where(l => l.LogType == logSearchModel.LogType.Value);
                     if (logSearchModel.Age.HasValue)
                         q = q.Where(l => (l.LogDate - DateTime.UtcNow) < logSearchModel.Age.Value);
+
+                    q = q.OrderByDescending(l => l.LogDate);
                     if (logSearchModel.MaxCount.HasValue)
                         q = q.Take(logSearchModel.MaxCount.Value);
 
-                    IEnumerable<ILogItem> result = q.OrderByDescending(l => l.LogDate).ToList();
+                    IEnumerable<ILogItem> result = q.ToList();
                     return result;
                 }
             });
