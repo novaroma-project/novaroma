@@ -17,7 +17,7 @@ namespace Novaroma.Win.Views {
 
             var product = ((AssemblyProductAttribute)app.GetCustomAttributes(typeof(AssemblyProductAttribute), false)[0]).Product;
             var copyright = ((AssemblyCopyrightAttribute)app.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false)[0]).Copyright;
-            var version = app.GetName().Version.ToString(2);
+            var version = app.GetName().Version.ToString(3);
 
             ProductTextBlock.Text = product;
             VersionTextBlock.Text = "v" + version;
