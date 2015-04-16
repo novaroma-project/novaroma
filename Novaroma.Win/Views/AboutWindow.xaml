@@ -24,13 +24,13 @@
         <TextBlock Name="DescriptionTextBlock" FontSize="15" FontStyle="Italic" Margin="0 0 0 20" HorizontalAlignment="Center" />
         <DockPanel HorizontalAlignment="Center" Margin="5">
             <TextBlock>
-                <Hyperlink TextDecorations="None" NavigateUri="https://www.facebook.com/pages/Novaroma/673551616124660"
+                <Hyperlink TextDecorations="None" NavigateUri="https://www.facebook.com/novaroma.project"
                            RequestNavigate="Hyperlink_OnRequestNavigate">
                     <Image Source="../Resources/Images/Img_Facebook_48x48.png" Width="30" Height="30" Margin="0 0 5 0" />
                 </Hyperlink>
             </TextBlock>
             <TextBlock>
-                <Hyperlink TextDecorations="None" NavigateUri="https://twitter.com/novaromainc"
+                <Hyperlink TextDecorations="None" NavigateUri="https://twitter.com/NovaromaProject"
                            RequestNavigate="Hyperlink_OnRequestNavigate">
                     <Image Source="../Resources/Images/Img_Twitter_48x48.png" Width="30" Height="30" Margin="0 0 5 0" />
                 </Hyperlink>

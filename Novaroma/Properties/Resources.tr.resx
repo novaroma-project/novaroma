@@ -1005,4 +1005,7 @@
   <data name="Searching" xml:space="preserve">
     <value>Arama</value>
   </data>
+  <data name="Url_Donate" xml:space="preserve">
+    <value>http://www.novaroma.net/tr/bagis.html</value>
+  </data>
 </root>
