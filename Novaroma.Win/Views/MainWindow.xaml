@@ -12,6 +12,26 @@
         WindowState="Maximized" Closing="MainWindow_OnClosing">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
+            <Button ToolTip="{Binding Source={StaticResource Resources}, Path=UpdateAvailable}" Cursor="Hand"
+                    Visibility="{Binding UpdateAvailable}"
+                    Command="{Binding InstallUpdateCommand}">
+                <Rectangle Width="20" Height="20" Fill="{StaticResource WhiteColorBrush}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource ni_up_arrow}" />
+                    </Rectangle.OpacityMask>
+                    <Rectangle.Triggers>
+                        <EventTrigger RoutedEvent="Window.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Height" From="10" To="20" 
+                                                     Duration="0:0:0.700" BeginTime="0:0:0" RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Rectangle.Triggers>
+                </Rectangle>
+            </Button>
             <Button Command="{Binding SettingsCommand}" Cursor="Hand">
                 <StackPanel Orientation="Horizontal">
                     <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource WhiteColorBrush}" Visual="{StaticResource appbar_settings}" />

@@ -1008,4 +1008,7 @@
   <data name="Url_Donate" xml:space="preserve">
     <value>http://www.novaroma.net/tr/bagis.html</value>
   </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Yeni Versiyon Yükle</value>
+  </data>
 </root>

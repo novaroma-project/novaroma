@@ -23,6 +23,7 @@ namespace Novaroma.Win.ViewModels {
         private readonly IExceptionHandler _exceptionHandler;
         private readonly ILogger _logger;
         private readonly IEnumerable<IPluginService> _pluginServices;
+        private readonly RelayCommand _installUpdateCommand;
         private readonly RelayCommand _aboutCommand;
         private readonly RelayCommand _newCommand;
         private readonly RelayCommand _watchDirectoryCommand;
@@ -71,6 +72,7 @@ namespace Novaroma.Win.ViewModels {
         private readonly RelayCommand _episodeDownloadCheckCommand;
         private readonly RelayCommand _movieDownloadCheckCommand;
         private readonly IEnumerable<EnumInfo<VideoQuality>> _videoQualityEnumInfo;
+        private bool _updateAvailable;
         private QueryResult<Movie> _movies;
         private QueryResult<TvShow> _tvShows;
         private QueryResult<Activity> _activities;
@@ -106,6 +108,7 @@ namespace Novaroma.Win.ViewModels {
             _tvShowSearchModel.RefreshNeeded += (sender, args) => DoGetTvShows();
             _activitySearchModel = new ActivitySearchModel();
 
+            _installUpdateCommand = new RelayCommand(InstallUpdate);
             _aboutCommand = new RelayCommand(About);
             _newCommand = new RelayCommand(NewMedia);
             _watchDirectoryCommand = new RelayCommand(WatchDirectory);
@@ -168,6 +171,9 @@ namespace Novaroma.Win.ViewModels {
         #region Methods
 
         #region Big Buttons
+
+        private static void InstallUpdate() {
+        }
 
         private static void About() {
             new AboutWindow().ShowDialog();
@@ -670,6 +676,10 @@ namespace Novaroma.Win.ViewModels {
 
         #region Commands
 
+        public RelayCommand InstallUpdateCommand {
+            get { return _installUpdateCommand; }
+        }
+
         public RelayCommand AboutCommand {
             get { return _aboutCommand; }
         }
@@ -855,6 +865,15 @@ namespace Novaroma.Win.ViewModels {
         }
 
         #endregion
+
+        public bool UpdateAvailable {
+            get { return _updateAvailable; }
+            set {
+                _updateAvailable = value;
+
+                RaisePropertyChanged("UpdateAvailable");
+            }
+        }
 
         public IEnumerable<IPluginService> PluginServices {
             get { return _pluginServices; }

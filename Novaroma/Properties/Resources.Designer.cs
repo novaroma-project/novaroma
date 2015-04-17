@@ -2696,6 +2696,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Available.
+        /// </summary>
+        public static string UpdateAvailable {
+            get {
+                return ResourceManager.GetString("UpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update Movie Info.
         /// </summary>
         public static string UpdateMovieInfo {
