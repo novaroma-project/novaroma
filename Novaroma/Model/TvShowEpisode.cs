@@ -8,7 +8,7 @@ namespace Novaroma.Model {
         private int _episode;
         private string _name;
         private string _overview;
-        private DateTime _airDate;
+        private DateTime? _airDate;
         private bool _backgroundDownload;
         private string _downloadKey;
         private bool _notFound;
@@ -62,7 +62,7 @@ namespace Novaroma.Model {
             }
         }
 
-        public DateTime AirDate {
+        public DateTime? AirDate {
             get { return _airDate; }
             set {
                 if (_airDate == value) return;

@@ -30,7 +30,10 @@ namespace Novaroma.Services.Tmdb {
 
                     foreach (var episode in season.Episodes) {
                         var ad = episode.AirDate;
-                        var airDate = new DateTime(ad.Year, ad.Month, ad.Day, 20, 0, 0, DateTimeKind.Utc);
+                        DateTime? airDate;
+                        if (ad.Year < 1896) airDate = null;
+                        else 
+                            airDate = new DateTime(ad.Year, ad.Month, ad.Day, 20, 0, 0, DateTimeKind.Utc);
                         episodes.Add(new TvShowEpisodeInfo(season.SeasonNumber, episode.EpisodeNumber, episode.Name, airDate, episode.Overview));
                     }
                 }

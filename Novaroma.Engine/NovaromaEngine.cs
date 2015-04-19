@@ -517,7 +517,7 @@ namespace Novaroma.Engine {
                 using (var context = _contextFactory.CreateContext()) {
                     return context.TvShows
                         .Episodes()
-                        .Where(e => e.BackgroundDownload && e.AirDate.Date.AddHours(8) < DateTime.UtcNow)
+                        .Where(e => e.BackgroundDownload && e.AirDate.HasValue && e.AirDate.Value.AddHours(8) < DateTime.UtcNow)
                         .Take(10)
                         .ToList()
                         .AsEnumerable();
@@ -548,7 +548,7 @@ namespace Novaroma.Engine {
                 using (var context = _contextFactory.CreateContext()) {
                     return context.TvShows
                         .Episodes()
-                        .Where(e => !string.IsNullOrEmpty(e.FilePath) && e.BackgroundSubtitleDownload && e.AirDate.Date.AddHours(12) < DateTime.UtcNow)
+                        .Where(e => !string.IsNullOrEmpty(e.FilePath) && e.BackgroundSubtitleDownload && e.AirDate.HasValue && e.AirDate.Value.AddHours(12) < DateTime.UtcNow)
                         .ToList()
                         .AsEnumerable();
                 }

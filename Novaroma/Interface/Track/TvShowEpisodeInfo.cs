@@ -6,10 +6,10 @@ namespace Novaroma.Interface.Track {
         private readonly int _season;
         private readonly int _episode;
         private readonly string _name;
-        private readonly DateTime _airDate;
+        private readonly DateTime? _airDate;
         private readonly string _overview;
 
-        public TvShowEpisodeInfo(int season, int episode, string name, DateTime airDate, string overview) {
+        public TvShowEpisodeInfo(int season, int episode, string name, DateTime? airDate, string overview) {
             _season = season;
             _episode = episode;
             _name = name;
@@ -29,7 +29,7 @@ namespace Novaroma.Interface.Track {
             get { return _name; }
         }
 
-        public DateTime AirDate {
+        public DateTime? AirDate {
             get { return _airDate; }
         }
 

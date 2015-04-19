@@ -6,7 +6,7 @@ namespace Novaroma.Interface.Track {
         int Season { get; }
         int Episode { get; }
         string Name { get; }
-        DateTime AirDate { get; }
+        DateTime? AirDate { get; }
         string Overview { get; }
     }
 }
