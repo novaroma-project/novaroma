@@ -4,7 +4,7 @@
 Name = Novaroma 0.9.4
 Description = New features added, bugs fixed and some features improved.
 URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.4/Novaroma.v0.9.4.setup.exe
-Size = 11301332
+Size = 11302619
 FilePath = [APPDIR]Novaroma.exe
 Version = 0.9.4
 Replaces = All
