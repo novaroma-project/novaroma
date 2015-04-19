@@ -26,7 +26,7 @@ namespace Novaroma {
     public static class Helper {
         public static string[] VideoExtensions = { ".avi", ".mkv", ".mp4", ".m4p", ".m4v", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".m2v", ".wmv" };
         public static string[] SubtitleExtensions = { ".srt", ".sub" };
-        private static readonly IEnumerable<char> _paranthesis = new List<char> {'(', '[', '{'}; 
+        private static readonly IEnumerable<char> _paranthesis = new List<char> { '(', '[', '{' };
 
         public static void SetCulture(Language language) {
             var cultureCode = GetTwoLetterLanguageCode(language);
@@ -329,6 +329,85 @@ namespace Novaroma {
                 downloadable.SubtitleNotFound = true;
         }
 
+        public static void RenameMovieFile(Movie movie, string template) {
+            if (string.IsNullOrEmpty(template) || string.IsNullOrEmpty(movie.FilePath)) return;
+            var fileInfo = new FileInfo(movie.FilePath);
+            if (!fileInfo.Exists || fileInfo.DirectoryName == null) return;
+
+            template = Regex.Replace(template, "%movieName%", movie.Title, RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%year%", movie.Year.ToString(), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%rating%", movie.Rating.ToString(), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%genres%", string.Join(", ", movie.Genres.Select(g => g.Name)), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%voteCount%", movie.VoteCount.ToString(), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%runtime%", movie.Runtime.ToString(), RegexOptions.IgnoreCase);
+            var videQuality = movie.VideoQuality;
+            if (videQuality != VideoQuality.Any) {
+                var videoQualityStr = videQuality == VideoQuality.P720 ? Resources.P720 : Resources.P1080;
+                template = Regex.Replace(template, "%videoQuality%", videoQualityStr, RegexOptions.IgnoreCase);
+            }
+
+            movie.FilePath = RenameVideoFile(fileInfo, template);
+        }
+
+        public static void RenameEpisodeFile(TvShowEpisode episode, string template) {
+            if (string.IsNullOrEmpty(template) || string.IsNullOrEmpty(episode.FilePath)) return;
+            var fileInfo = new FileInfo(episode.FilePath);
+            if (!fileInfo.Exists) return;
+
+            var season = episode.TvShowSeason;
+            var tvShow = season.TvShow;
+            template = Regex.Replace(template, "%showName%", tvShow.Title, RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%season%", season.Season.ToString("D2"), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%episode%", episode.Episode.ToString("D2"), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%episodeName%", episode.Name, RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%year%", episode.AirDate.HasValue ? episode.AirDate.Value.Year.ToString(CultureInfo.InvariantCulture) : string.Empty, RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%rating%", tvShow.Rating.ToString(), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%genres%", string.Join(", ", tvShow.Genres.Select(g => g.Name)), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%voteCount%", tvShow.VoteCount.ToString(), RegexOptions.IgnoreCase);
+            template = Regex.Replace(template, "%runtime%", tvShow.Runtime.ToString(), RegexOptions.IgnoreCase);
+            var videQuality = tvShow.VideoQuality;
+            if (videQuality != VideoQuality.Any) {
+                var videoQualityStr = videQuality == VideoQuality.P720 ? Resources.P720 : Resources.P1080;
+                template = Regex.Replace(template, "%videoQuality%", videoQualityStr, RegexOptions.IgnoreCase);
+            }
+
+            episode.FilePath = RenameVideoFile(fileInfo, template);
+        }
+
+        private static string RenameVideoFile(FileInfo videoFileInfo, string template) {
+            if (videoFileInfo.DirectoryName == null) return videoFileInfo.FullName;
+
+            template = MakeValidFileName(template);
+
+            RenameSubtitleFile(videoFileInfo, template);
+
+            var newFilePath = Path.Combine(videoFileInfo.DirectoryName, template) + videoFileInfo.Extension;
+            if (File.Exists(newFilePath))
+                File.Delete(newFilePath);
+            videoFileInfo.MoveTo(newFilePath);
+            return newFilePath;
+        }
+
+        private static void RenameSubtitleFile(FileInfo videoFileInfo, string template) {
+            if (videoFileInfo.DirectoryName == null) return;
+
+            var subtitleFilePath = GetSubtitleFilePath(videoFileInfo);
+            if (string.IsNullOrEmpty(subtitleFilePath)) return;
+
+            var subtitleFileInfo = new FileInfo(subtitleFilePath);
+            if (!subtitleFileInfo.Exists) return;
+
+            var newSubtitleFilePath = Path.Combine(videoFileInfo.DirectoryName, template) + subtitleFileInfo.Extension;
+            if (File.Exists(newSubtitleFilePath))
+                File.Delete(newSubtitleFilePath);
+            subtitleFileInfo.MoveTo(newSubtitleFilePath);
+        }
+
+        public static string MakeValidFileName(string path, char replaceChar = '-') {
+            var invalidChars = Path.GetInvalidFileNameChars();
+            return new string(path.Select(c => invalidChars.Contains(c) ? replaceChar : c).ToArray());
+        }
+
         public static IEnumerable GetEnumInfo(Type enumType) {
             var method = typeof(Helper).GetMethod("GetEnumInfo", new Type[] { });
             return method.MakeGenericMethod(enumType).Invoke(null, null) as IEnumerable;
@@ -347,8 +426,8 @@ namespace Novaroma {
             return infos;
         }
 
-        public static TAttribute GetMemberAttribute<TType, TAttribute>(string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute: Attribute {
-            return GetMemberAttribute<TAttribute>(typeof (TType), memberName, checkMetadataType, inherit);
+        public static TAttribute GetMemberAttribute<TType, TAttribute>(string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute : Attribute {
+            return GetMemberAttribute<TAttribute>(typeof(TType), memberName, checkMetadataType, inherit);
         }
 
         public static TAttribute GetMemberAttribute<TAttribute>(Type type, string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute : Attribute {
@@ -357,7 +436,7 @@ namespace Novaroma {
         }
 
         public static string GetTwoLetterLanguageCode(Language language) {
-            var langInfo = GetMemberAttribute<LanguageInfoAttribute>(typeof (Language), language.ToString());
+            var langInfo = GetMemberAttribute<LanguageInfoAttribute>(typeof(Language), language.ToString());
             return langInfo.TwoLetterCode;
         }
 
@@ -527,7 +606,7 @@ InfoTip={1}", iconPath, description);
                 return result;
             }
             catch (Exception ex) {
-                if (exceptionHandler == null) 
+                if (exceptionHandler == null)
                     throw;
 
                 // ReSharper disable ExplicitCallerInfoArgument

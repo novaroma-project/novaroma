@@ -18,7 +18,9 @@ namespace Novaroma.Engine {
         private readonly SettingSingleSelection<EnumInfo<Language>> _languageSelection;
         private readonly DirectorySelection _movieDirectory;
         private readonly DirectorySelection _tvShowDirectory;
+        private string _movieFileNameTemplate;
         private string _tvShowSeasonDirectoryTemplate;
+        private string _tvShowEpisodeFileNameTemplate;
         private readonly SettingMultiSelection<EnumInfo<Language>> _subtitleLanguages;
         private bool _deleteDirectoriesAlso;
         private readonly SettingSingleSelection<IInfoProvider> _infoProvider;
@@ -89,6 +91,28 @@ namespace Novaroma.Engine {
 
                 _tvShowSeasonDirectoryTemplate = value;
                 RaisePropertyChanged("TvShowSeasonDirectoryTemplate");
+            }
+        }
+
+        [Display(Name = "MovieFileNameTemplate", Description = "MovieFileNameTemplateDescription", GroupName = "Main", ResourceType = typeof(Resources))]
+        public string MovieFileNameTemplate {
+            get { return _movieFileNameTemplate; }
+            set {
+                if (_movieFileNameTemplate == value) return;
+
+                _movieFileNameTemplate = value;
+                RaisePropertyChanged("MovieFileNameTemplate");
+            }
+        }
+
+        [Display(Name = "TvShowEpisodeFileNameTemplate", Description = "TvShowEpisodeFileNameTemplateDescription", GroupName = "Main", ResourceType = typeof(Resources))]
+        public string TvShowEpisodeFileNameTemplate {
+            get { return _tvShowEpisodeFileNameTemplate; }
+            set {
+                if (_tvShowEpisodeFileNameTemplate == value) return;
+
+                _tvShowEpisodeFileNameTemplate = value;
+                RaisePropertyChanged("TvShowEpisodeFileNameTemplate");
             }
         }
 

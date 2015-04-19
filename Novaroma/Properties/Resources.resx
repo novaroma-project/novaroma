@@ -1060,4 +1060,16 @@
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Update Available</value>
   </data>
+  <data name="MovieFileNameTemplate" xml:space="preserve">
+    <value>Movie File Rename Template</value>
+  </data>
+  <data name="MovieFileNameTemplateDescription" xml:space="preserve">
+    <value>Available parameters: %movieName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
+  </data>
+  <data name="TvShowEpisodeFileNameTemplate" xml:space="preserve">
+    <value>Episode File Rename Template</value>
+  </data>
+  <data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
+    <value>Available parameters: %showName%, %season%, %episode%, %episodeName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
+  </data>
 </root>

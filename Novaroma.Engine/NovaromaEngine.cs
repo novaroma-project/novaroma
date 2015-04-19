@@ -181,9 +181,14 @@ namespace Novaroma.Engine {
                         var tvShow = media as TvShow;
                         var movie = media as Movie;
                         if (tvShow != null)
-                            tvShow.Seasons.ToList().ForEach(s => s.Episodes.ToList().ForEach(e => e.FilePath = string.Empty));
-                        else if (movie != null)
+                            tvShow.Seasons.ToList().ForEach(s => s.Episodes.ToList().ForEach(e => {
+                                e.FilePath = string.Empty;
+                                e.SubtitleDownloaded = false;
+                            }));
+                        else if (movie != null) {
                             movie.FilePath = string.Empty;
+                            movie.SubtitleDownloaded = false;
+                        }
 
                         context.Update(media);
                         await context.SaveChanges();
@@ -198,6 +203,7 @@ namespace Novaroma.Engine {
                     var movie = context.Movies.FirstOrDefault(m => string.Equals(m.FilePath, args.FullPath, StringComparison.OrdinalIgnoreCase));
                     if (movie != null) {
                         movie.FilePath = string.Empty;
+                        movie.SubtitleDownloaded = false;
                         context.Update(movie);
                         await context.SaveChanges();
 
@@ -207,6 +213,7 @@ namespace Novaroma.Engine {
                         var tvShowEpisode = context.TvShows.Episodes().FirstOrDefault(e => string.Equals(e.FilePath, args.FullPath, StringComparison.OrdinalIgnoreCase));
                         if (tvShowEpisode != null) {
                             tvShowEpisode.FilePath = string.Empty;
+                            tvShowEpisode.SubtitleDownloaded = false;
                             context.Update(tvShowEpisode.TvShowSeason.TvShow);
                             await context.SaveChanges();
 
@@ -276,11 +283,16 @@ namespace Novaroma.Engine {
                             episode.FilePath = Directory.GetFiles(directory, fileName).FirstOrDefault();
                     }
                     episode.DownloadKey = string.Empty;
+
                     try {
+                        if (!episode.BackgroundSubtitleDownload)
+                            Helper.RenameEpisodeFile(episode, Settings.TvShowEpisodeFileNameTemplate);
+
                         OnTvShowEpisodeDownloadCompleted(episode);
                     }
-                    // ReSharper disable once EmptyGeneralCatchClause
-                    catch { }
+                    catch (Exception ex) {
+                        _exceptionHandler.HandleException(ex);
+                    }
 
                     var season = episode.TvShowSeason;
                     var show = season.TvShow;
@@ -311,11 +323,16 @@ namespace Novaroma.Engine {
                             movie.FilePath = Directory.GetFiles(movie.Directory, fileName).FirstOrDefault();
                         }
                         movie.DownloadKey = string.Empty;
+
                         try {
+                            if (!movie.BackgroundSubtitleDownload)
+                                Helper.RenameMovieFile(movie, Settings.MovieFileNameTemplate);
+
                             OnMovieDownloadCompleted(movie);
                         }
-                        // ReSharper disable once EmptyGeneralCatchClause
-                        catch { }
+                        catch (Exception ex) {
+                            _exceptionHandler.HandleException(ex);
+                        }
 
                         var activity = CreateActivity(string.Format(Resources.MovieDownloaded, movie.Title), movie.FilePath);
                         context.Insert(activity);
@@ -334,6 +351,30 @@ namespace Novaroma.Engine {
                             DownloadSubtitle(file).Wait();
                     }
                 }
+            }
+        }
+
+        private void MovieSubtitleDownloaded(Movie movie) {
+            Helper.SetSubtitleDownloadProperties(true, movie);
+
+            try {
+                Helper.RenameMovieFile(movie, Settings.MovieFileNameTemplate);
+                OnMovieSubtitleDownloadCompleted(movie);
+            }
+            catch (Exception ex) {
+                _exceptionHandler.HandleException(ex);
+            }
+        }
+
+        private void EpisodeSubtitleDownloaded(TvShowEpisode episode) {
+            Helper.SetSubtitleDownloadProperties(true, episode);
+
+            try {
+                Helper.RenameEpisodeFile(episode, Settings.TvShowEpisodeFileNameTemplate);
+                OnTvShowEpisodeSubtitleDownloadCompleted(episode);
+            }
+            catch (Exception ex) {
+                _exceptionHandler.HandleException(ex);
             }
         }
 
@@ -462,7 +503,8 @@ namespace Novaroma.Engine {
             if (string.IsNullOrEmpty(movieDirectory))
                 movieDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), Resources.Movies);
 
-            movie.Directory = Path.Combine(movieDirectory, movie.Title);
+            var title = Helper.MakeValidFileName(movie.Title);
+            movie.Directory = Path.Combine(movieDirectory, title);
         }
 
         private void SetTvShowDirectory(TvShow tvShow) {
@@ -470,7 +512,8 @@ namespace Novaroma.Engine {
             if (string.IsNullOrEmpty(tvShowDirectory))
                 tvShowDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), Resources.TvShows);
 
-            tvShow.Directory = Path.Combine(tvShowDirectory, tvShow.Title);
+            var title = Helper.MakeValidFileName(tvShow.Title);
+            tvShow.Directory = Path.Combine(tvShowDirectory, title);
         }
 
         private async Task<FileInfo> ValidateSubtitleDownload(string filePath) {
@@ -1140,8 +1183,7 @@ namespace Novaroma.Engine {
                     var result = await subtitleDownloader.DownloadForMovie(movie.OriginalTitle, movie.FilePath, languages, movie.ImdbId);
                     if (!result) continue;
 
-                    Helper.SetSubtitleDownloadProperties(true, movie);
-                    OnMovieSubtitleDownloadCompleted(movie);
+                    MovieSubtitleDownloaded(movie);
 
                     var activity = CreateActivity(string.Format(Resources.MovieSubtitleDownloaded, movie.Title), movie.FilePath);
                     await SaveChanges(new[] { activity }, new[] { movie });
@@ -1173,8 +1215,7 @@ namespace Novaroma.Engine {
                     var result = await subtitleDownloader.DownloadForTvShowEpisode(show.OriginalTitle, season.Season, episode.Episode, episode.FilePath, languages, show.ImdbId);
                     if (!result) continue;
 
-                    Helper.SetSubtitleDownloadProperties(true, episode);
-                    OnTvShowEpisodeSubtitleDownloadCompleted(episode);
+                    EpisodeSubtitleDownloaded(episode);
 
                     var description = string.Format(Resources.TvShowEpisodeSubtitleDownloaded, show.Title, season.Season, episode.Episode);
                     var activity = CreateActivity(description, episode.FilePath);
@@ -1323,20 +1364,20 @@ namespace Novaroma.Engine {
                 if (result) {
                     var movie = downloadable as Movie;
                     if (movie != null) {
+                        MovieSubtitleDownloaded(movie);
+
                         var activity = CreateActivity(string.Format(Resources.MovieSubtitleDownloaded, movie.Title), movie.FilePath);
                         await InsertEntity(activity);
-
-                        OnMovieSubtitleDownloadCompleted(movie);
                     }
                     else {
                         var episode = downloadable as TvShowEpisode;
                         if (episode != null) {
+                            EpisodeSubtitleDownloaded(episode);
+
                             var season = episode.TvShowSeason;
                             var show = episode.TvShowSeason.TvShow;
                             var activity = CreateActivity(string.Format(Resources.TvShowEpisodeSubtitleDownloaded, show.Title, season.Season, episode.Episode), episode.FilePath);
                             await InsertEntity(activity);
-
-                            OnTvShowEpisodeSubtitleDownloadCompleted(episode);
                         }
                     }
                 }
@@ -1525,7 +1566,9 @@ namespace Novaroma.Engine {
                 Language = (int)Settings.LanguageSelection.SelectedItem.Item,
                 MovieDirectory = Settings.MovieDirectory.Path,
                 TvShowDirectory = Settings.TvShowDirectory.Path,
+                Settings.MovieFileNameTemplate,
                 Settings.TvShowSeasonDirectoryTemplate,
+                Settings.TvShowEpisodeFileNameTemplate,
                 Settings.MakeSpecialFolder,
                 Settings.DownloadInterval,
                 Settings.SubtitleDownloadInterval,
@@ -1556,6 +1599,15 @@ namespace Novaroma.Engine {
             Settings.MovieDirectory.Path = (string)o["MovieDirectory"];
             Settings.TvShowDirectory.Path = (string)o["TvShowDirectory"];
             Settings.TvShowSeasonDirectoryTemplate = (string)o["TvShowSeasonDirectoryTemplate"];
+
+            var movieFileNameTemplate = o["MovieFileNameTemplate"];
+            if (movieFileNameTemplate != null)
+                Settings.MovieFileNameTemplate = movieFileNameTemplate.ToString();
+
+            var tvShowEpisodeFileNameTemplate = o["TvShowEpisodeFileNameTemplate"];
+            if (tvShowEpisodeFileNameTemplate != null)
+                Settings.TvShowEpisodeFileNameTemplate = tvShowEpisodeFileNameTemplate.ToString();
+
             var makeSpecialFolder = o["MakeSpecialFolder"];
             if (makeSpecialFolder != null)
                 Settings.MakeSpecialFolder = (bool)makeSpecialFolder;
@@ -1572,7 +1624,6 @@ namespace Novaroma.Engine {
             var deleteExtensions = o["DeleteExtensions"];
             if (deleteExtensions != null)
                 Settings.DeleteExtensions = (string)deleteExtensions;
-
 
             var subtitleLanguages = (JArray)o["SubtitleLanguages"];
             if (subtitleLanguages != null)

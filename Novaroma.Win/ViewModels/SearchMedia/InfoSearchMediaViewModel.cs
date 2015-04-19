@@ -38,8 +38,8 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
         }
 
         private Media InitMedia(Media media) {
-            if (!string.IsNullOrEmpty(_directory))
-                media.Directory = _isParentDirectory ? Path.Combine(_directory, media.Title) : _directory;
+            if (!string.IsNullOrEmpty(_directory) && !_isParentDirectory)
+                media.Directory = _directory;
 
             var tvShow = media as TvShow;
             if (tvShow != null)

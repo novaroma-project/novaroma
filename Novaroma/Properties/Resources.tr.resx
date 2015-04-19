@@ -1011,4 +1011,16 @@
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Yeni Versiyon Yükle</value>
   </data>
+  <data name="MovieFileNameTemplate" xml:space="preserve">
+    <value>Film Dosyası İsimlendirme Şablonu</value>
+  </data>
+  <data name="MovieFileNameTemplateDescription" xml:space="preserve">
+    <value>Geçerli parametreler: %movieName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
+  </data>
+  <data name="TvShowEpisodeFileNameTemplate" xml:space="preserve">
+    <value>Dizi Bölüm Dosyası İsimlendirme Şablonu</value>
+  </data>
+  <data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
+    <value>Geçerli parametreler: %showName%, %season%, %episode%, %episodeName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
+  </data>
 </root>

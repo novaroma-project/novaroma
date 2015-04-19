@@ -1697,6 +1697,24 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Movie File Rename Template.
+        /// </summary>
+        public static string MovieFileNameTemplate {
+            get {
+                return ResourceManager.GetString("MovieFileNameTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available parameters: %movieName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%.
+        /// </summary>
+        public static string MovieFileNameTemplateDescription {
+            get {
+                return ResourceManager.GetString("MovieFileNameTemplateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Movie Providers.
         /// </summary>
         public static string MovieProviders {
@@ -2584,6 +2602,24 @@ namespace Novaroma.Properties {
         public static string TvShowEpisodeDownloadStarted {
             get {
                 return ResourceManager.GetString("TvShowEpisodeDownloadStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Episode File Rename Template.
+        /// </summary>
+        public static string TvShowEpisodeFileNameTemplate {
+            get {
+                return ResourceManager.GetString("TvShowEpisodeFileNameTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available parameters: %showName%, %season%, %episode%, %episodeName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%.
+        /// </summary>
+        public static string TvShowEpisodeFileNameTemplateDescription {
+            get {
+                return ResourceManager.GetString("TvShowEpisodeFileNameTemplateDescription", resourceCulture);
             }
         }
         
