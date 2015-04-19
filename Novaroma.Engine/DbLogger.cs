@@ -68,7 +68,7 @@ namespace Novaroma.Engine {
                     if (logSearchModel.LogType.HasValue)
                         q = q.Where(l => l.LogType == logSearchModel.LogType.Value);
                     if (logSearchModel.Age.HasValue)
-                        q = q.Where(l => (l.LogDate - DateTime.UtcNow) < logSearchModel.Age.Value);
+                        q = q.Where(l => (l.LogDate - DateTime.Now) < logSearchModel.Age.Value);
 
                     q = q.OrderByDescending(l => l.LogDate);
                     if (logSearchModel.MaxCount.HasValue)
@@ -98,7 +98,7 @@ namespace Novaroma.Engine {
                 LogType = logType,
                 Message = message,
                 Detail = detail,
-                LogDate = DateTime.UtcNow
+                LogDate = DateTime.Now
             };
 
             using (var context = _contextFactory.CreateContext()) {

@@ -89,26 +89,30 @@ namespace Novaroma.Engine {
                 downloader.DownloadCompleted += DownloaderOnDownloadCompleted;
 
             var downloadJob = JobBuilder.Create<DownloadJob>().WithIdentity(DownloadJobName).Build();
-            var downloadJobTrigger = CreateIntervalTrigger(DownloadJobDefaultTriggerName, Settings.DownloadInterval);
+            var downloadJobTrigger = CreateIntervalTrigger(DownloadJobDefaultTriggerName, Settings.DownloadInterval, 1);
             scheduler.ScheduleJob(downloadJob, downloadJobTrigger);
 
             var subtitleDownloadJob = JobBuilder.Create<SubtitleDownloadJob>().WithIdentity(SubtitleDownloadJobName).Build();
-            var subtitleDownloadJobTrigger = CreateIntervalTrigger(SubtitleDownloadJobDefaultTriggerName, Settings.SubtitleDownloadInterval);
+            var subtitleDownloadJobTrigger = CreateIntervalTrigger(SubtitleDownloadJobDefaultTriggerName, Settings.SubtitleDownloadInterval, 3);
             scheduler.ScheduleJob(subtitleDownloadJob, subtitleDownloadJobTrigger);
 
             var tvShowUpdateJob = JobBuilder.Create<TvShowUpdateJob>().WithIdentity(TvShowUpdateJobName).Build();
-            var tvShowUpdateJobTrigger = CreateIntervalTrigger(TvShowUpdateJobDefaultTriggerName, Settings.TvShowUpdateInterval * 60);
+            var tvShowUpdateJobTrigger = CreateIntervalTrigger(TvShowUpdateJobDefaultTriggerName, Settings.TvShowUpdateInterval * 60, 5);
             scheduler.ScheduleJob(tvShowUpdateJob, tvShowUpdateJobTrigger);
 
             scheduler.Start();
 
             Settings.PropertyChanged += (sender, args) => {
                 if (args.PropertyName == "DownloadInterval") {
-                    var newTrigger = CreateIntervalTrigger(DownloadJobDefaultTriggerName, Settings.DownloadInterval);
+                    var newTrigger = CreateIntervalTrigger(DownloadJobDefaultTriggerName, Settings.DownloadInterval, 0);
                     scheduler.RescheduleJob(new TriggerKey(DownloadJobDefaultTriggerName), newTrigger);
                 }
+                else if (args.PropertyName == "SubtitleDownloadInterval") {
+                    var newTrigger = CreateIntervalTrigger(SubtitleDownloadJobDefaultTriggerName, Settings.SubtitleDownloadInterval, 0);
+                    scheduler.RescheduleJob(new TriggerKey(SubtitleDownloadJobDefaultTriggerName), newTrigger);
+                }
                 else if (args.PropertyName == "TvShowUpdateInterval") {
-                    var newTrigger = CreateIntervalTrigger(TvShowUpdateJobDefaultTriggerName, Settings.TvShowUpdateInterval * 60);
+                    var newTrigger = CreateIntervalTrigger(TvShowUpdateJobDefaultTriggerName, Settings.TvShowUpdateInterval * 60, 0);
                     scheduler.RescheduleJob(new TriggerKey(TvShowUpdateJobDefaultTriggerName), newTrigger);
                 }
             };
@@ -129,10 +133,10 @@ namespace Novaroma.Engine {
 
         #region Methods
 
-        private static ITrigger CreateIntervalTrigger(string triggerName, int interval) {
+        private static ITrigger CreateIntervalTrigger(string triggerName, int interval, int delayMinutes) {
             return TriggerBuilder.Create()
                 .WithIdentity(triggerName)
-                .StartAt(DateTime.UtcNow.AddMinutes(1))
+                .StartAt(DateTime.UtcNow.AddMinutes(delayMinutes))
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(interval)
                     .RepeatForever())
@@ -445,11 +449,11 @@ namespace Novaroma.Engine {
             }
         }
 
-        private static Activity CreateActivity(string description, string path) {
+        private static Activity CreateActivity(string description, string path, string arguments = null) {
             return new Activity {
-                ActivityDate = DateTime.UtcNow,
+                ActivityDate = DateTime.Now,
                 Description = description,
-                Path = path
+                Path = string.IsNullOrEmpty(arguments) ? path : path + " > " + arguments
             };
         }
 

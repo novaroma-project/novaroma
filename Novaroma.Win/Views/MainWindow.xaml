@@ -13,7 +13,7 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button ToolTip="{Binding Source={StaticResource Resources}, Path=UpdateAvailable}" Cursor="Hand"
-                    Visibility="{Binding UpdateAvailable}"
+                    Visibility="{Binding UpdateAvailable, Converter={converters:BooleanToVisibilityConverter}}"
                     Command="{Binding InstallUpdateCommand}">
                 <Rectangle Width="20" Height="20" Fill="{StaticResource WhiteColorBrush}"
                            HorizontalAlignment="Center" VerticalAlignment="Center" >
@@ -792,11 +792,9 @@
                         </DataGrid.InputBindings>
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Description}" 
-                                            Header="{Binding Source={StaticResource Resources}, Path=Description}" />
+                                                Header="{Binding Source={StaticResource Resources}, Path=Description}" />
                             <DataGridTextColumn Binding="{Binding ActivityDate}" 
-                                            Header="{Binding Source={StaticResource Resources}, Path=Date}"/>
-                            <DataGridTextColumn Binding="{Binding Path}" 
-                                            Header="{Binding Source={StaticResource Resources}, Path=Path}"/>
+                                                Header="{Binding Source={StaticResource Resources}, Path=Date}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

@@ -161,7 +161,7 @@ namespace Novaroma.Model {
 
             IsActive = tvShowUpdate.IsActive;
             Status = tvShowUpdate.Status;
-            LastUpdateDate = DateTime.UtcNow;
+            LastUpdateDate = DateTime.Now;
 
             MergeEpisodes(tvShowUpdate.UpdateEpisodes);
         }

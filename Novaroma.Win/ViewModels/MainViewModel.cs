@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Novaroma.Interface;
 using Novaroma.Model;
@@ -23,6 +24,7 @@ namespace Novaroma.Win.ViewModels {
         private readonly IExceptionHandler _exceptionHandler;
         private readonly ILogger _logger;
         private readonly IEnumerable<IPluginService> _pluginServices;
+        private readonly Timer _updateCheckTimer;
         private readonly RelayCommand _installUpdateCommand;
         private readonly RelayCommand _aboutCommand;
         private readonly RelayCommand _newCommand;
@@ -166,18 +168,13 @@ namespace Novaroma.Win.ViewModels {
             _engine.TvShowsChanged += EngineOnTvShowsChanged;
             _engine.ActivitiesChanged += EngineOnActivitiesChanged;
             _engine.LanguageChanged += EngineOnLanguageChanged;
+
+            _updateCheckTimer = new Timer(o => DoCheckForUpdate(), null, TimeSpan.FromSeconds(5), TimeSpan.FromHours(1));
         }
 
         #region Methods
 
         #region Big Buttons
-
-        private static void InstallUpdate() {
-        }
-
-        private static void About() {
-            new AboutWindow().ShowDialog();
-        }
 
         private void NewMedia() {
             Helper.AddFromSearch(_engine, _exceptionHandler, DialogService);
@@ -621,6 +618,41 @@ namespace Novaroma.Win.ViewModels {
             new ConfigurationWindow(_engine, _exceptionHandler, DialogService, uTorrentDownloader).ShowDialog();
         }
 
+        private async void DoCheckForUpdate() {
+            await CheckForUpdate();
+        }
+
+        private async Task CheckForUpdate() {
+            var result = false;
+            var updaterPath = Path.Combine(Environment.CurrentDirectory, "Novaroma.Updater.exe");
+            if (File.Exists(updaterPath)) {
+                var checkProcess = Process.Start(updaterPath, "/justcheck");
+                if (checkProcess != null && checkProcess.WaitForExit(10000))
+                    result = checkProcess.ExitCode == 0;
+            }
+            UpdateAvailable = result;
+
+            if (UpdateAvailable) {
+                _updateCheckTimer.Dispose();
+
+                var activity = new Activity {
+                    ActivityDate = DateTime.Now,
+                    Description = Resources.UpdateAvailable,
+                    Path = updaterPath + " > /checknow"
+                };
+                await _engine.InsertEntity(activity);
+            }
+        }
+
+        private static void InstallUpdate() {
+            var updaterPath = Path.Combine(Environment.CurrentDirectory, "Novaroma.Updater.exe");
+            Process.Start(updaterPath, " /checknow");
+        }
+
+        private static void About() {
+            new AboutWindow().ShowDialog();
+        }
+
         private static void PlayActivity(object prm) {
             var activity = prm as Activity;
             if (activity == null) return;
@@ -629,7 +661,16 @@ namespace Novaroma.Win.ViewModels {
         }
 
         private static void PlayActivity(Activity activity) {
-            if (!string.IsNullOrWhiteSpace(activity.Path))
+            var path = activity.Path;
+            if (string.IsNullOrWhiteSpace(path)) return;
+            
+            var idx = path.IndexOf('>');
+            if (idx > 0) {
+                var args = path.Substring(idx + 1).Trim();
+                path = path.Substring(0, idx).Trim();
+                Process.Start(path, args);
+            }
+            else
                 Process.Start(activity.Path);
         }
 
