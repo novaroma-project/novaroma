@@ -327,16 +327,32 @@ namespace Novaroma.Win.ViewModels {
 
         private async Task ClearTvShowSearchModel() {
             ClearMediaSearchModel(_tvShowSearchModel);
+            _tvShowSearchModel.Ended = null;
             await GetTvShows();
         }
 
         private static void ClearMediaSearchModel<T>(T mediaSearchModel) where T : MediaSearchModel {
             mediaSearchModel.Query = null;
-            mediaSearchModel.ReleaseYearStart = mediaSearchModel.ReleaseYearEnd =
-                mediaSearchModel.NumberOfVotesMin = mediaSearchModel.NumberOfVotesMax =
-                mediaSearchModel.RuntimeMin = mediaSearchModel.RuntimeMax = null;
-            mediaSearchModel.RatingMin = mediaSearchModel.RatingMax = null;
-            mediaSearchModel.NotWatched = null;
+
+            mediaSearchModel.ReleaseYearStart
+            = mediaSearchModel.ReleaseYearEnd
+            = mediaSearchModel.NumberOfVotesMin
+            = mediaSearchModel.NumberOfVotesMax
+            = mediaSearchModel.RuntimeMin
+            = mediaSearchModel.RuntimeMax
+            = null;
+
+            mediaSearchModel.RatingMin
+            = mediaSearchModel.RatingMax
+            = null;
+
+            mediaSearchModel.NotWatched
+            = mediaSearchModel.Downloaded
+            = mediaSearchModel.SubtitleDownloaded
+            = mediaSearchModel.NotFound
+            = mediaSearchModel.SubtitleNotFound
+            = null;
+
             mediaSearchModel.Page = 1;
             mediaSearchModel.Genres.Selections.ToList().ForEach(si => si.IsSelected = false);
         }
