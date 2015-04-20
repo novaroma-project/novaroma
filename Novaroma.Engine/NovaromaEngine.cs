@@ -1096,6 +1096,9 @@ namespace Novaroma.Engine {
                     if (searchModel.SubtitleNotFound.HasValue)
                         q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.SubtitleNotFound == searchModel.SubtitleNotFound)));
 
+                    if (searchModel.Ended.HasValue)
+                        q = q.Where(x => x.IsActive == !searchModel.Ended.Value);
+
                     return FilterMediaQuery(q, searchModel);
                 }
             });

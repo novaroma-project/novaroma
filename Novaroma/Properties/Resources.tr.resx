@@ -1023,4 +1023,7 @@
   <data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
     <value>Geçerli parametreler: %showName%, %season%, %episode%, %episodeName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
   </data>
+  <data name="Ended" xml:space="preserve">
+    <value>Sonlandı</value>
+  </data>
 </root>
