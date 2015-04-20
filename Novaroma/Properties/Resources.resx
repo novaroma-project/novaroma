@@ -1072,4 +1072,7 @@
   <data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
     <value>Available parameters: %showName%, %season%, %episode%, %episodeName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
   </data>
+  <data name="Ended" xml:space="preserve">
+    <value>Ended</value>
+  </data>
 </root>
