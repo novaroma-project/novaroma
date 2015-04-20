@@ -1070,7 +1070,7 @@ namespace Novaroma.Engine {
         public Task<QueryResult<TvShow>> GetTvShows(TvShowSearchModel searchModel) {
             return Task.Run(() => {
                 using (var context = _contextFactory.CreateContext()) {
-                    var currentDate = DateTime.UtcNow.Date;
+                    var currentDate = DateTime.UtcNow;
                     var q = context.TvShows;
 
                     if (searchModel.NotWatched.HasValue)
