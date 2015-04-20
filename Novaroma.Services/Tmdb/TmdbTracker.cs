@@ -19,9 +19,10 @@ namespace Novaroma.Services.Tmdb {
                 var client = new TMDbClient(ApiKey);
 
                 var episodes = new List<TvShowEpisodeInfo>();
+                var updateDate = DateTime.Now;
                 var show = client.GetTvShow(id, language: GetLanguage(language));
                 if (show == null) return null;
-                
+
                 foreach (var seasonTmp in show.Seasons) {
                     if (seasonTmp.SeasonNumber == 0) continue;
 
@@ -32,13 +33,13 @@ namespace Novaroma.Services.Tmdb {
                         var ad = episode.AirDate;
                         DateTime? airDate;
                         if (ad.Year < 1896) airDate = null;
-                        else 
+                        else
                             airDate = new DateTime(ad.Year, ad.Month, ad.Day, 20, 0, 0, DateTimeKind.Utc);
                         episodes.Add(new TvShowEpisodeInfo(season.SeasonNumber, episode.EpisodeNumber, episode.Name, airDate, episode.Overview));
                     }
                 }
 
-                return new TvShowUpdate(show.InProduction, show.Status, episodes);
+                return new TvShowUpdate(updateDate, show.InProduction, show.Status, episodes);
             });
         }
 

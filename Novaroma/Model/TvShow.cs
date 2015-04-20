@@ -135,6 +135,7 @@ namespace Novaroma.Model {
         public void MergeEpisodes(IEnumerable<ITvShowEpisodeInfo> episodes) {
             episodes = episodes.OrderBy(e => e.Season, new SeasonComparer()).ThenBy(e => e.Episode);
 
+            ITvShowEpisodeInfo lastEpisode = null;
             foreach (var episodeInfo in episodes) {
                 var season = Seasons.FirstOrDefault(s => s.Season == episodeInfo.Season);
                 if (season == null) {
@@ -153,6 +154,23 @@ namespace Novaroma.Model {
                 episode.AirDate = episodeInfo.AirDate;
                 episode.Name = episodeInfo.Name;
                 episode.Overview = episodeInfo.Overview;
+
+                lastEpisode = episodeInfo;
+            }
+
+            if (lastEpisode != null) {
+                for (var i = Seasons.Count - 1; i >= 0; i--) {
+                    var season = Seasons.ElementAt(i);
+                    if (season.Season > lastEpisode.Season)
+                        Seasons.Remove(season);
+                    else if (season.Season == lastEpisode.Season) {
+                        for (var j = season.Episodes.Count - 1; j >= 0; j--) {
+                            var episode = season.Episodes.ElementAt(j);
+                            if (episode.Episode > lastEpisode.Episode)
+                                season.Episodes.Remove(episode);
+                        }
+                    }
+                }
             }
         }
 
@@ -161,7 +179,7 @@ namespace Novaroma.Model {
 
             IsActive = tvShowUpdate.IsActive;
             Status = tvShowUpdate.Status;
-            LastUpdateDate = DateTime.Now;
+            LastUpdateDate = tvShowUpdate.UpdateDate;
 
             MergeEpisodes(tvShowUpdate.UpdateEpisodes);
         }
