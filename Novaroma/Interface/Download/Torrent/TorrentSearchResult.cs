@@ -13,13 +13,13 @@ namespace Novaroma.Interface.Download.Torrent {
         private readonly string _name;
         private readonly int _seed;
         private readonly int _leech;
-        private readonly string _size;
+        private readonly double _size;
         private readonly int? _files;
         private readonly string _age;
         private readonly string _magnetUri;
         private readonly Func<TorrentSearchResult, Task<byte[]>> _download;
 
-        public TorrentSearchResult(ITorrentDownloader service, ITorrentProvider provider, string url, string name, int seed, int leech, string size, 
+        public TorrentSearchResult(ITorrentDownloader service, ITorrentProvider provider, string url, string name, int seed, int leech, double size, 
                                    int? files, string age, string magnetUri, Func<TorrentSearchResult, Task<byte[]>> download) {
             _service = service;
             _provider = provider;
@@ -60,8 +60,8 @@ namespace Novaroma.Interface.Download.Torrent {
             get { return _leech; }
         }
 
-        [Display(Name = "Size", ResourceType = typeof(Resources))]
-        public string Size {
+        [Display(Name = "SizeMB", ResourceType = typeof(Resources))]
+        public double Size {
             get { return _size; }
         }
 

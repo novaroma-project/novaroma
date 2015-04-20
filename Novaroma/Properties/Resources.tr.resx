@@ -603,8 +603,8 @@
   <data name="Seed" xml:space="preserve">
     <value>Besleyenler</value>
   </data>
-  <data name="Size" xml:space="preserve">
-    <value>Boyut</value>
+  <data name="SizeMB" xml:space="preserve">
+    <value>Boyut (MB)</value>
   </data>
   <data name="SearchResultNotFound" xml:space="preserve">
     <value>Arama sonucu bulunamadı. Seçerek arama yapabilirsiniz</value>

@@ -14,8 +14,8 @@ namespace Novaroma.Interface.Download.Torrent {
         int Seed { get; }
         [Display(Name = "Leech", ResourceType = typeof(Resources))]
         int Leech { get; }
-        [Display(Name = "Size", ResourceType = typeof(Resources))]
-        string Size { get; }
+        [Display(Name = "SizeMB", ResourceType = typeof(Resources))]
+        double Size { get; }
         [Display(Name = "FileCount", ResourceType = typeof(Resources))]
         int? FileCount { get; }
         [Display(Name = "Age", ResourceType = typeof(Resources))]

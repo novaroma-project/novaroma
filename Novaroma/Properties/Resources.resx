@@ -598,8 +598,8 @@
   <data name="Seed" xml:space="preserve">
     <value>Seed</value>
   </data>
-  <data name="Size" xml:space="preserve">
-    <value>Size</value>
+  <data name="SizeMB" xml:space="preserve">
+    <value>Size (MB)</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provider</value>

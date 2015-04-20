@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -108,7 +109,15 @@ namespace Novaroma.Services.Kickass {
                     var torrentName = torrentNameDiv.QuerySelectorAll("a").First(n => n.ClassName == "cellMainLink").TextContent;
                     if (excludeList.Any(e => torrentName.IndexOf(e, StringComparison.OrdinalIgnoreCase) > 0)) continue;
 
-                    var size = tds[1].TextContent;
+                    var sizeParts = tds[1].TextContent.Split(' ');
+                    var sizeStr = sizeParts[0];
+                    var sizeType = sizeParts[1];
+                    var size = double.Parse(sizeStr, new NumberFormatInfo {CurrencyDecimalSeparator = "."});
+                    if (sizeType == "KB")
+                        size = Math.Round(size/1024, 2);
+                    else if (sizeType == "GB")
+                        size = size*1024;
+
                     int? files = null;
                     int filesTmp;
                     var filesStr = tds[2].TextContent;

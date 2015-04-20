@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AngleSharp;
@@ -115,7 +116,16 @@ namespace Novaroma.Services.ThePirateBay {
                     var idx2 = detDesc.IndexOf(",", idx1 + 1, StringComparison.Ordinal);
                     var age = detDesc.Substring(0, idx1).Replace("Uploaded", string.Empty).Trim();
                     if (idx2 == -1) idx2 = detDesc.Length;
-                    var size = detDesc.Substring(idx1 + 1, idx2 - idx1 - 1).Replace("Size", string.Empty).Trim();
+                    
+                    var sizeParts = detDesc.Substring(idx1 + 1, idx2 - idx1 - 1).Replace("Size", string.Empty).Trim().Split((char)160);
+                    var sizeStr = sizeParts[0];
+                    var sizeType = sizeParts[1];
+                    var size = double.Parse(sizeStr, new NumberFormatInfo { CurrencyDecimalSeparator = "." });
+                    if (sizeType == "KiB")
+                        size = Math.Round(size / 1024, 2);
+                    else if (sizeType == "GiB")
+                        size = size * 1024;
+
                     var seed = Convert.ToInt32(tds[2].TextContent);
                     var leech = Convert.ToInt32(tds[3].TextContent);
 
