@@ -1045,6 +1045,8 @@ namespace Novaroma.Engine {
             return Task.Run(() => {
                 using (var context = _contextFactory.CreateContext()) {
                     var q = context.Medias;
+                    if (!q.Any()) return QueryResult<Media>.Empty;
+
                     return FilterMediaQuery(q, searchModel);
                 }
             });
@@ -1053,7 +1055,8 @@ namespace Novaroma.Engine {
         public Task<QueryResult<Movie>> GetMovies(MovieSearchModel searchModel) {
             return Task.Run(() => {
                 using (var context = _contextFactory.CreateContext()) {
-                    var q = context.Movies;
+                    var q = context.Movies.AsQueryable();
+                    if (!q.Any()) return QueryResult<Movie>.Empty;
 
                     if (searchModel.NotWatched.HasValue)
                         q = q.Where(m => m.IsWatched == !searchModel.NotWatched.Value);
@@ -1078,9 +1081,10 @@ namespace Novaroma.Engine {
         public Task<QueryResult<TvShow>> GetTvShows(TvShowSearchModel searchModel) {
             return Task.Run(() => {
                 using (var context = _contextFactory.CreateContext()) {
-                    var currentDate = DateTime.UtcNow;
                     var q = context.TvShows;
+                    if (!q.Any()) return QueryResult<TvShow>.Empty;
 
+                    var currentDate = DateTime.UtcNow;
                     if (searchModel.NotWatched.HasValue)
                         q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.IsWatched == !searchModel.NotWatched && e.AirDate < currentDate)));
 

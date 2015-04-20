@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Novaroma {
 
     public class QueryResult<T> {
+        private static readonly Lazy<QueryResult<T>> _lazyEmpty = new Lazy<QueryResult<T>>(() => new QueryResult<T>(Enumerable.Empty<T>(), 0)); 
+
         private readonly IEnumerable<T> _results;
         private readonly int _inlineCount;
 
@@ -17,6 +21,12 @@ namespace Novaroma {
 
         public int InlineCount {
             get { return _inlineCount; }
+        }
+
+        public static QueryResult<T> Empty {
+            get {
+                return _lazyEmpty.Value;
+            }
         }
     }
 

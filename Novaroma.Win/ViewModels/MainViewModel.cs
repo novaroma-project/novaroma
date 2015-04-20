@@ -1143,13 +1143,13 @@ namespace Novaroma.Win.ViewModels {
 
         public bool HasTvShows {
             get {
-                return TvShows != null && TvShows.InlineCount > 0;
+                return TvShows != QueryResult<TvShow>.Empty;
             }
         }
 
         public bool HasMovies {
             get {
-                return Movies != null && Movies.InlineCount > 0;
+                return Movies != QueryResult<Movie>.Empty;
             }
         }
 
