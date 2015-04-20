@@ -41,6 +41,7 @@ namespace Novaroma.Win.ViewModels {
         private readonly MovieSearchModel _movieSearchModel;
         private readonly TvShowSearchModel _tvShowSearchModel;
         private readonly ActivitySearchModel _activitySearchModel;
+        private readonly RelayCommand _saveSearchModelCommand;
         private readonly RelayCommand _movieSearchCommand;
         private readonly RelayCommand _tvShowSearchCommand;
         private readonly RelayCommand _clearMovieSearchModelCommand;
@@ -96,8 +97,7 @@ namespace Novaroma.Win.ViewModels {
 
         #endregion
 
-        public MainViewModel(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService, ILogger logger)
-            : base(dialogService) {
+        public MainViewModel(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService, ILogger logger): base(dialogService) {
             _engine = engine;
             _exceptionHandler = exceptionHandler;
             _logger = logger;
@@ -105,9 +105,7 @@ namespace Novaroma.Win.ViewModels {
 
             var genres = engine.MediaGenres;
             _movieSearchModel = new MovieSearchModel(genres);
-            _movieSearchModel.RefreshNeeded += (sender, args) => DoGetMovies();
             _tvShowSearchModel = new TvShowSearchModel(genres);
-            _tvShowSearchModel.RefreshNeeded += (sender, args) => DoGetTvShows();
             _activitySearchModel = new ActivitySearchModel();
 
             _installUpdateCommand = new RelayCommand(InstallUpdate);
@@ -124,6 +122,7 @@ namespace Novaroma.Win.ViewModels {
             _manageRuntimeServicesCommand = new RelayCommand(ManageRuntimeServices);
             _clearLogsAndActivitiesCommand = new RelayCommand(DoClearLogsAndActivities);
 
+            _saveSearchModelCommand = new RelayCommand(DoSaveSearchModel);
             _movieSearchCommand = new RelayCommand(DoGetMovies);
             _tvShowSearchCommand = new RelayCommand(DoGetTvShows);
             _clearMovieSearchModelCommand = new RelayCommand(DoClearMovieSearchModel);
@@ -254,7 +253,20 @@ namespace Novaroma.Win.ViewModels {
         #region Fetch Data
 
         public async Task ListData() {
+            await LoadSavedSearchModels();
+            _movieSearchModel.RefreshNeeded += (sender, args) => DoGetMovies();
+            _tvShowSearchModel.RefreshNeeded += (sender, args) => DoGetTvShows();
+            
             await Task.WhenAll(GetMovies(), GetTvShows(), GetActivities());
+        }
+
+        private async void DoSaveSearchModel(object prm) {
+            await SaveSearchModel((MediaSearchModel)prm);
+        }
+
+        private Task SaveSearchModel(MediaSearchModel searchModel) {
+            var c = (IConfigurable) searchModel;
+            return _engine.SaveSettings(c.SettingName, c.SerializeSettings());
         }
 
         private async void DoGetMovies() {
@@ -618,6 +630,18 @@ namespace Novaroma.Win.ViewModels {
             new ConfigurationWindow(_engine, _exceptionHandler, DialogService, uTorrentDownloader).ShowDialog();
         }
 
+        private async Task LoadSavedSearchModels() {
+            await LoadSavedSearchModel(MovieSearchModel);
+            await LoadSavedSearchModel(TvShowSearchModel);
+        }
+
+        private async Task LoadSavedSearchModel(MediaSearchModel searchModel) {
+            var c = (IConfigurable) searchModel;
+            var cs = await _engine.LoadSettings(c.SettingName);
+            if (!string.IsNullOrEmpty(cs))
+                c.DeserializeSettings(cs);
+        }
+
         private async void DoCheckForUpdate() {
             await CheckForUpdate();
         }
@@ -775,6 +799,10 @@ namespace Novaroma.Win.ViewModels {
 
         public TvShowSearchModel TvShowSearchModel {
             get { return _tvShowSearchModel; }
+        }
+
+        public RelayCommand SaveSearchModelCommand {
+            get { return _saveSearchModelCommand; }
         }
 
         public RelayCommand MovieSearchCommand {

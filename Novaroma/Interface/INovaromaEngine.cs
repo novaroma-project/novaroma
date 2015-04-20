@@ -40,6 +40,7 @@ namespace Novaroma.Interface {
         Task DeleteEntity(IEntity entity);
         Task SaveChanges(IEnumerable<IEntity> add, IEnumerable<IEntity> update, IEnumerable<IEntity> delete = null);
         Task SaveSettings(string settingName, string settingsJson);
+        Task<string> LoadSettings(string settingName);
 
         Task<IEnumerable<ScriptService>> GetScriptServices();
 

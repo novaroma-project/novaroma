@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using Newtonsoft.Json;
+using Novaroma.Interface;
 using Novaroma.Interface.Model;
 
 namespace Novaroma.Model.Search {
 
-    public class MediaSearchModel : ModelBase {
+    public abstract class MediaSearchModel : ModelBase, IConfigurable {
         private readonly MultiCheckSelection<string> _genres;
         private readonly IEnumerable<OrderSelection> _orderList;
         private string _query;
@@ -28,7 +31,7 @@ namespace Novaroma.Model.Search {
         private int _pageSize;
         private int _page;
 
-        public MediaSearchModel(ObservableCollection<string> mediaGenres) {
+        protected MediaSearchModel(ObservableCollection<string> mediaGenres) {
             _genres = new MultiCheckSelection<string>(mediaGenres);
             var orderEnumInfo = Constants.OrderFieldsEnumInfo;
             var orderList = new List<OrderSelection>();
@@ -256,5 +259,27 @@ namespace Novaroma.Model.Search {
             var handler = RefreshNeeded;
             if (handler != null) handler(this, EventArgs.Empty);
         }
+
+        protected abstract string SettingName { get; }
+
+        #region IConfigurable Members
+
+        string IConfigurable.SettingName {
+            get { return SettingName; }
+        }
+
+        INotifyPropertyChanged IConfigurable.Settings {
+            get { return this; }
+        }
+
+        string IConfigurable.SerializeSettings() {
+            return JsonConvert.SerializeObject(this);
+        }
+
+        void IConfigurable.DeserializeSettings(string settings) {
+            JsonConvert.PopulateObject(settings, this);
+        }
+
+        #endregion
     }
 }

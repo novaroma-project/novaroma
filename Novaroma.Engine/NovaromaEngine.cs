@@ -951,6 +951,14 @@ namespace Novaroma.Engine {
             });
         }
 
+        public Task<string> LoadSettings(string settingName) {
+            return Task.Run(() => {
+                using (var context = _contextFactory.CreateContext()) {
+                    return context.Settings.Where(s => s.SettingName == settingName).Select(s => s.Value).FirstOrDefault();
+                }
+            });
+        }
+
         public Task<IEnumerable<ScriptService>> GetScriptServices() {
             return Task.Run(() => {
                 using (var context = _contextFactory.CreateContext()) {

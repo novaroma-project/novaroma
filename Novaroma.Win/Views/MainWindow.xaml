@@ -297,6 +297,12 @@
                                     </DockPanel>
                                 </WrapPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Bottom">
+                                    <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Save}" Margin="0 0 5 0" 
+                                            Style="{StaticResource MetroCircleButtonStyle}" Width="50" Height="50"
+                                            Command="{Binding Path=DataContext.SaveSearchModelCommand, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}"
+                                            CommandParameter="{Binding}">
+                                        <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_save}" />
+                                    </Button>
                                     <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Clear}" Margin="0 0 5 0" 
                                             Style="{StaticResource MetroCircleButtonStyle}" Width="50" Height="50"
                                             Command="{Binding Path=DataContext.ClearTvShowSearchModelCommand, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}">
@@ -569,6 +575,12 @@
                                     </DockPanel>
                                 </WrapPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Bottom">
+                                    <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Save}" Margin="0 0 5 0" 
+                                            Style="{StaticResource MetroCircleButtonStyle}" Width="50" Height="50"
+                                            Command="{Binding Path=DataContext.SaveSearchModelCommand, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}"
+                                            CommandParameter="{Binding}">
+                                        <userControls:IconUserControl Width="20" Height="20" Fill="{StaticResource BlackBrush}" Visual="{StaticResource ni_save}" />
+                                    </Button>
                                     <Button ToolTip="{Binding Source={StaticResource Resources}, Path=Clear}" Margin="0 0 5 0" Style="{StaticResource MetroCircleButtonStyle}"
                                             Command="{Binding Path=DataContext.ClearMovieSearchModelCommand, RelativeSource={RelativeSource AncestorType=Controls:MetroWindow}}"
                                             Width="50" Height="50">

@@ -6,5 +6,9 @@ namespace Novaroma.Model.Search {
 
         public TvShowSearchModel(ObservableCollection<string> mediaGenres): base(mediaGenres) {
         }
+
+        protected override string SettingName {
+            get { return "TvShowSearchModel"; }
+        }
     }
 }
