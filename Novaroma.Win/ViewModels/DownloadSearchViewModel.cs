@@ -16,6 +16,8 @@ namespace Novaroma.Win.ViewModels {
         private string _searchQuery;
         private VideoQuality _videoQuality;
         private string _excludeKeywords;
+        private int? _minSize;
+        private int? _maxSize;
         private IEnumerable<IDownloadSearchResult> _results;
         private IDownloadSearchResult _selectedResult;
         private bool _isBusy;
@@ -29,10 +31,12 @@ namespace Novaroma.Win.ViewModels {
             _searchCommand = new RelayCommand(DoSearch, CanSearch);
         }
 
-        public Task InitSearch(string searchQuery, VideoQuality videoQuality, string excludeKeywords) {
+        public Task InitSearch(string searchQuery, VideoQuality videoQuality, string excludeKeywords, int? minSize, int? maxSize) {
             SearchQuery = searchQuery;
             VideoQuality = videoQuality;
             ExcludeKeywords = excludeKeywords;
+            MinSize = minSize;
+            MaxSize = maxSize;
 
             return Search();
         }
@@ -46,7 +50,7 @@ namespace Novaroma.Win.ViewModels {
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
                 IsBusy = true;
                 Results = await Novaroma.Helper.RunTask(() =>
-                    _engine.SearchForDownload(SearchQuery, VideoQuality, ExcludeKeywords),
+                    _engine.SearchForDownload(SearchQuery, VideoQuality, ExcludeKeywords, MinSize, MaxSize),
                     _exceptionHandler
                 );
                 IsBusy = false;
@@ -68,7 +72,7 @@ namespace Novaroma.Win.ViewModels {
         public string SearchQuery {
             get { return _searchQuery; }
             set {
-                if (Equals(_searchQuery, value)) return;
+                if (_searchQuery == value) return;
 
                 _searchQuery = value;
                 RaisePropertyChanged("SearchQuery");
@@ -78,7 +82,7 @@ namespace Novaroma.Win.ViewModels {
         public VideoQuality VideoQuality {
             get { return _videoQuality; }
             set {
-                if (Equals(_videoQuality, value)) return;
+                if (_videoQuality == value) return;
 
                 _videoQuality = value;
                 RaisePropertyChanged("VideoQuality");
@@ -88,10 +92,30 @@ namespace Novaroma.Win.ViewModels {
         public string ExcludeKeywords {
             get { return _excludeKeywords; }
             set {
-                if (Equals(_excludeKeywords, value)) return;
+                if (_excludeKeywords == value) return;
 
                 _excludeKeywords = value;
                 RaisePropertyChanged("ExcludeKeywords");
+            }
+        }
+
+        public int? MinSize {
+            get { return _minSize; }
+            set {
+                if (_minSize == value) return;
+
+                _minSize = value;
+                RaisePropertyChanged("MinSize");
+            }
+        }
+
+        public int? MaxSize {
+            get { return _maxSize; }
+            set {
+                if (_maxSize == value) return;
+
+                _maxSize = value;
+                RaisePropertyChanged("MaxSize");
             }
         }
 

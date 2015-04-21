@@ -10,7 +10,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Novaroma.Interface;
 using Novaroma.Model;
-using Novaroma.RuntimeServices;
 using Resx = Novaroma.Properties.Resources;
 
 namespace Novaroma.Win.Views {
@@ -54,22 +53,22 @@ namespace Novaroma.Win.Views {
         private string LoadCode() {
             switch (ServiceType) {
                 case ServiceType.DownloadEventHandler:
-                    return RuntimeDownloadEventHandler.DEFAULT_CODE;
+                    return Constants.DownloadEventHandlerDefaultCode;
                 case ServiceType.PluginService:
-                    return RuntimePluginService.DEFAULT_CODE;
+                    return Constants.PluginServiceDefaultCode;
                 case ServiceType.Downloader:
-                    return RuntimeDownloader.DEFAULT_CODE;
+                    return Constants.DownloaderDefaultCode;
                 case ServiceType.InfoProvider:
-                    return RuntimeInfoProvider.DEFAULT_CODE;
+                    return Constants.InfoProviderDefaultCode;
                 case ServiceType.SubtitleDownloader:
-                    return RuntimeSubtitleDownloader.DEFAULT_CODE;
+                    return Constants.SubtitleDownloaderDefaultCode;
                 case ServiceType.TorrentMovieProvider:
-                    return RuntimeTorrentMovieProvider.DEFAULT_CODE;
+                    return Constants.TorrentMovieProviderDefaultCode;
                 case ServiceType.TorrentTvShowProvider:
-                    return RuntimeTorrentTvShowProvider.DEFAULT_CODE;
+                    return Constants.TorrentTvShowProviderDefaultCode;
                 case ServiceType.ShowTracker:
-                    return RuntimeShowTracker.DEFAULT_CODE;
-                default: return RuntimePluginService.DEFAULT_CODE;
+                    return Constants.ShowTrackerDefaultCode;
+                default: return Constants.PluginServiceDefaultCode;
             }
         }
 
@@ -108,7 +107,7 @@ namespace Novaroma.Win.Views {
             if (CompilerResults.Errors.HasErrors) {
                 ErrorsFlyout.IsOpen = true;
                 return;
-            };
+            }
             var ass = CompilerResults.CompiledAssembly;
 
             var types = ass.ExportedTypes.Where(t => typeof(INovaromaService).IsAssignableFrom(t)).ToList();

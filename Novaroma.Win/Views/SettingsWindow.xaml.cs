@@ -164,9 +164,10 @@ namespace Novaroma.Win.Views {
         private async void SaveClick(object sender, RoutedEventArgs e) {
             _lateBindables.ForEach(lb => lb.AcceptChanges());
             _bindings.ForEach(b => b.UpdateSource());
-            await _viewModel.Save();
-            _shouldBeClosed = true;
+            if (!(await _viewModel.Save()))
+                return;
 
+            _shouldBeClosed = true;
             Close();
         }
 

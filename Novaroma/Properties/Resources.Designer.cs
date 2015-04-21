@@ -511,6 +511,25 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Maximum Size (MB)
+        ///.
+        /// </summary>
+        public static string DefaultMaxSize {
+            get {
+                return ResourceManager.GetString("DefaultMaxSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Minimum Size (MB).
+        /// </summary>
+        public static string DefaultMinSize {
+            get {
+                return ResourceManager.GetString("DefaultMinSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default Movie Exclude Keywords.
         /// </summary>
         public static string DefaultMovieExcludeKeywords {
@@ -1598,6 +1617,24 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max Size (MB).
+        /// </summary>
+        public static string MaxSize {
+            get {
+                return ResourceManager.GetString("MaxSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search results smaller than this size will be extracted from the list.
+        /// </summary>
+        public static string MaxSizeDescription {
+            get {
+                return ResourceManager.GetString("MaxSizeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         public static string MediaTypes {
@@ -1612,6 +1649,33 @@ namespace Novaroma.Properties {
         public static string Message {
             get {
                 return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum value cannot be greater than maximum value.
+        /// </summary>
+        public static string MinCannotExceedMax {
+            get {
+                return ResourceManager.GetString("MinCannotExceedMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min Size (MB).
+        /// </summary>
+        public static string MinSize {
+            get {
+                return ResourceManager.GetString("MinSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search results bigger than this size will be extracted from the list.
+        /// </summary>
+        public static string MinSizeDescription {
+            get {
+                return ResourceManager.GetString("MinSizeDescription", resourceCulture);
             }
         }
         
@@ -2345,7 +2409,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Size.
+        ///   Looks up a localized string similar to Size (MB).
         /// </summary>
         public static string SizeMB {
             get {

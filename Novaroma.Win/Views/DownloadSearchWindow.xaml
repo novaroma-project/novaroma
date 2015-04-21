@@ -9,7 +9,7 @@
         BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1 0 1 1" Padding="5" 
         Icon="pack://application:,,,/Novaroma;component/Images/Img_Logo_Window.ico"
         Title="{Binding Source={StaticResource Resources}, Path=Download, Converter={converters:ToLowerConverter}}" TitleCaps="False"
-        WindowStartupLocation="CenterScreen" Height="600" Width="950">
+        WindowStartupLocation="CenterScreen" Height="700" Width="1100">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,6 +27,8 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <DockPanel Margin="5" Height="30">
                         <TextBlock Margin="0 0 5 0" VerticalAlignment="Center" Text="{Binding Source={StaticResource Resources}, Path=Search}" />
@@ -38,12 +40,21 @@
                         <TextBox Text="{Binding ExcludeKeywords, UpdateSourceTrigger=PropertyChanged}" />
                     </DockPanel>
                     <DockPanel Grid.Column="2" Margin="5" Height="30">
-                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={StaticResource Resources}, Path=VideoQuality}"
-                           Margin="0 0 5 0"/>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={StaticResource Resources}, Path=VideoQuality}" Margin="0 0 5 0"/>
                         <ComboBox ItemsSource="{Binding VideoQualityEnumInfo, Source={x:Static utilities:StaticSource.Instance}}"
                           DisplayMemberPath="DisplayName" 
                           SelectedValue="{Binding VideoQuality, UpdateSourceTrigger=PropertyChanged}" 
                           SelectedValuePath="Item" />
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Margin="5" Height="30">
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={StaticResource Resources}, Path=MinSize}" 
+                                   ToolTip="{Binding Source={StaticResource Resources}, Path=MinSizeDescription}" Margin="0 0 5 0"/>
+                        <controls:NumericUpDown x:Name="MinSizeControl" Value="{Binding MinSize}" Maximum="{Binding ElementName=MaxSizeControl, Path=Value}" />
+                    </DockPanel>
+                    <DockPanel Grid.Column="4" Margin="5" Height="30">
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={StaticResource Resources}, Path=MaxSize}" 
+                                   ToolTip="{Binding Source={StaticResource Resources}, Path=MaxSizeDescription}" Margin="0 0 5 0"/>
+                        <controls:NumericUpDown x:Name="MaxSizeControl" Value="{Binding MaxSize}" Minimum="{Binding ElementName=MinSizeControl, Path=Value}" />
                     </DockPanel>
                 </Grid>
                 <Button Grid.Column="1" Name="SearchButton" HorizontalAlignment="Right" Margin="5" 

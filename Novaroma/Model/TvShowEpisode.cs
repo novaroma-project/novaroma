@@ -186,6 +186,14 @@ namespace Novaroma.Model {
             get { return TvShowSeason.TvShow.ExcludeKeywords; }
         }
 
+        int? IDownloadable.MinSize {
+            get { return TvShowSeason.TvShow.MinSize; }
+        }
+
+        int? IDownloadable.MaxSize {
+            get { return TvShowSeason.TvShow.MaxSize; }
+        }
+
         string IDownloadable.GetSearchQuery() {
             return Helper.PopulateTvShowEpisodeSearchQuery(this);
         }

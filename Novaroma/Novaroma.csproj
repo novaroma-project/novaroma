@@ -129,16 +129,6 @@
     <Compile Include="ReferencePreservingDataContractFormatAttribute.cs" />
     <Compile Include="ReferencePreservingDataContractSerializerOperationBehavior.cs" />
     <Compile Include="ResourceHelper.cs" />
-    <Compile Include="RuntimeServices\RuntimeAdvancedInfoProvider.cs" />
-    <Compile Include="RuntimeServices\RuntimePluginService.cs" />
-    <Compile Include="RuntimeServices\RuntimeDownloader.cs" />
-    <Compile Include="RuntimeServices\RuntimeDownloadEventHandler.cs" />
-    <Compile Include="RuntimeServices\RuntimeInfoProvider.cs" />
-    <Compile Include="RuntimeServices\RuntimeServiceBase.cs" />
-    <Compile Include="RuntimeServices\RuntimeShowTracker.cs" />
-    <Compile Include="RuntimeServices\RuntimeSubtitleDownloader.cs" />
-    <Compile Include="RuntimeServices\RuntimeTorrentMovieProvider.cs" />
-    <Compile Include="RuntimeServices\RuntimeTorrentTvShowProvider.cs" />
     <Compile Include="SeasonComparer.cs" />
     <Compile Include="ServiceType.cs" />
     <Compile Include="ServiceUnavailableException.cs" />
@@ -175,6 +165,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

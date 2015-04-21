@@ -75,7 +75,8 @@ namespace Novaroma.Interface {
         Task ExecuteTvShowUpdates();
         void ExecuteTvShowUpdateJob();
 
-        Task<IEnumerable<IDownloadSearchResult>> SearchForDownload(string searchQuery, VideoQuality videoQuality, string excludeKeywords);
+        Task<IEnumerable<IDownloadSearchResult>> SearchForDownload(string searchQuery, VideoQuality videoQuality = VideoQuality.Any, 
+                                                                   string excludeKeywords = null, int? minSize = null, int? maxSize = null);
         Task<string> Download(string directory, IDownloadSearchResult searchResult, IDownloadable downloadable = null);
 
         Task<IEnumerable<ISubtitleSearchResult>> SearchForSubtitleDownload(string searchQuery, Language[] languages = null);

@@ -1026,4 +1026,26 @@
   <data name="Ended" xml:space="preserve">
     <value>Sonlandı</value>
   </data>
+  <data name="DefaultMaxSize" xml:space="preserve">
+    <value>Varsayılan Maksimum Boyut (MB)
+</value>
+  </data>
+  <data name="DefaultMinSize" xml:space="preserve">
+    <value>Varsayılan Minimum Boyut (MB)</value>
+  </data>
+  <data name="MaxSize" xml:space="preserve">
+    <value>Maks Boyut (MB)</value>
+  </data>
+  <data name="MaxSizeDescription" xml:space="preserve">
+    <value>Arama sonuçlarından bu boyutu aşanlar atlanacak</value>
+  </data>
+  <data name="MinSize" xml:space="preserve">
+    <value>Min Boyut (MB)</value>
+  </data>
+  <data name="MinSizeDescription" xml:space="preserve">
+    <value>Arama sonuçlarından bu boyuttan küçük olanlar atlanacak</value>
+  </data>
+  <data name="MinCannotExceedMax" xml:space="preserve">
+    <value>Minimum değer maksimum değerden büyük olamaz</value>
+  </data>
 </root>

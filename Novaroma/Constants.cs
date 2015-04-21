@@ -54,7 +54,427 @@ namespace Novaroma {
 
         public static Dictionary<string, string> Quotes {
             get { return _quotes; }
-        } 
+        }
+
+        #region Codes
+
+        private const string AdvancedInfoProviderDefaultCode =
+@"
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Novaroma.Interface.Info;
+
+namespace Novaroma.MyServices {
+
+    public class MyAdvancedInfoProvider : IAdvancedInfoProvider {
+
+        #region IAdvancedInfoProvider Members
+
+        public IEnumerable<string> Genres {
+            get { throw new NotImplementedException(); }
+        }
+
+        public Task<IEnumerable<IAdvancedInfoSearchResult>> AdvancedSearch(string query, MediaTypes mediaTypes = MediaTypes.All, int? releaseYearStart = null, int? releaseYearEnd = null, 
+                                                                           float? ratingMin = null, float? ratingMax = null, int? numberOfVotesMin = null, int? numberOfVotesMax = null, 
+                                                                           int? runtimeMin = null, int? runtimeMax = null, IEnumerable<string> genres = null, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public Task<IMovieInfo> GetMovie(IAdvancedInfoSearchResult searchResult, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public Task<ITvShowInfo> GetTvShow(IAdvancedInfoSearchResult searchResult, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IInfoProvider Members
+
+        public Task<IEnumerable<IInfoSearchResult>> Search(string query, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public Task<IMovieInfo> GetMovie(IInfoSearchResult searchResult, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public Task<IMovieInfo> GetMovie(string id, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public Task<ITvShowInfo> GetTvShow(IInfoSearchResult searchResult, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public Task<ITvShowInfo> GetTvShow(string id, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MyAdvancedInfoProvider""; }
+        }
+
+        #endregion
+    }
+}
+";
+
+        public const string DownloaderDefaultCode =
+@"
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Novaroma.Interface.Download;
+
+namespace Novaroma.MyServices {
+
+    public class MyDownloader : IDownloader {
+
+        #region IDownloader Members
+
+        public Task<IEnumerable<IDownloadSearchResult>> SearchMovie(string name, int? year = null, string imdbId = null, VideoQuality videoQuality = VideoQuality.Any, 
+                                                                    string extraKeywords = null, string excludeKeywords = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> DownloadMovie(string path, string name, int? year = null, string imdbId = null, VideoQuality videoQuality = VideoQuality.Any, 
+                                          string extraKeywords = null, string excludeKeywords = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IDownloadSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName = null, string imdbId = null, 
+                                                                            VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> DownloadTvShowEpisode(string path, string name, int season, int episode, string episodeName = null, string imdbId = null, 
+                                                  VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IDownloadSearchResult>> Search(string query, VideoQuality videoQuality = VideoQuality.Any, string excludeKeywords = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> Download(string path, IDownloadSearchResult searchResult) {
+            throw new NotImplementedException();
+        }
+
+        public Task Refresh() {
+            throw new NotImplementedException();
+        }
+
+        public event EventHandler<DownloadCompletedEventArgs> DownloadCompleted;
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MyDownloader""; }
+        }
+
+        #endregion
+    }
+}
+";
+
+        public const string DownloadEventHandlerDefaultCode =
+@"
+using System;
+using Novaroma.Interface.EventHandler;
+using Novaroma.Model;
+
+namespace Novaroma.MyServices {
+
+    public class MyDownloadEventHandler : IDownloadEventHandler {
+
+        #region IDownloadEventHandler Members
+
+        public void MovieDownloaded(Movie movie) {
+            throw new NotImplementedException();
+        }
+
+        public void MovieSubtitleDownloaded(Movie movie) {
+            throw new NotImplementedException();
+        }
+
+        public void TvShowEpisodeDownloaded(TvShowEpisode episode) {
+            throw new NotImplementedException();
+        }
+
+        public void TvShowEpisodeSubtitleDownloaded(TvShowEpisode episode) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MyIDownloadEventHandler""; }
+        }
+
+        #endregion
+    }
+}
+";
+
+        public const string InfoProviderDefaultCode =
+@"
+using System;
+using Novaroma.Interface.Info;
+
+namespace Novaroma.MyServices {
+
+    public class MyInfoProvider : IInfoProvider {
+
+        #region IInfoProvider Members
+
+        public System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<IInfoSearchResult>> Search(string query, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public System.Threading.Tasks.Task<IMovieInfo> GetMovie(IInfoSearchResult searchResult, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public System.Threading.Tasks.Task<IMovieInfo> GetMovie(string id, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public System.Threading.Tasks.Task<ITvShowInfo> GetTvShow(IInfoSearchResult searchResult, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public System.Threading.Tasks.Task<ITvShowInfo> GetTvShow(string id, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MyInfoProvider""; }
+        }
+
+        #endregion
+    }
+}
+";
+
+        public const string PluginServiceDefaultCode =
+@"
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Threading.Tasks;
+using Novaroma.Interface;
+
+namespace Novaroma.MyServices {
+
+    public class MyPluginService : IPluginService {
+
+        #region IPluginService Members
+
+        public string DisplayName {
+            get { return ""MyPluginService""; }
+        }
+
+        public Task Activate() {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MyPluginService""; }
+        }
+
+        #endregion
+    }
+
+}
+";
+
+        public const string ShowTrackerDefaultCode =
+@"
+using System;
+using System.Threading.Tasks;
+using Novaroma.Interface.Track;
+
+namespace Novaroma.MyServices {
+
+    public class MyShowTracker : IShowTracker {
+
+
+        #region IShowTracker Members
+
+        public Task<ITvShowUpdate> GetTvShowUpdate(string id, DateTime? lastUpdate = null, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        public Task<ITvShowUpdate> GetTvShowUpdateByImdbId(string imdbId, DateTime? lastUpdate = null, Languages language = Languages.English) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MyShowTracker""; }
+        }
+
+        #endregion
+    }
+}";
+
+        public const string SubtitleDownloaderDefaultCode =
+@"
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Novaroma.Interface.Subtitle;
+
+namespace Novaroma.MyServices {
+
+    public class MySubtitleDownloader : ISubtitleDownloader {
+
+        #region ISubtitleDownloader Members
+
+        public Task<IEnumerable<ISubtitleSearchResult>> SearchForMovie(string name, string videoFilePath, Languages[] languages, string imdbId = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DownloadForMovie(string name, string videoFilePath, Languages[] languages, string imdbId = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ISubtitleSearchResult>> SearchForTvShowEpisode(string name, int season, int episode, string videoFilePath, Languages[] languages, string imdbId = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DownloadForTvShowEpisode(string name, int season, int episode, string videoFilePath, Languages[] languages, string imdbId = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ISubtitleSearchResult>> Search(string query, Languages[] languages, string imdbId = null) {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Download(string videoFilePath, ISubtitleSearchResult searchResult) {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Download(string videoFilePath, Languages[] languages, string imdbId = null) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MySubtitleDownloader""; }
+        }
+
+        #endregion
+    }
+}";
+
+        public const string TorrentMovieProviderDefaultCode =
+@"
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Novaroma.Interface.Download.Torrent;
+using Novaroma.Interface.Download.Torrent.Provider;
+
+namespace Novaroma.MyServices {
+
+    public class MyTorrentMovieProvider : ITorrentMovieProvider {
+
+        #region ITorrentMovieProvider Members
+
+        public Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year = null, string imdbId = null, VideoQuality videoQuality = VideoQuality.Any, 
+                                                                   string extraKeywords = null, string excludeKeywords = null, ITorrentDownloader service = null) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region ITorrentProvider Members
+
+        public Task<IEnumerable<ITorrentSearchResult>> Search(string search, VideoQuality videoQuality = VideoQuality.Any, 
+                                                              string excludeKeywords = null, ITorrentDownloader service = null) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MyTorrentMovieProvider""; }
+        }
+
+        #endregion
+    }
+}";
+
+        public const string TorrentTvShowProviderDefaultCode =
+@"
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Novaroma.Interface.Download.Torrent;
+using Novaroma.Interface.Download.Torrent.Provider;
+
+namespace Novaroma.MyServices {
+
+    public class MyTorrentTvShowProvider : ITorrentTvShowProvider {
+
+        #region ITorrentTvShowProvider Members
+
+        public Task<IEnumerable<ITorrentSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName, string imdbId = null, 
+                                                                           VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, 
+                                                                           string excludeKeywords = null, ITorrentDownloader service = null) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region ITorrentProvider Members
+
+        public Task<IEnumerable<ITorrentSearchResult>> Search(string search, VideoQuality videoQuality = VideoQuality.Any, 
+                                                              string excludeKeywords = null, ITorrentDownloader service = null) {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region INovaromaService Members
+
+        public string ServiceName {
+            get { return ""MyTorrentTvShowProvider""; }
+        }
+
+        #endregion
+    }
+}";
+
+        #endregion
 
         #region Quotes
 

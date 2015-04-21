@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Novaroma.Interface.Download.Torrent.Provider;
 using Novaroma.Interface.Model;
 using Novaroma.Properties;
@@ -19,6 +20,8 @@ namespace Novaroma.Services.UTorrent {
         private readonly SettingSingleSelection<EnumInfo<VideoQuality>> _defaultTvShowVideoQuality;
         private string _defaultTvShowExtraKeywords;
         private string _defaultTvShowExcludeKeywords;
+        private int? _defaultMinSize;
+        private int? _defaultMaxSize;
 
         public UTorrentSettings(IEnumerable<ITorrentMovieProvider> movieProviders, IEnumerable<ITorrentTvShowProvider> tvShowProviders) {
             _movieProviderSelection = new SettingMultiSelection<ITorrentMovieProvider>(movieProviders);
@@ -134,6 +137,42 @@ namespace Novaroma.Services.UTorrent {
                 _defaultTvShowExcludeKeywords = value;
                 RaisePropertyChanged("DefaultTvShowExcludeKeywords");
             }
+        }
+
+        [Display(Name = "DefaultMinSize", Description = "MinSizeDescription", GroupName = "Searching", ResourceType = typeof(Resources))]
+        public int? DefaultMinSize {
+            get { return _defaultMinSize; }
+            set {
+                if (_defaultMinSize == value) return;
+
+                _defaultMinSize = value;
+                RaisePropertyChanged("MinSize");
+            }
+        }
+
+        [Display(Name = "DefaultMaxSize", Description = "MaxSizeDescription", GroupName = "Searching", ResourceType = typeof(Resources))]
+        public int? DefaultMaxSize {
+            get { return _defaultMaxSize; }
+            set {
+                if (_defaultMaxSize == value) return;
+
+                _defaultMaxSize = value;
+                RaisePropertyChanged("MaxSize");
+            }
+        }
+
+        protected override IEnumerable<ValidationResult> Validate() {
+            var result = base.Validate() ?? Enumerable.Empty<ValidationResult>();
+
+            if (DefaultMinSize.HasValue && DefaultMaxSize.HasValue) {
+                var min = DefaultMinSize.Value;
+                var max = DefaultMaxSize.Value;
+
+                if (min > max)
+                    result = result.Union(new[] { new ValidationResult(Resources.MinCannotExceedMax) });
+            }
+
+            return result;
         }
     }
 }

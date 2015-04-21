@@ -14,6 +14,8 @@ namespace Novaroma.Interface.Model {
          VideoQuality VideoQuality { get; }
          string ExtraKeywords { get; }
          string ExcludeKeywords { get; }
+         int? MinSize { get; }
+         int? MaxSize { get; }
          Media Media { get; }
          string GetSearchQuery();
      }

@@ -1136,8 +1136,8 @@ namespace Novaroma.Engine {
                 var downloader = Settings.Downloader.SelectedItem;
                 if (downloader == null) return string.Empty;
 
-                var downloadKey = await downloader.DownloadMovie(movie.Directory, movie.OriginalTitle, movie.Year, movie.ImdbId,
-                                                                 movie.VideoQuality, movie.ExtraKeywords, movie.ExcludeKeywords);
+                var downloadKey = await downloader.DownloadMovie(movie.Directory, movie.OriginalTitle, movie.Year, movie.ImdbId, movie.VideoQuality, 
+                                                                 movie.ExtraKeywords, movie.ExcludeKeywords, movie.MinSize, movie.MaxSize);
                 Helper.SetDownloadProperties(downloadKey, movie);
 
                 if (!string.IsNullOrEmpty(downloadKey)) {
@@ -1165,7 +1165,7 @@ namespace Novaroma.Engine {
                 var directory = Helper.GetTvShowSeasonDirectory(Settings.TvShowSeasonDirectoryTemplate, episode);
 
                 var downloadKey = await downloader.DownloadTvShowEpisode(directory, show.OriginalTitle, season.Season, episode.Episode, episode.Name, show.ImdbId,
-                                                                         show.VideoQuality, show.ExtraKeywords, show.ExcludeKeywords);
+                                                                         show.VideoQuality, show.ExtraKeywords, show.ExcludeKeywords, show.MinSize, show.MaxSize);
                 Helper.SetDownloadProperties(downloadKey, episode);
 
                 if (!string.IsNullOrEmpty(downloadKey)) {
@@ -1298,11 +1298,12 @@ namespace Novaroma.Engine {
             _scheduler.TriggerJob(new JobKey(TvShowUpdateJobName));
         }
 
-        public async Task<IEnumerable<IDownloadSearchResult>> SearchForDownload(string searchQuery, VideoQuality videoQuality, string excludeKeywords) {
+        public async Task<IEnumerable<IDownloadSearchResult>> SearchForDownload(string searchQuery, VideoQuality videoQuality = VideoQuality.Any,
+                                                                                string excludeKeywords = null, int? minSize = null, int? maxSize = null) {
             await Task.Run(() => _downloadSemaphore.WaitOne());
 
             try {
-                return await Settings.Downloader.SelectedItem.Search(searchQuery, videoQuality, excludeKeywords);
+                return await Settings.Downloader.SelectedItem.Search(searchQuery, videoQuality, excludeKeywords, minSize, maxSize);
             }
             finally {
                 _downloadSemaphore.Release();

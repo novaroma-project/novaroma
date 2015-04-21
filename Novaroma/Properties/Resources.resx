@@ -1075,4 +1075,26 @@
   <data name="Ended" xml:space="preserve">
     <value>Ended</value>
   </data>
+  <data name="DefaultMaxSize" xml:space="preserve">
+    <value>Default Maximum Size (MB)
+</value>
+  </data>
+  <data name="DefaultMinSize" xml:space="preserve">
+    <value>Default Minimum Size (MB)</value>
+  </data>
+  <data name="MaxSize" xml:space="preserve">
+    <value>Max Size (MB)</value>
+  </data>
+  <data name="MinSize" xml:space="preserve">
+    <value>Min Size (MB)</value>
+  </data>
+  <data name="MinSizeDescription" xml:space="preserve">
+    <value>Search results bigger than this size will be extracted from the list</value>
+  </data>
+  <data name="MaxSizeDescription" xml:space="preserve">
+    <value>Search results smaller than this size will be extracted from the list</value>
+  </data>
+  <data name="MinCannotExceedMax" xml:space="preserve">
+    <value>Minimum value cannot be greater than maximum value</value>
+  </data>
 </root>

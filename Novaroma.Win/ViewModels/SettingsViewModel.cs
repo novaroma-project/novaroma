@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using Novaroma.Interface;
 using Novaroma.Properties;
 using Novaroma.Win.Utilities;
@@ -21,8 +22,18 @@ namespace Novaroma.Win.ViewModels {
             _editServiceSettingsCommand = new RelayCommand(EditServiceSettings);
         }
         
-        public async Task Save() {
+        public async Task<bool> Save() {
+            var idei = _settings as IDataErrorInfo;
+            if (idei != null) {
+                var error = idei.Error;
+                if (!string.IsNullOrEmpty(error)) {
+                    await DialogService.Error(Resources.MontyNi, error);
+                    return false;
+                }
+            }
+
             await _engine.SaveSettings(_configurable.SettingName, _configurable.SerializeSettings());
+            return true;
         }
 
         public void Cancel() {

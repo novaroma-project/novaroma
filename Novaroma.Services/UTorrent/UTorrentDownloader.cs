@@ -83,27 +83,50 @@ namespace Novaroma.Services.UTorrent {
         }
 
         public override Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year, string imdbId, VideoQuality videoQuality = VideoQuality.Any,
-                                                                            string extraKeywords = null, string excludeKeywords = null) {
+                                                                            string extraKeywords = null, string excludeKeywords = null, int? minSize = null, int? maxSize = null) {
             if (videoQuality == VideoQuality.Any)
                 videoQuality = Settings.DefaultMovieVideoQuality.SelectedItem.Item;
             if (string.IsNullOrEmpty(extraKeywords))
                 extraKeywords = Settings.DefaultMovieExtraKeywords;
             if (string.IsNullOrEmpty(excludeKeywords))
                 excludeKeywords = Settings.DefaultMovieExcludeKeywords;
+            if (minSize == null)
+                minSize = Settings.DefaultMinSize;
+            if (maxSize == null)
+                maxSize = Settings.DefaultMaxSize;
 
-            return base.SearchMovie(name, year, imdbId, videoQuality, extraKeywords, excludeKeywords);
+            return base.SearchMovie(name, year, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize);
         }
 
         public override Task<IEnumerable<ITorrentSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName, string imdbId,
-                                                                                    VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null) {
+                                                                                    VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null,
+                                                                                    int? minSize = null, int? maxSize = null) {
             if (videoQuality == VideoQuality.Any)
                 videoQuality = Settings.DefaultTvShowVideoQuality.SelectedItem.Item;
             if (string.IsNullOrEmpty(extraKeywords))
                 extraKeywords = Settings.DefaultTvShowExtraKeywords;
             if (string.IsNullOrEmpty(excludeKeywords))
                 excludeKeywords = Settings.DefaultTvShowExcludeKeywords;
+            if (minSize == null)
+                minSize = Settings.DefaultMinSize;
+            if (maxSize == null)
+                maxSize = Settings.DefaultMaxSize;
 
-            return base.SearchTvShowEpisode(name, season, episode, episodeName, imdbId, videoQuality, extraKeywords, excludeKeywords);
+            return base.SearchTvShowEpisode(name, season, episode, episodeName, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize);
+        }
+
+        public override Task<IEnumerable<ITorrentSearchResult>> Search(string query, VideoQuality videoQuality = VideoQuality.Any, string excludeKeywords = null, 
+                                                                       int? minSize = null, int? maxSize = null) {
+            if (videoQuality == VideoQuality.Any)
+                videoQuality = Settings.DefaultTvShowVideoQuality.SelectedItem.Item;
+            if (string.IsNullOrEmpty(excludeKeywords))
+                excludeKeywords = Settings.DefaultTvShowExcludeKeywords;
+            if (minSize == null)
+                minSize = Settings.DefaultMinSize;
+            if (maxSize == null)
+                maxSize = Settings.DefaultMaxSize;
+
+            return base.Search(query, videoQuality, excludeKeywords, minSize, maxSize);
         }
 
         protected override string ServiceName {
@@ -145,7 +168,9 @@ namespace Novaroma.Services.UTorrent {
                 DefaultMovieVideoQuality = Settings.DefaultMovieVideoQuality.SelectedItem.Name,
                 Settings.DefaultTvShowExcludeKeywords,
                 Settings.DefaultTvShowExtraKeywords,
-                DefaultTvShowVideoQuality = Settings.DefaultTvShowVideoQuality.SelectedItem.Name
+                DefaultTvShowVideoQuality = Settings.DefaultTvShowVideoQuality.SelectedItem.Name,
+                Settings.DefaultMinSize,
+                Settings.DefaultMaxSize
             };
             return JsonConvert.SerializeObject(o);
         }
@@ -189,6 +214,9 @@ namespace Novaroma.Services.UTorrent {
                 var defaultTvShowVideoQualityStr = defaultTvShowVideoQuality.ToString();
                 Settings.DefaultTvShowVideoQuality.SelectedItem = Settings.DefaultTvShowVideoQuality.Items.First(vq => vq.Name == defaultTvShowVideoQualityStr);
             }
+
+            Settings.DefaultMinSize = (int?)o["DefaultMinSize"];
+            Settings.DefaultMaxSize = (int?)o["DefaultMaxSize"];
         }
 
         #endregion

@@ -85,25 +85,27 @@ namespace Novaroma.Win {
 
         public static Task ManualDownload(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService, Movie movie) {
             var downloadable = (IDownloadable)movie;
-            return ManualDownload(engine, exceptionHandler, dialogService, movie, downloadable.GetSearchQuery(), downloadable.VideoQuality, downloadable.ExcludeKeywords, movie.Directory);
+            return ManualDownload(engine, exceptionHandler, dialogService, movie, downloadable.GetSearchQuery(), 
+                                  downloadable.VideoQuality, downloadable.ExcludeKeywords, downloadable.MinSize, downloadable.MaxSize, movie.Directory);
         }
 
         public static Task ManualDownload(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService, TvShowEpisode episode) {
             var downloadable = (IDownloadable)episode;
             var directory = Novaroma.Helper.GetTvShowSeasonDirectory(engine.TvShowSeasonDirectoryTemplate, episode);
-            return ManualDownload(engine, exceptionHandler, dialogService, episode, downloadable.GetSearchQuery(), downloadable.VideoQuality, downloadable.ExcludeKeywords, directory);
+            return ManualDownload(engine, exceptionHandler, dialogService, episode, downloadable.GetSearchQuery(), 
+                                  downloadable.VideoQuality, downloadable.ExcludeKeywords, downloadable.MinSize, downloadable.MaxSize, directory);
         }
 
         public static Task ManualDownload(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService) {
-            return ManualDownload(engine, exceptionHandler, dialogService, null, string.Empty, VideoQuality.Any, string.Empty, string.Empty);
+            return ManualDownload(engine, exceptionHandler, dialogService, null, string.Empty, VideoQuality.Any, string.Empty, null, null, string.Empty);
         }
 
         private static Task ManualDownload(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService, IDownloadable downloadable,
-                                                         string searchQuery, VideoQuality videoQuality, string excludeKeywords, string directory) {
+                                           string searchQuery, VideoQuality videoQuality, string excludeKeywords, int? minSize, int? maxSize, string directory) {
             var viewModel = new DownloadSearchViewModel(engine, exceptionHandler, dialogService, downloadable, directory);
             var window = new DownloadSearchWindow(viewModel);
 
-            var t = viewModel.InitSearch(searchQuery, videoQuality, excludeKeywords);
+            var t = viewModel.InitSearch(searchQuery, videoQuality, excludeKeywords, minSize, maxSize);
             window.ForceShow();
             return t;
         }

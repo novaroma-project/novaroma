@@ -21,6 +21,8 @@ namespace Novaroma.Model {
         private VideoQuality _videoQuality;
         private string _extraKeywords;
         private string _excludeKeywords;
+        private int? _minSize;
+        private int? _maxSize;
         private Language? _language;
         private bool _isDeleted;
         private ICollection<MediaGenre> _genres;
@@ -204,6 +206,26 @@ namespace Novaroma.Model {
 
                 _excludeKeywords = value;
                 RaisePropertyChanged("ExcludeKeywords");
+            }
+        }
+
+        public int? MinSize {
+            get { return _minSize; }
+            set {
+                if (_minSize == value) return;
+
+                _minSize = value;
+                RaisePropertyChanged("MinSize");
+            }
+        }
+
+        public int? MaxSize {
+            get { return _maxSize; }
+            set {
+                if (_minSize == value) return;
+
+                _maxSize = value;
+                RaisePropertyChanged("MaxSize");
             }
         }
 
