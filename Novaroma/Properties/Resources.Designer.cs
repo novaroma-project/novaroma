@@ -746,7 +746,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download Interval (mins).
+        ///   Looks up a localized string similar to Download Interval (min).
         /// </summary>
         public static string DownloadInterval {
             get {
@@ -2211,6 +2211,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save search selections as default.
+        /// </summary>
+        public static string SaveSearch {
+            get {
+                return ResourceManager.GetString("SaveSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Script Service.
         /// </summary>
         public static string ScriptService {
@@ -2490,7 +2499,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subtitle Download Interval (mins.).
+        ///   Looks up a localized string similar to Subtitle Download Interval (min).
         /// </summary>
         public static string SubtitleDownloadInterval {
             get {

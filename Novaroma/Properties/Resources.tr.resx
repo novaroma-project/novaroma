@@ -802,7 +802,7 @@
     <value>Güncellemeleri Denetle</value>
   </data>
   <data name="SubtitleDownloadInterval" xml:space="preserve">
-    <value>Altyazı İndirme Aralığı (dk.)</value>
+    <value>Altyazı İndirme Aralığı (dk)</value>
   </data>
   <data name="Afrikaans" xml:space="preserve">
     <value>Afrikaans</value>
@@ -1047,5 +1047,8 @@
   </data>
   <data name="MinCannotExceedMax" xml:space="preserve">
     <value>Minimum değer maksimum değerden büyük olamaz</value>
+  </data>
+  <data name="SaveSearch" xml:space="preserve">
+    <value>Arama seçimlerini varsayılan olarak kaydet</value>
   </data>
 </root>

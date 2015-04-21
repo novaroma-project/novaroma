@@ -310,7 +310,7 @@
     <value>Year</value>
   </data>
   <data name="DownloadInterval" xml:space="preserve">
-    <value>Download Interval (mins)</value>
+    <value>Download Interval (min)</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
@@ -851,7 +851,7 @@
     <value>Check for Updates</value>
   </data>
   <data name="SubtitleDownloadInterval" xml:space="preserve">
-    <value>Subtitle Download Interval (mins.)</value>
+    <value>Subtitle Download Interval (min)</value>
   </data>
   <data name="Afrikaans" xml:space="preserve">
     <value>Afrikaans</value>
@@ -1096,5 +1096,8 @@
   </data>
   <data name="MinCannotExceedMax" xml:space="preserve">
     <value>Minimum value cannot be greater than maximum value</value>
+  </data>
+  <data name="SaveSearch" xml:space="preserve">
+    <value>Save search selections as default</value>
   </data>
 </root>
