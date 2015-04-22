@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -62,8 +63,11 @@ namespace Novaroma.Win.Views {
             ProgressRing.IsActive = true;
 
             using (var client = new NovaromaWebClient()) {
+                var app = Assembly.GetExecutingAssembly();
+                var version = app.GetName().Version.ToString(3);
                 var feedback = new {
                     IsFrown,
+                    Version = version,
                     Message,
                     Logs = _logs.SelectedItems,
                     Email = mailCheck ? EmailTextBox.Text : string.Empty

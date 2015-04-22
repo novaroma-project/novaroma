@@ -266,7 +266,7 @@ namespace Novaroma.Engine {
         }
 
         private void DownloaderOnDownloadCompleted(object sender, DownloadCompletedEventArgs args) {
-            var fileName = Helper.GetFirstVideoFileName(args.DownloadDirectory);
+            if (!Directory.Exists(args.DownloadDirectory)) return;
 
             using (var context = _contextFactory.CreateContext()) {
                 var episode = context.TvShows.Episodes().FirstOrDefault(e => e.DownloadKey == args.DownloadKey);
@@ -279,6 +279,7 @@ namespace Novaroma.Engine {
                             args.Found = true;
                         }
 
+                        var fileName = Helper.GetFirstVideoFileName(args.DownloadDirectory);
                         if (!string.IsNullOrEmpty(fileName))
                             episode.FilePath = Directory.GetFiles(directory, fileName).FirstOrDefault();
                     }
@@ -320,6 +321,7 @@ namespace Novaroma.Engine {
                                 args.Found = true;
                             }
 
+                            var fileName = Helper.GetFirstVideoFileName(args.DownloadDirectory);
                             movie.FilePath = Directory.GetFiles(movie.Directory, fileName).FirstOrDefault();
                         }
                         movie.DownloadKey = string.Empty;
