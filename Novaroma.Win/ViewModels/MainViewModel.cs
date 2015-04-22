@@ -97,7 +97,8 @@ namespace Novaroma.Win.ViewModels {
 
         #endregion
 
-        public MainViewModel(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService, ILogger logger): base(dialogService) {
+        public MainViewModel(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService, ILogger logger)
+            : base(dialogService) {
             _engine = engine;
             _exceptionHandler = exceptionHandler;
             _logger = logger;
@@ -256,7 +257,7 @@ namespace Novaroma.Win.ViewModels {
             await LoadSavedSearchModels();
             _movieSearchModel.RefreshNeeded += (sender, args) => DoGetMovies();
             _tvShowSearchModel.RefreshNeeded += (sender, args) => DoGetTvShows();
-            
+
             await Task.WhenAll(GetMovies(), GetTvShows(), GetActivities());
         }
 
@@ -265,7 +266,7 @@ namespace Novaroma.Win.ViewModels {
         }
 
         private Task SaveSearchModel(MediaSearchModel searchModel) {
-            var c = (IConfigurable) searchModel;
+            var c = (IConfigurable)searchModel;
             return _engine.SaveSettings(c.SettingName, c.SerializeSettings());
         }
 
@@ -403,6 +404,11 @@ namespace Novaroma.Win.ViewModels {
 
         private async Task UpdateMovieInfo(Movie movie) {
             await Novaroma.Helper.RunTask(() => _engine.UpdateMediaInfo(movie), _exceptionHandler);
+
+            if (SelectedMovie == movie) {
+                SelectedMovie = null;
+                SelectedMovie = movie;
+            }
         }
 
         private async void DoDeleteMovie(object prm) {
@@ -570,6 +576,11 @@ namespace Novaroma.Win.ViewModels {
 
         private async Task UpdateTvShowInfo(TvShow tvShow) {
             await Novaroma.Helper.RunTask(() => _engine.UpdateTvShow(tvShow), _exceptionHandler);
+
+            if (SelectedTvShow == tvShow) {
+                SelectedTvShow = null;
+                SelectedTvShow = tvShow;
+            }
         }
 
         private async void DoDeleteTvShow(object prm) {
@@ -652,7 +663,7 @@ namespace Novaroma.Win.ViewModels {
         }
 
         private async Task LoadSavedSearchModel(MediaSearchModel searchModel) {
-            var c = (IConfigurable) searchModel;
+            var c = (IConfigurable)searchModel;
             var cs = await _engine.LoadSettings(c.SettingName);
             if (!string.IsNullOrEmpty(cs))
                 c.DeserializeSettings(cs);
@@ -703,7 +714,7 @@ namespace Novaroma.Win.ViewModels {
         private static void PlayActivity(Activity activity) {
             var path = activity.Path;
             if (string.IsNullOrWhiteSpace(path)) return;
-            
+
             var idx = path.IndexOf('>');
             if (idx > 0) {
                 var args = path.Substring(idx + 1).Trim();

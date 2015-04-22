@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Novaroma.Win.ViewModels;
 
@@ -16,15 +17,25 @@ namespace Novaroma.Win.Views {
         }
 
         private async void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-            await _viewModel.Download();
-
-            Close();
+            await Download();
         }
 
         private async void Download_Button_Click(object sender, RoutedEventArgs e) {
-            await _viewModel.Download();
+            await Download();
+        }
 
-            Close();
+        private async Task Download() {
+            IsEnabled = false;
+            _viewModel.IsBusy = true;
+            try {
+                await _viewModel.Download();
+
+                Close();
+            }
+            finally {
+                IsEnabled = true;
+                _viewModel.IsBusy = false;
+            }
         }
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e) {
