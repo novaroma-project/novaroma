@@ -59,12 +59,13 @@ namespace Novaroma.Win.ViewModels {
             return !IsBusy;
         }
 
-        public async Task Download() {
-            if (SelectedResult == null) return;
-
-            await Novaroma.Helper.RunTask(() =>
+        public async Task<bool> Download() {
+            IsBusy = true;
+            var result = await Novaroma.Helper.RunTask(() =>
                 _engine.DownloadSubtitle(_fileInfo.FullName, SelectedResult, _downloadable), _exceptionHandler
             );
+            IsBusy = false;
+            return result;
         }
 
         public string SearchQuery {

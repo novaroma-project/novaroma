@@ -26,16 +26,11 @@ namespace Novaroma.Win.Views {
 
         private async Task Download() {
             IsEnabled = false;
-            _viewModel.IsBusy = true;
-            try {
-                await _viewModel.Download();
-
+            var result = await _viewModel.Download();
+            if (!string.IsNullOrEmpty(result))
                 Close();
-            }
-            finally {
+            else 
                 IsEnabled = true;
-                _viewModel.IsBusy = false;
-            }
         }
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e) {

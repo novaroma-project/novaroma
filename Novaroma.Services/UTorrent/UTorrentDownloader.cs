@@ -60,7 +60,7 @@ namespace Novaroma.Services.UTorrent {
         }
 
         protected virtual UTorrentClient CreateClient() {
-            if (!Process.GetProcessesByName("uTorrent").Any()) {
+            if (!Process.GetProcessesByName("uTorrent").Any() && !Process.GetProcessesByName("BitTorrent").Any()) {
                 string path;
                 var registryExePath = (Registry.GetValue(@"HKEY_CLASSES_ROOT\uTorrent\shell\open\command", "", null)
                                       ?? Registry.GetValue(@"HKEY_CLASSES_ROOT\bittorrent\shell\open\command", "", null)) as string;
