@@ -279,9 +279,15 @@ namespace Novaroma.Engine {
                             args.Found = true;
                         }
 
-                        var fileName = Helper.GetFirstVideoFileName(args.DownloadDirectory);
-                        if (!string.IsNullOrEmpty(fileName))
-                            episode.FilePath = Directory.GetFiles(directory, fileName).FirstOrDefault();
+                        var directoryInfo = new DirectoryInfo(args.DownloadDirectory);
+                        var videoFiles = directoryInfo.GetFiles().Where(Helper.IsVideoFile).ToList();
+                        var episodeFile = videoFiles.FirstOrDefault(f => {
+                            int? s, e;
+                            Helper.DetectEpisodeInfo(f, episode.TvShowSeason.TvShow, out s, out e);
+                            return s == episode.TvShowSeason.Season && e == episode.Episode;
+                        }) ?? videoFiles.FirstOrDefault();
+                        if (episodeFile != null)
+                            episode.FilePath = Directory.GetFiles(directory, episodeFile.Name).FirstOrDefault();
                     }
                     episode.DownloadKey = string.Empty;
 

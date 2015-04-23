@@ -25,7 +25,7 @@ namespace Novaroma {
 
     public static class Helper {
         public static string[] VideoExtensions = { ".avi", ".mkv", ".mp4", ".m4p", ".m4v", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".m2v", ".wmv" };
-        public static string[] SubtitleExtensions = { ".srt", ".sub" };
+        public static string[] SubtitleExtensions = { ".srt", ".sub", ".ass" };
         private static readonly IEnumerable<char> _paranthesis = new List<char> { '(', '[', '{' };
 
         public static void SetCulture(Language language) {
@@ -84,9 +84,10 @@ namespace Novaroma {
             season = null;
             episode = null;
 
-            var name = fileInfo.Name;
+            var name = fileInfo.NameWithoutExtension();
             var titleRegex = tvShow.Title.Replace(" ", ".");
             name = Regex.Replace(name, titleRegex, string.Empty, RegexOptions.IgnoreCase);
+            name = Regex.Replace(name, "480p|720p|1080p", string.Empty, RegexOptions.IgnoreCase);
 
             Match match = null;
             var matches = Regex.Matches(name, @"(\d{1,2})\D*(\d{1,2})");
