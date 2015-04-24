@@ -1,5 +1,6 @@
 ﻿using System;
 using Novaroma.Interface.Info;
+using Novaroma.Properties;
 
 namespace Novaroma.Services.Imdb {
 
@@ -11,9 +12,11 @@ namespace Novaroma.Services.Imdb {
         private readonly int? _runtime;
         private readonly string _genres;
 
-        public ImdbAdvancedInfoSearchResult(ImdbInfoProvider service, string id, string url, string title, byte[] poster, int? year, bool isTvShow, 
-                                            string outline, string credits, float? rating, int? numberOfVotes, int? runtime, string genres)
-                : base(service, id, url, title, poster, string.Join(Environment.NewLine, new[] { credits, genres, outline }), year, isTvShow) {
+        public ImdbAdvancedInfoSearchResult(ImdbInfoProvider service, string id, string url, string title, byte[] poster, int? year, bool isTvShow,
+            string outline, string credits, float? rating, int? numberOfVotes, int? runtime, string genres)
+            : base(service, id, url, title, poster,
+                string.Join(Environment.NewLine,
+                    new[] {credits, runtime.HasValue ? runtime + " " + Resources.MinuteReduced + " - " + genres : string.Empty, outline}), year, isTvShow) {
             _outline = outline;
             _credits = credits;
             _rating = rating;

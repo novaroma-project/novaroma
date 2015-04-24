@@ -15,8 +15,8 @@ namespace Novaroma.Model.Search {
         private string _query;
         private int? _releaseYearStart;
         private int? _releaseYearEnd;
-        private float? _ratingMin;
-        private float? _ratingMax;
+        private float? _ratingMin = 0;
+        private float? _ratingMax = 10;
         private int? _numberOfVotesMin;
         private int? _numberOfVotesMax;
         private int? _runtimeMin;
@@ -71,6 +71,7 @@ namespace Novaroma.Model.Search {
 
                 _releaseYearStart = value;
                 RaisePropertyChanged("ReleaseYearStart");
+                RaisePropertyChanged("MinimumYear");
             }
         }
 
@@ -81,6 +82,7 @@ namespace Novaroma.Model.Search {
 
                 _releaseYearEnd = value;
                 RaisePropertyChanged("ReleaseYearEnd");
+                RaisePropertyChanged("MaximumYear");
             }
         }
 
@@ -111,6 +113,7 @@ namespace Novaroma.Model.Search {
 
                 _numberOfVotesMin = value;
                 RaisePropertyChanged("NumberOfVotesMin");
+                RaisePropertyChanged("MinimumVote");
             }
         }
 
@@ -121,6 +124,7 @@ namespace Novaroma.Model.Search {
 
                 _numberOfVotesMax = value;
                 RaisePropertyChanged("NumberOfVotesMax");
+                RaisePropertyChanged("MaximumVote");
             }
         }
 
@@ -131,6 +135,7 @@ namespace Novaroma.Model.Search {
 
                 _runtimeMin = value;
                 RaisePropertyChanged("RuntimeMin");
+                RaisePropertyChanged("MinimumRuntime");
             }
         }
 
@@ -141,6 +146,7 @@ namespace Novaroma.Model.Search {
 
                 _runtimeMax = value;
                 RaisePropertyChanged("RuntimeMax");
+                RaisePropertyChanged("MaximumRuntime");
             }
         }
 
@@ -248,6 +254,30 @@ namespace Novaroma.Model.Search {
 
         public MultiCheckSelection<string> Genres {
             get { return _genres; }
+        }
+
+        public int MinimumYear {
+            get { return ReleaseYearStart.HasValue ? ReleaseYearStart.Value : 1886; }
+        }
+
+        public int MaximumYear {
+            get { return ReleaseYearEnd.HasValue ? ReleaseYearEnd.Value : (DateTime.Now.Year + 1); }
+        }
+
+        public int MinimumVote {
+            get { return NumberOfVotesMin.HasValue ? NumberOfVotesMin.Value : 0; }
+        }
+
+        public int? MaximumVote {
+            get { return NumberOfVotesMax.HasValue ? NumberOfVotesMax.Value : (int?)null; }
+        }
+
+        public int MinimumRuntime {
+            get { return RuntimeMin.HasValue ? RuntimeMin.Value : 0; }
+        }
+
+        public int? MaximumRuntime {
+            get { return RuntimeMax.HasValue ? RuntimeMax.Value : (int?)null; }
         }
 
         public IEnumerable<OrderSelection> OrderList {

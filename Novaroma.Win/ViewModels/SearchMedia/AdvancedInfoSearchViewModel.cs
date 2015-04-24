@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,8 +33,8 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
 
         private int? _releaseYearStart;
         private int? _releaseYearEnd;
-        private float? _ratingMin;
-        private float? _ratingMax;
+        private float? _ratingMin = 0;
+        private float? _ratingMax = 10;
         private int? _numberOfVotesMin;
         private int? _numberOfVotesMax;
         private int? _runtimeMin;
@@ -170,6 +171,7 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
 
                 _releaseYearStart = value;
                 RaisePropertyChanged("ReleaseYearStart");
+                RaisePropertyChanged("MinimumYear");
             }
         }
 
@@ -180,6 +182,7 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
 
                 _releaseYearEnd = value;
                 RaisePropertyChanged("ReleaseYearEnd");
+                RaisePropertyChanged("MaximumYear");
             }
         }
 
@@ -210,6 +213,7 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
 
                 _numberOfVotesMin = value;
                 RaisePropertyChanged("NumberOfVotesMin");
+                RaisePropertyChanged("MinimumVote");
             }
         }
 
@@ -220,6 +224,7 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
 
                 _numberOfVotesMax = value;
                 RaisePropertyChanged("NumberOfVotesMax");
+                RaisePropertyChanged("MaximumVote");
             }
         }
 
@@ -230,6 +235,7 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
 
                 _runtimeMin = value;
                 RaisePropertyChanged("RuntimeMin");
+                RaisePropertyChanged("MinimumRuntime");
             }
         }
 
@@ -240,6 +246,7 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
 
                 _runtimeMax = value;
                 RaisePropertyChanged("RuntimeMax");
+                RaisePropertyChanged("MaximumRuntime");
             }
         }
 
@@ -255,6 +262,30 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
 
         public MultiCheckSelection<string> Genres {
             get { return _genres; }
+        }
+
+        public int MinimumYear {
+            get { return ReleaseYearStart.HasValue ? ReleaseYearStart.Value : 1886; }
+        }
+
+        public int MaximumYear {
+            get { return ReleaseYearEnd.HasValue ? ReleaseYearEnd.Value : (DateTime.Now.Year + 1); }
+        }
+
+        public int MinimumVote {
+            get { return NumberOfVotesMin.HasValue ? NumberOfVotesMin.Value : 0; }
+        }
+
+        public int? MaximumVote {
+            get { return NumberOfVotesMax.HasValue ? NumberOfVotesMax.Value : (int?) null; }
+        }
+
+        public int MinimumRuntime {
+            get { return RuntimeMin.HasValue ? RuntimeMin.Value : 0; }
+        }
+
+        public int? MaximumRuntime {
+            get { return RuntimeMax.HasValue ? RuntimeMax.Value : (int?) null; }
         }
 
         public IEnumerable<IInfoSearchMediaViewModel<IAdvancedInfoSearchResult>> Results {
