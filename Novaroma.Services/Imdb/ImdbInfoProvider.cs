@@ -132,7 +132,7 @@ namespace Novaroma.Services.Imdb {
                     var titleNode = item.QuerySelector("td[class='title']");
                     var title = titleNode.QuerySelector("a").TextContent.Trim();
                     var yearType = titleNode.QuerySelector("span[class='year_type']").TextContent.Trim();
-                    var isTvShow = yearType.Contains("TV Series)") || yearType.Contains("TV Mini-Series)");
+                    var isTvShow = yearType.Contains(" Series)") || yearType.Contains("Mini-Series)");
 
                     int? year = null;
                     if (yearType.Length > 4) {

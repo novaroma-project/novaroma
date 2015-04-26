@@ -87,7 +87,7 @@ namespace Novaroma {
             var name = fileInfo.NameWithoutExtension();
             var titleRegex = tvShow.Title.Replace(" ", ".");
             name = Regex.Replace(name, titleRegex, string.Empty, RegexOptions.IgnoreCase);
-            name = Regex.Replace(name, "480p|720p|1080p", string.Empty, RegexOptions.IgnoreCase);
+            name = Regex.Replace(name, "480p|720p|1080p|x264", string.Empty, RegexOptions.IgnoreCase);
 
             Match match = null;
             var matches = Regex.Matches(name, @"(\d{1,2})\D*(\d{1,2})");
@@ -115,6 +115,7 @@ namespace Novaroma {
                     var seasonResult = Regex.Match(fileInfo.Directory.Name, @"(\d{1,2})");
                     if (seasonResult.Success)
                         tmpSeasonStr = seasonResult.Groups[0].Value;
+                    else season = 1;
                 }
                 tmpEpisodeStr = matchStr;
             }
