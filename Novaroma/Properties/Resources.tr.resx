@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,996 +59,996 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="About" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="About" xml:space="preserve">
     <value>Hakkında</value>
   </data>
-  <data name="AdvancedInfoProvider" xml:space="preserve">
+	<data name="AdvancedInfoProvider" xml:space="preserve">
     <value>Gelişmiş Bilgi Sağlayıcı</value>
   </data>
-  <data name="AdvancedSearchResultCount" xml:space="preserve">
+	<data name="AdvancedSearchResultCount" xml:space="preserve">
     <value>Gelişmiş Arama Sonuç Sayısı</value>
   </data>
-  <data name="AirDate" xml:space="preserve">
+	<data name="AirDate" xml:space="preserve">
     <value>Yayın Tarihi</value>
   </data>
-  <data name="All" xml:space="preserve">
+	<data name="All" xml:space="preserve">
     <value>Hepsi</value>
   </data>
-  <data name="AreYouSure" xml:space="preserve">
+	<data name="AreYouSure" xml:space="preserve">
     <value>Emin misiniz?</value>
   </data>
-  <data name="AutoDownloadNewEpisodes" xml:space="preserve">
+	<data name="AutoDownloadNewEpisodes" xml:space="preserve">
     <value>Yeni Bölümleri Otomatik İndir</value>
   </data>
-  <data name="Back" xml:space="preserve">
+	<data name="Back" xml:space="preserve">
     <value>Geri</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
+	<data name="Cancel" xml:space="preserve">
     <value>İptal</value>
   </data>
-  <data name="Directory" xml:space="preserve">
+	<data name="Directory" xml:space="preserve">
     <value>Klasör</value>
   </data>
-  <data name="Downloader" xml:space="preserve">
+	<data name="Downloader" xml:space="preserve">
     <value>İndirici</value>
   </data>
-  <data name="Edit" xml:space="preserve">
+	<data name="Edit" xml:space="preserve">
     <value>Düzenle</value>
   </data>
-  <data name="Episode" xml:space="preserve">
+	<data name="Episode" xml:space="preserve">
     <value>Bölüm</value>
   </data>
-  <data name="EpisodeName" xml:space="preserve">
+	<data name="EpisodeName" xml:space="preserve">
     <value>Bölüm Adı</value>
   </data>
-  <data name="Episodes" xml:space="preserve">
+	<data name="Episodes" xml:space="preserve">
     <value>Bölümler</value>
   </data>
-  <data name="Filter" xml:space="preserve">
+	<data name="Filter" xml:space="preserve">
     <value>Filtre</value>
   </data>
-  <data name="Filters" xml:space="preserve">
+	<data name="Filters" xml:space="preserve">
     <value>Filtreler</value>
   </data>
-  <data name="Finish" xml:space="preserve">
+	<data name="Finish" xml:space="preserve">
     <value>Bitir</value>
   </data>
-  <data name="FoundMedia" xml:space="preserve">
+	<data name="FoundMedia" xml:space="preserve">
     <value>Bulunan Medya</value>
   </data>
-  <data name="Genre" xml:space="preserve">
+	<data name="Genre" xml:space="preserve">
     <value>Tür</value>
   </data>
-  <data name="ImdbId" xml:space="preserve">
+	<data name="ImdbId" xml:space="preserve">
     <value>Imdb Id</value>
   </data>
-  <data name="InfoProvider" xml:space="preserve">
+	<data name="InfoProvider" xml:space="preserve">
     <value>Bilgi Sağlayıcı</value>
   </data>
-  <data name="IsDeleted" xml:space="preserve">
+	<data name="IsDeleted" xml:space="preserve">
     <value>Silindi?</value>
   </data>
-  <data name="IsWatched" xml:space="preserve">
+	<data name="IsWatched" xml:space="preserve">
     <value>İzlendi?</value>
   </data>
-  <data name="Main" xml:space="preserve">
+	<data name="Main" xml:space="preserve">
     <value>Basit</value>
   </data>
-  <data name="MontyNi" xml:space="preserve">
+	<data name="MontyNi" xml:space="preserve">
     <value>Ni!</value>
   </data>
-  <data name="MontyNudgeNudge" xml:space="preserve">
+	<data name="MontyNudgeNudge" xml:space="preserve">
     <value>Nudge, nudge, wink, wink. Know what I mean?</value>
   </data>
-  <data name="MovieDirectory" xml:space="preserve">
+	<data name="MovieDirectory" xml:space="preserve">
     <value>Film Klasörü</value>
   </data>
-  <data name="MovieProviders" xml:space="preserve">
+	<data name="MovieProviders" xml:space="preserve">
     <value>Film Sağlayıcılar</value>
   </data>
-  <data name="Movies" xml:space="preserve">
+	<data name="Movies" xml:space="preserve">
     <value>Filmler</value>
   </data>
-  <data name="New" xml:space="preserve">
+	<data name="New" xml:space="preserve">
     <value>Yeni</value>
   </data>
-  <data name="Next" xml:space="preserve">
+	<data name="Next" xml:space="preserve">
     <value>İleri</value>
   </data>
-  <data name="NotWatched" xml:space="preserve">
+	<data name="NotWatched" xml:space="preserve">
     <value>İzlenmedi</value>
   </data>
-  <data name="Outline" xml:space="preserve">
+	<data name="Outline" xml:space="preserve">
     <value>Özet</value>
   </data>
-  <data name="Overview" xml:space="preserve">
+	<data name="Overview" xml:space="preserve">
     <value>Genel Bakış</value>
   </data>
-  <data name="Password" xml:space="preserve">
+	<data name="Password" xml:space="preserve">
     <value>Şifre</value>
   </data>
-  <data name="Port" xml:space="preserve">
+	<data name="Port" xml:space="preserve">
     <value>Port</value>
   </data>
-  <data name="Poster" xml:space="preserve">
+	<data name="Poster" xml:space="preserve">
     <value>Poster</value>
   </data>
-  <data name="Previous" xml:space="preserve">
+	<data name="Previous" xml:space="preserve">
     <value>Önceki</value>
   </data>
-  <data name="Rating" xml:space="preserve">
+	<data name="Rating" xml:space="preserve">
     <value>Puan</value>
   </data>
-  <data name="ReleaseYear" xml:space="preserve">
+	<data name="ReleaseYear" xml:space="preserve">
     <value>Yayın Yılı</value>
   </data>
-  <data name="Remove" xml:space="preserve">
+	<data name="Remove" xml:space="preserve">
     <value>Çıkart</value>
   </data>
-  <data name="Runtime" xml:space="preserve">
+	<data name="Runtime" xml:space="preserve">
     <value>Süre</value>
   </data>
-  <data name="Save" xml:space="preserve">
+	<data name="Save" xml:space="preserve">
     <value>Kaydet</value>
   </data>
-  <data name="Search" xml:space="preserve">
+	<data name="Search" xml:space="preserve">
     <value>Ara</value>
   </data>
-  <data name="Season" xml:space="preserve">
+	<data name="Season" xml:space="preserve">
     <value>Sezon</value>
   </data>
-  <data name="Seasons" xml:space="preserve">
+	<data name="Seasons" xml:space="preserve">
     <value>Sezonlar</value>
   </data>
-  <data name="Select" xml:space="preserve">
+	<data name="Select" xml:space="preserve">
     <value>Seç</value>
   </data>
-  <data name="Services" xml:space="preserve">
+	<data name="Services" xml:space="preserve">
     <value>Servisler</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+	<data name="Settings" xml:space="preserve">
     <value>Ayarlar</value>
   </data>
-  <data name="ShowTracker" xml:space="preserve">
+	<data name="ShowTracker" xml:space="preserve">
     <value>Dizi Takipçisi</value>
   </data>
-  <data name="SubtitleDownloader" xml:space="preserve">
+	<data name="SubtitleDownloader" xml:space="preserve">
     <value>Altyazı İndirici</value>
   </data>
-  <data name="Title" xml:space="preserve">
+	<data name="Title" xml:space="preserve">
     <value>Başlık</value>
   </data>
-  <data name="TvShowDirectory" xml:space="preserve">
+	<data name="TvShowDirectory" xml:space="preserve">
     <value>Dizi Klasörü</value>
   </data>
-  <data name="TvShowProviders" xml:space="preserve">
+	<data name="TvShowProviders" xml:space="preserve">
     <value>Dizi Sağlayıcılar</value>
   </data>
-  <data name="TvShows" xml:space="preserve">
+	<data name="TvShows" xml:space="preserve">
     <value>Diziler</value>
   </data>
-  <data name="UseAdvancedSearch" xml:space="preserve">
+	<data name="UseAdvancedSearch" xml:space="preserve">
     <value>Gelişmiş Arama Kullan</value>
   </data>
-  <data name="UserName" xml:space="preserve">
+	<data name="UserName" xml:space="preserve">
     <value>Kullanıcı Adı</value>
   </data>
-  <data name="Vote" xml:space="preserve">
+	<data name="Vote" xml:space="preserve">
     <value>Oy</value>
   </data>
-  <data name="VoteCount" xml:space="preserve">
+	<data name="VoteCount" xml:space="preserve">
     <value>Oy Sayısı</value>
   </data>
-  <data name="Watched" xml:space="preserve">
+	<data name="Watched" xml:space="preserve">
     <value>İzlendi</value>
   </data>
-  <data name="Year" xml:space="preserve">
+	<data name="Year" xml:space="preserve">
     <value>Yıl</value>
   </data>
-  <data name="DownloadInterval" xml:space="preserve">
+	<data name="DownloadInterval" xml:space="preserve">
     <value>İndirme Aralığı (dk)</value>
   </data>
-  <data name="Clear" xml:space="preserve">
+	<data name="Clear" xml:space="preserve">
     <value>Temizle</value>
   </data>
-  <data name="SubtitleLanguages" xml:space="preserve">
+	<data name="SubtitleLanguages" xml:space="preserve">
     <value>Altyazı Dilleri</value>
   </data>
-  <data name="English" xml:space="preserve">
+	<data name="English" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="Turkish" xml:space="preserve">
+	<data name="Turkish" xml:space="preserve">
     <value>Turkish</value>
   </data>
-  <data name="NotSelected" xml:space="preserve">
+	<data name="NotSelected" xml:space="preserve">
     <value>Seçilmedi</value>
   </data>
-  <data name="Selected" xml:space="preserve">
+	<data name="Selected" xml:space="preserve">
     <value>Seçili</value>
   </data>
-  <data name="Language" xml:space="preserve">
+	<data name="Language" xml:space="preserve">
     <value>Dil</value>
   </data>
-  <data name="TvShowUpdateInterval" xml:space="preserve">
+	<data name="TvShowUpdateInterval" xml:space="preserve">
     <value>Dizi Güncelleme Periyodu (saat)</value>
   </data>
-  <data name="Activities" xml:space="preserve">
+	<data name="Activities" xml:space="preserve">
     <value>Aktiviteler</value>
   </data>
-  <data name="MovieDownloaded" xml:space="preserve">
+	<data name="MovieDownloaded" xml:space="preserve">
     <value>'{0}' indirme tamamlandı</value>
   </data>
-  <data name="MovieSubtitleDownloaded" xml:space="preserve">
+	<data name="MovieSubtitleDownloaded" xml:space="preserve">
     <value>'{0}' altyazı indirildi</value>
   </data>
-  <data name="TvShowEpisodeDownloaded" xml:space="preserve">
+	<data name="TvShowEpisodeDownloaded" xml:space="preserve">
     <value>'{0}' sezon {1} bölüm {2} indirildi</value>
   </data>
-  <data name="TvShowEpisodeSubtitleDownloaded" xml:space="preserve">
+	<data name="TvShowEpisodeSubtitleDownloaded" xml:space="preserve">
     <value>'{0}' sezon {1} bölüm {2} altyazı indirildi</value>
   </data>
-  <data name="Description" xml:space="preserve">
+	<data name="Description" xml:space="preserve">
     <value>Açıklama</value>
   </data>
-  <data name="MovieDownloadStarted" xml:space="preserve">
+	<data name="MovieDownloadStarted" xml:space="preserve">
     <value>'{0}' indirme başladı</value>
   </data>
-  <data name="TvShowEpisodeDownloadStarted" xml:space="preserve">
+	<data name="TvShowEpisodeDownloadStarted" xml:space="preserve">
     <value>'{0}' sezon {1} bölüm {2} indirme başladı</value>
   </data>
-  <data name="BackgroundDownload" xml:space="preserve">
+	<data name="BackgroundDownload" xml:space="preserve">
     <value>İndir</value>
   </data>
-  <data name="MinuteReduced" xml:space="preserve">
+	<data name="MinuteReduced" xml:space="preserve">
     <value>dk.</value>
   </data>
-  <data name="BaseUrl" xml:space="preserve">
+	<data name="BaseUrl" xml:space="preserve">
     <value>Adres</value>
   </data>
-  <data name="Path" xml:space="preserve">
+	<data name="Path" xml:space="preserve">
     <value>Dizin</value>
   </data>
-  <data name="MovieDetails" xml:space="preserve">
+	<data name="MovieDetails" xml:space="preserve">
     <value>Film Detayları</value>
   </data>
-  <data name="Date" xml:space="preserve">
+	<data name="Date" xml:space="preserve">
     <value>Tarih</value>
   </data>
-  <data name="Dutch" xml:space="preserve">
+	<data name="Dutch" xml:space="preserve">
     <value>Dutch</value>
   </data>
-  <data name="French" xml:space="preserve">
+	<data name="French" xml:space="preserve">
     <value>French</value>
   </data>
-  <data name="German" xml:space="preserve">
+	<data name="German" xml:space="preserve">
     <value>German</value>
   </data>
-  <data name="Italian" xml:space="preserve">
+	<data name="Italian" xml:space="preserve">
     <value>Italian</value>
   </data>
-  <data name="Russian" xml:space="preserve">
+	<data name="Russian" xml:space="preserve">
     <value>Russian</value>
   </data>
-  <data name="Exit" xml:space="preserve">
+	<data name="Exit" xml:space="preserve">
     <value>Çıkış</value>
   </data>
-  <data name="OrderBy" xml:space="preserve">
+	<data name="OrderBy" xml:space="preserve">
     <value>Sırala</value>
   </data>
-  <data name="Discover" xml:space="preserve">
+	<data name="Discover" xml:space="preserve">
     <value>Keşfet</value>
   </data>
-  <data name="ExcludeExisting" xml:space="preserve">
+	<data name="ExcludeExisting" xml:space="preserve">
     <value>Varolanları Atla</value>
   </data>
-  <data name="ExecuteBackgroundDownloads" xml:space="preserve">
+	<data name="ExecuteBackgroundDownloads" xml:space="preserve">
     <value>İndirmeleri Çalıştır</value>
   </data>
-  <data name="MovieSearchPattern" xml:space="preserve">
+	<data name="MovieSearchPattern" xml:space="preserve">
     <value>Film Arama Şablonu</value>
   </data>
-  <data name="MovieSearchPatternDescription" xml:space="preserve">
+	<data name="MovieSearchPatternDescription" xml:space="preserve">
     <value>Geçerli parametreler: %movieName%, %year%, %imdbId%</value>
   </data>
-  <data name="TvShowEpisodeSearchPattern" xml:space="preserve">
+	<data name="TvShowEpisodeSearchPattern" xml:space="preserve">
     <value>Dizi Bölüm Arama Şablonu</value>
   </data>
-  <data name="TvShowEpisodeSearchPatternDescription" xml:space="preserve">
+	<data name="TvShowEpisodeSearchPatternDescription" xml:space="preserve">
     <value>Geçerli parametreler: %showName%, %imdbId%, %season%, %episode%</value>
   </data>
-  <data name="ExecuteBackgroundTvShowUpdates" xml:space="preserve">
+	<data name="ExecuteBackgroundTvShowUpdates" xml:space="preserve">
     <value>Dizi Güncellemelerini Çalıştır</value>
   </data>
-  <data name="MediaTypes" xml:space="preserve">
+	<data name="MediaTypes" xml:space="preserve">
     <value>Tip</value>
   </data>
-  <data name="Feedback" xml:space="preserve">
+	<data name="Feedback" xml:space="preserve">
     <value>Geribildirim</value>
   </data>
-  <data name="IncludeEmail" xml:space="preserve">
+	<data name="IncludeEmail" xml:space="preserve">
     <value>Email adresimi de gönder</value>
   </data>
-  <data name="FrownWatermark" xml:space="preserve">
+	<data name="FrownWatermark" xml:space="preserve">
     <value>Neleri beğenmediğinizi ya da ne sıkıntı yaşadığınızı bize söyleyin</value>
   </data>
-  <data name="ItemsPerPage" xml:space="preserve">
+	<data name="ItemsPerPage" xml:space="preserve">
     <value>Sayfa Başı Adet</value>
   </data>
-  <data name="Page" xml:space="preserve">
+	<data name="Page" xml:space="preserve">
     <value>Sayfa</value>
   </data>
-  <data name="Message" xml:space="preserve">
+	<data name="Message" xml:space="preserve">
     <value>Mesaj</value>
   </data>
-  <data name="ErrorLogs" xml:space="preserve">
+	<data name="ErrorLogs" xml:space="preserve">
     <value>Hata Kayıtları</value>
   </data>
-  <data name="Download" xml:space="preserve">
+	<data name="Download" xml:space="preserve">
     <value>İndir</value>
   </data>
-  <data name="NotifyIconToolTip" xml:space="preserve">
+	<data name="NotifyIconToolTip" xml:space="preserve">
     <value>Çift-tık ana pencere için, sağ tık menü</value>
   </data>
-  <data name="ExcludeKeywords" xml:space="preserve">
+	<data name="ExcludeKeywords" xml:space="preserve">
     <value>İstenmeyen Kelimeler</value>
   </data>
-  <data name="ExcludeKeywordsDescription" xml:space="preserve">
+	<data name="ExcludeKeywordsDescription" xml:space="preserve">
     <value>Arama sonuçlarında bu kelimeleri içerenler atlanacak</value>
   </data>
-  <data name="DefaultTvShowExtraKeywords" xml:space="preserve">
+	<data name="DefaultTvShowExtraKeywords" xml:space="preserve">
     <value>Varsayılan Dizi Ekstra Kelimeler</value>
   </data>
-  <data name="ExtraKeywordsDescription" xml:space="preserve">
+	<data name="ExtraKeywordsDescription" xml:space="preserve">
     <value>Arama sorgusuna eklenecek</value>
   </data>
-  <data name="DefaultMovieVideoQuality" xml:space="preserve">
+	<data name="DefaultMovieVideoQuality" xml:space="preserve">
     <value>Varsayılan Film Görüntü Kalitesi</value>
   </data>
-  <data name="DefaultTvShowVideoQuality" xml:space="preserve">
+	<data name="DefaultTvShowVideoQuality" xml:space="preserve">
     <value>Varsayılan Dizi Görüntü Kalitesi</value>
   </data>
-  <data name="DefaultMovieExcludeKeywords" xml:space="preserve">
+	<data name="DefaultMovieExcludeKeywords" xml:space="preserve">
     <value>Varsayılan Fim İstenmeyen Kelimeler</value>
   </data>
-  <data name="DefaultTvShowExcludeKeywords" xml:space="preserve">
+	<data name="DefaultTvShowExcludeKeywords" xml:space="preserve">
     <value>Varsayılan Dizi İstenmeyen Kelimeler</value>
   </data>
-  <data name="Any" xml:space="preserve">
+	<data name="Any" xml:space="preserve">
     <value>Farketmez</value>
   </data>
-  <data name="P1080" xml:space="preserve">
+	<data name="P1080" xml:space="preserve">
     <value>1080p</value>
   </data>
-  <data name="P480" xml:space="preserve">
+	<data name="P480" xml:space="preserve">
     <value>480p</value>
   </data>
-  <data name="P720" xml:space="preserve">
+	<data name="P720" xml:space="preserve">
     <value>720p</value>
   </data>
-  <data name="EmailAddress" xml:space="preserve">
+	<data name="EmailAddress" xml:space="preserve">
     <value>Email Adresi</value>
   </data>
-  <data name="Documentary" xml:space="preserve">
+	<data name="Documentary" xml:space="preserve">
     <value>Belgesel</value>
   </data>
-  <data name="Delete" xml:space="preserve">
+	<data name="Delete" xml:space="preserve">
     <value>Sil</value>
   </data>
-  <data name="Play" xml:space="preserve">
+	<data name="Play" xml:space="preserve">
     <value>Oynat</value>
   </data>
-  <data name="PlayUnseenEpisode" xml:space="preserve">
+	<data name="PlayUnseenEpisode" xml:space="preserve">
     <value>İzlenmemiş Bölümü Oynat</value>
   </data>
-  <data name="DefaultMovieExtraKeywords" xml:space="preserve">
+	<data name="DefaultMovieExtraKeywords" xml:space="preserve">
     <value>Varsayılan Fim Ekstra Kelimeler</value>
   </data>
-  <data name="ExtraKeywords" xml:space="preserve">
+	<data name="ExtraKeywords" xml:space="preserve">
     <value>Ekstra Kelimeler</value>
   </data>
-  <data name="BackgroundSubtitleDownload" xml:space="preserve">
+	<data name="BackgroundSubtitleDownload" xml:space="preserve">
     <value>Altyazı İndir</value>
   </data>
-  <data name="Downloaded" xml:space="preserve">
+	<data name="Downloaded" xml:space="preserve">
     <value>İndirildi</value>
   </data>
-  <data name="Name" xml:space="preserve">
+	<data name="Name" xml:space="preserve">
     <value>Ad</value>
   </data>
-  <data name="Availability" xml:space="preserve">
+	<data name="Availability" xml:space="preserve">
     <value>Uygunluk</value>
   </data>
-  <data name="Age" xml:space="preserve">
+	<data name="Age" xml:space="preserve">
     <value>Yaş</value>
   </data>
-  <data name="FileCount" xml:space="preserve">
+	<data name="FileCount" xml:space="preserve">
     <value>Dosya Sayısı</value>
   </data>
-  <data name="Leech" xml:space="preserve">
+	<data name="Leech" xml:space="preserve">
     <value>Sömüren</value>
   </data>
-  <data name="Provider" xml:space="preserve">
+	<data name="Provider" xml:space="preserve">
     <value>Sağlayıcı</value>
   </data>
-  <data name="DownloadSubtitle" xml:space="preserve">
+	<data name="DownloadSubtitle" xml:space="preserve">
     <value>Altyazı İndir</value>
   </data>
-  <data name="DiscoverFiles" xml:space="preserve">
+	<data name="DiscoverFiles" xml:space="preserve">
     <value>Dosyaları Keşfet</value>
   </data>
-  <data name="DownloadCount" xml:space="preserve">
+	<data name="DownloadCount" xml:space="preserve">
     <value>İndirilme Sayısı</value>
   </data>
-  <data name="CheckAndUpdateDirectoryFiles" xml:space="preserve">
+	<data name="CheckAndUpdateDirectoryFiles" xml:space="preserve">
     <value>Dosyaları Kontrol Et ve Güncelle</value>
   </data>
-  <data name="GoToDirectory" xml:space="preserve">
+	<data name="GoToDirectory" xml:space="preserve">
     <value>Klasöre Git</value>
   </data>
-  <data name="ManualDownload" xml:space="preserve">
+	<data name="ManualDownload" xml:space="preserve">
     <value>Seçerek İndir</value>
   </data>
-  <data name="ManualSubtitleDownload" xml:space="preserve">
+	<data name="ManualSubtitleDownload" xml:space="preserve">
     <value>Seçerek Altyazı İndir</value>
   </data>
-  <data name="ImdbIdNotFound" xml:space="preserve">
+	<data name="ImdbIdNotFound" xml:space="preserve">
     <value>Imdb Id bulunamadı</value>
   </data>
-  <data name="DeleteExtensions" xml:space="preserve">
+	<data name="DeleteExtensions" xml:space="preserve">
     <value>Silinecek Eklentiler</value>
   </data>
-  <data name="DeleteExtensionsDescription" xml:space="preserve">
+	<data name="DeleteExtensionsDescription" xml:space="preserve">
     <value>İndirilen dosyalardan bu eklentilere sahip olanlar silinecek (; ile ayırın)</value>
   </data>
-  <data name="LogDate" xml:space="preserve">
+	<data name="LogDate" xml:space="preserve">
     <value>Kayıt Tarihi</value>
   </data>
-  <data name="StopWatching" xml:space="preserve">
+	<data name="StopWatching" xml:space="preserve">
     <value>Takibi Bırak</value>
   </data>
-  <data name="TvShowSeasonDirectoryTemplate" xml:space="preserve">
+	<data name="TvShowSeasonDirectoryTemplate" xml:space="preserve">
     <value>Sezon Klasör Şablonu</value>
   </data>
-  <data name="SendAFrown" xml:space="preserve">
+	<data name="SendAFrown" xml:space="preserve">
     <value>Üzgün Surat Gönder</value>
   </data>
-  <data name="SendASmile" xml:space="preserve">
+	<data name="SendASmile" xml:space="preserve">
     <value>Gülücük Gönder</value>
   </data>
-  <data name="TellUsWhatYouThink" xml:space="preserve">
+	<data name="TellUsWhatYouThink" xml:space="preserve">
     <value>Ne düşündüğünüzü bize söyleyin</value>
   </data>
-  <data name="SmileWatermark" xml:space="preserve">
+	<data name="SmileWatermark" xml:space="preserve">
     <value>Neleri beğendiğinizi bize söyleyin</value>
   </data>
-  <data name="Send" xml:space="preserve">
+	<data name="Send" xml:space="preserve">
     <value>Gönder</value>
   </data>
-  <data name="VideoQuality" xml:space="preserve">
+	<data name="VideoQuality" xml:space="preserve">
     <value>Görüntü Kalitesi</value>
   </data>
-  <data name="UpdateMovieInfo" xml:space="preserve">
+	<data name="UpdateMovieInfo" xml:space="preserve">
     <value>Film Bilgisini Güncelle</value>
   </data>
-  <data name="UpdateTvShowInfo" xml:space="preserve">
+	<data name="UpdateTvShowInfo" xml:space="preserve">
     <value>Dizi Bilgisini Güncelle</value>
   </data>
-  <data name="Votes" xml:space="preserve">
+	<data name="Votes" xml:space="preserve">
     <value>Oylar</value>
   </data>
-  <data name="UpdateTvShow" xml:space="preserve">
+	<data name="UpdateTvShow" xml:space="preserve">
     <value>Diziyi Güncelle</value>
   </data>
-  <data name="SubtitleDownloaded" xml:space="preserve">
+	<data name="SubtitleDownloaded" xml:space="preserve">
     <value>Altyazı İndirildi</value>
   </data>
-  <data name="Seed" xml:space="preserve">
+	<data name="Seed" xml:space="preserve">
     <value>Besleyenler</value>
   </data>
-  <data name="SizeMB" xml:space="preserve">
+	<data name="SizeMB" xml:space="preserve">
     <value>Boyut (MB)</value>
   </data>
-  <data name="SearchResultNotFound" xml:space="preserve">
+	<data name="SearchResultNotFound" xml:space="preserve">
     <value>Arama sonucu bulunamadı. Seçerek arama yapabilirsiniz</value>
   </data>
-  <data name="SearchResultNotFoundForSubtitle" xml:space="preserve">
+	<data name="SearchResultNotFoundForSubtitle" xml:space="preserve">
     <value>Arama sonucu altyazı buluanamadı. Seçerek arama yapabilirsiniz</value>
   </data>
-  <data name="SubtitleSearch" xml:space="preserve">
+	<data name="SubtitleSearch" xml:space="preserve">
     <value>Altyazı Ara</value>
   </data>
-  <data name="ServiceIdNotFound" xml:space="preserve">
+	<data name="ServiceIdNotFound" xml:space="preserve">
     <value>{0} Id bulunamadı</value>
   </data>
-  <data name="UnsupportedSearchResult" xml:space="preserve">
+	<data name="UnsupportedSearchResult" xml:space="preserve">
     <value>Desteklenmeyen arama sonucu</value>
   </data>
-  <data name="ServiceUnavailable" xml:space="preserve">
+	<data name="ServiceUnavailable" xml:space="preserve">
     <value>Servise Erişilemedi: {0}</value>
   </data>
-  <data name="Advanced" xml:space="preserve">
+	<data name="Advanced" xml:space="preserve">
     <value>Gelişmiş</value>
   </data>
-  <data name="SelectAFile" xml:space="preserve">
+	<data name="SelectAFile" xml:space="preserve">
     <value>Bir dosya seçin</value>
   </data>
-  <data name="BackupDatabase" xml:space="preserve">
+	<data name="BackupDatabase" xml:space="preserve">
     <value>Veritabanını Yedekle</value>
   </data>
-  <data name="SubtitleDownloaders" xml:space="preserve">
+	<data name="SubtitleDownloaders" xml:space="preserve">
     <value>Altyazı İndiriciler</value>
   </data>
-  <data name="NotFound" xml:space="preserve">
+	<data name="NotFound" xml:space="preserve">
     <value>Bulunamadı</value>
   </data>
-  <data name="SubtitleNotFound" xml:space="preserve">
+	<data name="SubtitleNotFound" xml:space="preserve">
     <value>Altyazı Bulunamadı</value>
   </data>
-  <data name="Add" xml:space="preserve">
+	<data name="Add" xml:space="preserve">
     <value>Ekle</value>
   </data>
-  <data name="ScriptServices" xml:space="preserve">
+	<data name="ScriptServices" xml:space="preserve">
     <value>Çalışma zamanı Servisler</value>
   </data>
-  <data name="MovieTorrentProvider" xml:space="preserve">
+	<data name="MovieTorrentProvider" xml:space="preserve">
     <value>Film Torrent Sağlayıcı</value>
   </data>
-  <data name="TvShowTorrentProvider" xml:space="preserve">
+	<data name="TvShowTorrentProvider" xml:space="preserve">
     <value>Dizi Torrent Sağlayıcı</value>
   </data>
-  <data name="DownloadEventHandlers" xml:space="preserve">
+	<data name="DownloadEventHandlers" xml:space="preserve">
     <value>İndirme Olay İşleyici</value>
   </data>
-  <data name="LoadDefaultCode" xml:space="preserve">
+	<data name="LoadDefaultCode" xml:space="preserve">
     <value>Varsayılan Kodu Yükle</value>
   </data>
-  <data name="Build" xml:space="preserve">
+	<data name="Build" xml:space="preserve">
     <value>Derle</value>
   </data>
-  <data name="CompiledCodeNovaromaServiceRequired" xml:space="preserve">
+	<data name="CompiledCodeNovaromaServiceRequired" xml:space="preserve">
     <value>Derlenen kod içinde Novaroma Servisi bulunamadı</value>
   </data>
-  <data name="Errors" xml:space="preserve">
+	<data name="Errors" xml:space="preserve">
     <value>Hatalar</value>
   </data>
-  <data name="Warnings" xml:space="preserve">
+	<data name="Warnings" xml:space="preserve">
     <value>Uyarılar</value>
   </data>
-  <data name="Column" xml:space="preserve">
+	<data name="Column" xml:space="preserve">
     <value>Sütun</value>
   </data>
-  <data name="Line" xml:space="preserve">
+	<data name="Line" xml:space="preserve">
     <value>Satır</value>
   </data>
-  <data name="RestartNovaroma" xml:space="preserve">
+	<data name="RestartNovaroma" xml:space="preserve">
     <value>Novaromayı Baştan Başlat</value>
   </data>
-  <data name="CompiledCodeParameterlessCtorRequired" xml:space="preserve">
+	<data name="CompiledCodeParameterlessCtorRequired" xml:space="preserve">
     <value>Tüm servis tipleri parametresiz constructor içermek zorundadır</value>
   </data>
-  <data name="ScriptService" xml:space="preserve">
+	<data name="ScriptService" xml:space="preserve">
     <value>Çalışma zamanı Servis</value>
   </data>
-  <data name="DownloadEventHandler" xml:space="preserve">
+	<data name="DownloadEventHandler" xml:space="preserve">
     <value>İndirme Olay İşleyici</value>
   </data>
-  <data name="ClearActvitiesAndLogs" xml:space="preserve">
+	<data name="ClearActvitiesAndLogs" xml:space="preserve">
     <value>Aktivite ve Log Temizle</value>
   </data>
-  <data name="MovieSubtitleNotFound" xml:space="preserve">
+	<data name="MovieSubtitleNotFound" xml:space="preserve">
     <value>'{0}' altyazısı bulunamadı</value>
   </data>
-  <data name="TvShowEpisodeSubtitleNotFound" xml:space="preserve">
+	<data name="TvShowEpisodeSubtitleNotFound" xml:space="preserve">
     <value>'{0}' sezon {1} bölüm {2} altyazısı bulunamadı</value>
   </data>
-  <data name="SubtitleNotDownloaded_DownloadersNotSelected" xml:space="preserve">
+	<data name="SubtitleNotDownloaded_DownloadersNotSelected" xml:space="preserve">
     <value>Altyazı indirilemedi: indirici seçilmedi. Ayarlardan seçim yapabilirsiniz</value>
   </data>
-  <data name="SubtitleNotDownloaded_LanguagesNotSelected" xml:space="preserve">
+	<data name="SubtitleNotDownloaded_LanguagesNotSelected" xml:space="preserve">
     <value>Altyazı indirilemedi: dil seçilmedi. Ayarlardan seçim yapabilirsiniz</value>
   </data>
-  <data name="SubtitleNotDownloaded_FileNotFound" xml:space="preserve">
+	<data name="SubtitleNotDownloaded_FileNotFound" xml:space="preserve">
     <value>Altyazı indirilemedi: '{0}' dosyası bulunamadı</value>
   </data>
-  <data name="FileNotFound" xml:space="preserve">
+	<data name="FileNotFound" xml:space="preserve">
     <value>Dosya bulunamadı: '{0}'</value>
   </data>
-  <data name="Configuration" xml:space="preserve">
+	<data name="Configuration" xml:space="preserve">
     <value>Tercihler</value>
   </data>
-  <data name="UtorrentWebUISettings" xml:space="preserve">
+	<data name="UtorrentWebUISettings" xml:space="preserve">
     <value>μTorrent Web UI Ayarları</value>
   </data>
-  <data name="VideoFiles" xml:space="preserve">
+	<data name="VideoFiles" xml:space="preserve">
     <value>Video Dosyaları</value>
   </data>
-  <data name="AddSubdirectories" xml:space="preserve">
+	<data name="AddSubdirectories" xml:space="preserve">
     <value>Alt Klasörleri Ekle</value>
   </data>
-  <data name="MakeSpecialFolder" xml:space="preserve">
+	<data name="MakeSpecialFolder" xml:space="preserve">
     <value>Klasörleri özelleştir</value>
   </data>
-  <data name="MakeSpecialFolderDescription" xml:space="preserve">
+	<data name="MakeSpecialFolderDescription" xml:space="preserve">
     <value>Windows explorer içinde novaroma klasörü novaroma ikonu, dizi ve film klasörleri poster şeklinde görüntülenecek</value>
   </data>
-  <data name="PluginService" xml:space="preserve">
+	<data name="PluginService" xml:space="preserve">
     <value>Eklenti Servis</value>
   </data>
-  <data name="Plugins" xml:space="preserve">
+	<data name="Plugins" xml:space="preserve">
     <value>Eklentiler</value>
   </data>
-  <data name="BuyCoffee" xml:space="preserve">
+	<data name="BuyCoffee" xml:space="preserve">
     <value>Kahve ısmarla</value>
   </data>
-  <data name="DirectoryToAdd" xml:space="preserve">
+	<data name="DirectoryToAdd" xml:space="preserve">
     <value>'{0}' novarama takip edilen klasör listesine eklenecek</value>
   </data>
-  <data name="DeleteDirectoriesAlso" xml:space="preserve">
+	<data name="DeleteDirectoriesAlso" xml:space="preserve">
     <value>Klasörleri de Sil</value>
   </data>
-  <data name="DeleteDirectoriesAlsoDescription" xml:space="preserve">
+	<data name="DeleteDirectoriesAlsoDescription" xml:space="preserve">
     <value>Bir film ya da dizi silindikten sonra, onun klasörünü de sil</value>
   </data>
-  <data name="MarkAsWatched" xml:space="preserve">
+	<data name="MarkAsWatched" xml:space="preserve">
     <value>İzlendi Olarak İşaretle</value>
   </data>
-  <data name="Movie" xml:space="preserve">
+	<data name="Movie" xml:space="preserve">
     <value>Film</value>
   </data>
-  <data name="TvShow" xml:space="preserve">
+	<data name="TvShow" xml:space="preserve">
     <value>Dizi</value>
   </data>
-  <data name="NovaromaSlogan" xml:space="preserve">
+	<data name="NovaromaSlogan" xml:space="preserve">
     <value>Arkana yaslan, rahatla ve sadece izle!</value>
   </data>
-  <data name="VisitWebSite" xml:space="preserve">
+	<data name="VisitWebSite" xml:space="preserve">
     <value>Web Sitesini Ziyaret Et</value>
   </data>
-  <data name="HowToAddMovie" xml:space="preserve">
+	<data name="HowToAddMovie" xml:space="preserve">
     <value>Film nasıl eklenir ?</value>
   </data>
-  <data name="HowToAddTvShow" xml:space="preserve">
+	<data name="HowToAddTvShow" xml:space="preserve">
     <value>Dizi nasıl eklenir ?</value>
   </data>
-  <data name="HowTo" xml:space="preserve">
+	<data name="HowTo" xml:space="preserve">
     <value>Nasıl Yapılır?</value>
   </data>
-  <data name="Url_HowToAddMovie" xml:space="preserve">
+	<data name="Url_HowToAddMovie" xml:space="preserve">
     <value>http://www.novaroma.net/tr/film-nasil-eklenir.html</value>
   </data>
-  <data name="Url_HowToAddTvShow" xml:space="preserve">
+	<data name="Url_HowToAddTvShow" xml:space="preserve">
     <value>http://www.novaroma.net/tr/dizi-nasil-eklenir.html</value>
   </data>
-  <data name="Url_HowToConfigureUtorrentWebUISettings" xml:space="preserve">
+	<data name="Url_HowToConfigureUtorrentWebUISettings" xml:space="preserve">
     <value>http://www.novaroma.net/tr/utorrent-web-ui-ayarlari-nasil-yapilir.html</value>
   </data>
-  <data name="InvalidEmail" xml:space="preserve">
+	<data name="InvalidEmail" xml:space="preserve">
     <value>Geçersiz mail adresi</value>
   </data>
-  <data name="GoToPluginDirectory" xml:space="preserve">
+	<data name="GoToPluginDirectory" xml:space="preserve">
     <value>Eklenti klasörünü aç</value>
   </data>
-  <data name="TvShowFileNameFormatInfo" xml:space="preserve">
+	<data name="TvShowFileNameFormatInfo" xml:space="preserve">
     <value>Video dosyası bulunamadıysa video ismini aşağıdaki örnekteki gibi değiştirebilirsiniz</value>
   </data>
-  <data name="AddScriptService" xml:space="preserve">
+	<data name="AddScriptService" xml:space="preserve">
     <value>Çalışma Zamanı Servisi Ekle</value>
   </data>
-  <data name="PluginAddInfo" xml:space="preserve">
+	<data name="PluginAddInfo" xml:space="preserve">
     <value>Eklenti klasöründeki değişikliklerin etkili olması için Novaroma'yı yeniden başlatmanız gerekmektedir</value>
   </data>
-  <data name="PluginDirectory" xml:space="preserve">
+	<data name="PluginDirectory" xml:space="preserve">
     <value>Eklenti Klasörü</value>
   </data>
-  <data name="CheckForUpdates" xml:space="preserve">
+	<data name="CheckForUpdates" xml:space="preserve">
     <value>Güncellemeleri Denetle</value>
   </data>
-  <data name="SubtitleDownloadInterval" xml:space="preserve">
+	<data name="SubtitleDownloadInterval" xml:space="preserve">
     <value>Altyazı İndirme Aralığı (dk)</value>
   </data>
-  <data name="Afrikaans" xml:space="preserve">
+	<data name="Afrikaans" xml:space="preserve">
     <value>Afrikaans</value>
   </data>
-  <data name="Albanian" xml:space="preserve">
+	<data name="Albanian" xml:space="preserve">
     <value>Albanian</value>
   </data>
-  <data name="Arabic" xml:space="preserve">
+	<data name="Arabic" xml:space="preserve">
     <value>Arabic</value>
   </data>
-  <data name="Armenian" xml:space="preserve">
+	<data name="Armenian" xml:space="preserve">
     <value>Armenian</value>
   </data>
-  <data name="Basque" xml:space="preserve">
+	<data name="Basque" xml:space="preserve">
     <value>Basque</value>
   </data>
-  <data name="Belarusian" xml:space="preserve">
+	<data name="Belarusian" xml:space="preserve">
     <value>Belarusian</value>
   </data>
-  <data name="Bengali" xml:space="preserve">
+	<data name="Bengali" xml:space="preserve">
     <value>Bengali</value>
   </data>
-  <data name="Bosnian" xml:space="preserve">
+	<data name="Bosnian" xml:space="preserve">
     <value>Bosnian</value>
   </data>
-  <data name="Breton" xml:space="preserve">
+	<data name="Breton" xml:space="preserve">
     <value>Breton</value>
   </data>
-  <data name="Bulgarian" xml:space="preserve">
+	<data name="Bulgarian" xml:space="preserve">
     <value>Bulgarian</value>
   </data>
-  <data name="Burmese" xml:space="preserve">
+	<data name="Burmese" xml:space="preserve">
     <value>Burmese</value>
   </data>
-  <data name="Catalan" xml:space="preserve">
+	<data name="Catalan" xml:space="preserve">
     <value>Catalan</value>
   </data>
-  <data name="ChineseBilingual" xml:space="preserve">
+	<data name="ChineseBilingual" xml:space="preserve">
     <value>Chinese (Bilingual)</value>
   </data>
-  <data name="ChineseSimplified" xml:space="preserve">
+	<data name="ChineseSimplified" xml:space="preserve">
     <value>Chinese (Simplified)</value>
   </data>
-  <data name="ChineseTraditional" xml:space="preserve">
+	<data name="ChineseTraditional" xml:space="preserve">
     <value>Chinese (Traditional)</value>
   </data>
-  <data name="Croatian" xml:space="preserve">
+	<data name="Croatian" xml:space="preserve">
     <value>Croatian</value>
   </data>
-  <data name="Czech" xml:space="preserve">
+	<data name="Czech" xml:space="preserve">
     <value>Czech</value>
   </data>
-  <data name="Danish" xml:space="preserve">
+	<data name="Danish" xml:space="preserve">
     <value>Danish</value>
   </data>
-  <data name="Esperanto" xml:space="preserve">
+	<data name="Esperanto" xml:space="preserve">
     <value>Esperanto</value>
   </data>
-  <data name="Estonian" xml:space="preserve">
+	<data name="Estonian" xml:space="preserve">
     <value>Estonian</value>
   </data>
-  <data name="Finnish" xml:space="preserve">
+	<data name="Finnish" xml:space="preserve">
     <value>Finnish</value>
   </data>
-  <data name="Galician" xml:space="preserve">
+	<data name="Galician" xml:space="preserve">
     <value>Galician</value>
   </data>
-  <data name="Georgian" xml:space="preserve">
+	<data name="Georgian" xml:space="preserve">
     <value>Georgian</value>
   </data>
-  <data name="Greek" xml:space="preserve">
+	<data name="Greek" xml:space="preserve">
     <value>Greek</value>
   </data>
-  <data name="Hebrew" xml:space="preserve">
+	<data name="Hebrew" xml:space="preserve">
     <value>Hebrew</value>
   </data>
-  <data name="Hindi" xml:space="preserve">
+	<data name="Hindi" xml:space="preserve">
     <value>Hindi</value>
   </data>
-  <data name="Hungarian" xml:space="preserve">
+	<data name="Hungarian" xml:space="preserve">
     <value>Hungarian</value>
   </data>
-  <data name="Icelandic" xml:space="preserve">
+	<data name="Icelandic" xml:space="preserve">
     <value>Icelandic</value>
   </data>
-  <data name="Indonesian" xml:space="preserve">
+	<data name="Indonesian" xml:space="preserve">
     <value>Indonesian</value>
   </data>
-  <data name="Japanese" xml:space="preserve">
+	<data name="Japanese" xml:space="preserve">
     <value>Japanese</value>
   </data>
-  <data name="Kazakh" xml:space="preserve">
+	<data name="Kazakh" xml:space="preserve">
     <value>Kazakh</value>
   </data>
-  <data name="Khmer" xml:space="preserve">
+	<data name="Khmer" xml:space="preserve">
     <value>Khmer</value>
   </data>
-  <data name="Korean" xml:space="preserve">
+	<data name="Korean" xml:space="preserve">
     <value>Korean</value>
   </data>
-  <data name="Latvian" xml:space="preserve">
+	<data name="Latvian" xml:space="preserve">
     <value>Latvian</value>
   </data>
-  <data name="Lithuanian" xml:space="preserve">
+	<data name="Lithuanian" xml:space="preserve">
     <value>Lithuanian</value>
   </data>
-  <data name="Luxembourgish" xml:space="preserve">
+	<data name="Luxembourgish" xml:space="preserve">
     <value>Luxembourgish</value>
   </data>
-  <data name="Macedonian" xml:space="preserve">
+	<data name="Macedonian" xml:space="preserve">
     <value>Macedonian</value>
   </data>
-  <data name="Malay" xml:space="preserve">
+	<data name="Malay" xml:space="preserve">
     <value>Malay</value>
   </data>
-  <data name="Malayalam" xml:space="preserve">
+	<data name="Malayalam" xml:space="preserve">
     <value>Malayalam</value>
   </data>
-  <data name="Manipuri" xml:space="preserve">
+	<data name="Manipuri" xml:space="preserve">
     <value>Manipuri</value>
   </data>
-  <data name="Mongolian" xml:space="preserve">
+	<data name="Mongolian" xml:space="preserve">
     <value>Mongolian</value>
   </data>
-  <data name="Montenegrin" xml:space="preserve">
+	<data name="Montenegrin" xml:space="preserve">
     <value>Montenegrin</value>
   </data>
-  <data name="Norwegian" xml:space="preserve">
+	<data name="Norwegian" xml:space="preserve">
     <value>Norwegian</value>
   </data>
-  <data name="Occitan" xml:space="preserve">
+	<data name="Occitan" xml:space="preserve">
     <value>Occitan</value>
   </data>
-  <data name="Persian" xml:space="preserve">
+	<data name="Persian" xml:space="preserve">
     <value>Persian</value>
   </data>
-  <data name="Polish" xml:space="preserve">
+	<data name="Polish" xml:space="preserve">
     <value>Polish</value>
   </data>
-  <data name="Portuguese" xml:space="preserve">
+	<data name="Portuguese" xml:space="preserve">
     <value>Portuguese</value>
   </data>
-  <data name="Romanian" xml:space="preserve">
+	<data name="Romanian" xml:space="preserve">
     <value>Romanian</value>
   </data>
-  <data name="Serbian" xml:space="preserve">
+	<data name="Serbian" xml:space="preserve">
     <value>Serbian</value>
   </data>
-  <data name="Sinhalese" xml:space="preserve">
+	<data name="Sinhalese" xml:space="preserve">
     <value>Sinhalese</value>
   </data>
-  <data name="Slovak" xml:space="preserve">
+	<data name="Slovak" xml:space="preserve">
     <value>Slovak</value>
   </data>
-  <data name="Slovenian" xml:space="preserve">
+	<data name="Slovenian" xml:space="preserve">
     <value>Slovenian</value>
   </data>
-  <data name="Spanish" xml:space="preserve">
+	<data name="Spanish" xml:space="preserve">
     <value>Spanish</value>
   </data>
-  <data name="Swahili" xml:space="preserve">
+	<data name="Swahili" xml:space="preserve">
     <value>Swahili</value>
   </data>
-  <data name="Swedish" xml:space="preserve">
+	<data name="Swedish" xml:space="preserve">
     <value>Swedish</value>
   </data>
-  <data name="Syriac" xml:space="preserve">
+	<data name="Syriac" xml:space="preserve">
     <value>Syriac</value>
   </data>
-  <data name="Tagalog" xml:space="preserve">
+	<data name="Tagalog" xml:space="preserve">
     <value>Tagalog</value>
   </data>
-  <data name="Tamil" xml:space="preserve">
+	<data name="Tamil" xml:space="preserve">
     <value>Tamil</value>
   </data>
-  <data name="Telugu" xml:space="preserve">
+	<data name="Telugu" xml:space="preserve">
     <value>Telugu</value>
   </data>
-  <data name="Thai" xml:space="preserve">
+	<data name="Thai" xml:space="preserve">
     <value>Thai</value>
   </data>
-  <data name="Ukrainian" xml:space="preserve">
+	<data name="Ukrainian" xml:space="preserve">
     <value>Ukrainian</value>
   </data>
-  <data name="Urdu" xml:space="preserve">
+	<data name="Urdu" xml:space="preserve">
     <value>Urdu</value>
   </data>
-  <data name="Vietnamese" xml:space="preserve">
+	<data name="Vietnamese" xml:space="preserve">
     <value>Vietnamese</value>
   </data>
-  <data name="Help" xml:space="preserve">
+	<data name="Help" xml:space="preserve">
     <value>Yardım</value>
   </data>
-  <data name="Url_Help" xml:space="preserve">
+	<data name="Url_Help" xml:space="preserve">
     <value>http://www.novaroma.net/tr/yardim.html</value>
   </data>
-  <data name="DeleteCompletedTorrents" xml:space="preserve">
+	<data name="DeleteCompletedTorrents" xml:space="preserve">
     <value>Tamamlanmış Torrentleri Sil</value>
   </data>
-  <data name="Searching" xml:space="preserve">
+	<data name="Searching" xml:space="preserve">
     <value>Arama</value>
   </data>
-  <data name="Url_Donate" xml:space="preserve">
+	<data name="Url_Donate" xml:space="preserve">
     <value>http://www.novaroma.net/tr/bagis.html</value>
   </data>
-  <data name="UpdateAvailable" xml:space="preserve">
+	<data name="UpdateAvailable" xml:space="preserve">
     <value>Yeni Versiyon Yükle</value>
   </data>
-  <data name="MovieFileNameTemplate" xml:space="preserve">
+	<data name="MovieFileNameTemplate" xml:space="preserve">
     <value>Film Dosyası İsimlendirme Şablonu</value>
   </data>
-  <data name="MovieFileNameTemplateDescription" xml:space="preserve">
+	<data name="MovieFileNameTemplateDescription" xml:space="preserve">
     <value>Geçerli parametreler: %movieName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
   </data>
-  <data name="TvShowEpisodeFileNameTemplate" xml:space="preserve">
+	<data name="TvShowEpisodeFileNameTemplate" xml:space="preserve">
     <value>Dizi Bölüm Dosyası İsimlendirme Şablonu</value>
   </data>
-  <data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
+	<data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
     <value>Geçerli parametreler: %showName%, %season%, %episode%, %episodeName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
   </data>
-  <data name="Ended" xml:space="preserve">
+	<data name="Ended" xml:space="preserve">
     <value>Sonlandı</value>
   </data>
-  <data name="DefaultMaxSize" xml:space="preserve">
+	<data name="DefaultMaxSize" xml:space="preserve">
     <value>Varsayılan Maksimum Boyut (MB)
 </value>
   </data>
-  <data name="DefaultMinSize" xml:space="preserve">
+	<data name="DefaultMinSize" xml:space="preserve">
     <value>Varsayılan Minimum Boyut (MB)</value>
   </data>
-  <data name="MaxSize" xml:space="preserve">
+	<data name="MaxSize" xml:space="preserve">
     <value>Maks Boyut (MB)</value>
   </data>
-  <data name="MaxSizeDescription" xml:space="preserve">
+	<data name="MaxSizeDescription" xml:space="preserve">
     <value>Arama sonuçlarından bu boyutu aşanlar atlanacak</value>
   </data>
-  <data name="MinSize" xml:space="preserve">
+	<data name="MinSize" xml:space="preserve">
     <value>Min Boyut (MB)</value>
   </data>
-  <data name="MinSizeDescription" xml:space="preserve">
+	<data name="MinSizeDescription" xml:space="preserve">
     <value>Arama sonuçlarından bu boyuttan küçük olanlar atlanacak</value>
   </data>
-  <data name="MinCannotExceedMax" xml:space="preserve">
+	<data name="MinCannotExceedMax" xml:space="preserve">
     <value>Minimum değer maksimum değerden büyük olamaz</value>
   </data>
-  <data name="SaveSearch" xml:space="preserve">
+	<data name="SaveSearch" xml:space="preserve">
     <value>Arama seçimlerini varsayılan olarak kaydet</value>
   </data>
 </root>
