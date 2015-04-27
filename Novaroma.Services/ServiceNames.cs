@@ -9,7 +9,7 @@
         public const string Tvdb = "tvdb";
         public const string TvRage = "tvrage";
         public const string Freebase = "freebase";
-        public const string UTorrent = "utorrent";
+        public const string UTorrent = "bittorrent/utorrent";
         public const string ThePirateBay = "thepiratebay";
     }
 }
