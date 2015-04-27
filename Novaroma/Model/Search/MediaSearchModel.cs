@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
@@ -283,41 +284,41 @@ namespace Novaroma.Model.Search {
 
         protected abstract string SettingName { get; }
 
-        #region IConfigurable Members
-
-        string IConfigurable.SettingName {
-            get { return SettingName; }
-        }
-
-        INotifyPropertyChanged IConfigurable.Settings {
-            get { return this; }
-        }
-
-        string IConfigurable.SerializeSettings() {
-            var o = new {
-                Downloaded,
-                Genres = Genres.SelectedItems.Select(g => g),
-                NotFound,
-                NotWatched,
-                VoteCountMax,
-                VoteCountMin,
-                PageSize,
-                Query,
-                RatingMax,
-                RatingMin,
-                ReleaseYearEnd,
-                ReleaseYearStart,
-                RuntimeMax,
-                RuntimeMin,
-                SelectedOrderValue = SelectedOrder.Order.Value,
-                SubtitleDownloaded,
-                SubtitleNotFound
+        protected virtual Dictionary<string, object> GetSettingsDictionary() {
+            return new Dictionary<string, object> {
+                { "Downloaded", Downloaded },
+                { "Genres", Genres.SelectedItems.Select(g => g) },
+                { "NotFound", NotFound },
+                { "NotWatched", NotWatched },
+                { "VoteCountMax", VoteCountMax },
+                { "VoteCountMin", VoteCountMin },
+                { "PageSize", PageSize },
+                { "Query", Query },
+                { "RatingMax", RatingMax },
+                { "RatingMin", RatingMin },
+                { "ReleaseYearEnd", ReleaseYearEnd },
+                { "ReleaseYearStart", ReleaseYearStart },
+                { "RuntimeMax", RuntimeMax },
+                { "RuntimeMin", RuntimeMin },
+                { "SelectedOrderValue", SelectedOrder.Order.Value },
+                { "SubtitleDownloaded", SubtitleDownloaded },
+                { "SubtitleNotFound", SubtitleNotFound }
             };
+        }
+
+        protected virtual string SerializeSettings() {
+            var o = GetSettingsDictionary();
+
             return JsonConvert.SerializeObject(o);
         }
 
-        void IConfigurable.DeserializeSettings(string settings) {
+        protected virtual void DeserializeSettings(string settings) {
             var json = (JObject)JsonConvert.DeserializeObject(settings);
+            
+            SetSettingsFromJson(json);
+        }
+
+        protected virtual void SetSettingsFromJson(JObject json) {
             Downloaded = (bool?)json["Downloaded"];
             var genres = (IEnumerable)json["Genres"];
             genres.OfType<object>().ToList().ForEach(g => {
@@ -340,6 +341,24 @@ namespace Novaroma.Model.Search {
             SelectedOrder = OrderList.First(o => o.Order.Value == (decimal)json["SelectedOrderValue"]);
             SubtitleDownloaded = (bool?)json["SubtitleDownloaded"];
             SubtitleNotFound = (bool?)json["SubtitleNotFound"];
+        }
+
+        #region IConfigurable Members
+
+        string IConfigurable.SettingName {
+            get { return SettingName; }
+        }
+
+        INotifyPropertyChanged IConfigurable.Settings {
+            get { return this; }
+        }
+
+        string IConfigurable.SerializeSettings() {
+            return SerializeSettings();
+        }
+
+        void IConfigurable.DeserializeSettings(string settings) {
+            DeserializeSettings(settings);
         }
 
         #endregion
