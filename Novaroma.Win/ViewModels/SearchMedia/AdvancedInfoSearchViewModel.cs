@@ -35,8 +35,8 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
         private int? _releaseYearEnd;
         private float? _ratingMin = 0;
         private float? _ratingMax = 10;
-        private int? _numberOfVotesMin;
-        private int? _numberOfVotesMax;
+        private int? _voteCountMin;
+        private int? _voteCountMax;
         private int? _runtimeMin;
         private int? _runtimeMax;
         private bool _excludeExisting = true;
@@ -99,7 +99,7 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
             await Novaroma.Helper.RunTask(async () => {
                 await _engine
                     .AdvancedSearchInfo(Query, mediaTypes, ReleaseYearStart, ReleaseYearEnd, RatingMin, RatingMax,
-                                        NumberOfVotesMin, NumberOfVotesMax, RuntimeMin, RuntimeMax, Genres.SelectedItems)
+                                        VoteCountMin, VoteCountMax, RuntimeMin, RuntimeMax, Genres.SelectedItems)
                     .ContinueWith(async t => {
                         var results = new List<InfoSearchMediaViewModel<IAdvancedInfoSearchResult>>();
                         t.Result.ToList()
@@ -134,8 +134,8 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
             ReleaseYearEnd = null;
             RatingMin = null;
             RatingMax = null;
-            NumberOfVotesMin = null;
-            NumberOfVotesMax = null;
+            VoteCountMin = null;
+            VoteCountMax = null;
             RuntimeMin = null;
             RuntimeMax = null;
             ExcludeExisting = true;
@@ -206,24 +206,24 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
             }
         }
 
-        public int? NumberOfVotesMin {
-            get { return _numberOfVotesMin; }
+        public int? VoteCountMin {
+            get { return _voteCountMin; }
             set {
-                if (_numberOfVotesMin == value) return;
+                if (_voteCountMin == value) return;
 
-                _numberOfVotesMin = value;
-                RaisePropertyChanged("NumberOfVotesMin");
+                _voteCountMin = value;
+                RaisePropertyChanged("VoteCountMin");
                 RaisePropertyChanged("MinimumVote");
             }
         }
 
-        public int? NumberOfVotesMax {
-            get { return _numberOfVotesMax; }
+        public int? VoteCountMax {
+            get { return _voteCountMax; }
             set {
-                if (_numberOfVotesMax == value) return;
+                if (_voteCountMax == value) return;
 
-                _numberOfVotesMax = value;
-                RaisePropertyChanged("NumberOfVotesMax");
+                _voteCountMax = value;
+                RaisePropertyChanged("VoteCountMax");
                 RaisePropertyChanged("MaximumVote");
             }
         }
@@ -273,11 +273,11 @@ namespace Novaroma.Win.ViewModels.SearchMedia {
         }
 
         public int MinimumVote {
-            get { return NumberOfVotesMin.HasValue ? NumberOfVotesMin.Value : 0; }
+            get { return VoteCountMin.HasValue ? VoteCountMin.Value : 0; }
         }
 
         public int? MaximumVote {
-            get { return NumberOfVotesMax.HasValue ? NumberOfVotesMax.Value : (int?) null; }
+            get { return VoteCountMax.HasValue ? VoteCountMax.Value : (int?)null; }
         }
 
         public int MinimumRuntime {

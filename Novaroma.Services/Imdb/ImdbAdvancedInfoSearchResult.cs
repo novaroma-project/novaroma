@@ -8,19 +8,19 @@ namespace Novaroma.Services.Imdb {
         private readonly string _outline;
         private readonly string _credits;
         private readonly float? _rating;
-        private readonly int? _numberOfVotes;
+        private readonly int? _voteCount;
         private readonly int? _runtime;
         private readonly string _genres;
 
         public ImdbAdvancedInfoSearchResult(ImdbInfoProvider service, string id, string url, string title, byte[] poster, int? year, bool isTvShow,
-            string outline, string credits, float? rating, int? numberOfVotes, int? runtime, string genres)
+            string outline, string credits, float? rating, int? voteCount, int? runtime, string genres)
             : base(service, id, url, title, poster,
                 string.Join(Environment.NewLine,
                     new[] {credits, runtime.HasValue ? runtime + " " + Resources.MinuteReduced + " - " + genres : string.Empty, outline}), year, isTvShow) {
             _outline = outline;
             _credits = credits;
             _rating = rating;
-            _numberOfVotes = numberOfVotes;
+            _voteCount = voteCount;
             _runtime = runtime;
             _genres = genres;
         }
@@ -37,8 +37,8 @@ namespace Novaroma.Services.Imdb {
             get { return _rating; }
         }
 
-        public int? NumberOfVotes {
-            get { return _numberOfVotes; }
+        public int? VoteCount {
+            get { return _voteCount; }
         }
 
         public int? Runtime {

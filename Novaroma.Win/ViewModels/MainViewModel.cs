@@ -337,8 +337,8 @@ namespace Novaroma.Win.ViewModels {
 
             mediaSearchModel.ReleaseYearStart
             = mediaSearchModel.ReleaseYearEnd
-            = mediaSearchModel.NumberOfVotesMin
-            = mediaSearchModel.NumberOfVotesMax
+            = mediaSearchModel.VoteCountMin
+            = mediaSearchModel.VoteCountMax
             = mediaSearchModel.RuntimeMin
             = mediaSearchModel.RuntimeMax
             = null;

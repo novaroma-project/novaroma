@@ -26,7 +26,7 @@ namespace Novaroma.Interface {
         IEnumerable<string> GetAdvancedInfoProviderGenres();
         Task<IEnumerable<IAdvancedInfoSearchResult>> AdvancedSearchInfo(
             string query, MediaTypes mediaTypes = MediaTypes.All, int? releaseYearStart = null, int? releaseYearEnd = null,
-            float? ratingMin = null, float? ratingMax = null, int? numberOfVotesMin = null, int? numberOfVotesMax = null,
+            float? ratingMin = null, float? ratingMax = null, int? voteCountMin = null, int? voteCountMax = null,
             int? runtimeMin = null, int? runtimeMax = null, IEnumerable<string> genres = null);
 
         Task<IDictionary<string, object>> ConvertImdbId(Media media);

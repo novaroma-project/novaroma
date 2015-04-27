@@ -403,11 +403,11 @@ namespace Novaroma.Engine {
             if (searchModel.RatingMax.HasValue && searchModel.RatingMax.Value > 0)
                 query = query.Where(x => x.Rating <= searchModel.RatingMax);
 
-            if (searchModel.NumberOfVotesMin.HasValue)
-                query = query.Where(x => x.VoteCount >= searchModel.NumberOfVotesMin);
+            if (searchModel.VoteCountMin.HasValue)
+                query = query.Where(x => x.VoteCount >= searchModel.VoteCountMin);
 
-            if (searchModel.NumberOfVotesMax.HasValue)
-                query = query.Where(x => x.VoteCount <= searchModel.NumberOfVotesMax);
+            if (searchModel.VoteCountMax.HasValue)
+                query = query.Where(x => x.VoteCount <= searchModel.VoteCountMax);
 
             if (searchModel.RuntimeMin.HasValue)
                 query = query.Where(x => x.Runtime >= searchModel.RuntimeMin);
@@ -743,13 +743,13 @@ namespace Novaroma.Engine {
         }
 
         public async Task<IEnumerable<IAdvancedInfoSearchResult>> AdvancedSearchInfo(string query, MediaTypes mediaTypes = MediaTypes.All, int? releaseYearStart = null, int? releaseYearEnd = null,
-                                                                                     float? ratingMin = null, float? ratingMax = null, int? numberOfVotesMin = null, int? numberOfVotesMax = null,
+                                                                                     float? ratingMin = null, float? ratingMax = null, int? voteCountMin = null, int? voteCountMax = null,
                                                                                      int? runtimeMin = null, int? runtimeMax = null, IEnumerable<string> genres = null) {
             await Task.Run(() => _infoSemaphore.WaitOne());
 
             try {
                 return await Settings.AdvancedInfoProvider.SelectedItem.AdvancedSearch(query, mediaTypes, releaseYearStart, releaseYearEnd, ratingMin, ratingMax,
-                                                                                       numberOfVotesMin, numberOfVotesMax, runtimeMin, runtimeMax, genres);
+                                                                                       voteCountMin, voteCountMax, runtimeMin, runtimeMax, genres);
             }
             finally {
                 _infoSemaphore.Release();

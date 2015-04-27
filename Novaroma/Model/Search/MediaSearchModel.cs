@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
 using Novaroma.Interface.Model;
 
@@ -17,8 +19,8 @@ namespace Novaroma.Model.Search {
         private int? _releaseYearEnd;
         private float? _ratingMin = 0;
         private float? _ratingMax = 10;
-        private int? _numberOfVotesMin;
-        private int? _numberOfVotesMax;
+        private int? _voteCountMin;
+        private int? _voteCountMax;
         private int? _runtimeMin;
         private int? _runtimeMax;
         private bool? _notWatched;
@@ -26,7 +28,6 @@ namespace Novaroma.Model.Search {
         private bool? _subtitleDownloaded;
         private bool? _notFound;
         private bool? _subtitleNotFound;
-        private string _imdbId;
         private OrderSelection _selectedOrder;
         private int _pageSize;
         private int _page;
@@ -106,24 +107,24 @@ namespace Novaroma.Model.Search {
             }
         }
 
-        public int? NumberOfVotesMin {
-            get { return _numberOfVotesMin; }
+        public int? VoteCountMin {
+            get { return _voteCountMin; }
             set {
-                if (_numberOfVotesMin == value) return;
+                if (_voteCountMin == value) return;
 
-                _numberOfVotesMin = value;
-                RaisePropertyChanged("NumberOfVotesMin");
+                _voteCountMin = value;
+                RaisePropertyChanged("VoteCountMin");
                 RaisePropertyChanged("MinimumVote");
             }
         }
 
-        public int? NumberOfVotesMax {
-            get { return _numberOfVotesMax; }
+        public int? VoteCountMax {
+            get { return _voteCountMax; }
             set {
-                if (_numberOfVotesMax == value) return;
+                if (_voteCountMax == value) return;
 
-                _numberOfVotesMax = value;
-                RaisePropertyChanged("NumberOfVotesMax");
+                _voteCountMax = value;
+                RaisePropertyChanged("VoteCountMax");
                 RaisePropertyChanged("MaximumVote");
             }
         }
@@ -200,16 +201,6 @@ namespace Novaroma.Model.Search {
             }
         }
 
-        public string ImdbId {
-            get { return _imdbId; }
-            set {
-                if (_imdbId == value) return;
-
-                _imdbId = value;
-                RaisePropertyChanged("ImdbId");
-            }
-        }
-
         public OrderSelection SelectedOrder {
             get { return _selectedOrder; }
             set {
@@ -265,11 +256,11 @@ namespace Novaroma.Model.Search {
         }
 
         public int MinimumVote {
-            get { return NumberOfVotesMin.HasValue ? NumberOfVotesMin.Value : 0; }
+            get { return VoteCountMin.HasValue ? VoteCountMin.Value : 0; }
         }
 
         public int? MaximumVote {
-            get { return NumberOfVotesMax.HasValue ? NumberOfVotesMax.Value : (int?)null; }
+            get { return VoteCountMax.HasValue ? VoteCountMax.Value : (int?)null; }
         }
 
         public int MinimumRuntime {
@@ -303,11 +294,52 @@ namespace Novaroma.Model.Search {
         }
 
         string IConfigurable.SerializeSettings() {
-            return JsonConvert.SerializeObject(this);
+            var o = new {
+                Downloaded,
+                Genres = Genres.SelectedItems.Select(g => g),
+                NotFound,
+                NotWatched,
+                VoteCountMax,
+                VoteCountMin,
+                PageSize,
+                Query,
+                RatingMax,
+                RatingMin,
+                ReleaseYearEnd,
+                ReleaseYearStart,
+                RuntimeMax,
+                RuntimeMin,
+                SelectedOrderValue = SelectedOrder.Order.Value,
+                SubtitleDownloaded,
+                SubtitleNotFound
+            };
+            return JsonConvert.SerializeObject(o);
         }
 
         void IConfigurable.DeserializeSettings(string settings) {
-            JsonConvert.PopulateObject(settings, this);
+            var json = (JObject)JsonConvert.DeserializeObject(settings);
+            Downloaded = (bool?)json["Downloaded"];
+            var genres = (IEnumerable)json["Genres"];
+            genres.OfType<object>().ToList().ForEach(g => {
+                var genre = Genres.Selections.FirstOrDefault(gg => gg.Item == g.ToString());
+                if (genre != null)
+                    genre.IsSelected = true;
+            });
+            NotFound = (bool?)json["NotFound"];
+            NotWatched = (bool?)json["NotWatched"];
+            VoteCountMax = (int?)json["VoteCountMax"];
+            VoteCountMin = (int?)json["VoteCountMin"];
+            PageSize = (int)json["PageSize"];
+            Query = (string)json["Query"];
+            RatingMax = (float?)json["RatingMax"];
+            RatingMin = (float?)json["RatingMin"];
+            ReleaseYearEnd = (int?)json["ReleaseYearEnd"];
+            ReleaseYearStart = (int?)json["ReleaseYearStart"];
+            RuntimeMax = (int?)json["RuntimeMax"];
+            RuntimeMin = (int?)json["RuntimeMin"];
+            SelectedOrder = OrderList.First(o => o.Order.Value == (decimal)json["SelectedOrderValue"]);
+            SubtitleDownloaded = (bool?)json["SubtitleDownloaded"];
+            SubtitleNotFound = (bool?)json["SubtitleNotFound"];
         }
 
         #endregion

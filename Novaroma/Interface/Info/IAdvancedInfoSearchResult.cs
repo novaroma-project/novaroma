@@ -4,7 +4,7 @@
         string Outline { get; }
         string Credits { get; }
         float? Rating { get; }
-        int? NumberOfVotes { get; }
+        int? VoteCount { get; }
         int? Runtime { get; }
         string Genres { get; }
     }

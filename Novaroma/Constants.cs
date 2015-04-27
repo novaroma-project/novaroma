@@ -76,7 +76,7 @@ namespace Novaroma.MyServices {
         }
 
         public Task<IEnumerable<IAdvancedInfoSearchResult>> AdvancedSearch(string query, MediaTypes mediaTypes = MediaTypes.All, int? releaseYearStart = null, int? releaseYearEnd = null, 
-                                                                           float? ratingMin = null, float? ratingMax = null, int? numberOfVotesMin = null, int? numberOfVotesMax = null, 
+                                                                           float? ratingMin = null, float? ratingMax = null, int? voteCountMin = null, int? voteCountMax = null, 
                                                                            int? runtimeMin = null, int? runtimeMax = null, IEnumerable<string> genres = null, Languages language = Languages.English) {
             throw new NotImplementedException();
         }

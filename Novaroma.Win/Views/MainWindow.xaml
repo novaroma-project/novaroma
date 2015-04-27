@@ -258,12 +258,12 @@
                                     <DockPanel Margin="10 10 0 10">
                                         <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Vote}" Width="60"/>
                                         <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
-                                            <Controls:NumericUpDown Name="NumberOfVotesMinTextBox" Minimum="0"
-                                                                    Value="{Binding NumberOfVotesMin, UpdateSourceTrigger=PropertyChanged}" Width="89" 
+                                            <Controls:NumericUpDown Name="VoteCountMinTextBox" Minimum="0"
+                                                                    Value="{Binding VoteCountMin, UpdateSourceTrigger=PropertyChanged}" Width="89" 
                                                                     Maximum="{Binding MaximumVote}" />
                                             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
-                                            <Controls:NumericUpDown Name="NumberOfVotesMaxTextBox"
-                                                                    Value="{Binding NumberOfVotesMax, UpdateSourceTrigger=PropertyChanged}" Width="89" 
+                                            <Controls:NumericUpDown Name="VoteCountMaxTextBox"
+                                                                    Value="{Binding VoteCountMax, UpdateSourceTrigger=PropertyChanged}" Width="89" 
                                                                     Minimum="{Binding MinimumVote}" />
                                         </StackPanel>
                                     </DockPanel>
@@ -548,12 +548,12 @@
                                     <DockPanel Margin="10 10 0 10">
                                         <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Vote}" Width="60"/>
                                         <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
-                                            <Controls:NumericUpDown Name="MovieNumberOfVotesMinTextBox" Minimum="0"
-                                                                    Value="{Binding NumberOfVotesMin, UpdateSourceTrigger=PropertyChanged}" Width="89" 
+                                            <Controls:NumericUpDown Name="MovieVoteCountMinTextBox" Minimum="0"
+                                                                    Value="{Binding VoteCountMin, UpdateSourceTrigger=PropertyChanged}" Width="89" 
                                                                     Maximum="{Binding MaximumVote}" />
                                             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content=" - "/>
-                                            <Controls:NumericUpDown Name="MovieNumberOfVotesMaxTextBox" 
-                                                                    Value="{Binding NumberOfVotesMax, UpdateSourceTrigger=PropertyChanged}" Width="89"
+                                            <Controls:NumericUpDown Name="MovieVoteCountMaxTextBox" 
+                                                                    Value="{Binding VoteCountMax, UpdateSourceTrigger=PropertyChanged}" Width="89"
                                                                     Minimum="{Binding MinimumVote}" />
                                         </StackPanel>
                                     </DockPanel>
