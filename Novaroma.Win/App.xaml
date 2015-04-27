@@ -87,10 +87,11 @@
                         </Grid.ColumnDefinitions>
                         <Grid>
                             <userControls:PosterUserControl Width="100" Height="147" Margin="5" VerticalAlignment="Top" />
-                            <userControls:RatingUserControl  Width="40" RatingSize ="11" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <userControls:RatingUserControl  Width="40" RatingSize ="11" VerticalAlignment="Top" HorizontalAlignment="Left" />
                         </Grid>
                         <Grid Grid.Row="0" Grid.Column="1" Margin="5 0 0 0">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -109,8 +110,21 @@
                                 </Hyperlink>
                                 </TextBlock>
                             </StackPanel>
-                            <TextBlock Grid.Row="1" Text="{Binding Outline}" ToolTip="{Binding Outline}"  TextTrimming="WordEllipsis" Margin="0 0 0 5" TextWrapping="Wrap" MaxHeight="60"/>
-                            <Grid Grid.Row="2" Margin="0 0 0 5" DataContext="{Binding}">
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 3">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource appbar_clock}" Fill="{Binding RelativeSource={RelativeSource AncestorType=controls:Flyout}, Path=Foreground}"  Margin="0 0 5 0"/>
+                                    <TextBlock Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:Flyout}, Path=Foreground}">
+                                <Run Text="{Binding Runtime}" />
+                                <Run Text="{Binding Source={StaticResource Resources}, Path=MinuteReduced, Mode=OneWay}" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <TextBlock Text=" - " />
+                                <TextBlock Text="{Binding Genres, Converter={converters:ListToStringConverter}}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <TextBlock Grid.Row="2" Text="{Binding Outline}" ToolTip="{Binding Outline}" FontStyle="Italic"
+                                       TextTrimming="WordEllipsis" Margin="0 0 0 5" TextWrapping="Wrap" MaxHeight="40"/>
+                            <TextBlock Grid.Row="3" Text="{Binding Credits}" TextTrimming="WordEllipsis" Margin="0 0 0 5" TextWrapping="Wrap" MaxHeight="20"/>
+                            <Grid Grid.Row="4" Margin="0 0 0 5" DataContext="{Binding}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40" />
                                     <RowDefinition Height="30"/>
@@ -208,6 +222,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 5">
                                     <TextBlock ToolTip="{Binding Title}">
@@ -222,8 +237,21 @@
                                     </Hyperlink>
                                     </TextBlock>
                                 </StackPanel>
-                                <TextBlock Grid.Row="1" Text="{Binding Outline}" ToolTip="{Binding Outline}" TextTrimming="WordEllipsis" Margin="0 0 0 5" TextWrapping="Wrap" MaxHeight="60"/>
-                                <Grid Grid.Row="2" Margin="0 0 0 5" DataContext="{Binding}">
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 3">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource appbar_clock}" Fill="{Binding RelativeSource={RelativeSource AncestorType=controls:Flyout}, Path=Foreground}"  Margin="0 0 5 0"/>
+                                        <TextBlock Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:Flyout}, Path=Foreground}">
+                                <Run Text="{Binding Runtime}" />
+                                <Run Text="{Binding Source={StaticResource Resources}, Path=MinuteReduced, Mode=OneWay}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <TextBlock Text=" - " />
+                                    <TextBlock Text="{Binding Genres, Converter={converters:ListToStringConverter}}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <TextBlock Grid.Row="2" Text="{Binding Outline}" ToolTip="{Binding Outline}" FontStyle="Italic"
+                                           TextTrimming="WordEllipsis" Margin="0 0 0 5" TextWrapping="Wrap" MaxHeight="40"/>
+                                <TextBlock Grid.Row="3" Text="{Binding Credits}" TextTrimming="WordEllipsis" Margin="0 0 0 5" TextWrapping="Wrap" MaxHeight="20"/>
+                                <Grid Grid.Row="4" Margin="0 0 0 5" DataContext="{Binding}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="40" />
                                         <RowDefinition Height="30"/>
@@ -304,15 +332,16 @@
                                 <Run Text="{Binding VoteCount}" />
                                 <Run Text="{Binding Source={StaticResource Resources}, Path=Votes, Mode=OneWay, Converter={converters:ToLowerConverter}}"/>
                             </TextBlock>
+                            <TextBlock Visibility="{Binding ImdbUrl, Converter={converters:StringToVisibilityConverter}}" Margin="10 0 0 0" VerticalAlignment="Center">
+                                <Hyperlink TextDecorations="None" NavigateUri="{Binding ImdbUrl}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    <Image Height="22" Width="46" Source="../Resources/Images/Img_Imdb_46x22.png" />
+                                </Hyperlink>
+                            </TextBlock>
                         </StackPanel>
                         <Separator Margin="0 10 0 10"/>
                         <TextBlock Text="{Binding Outline}" TextWrapping="Wrap"/>
                         <Separator Margin="0 10 0 10"/>
-                        <TextBlock Visibility="{Binding ImdbUrl, Converter={converters:StringToVisibilityConverter}}">
-                            <Hyperlink TextDecorations="None" NavigateUri="{Binding ImdbUrl}" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                <Image Height="22" Width="46" Source="../Resources/Images/Img_Imdb_46x22.png" />
-                            </Hyperlink>
-                        </TextBlock>
+                        <TextBlock Text="{Binding Credits}" TextWrapping="Wrap"/>
                         <Separator Margin="0 10 0 10"/>
                     </StackPanel>
                 </Grid>

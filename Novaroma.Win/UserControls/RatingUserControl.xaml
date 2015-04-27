@@ -7,6 +7,13 @@
     <Grid>
         <Image Source="/Resources/Images/Img_ImdbStar_64x56.png"/>
         <TextBlock Text="{Binding Path=Rating, Mode=OneWay}" FontWeight="Bold" Foreground="Black"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{Binding RatingSize, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"  />
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{Binding RatingSize, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}">
+            <TextBlock.ToolTip>
+                <TextBlock>
+                    <Run Text="{Binding VoteCount, Mode=OneWay}" FontWeight="Bold" />
+                    <Run Text="{Binding Source={StaticResource Resources}, Path=Votes, Mode=OneWay}" FontWeight="Bold" />
+                </TextBlock>
+            </TextBlock.ToolTip>
+        </TextBlock>
     </Grid>
 </UserControl>

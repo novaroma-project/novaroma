@@ -13,14 +13,7 @@
         </Grid.ColumnDefinitions>
         <userControls:PosterUserControl Margin="5" Width="50"/>
         <Grid Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding Rating, Converter={converters:StringToVisibilityConverter}}">
-            <userControls:RatingUserControl  Width="30" RatingSize ="9">
-                <userControls:RatingUserControl.ToolTip>
-                    <TextBlock>
-                        <Run Text="{Binding NumberOfVotes, Mode=OneWay}" FontWeight="Bold" />
-                        <Run Text="{Binding Source={StaticResource Resources}, Path=Votes, Mode=OneWay}" FontWeight="Bold" />
-                    </TextBlock>
-                </userControls:RatingUserControl.ToolTip>
-            </userControls:RatingUserControl>
+            <userControls:RatingUserControl  Width="30" RatingSize ="9" />
         </Grid>
         <Grid Grid.Column="1" Margin="5 0 0 0">
             <Grid.RowDefinitions>
@@ -33,7 +26,6 @@
                             <TextBlock Visibility="{Binding IsTvShow, Converter={converters:BooleanToVisibilityConverter}}" >
                             (<Run Text="{Binding Source={StaticResource Resources}, Path=TvShow, Mode=OneWay}" />)
                             </TextBlock>
-
             </TextBlock>
             <TextBlock Grid.Row="1" Text="{Binding Description, Mode=OneWay}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Description, Mode=OneWay}"/>
         </Grid>

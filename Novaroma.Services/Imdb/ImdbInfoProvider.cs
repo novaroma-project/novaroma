@@ -88,7 +88,7 @@ namespace Novaroma.Services.Imdb {
 
         public Task<IEnumerable<ImdbAdvancedInfoSearchResult>> AdvancedSearch(
                 string query, MediaTypes mediaTypes = MediaTypes.All, int? releaseYearStart = null, int? releaseYearEnd = null,
-                float? ratingMin = null, float? ratingMax = null, int? numberOfVotesMin = null, int? numberOfVotesMax = null,
+                float? ratingMin = null, float? ratingMax = null, int? voteCountMin = null, int? voteCountMax = null,
                 int? runtimeMin = null, int? runtimeMax = null, IEnumerable<string> genres = null, Language language = Language.English) {
             return Task.Run(async () => {
                 query = HttpUtility.UrlEncode(query, Encoding.GetEncoding("ISO-8859-1"));
@@ -106,7 +106,7 @@ namespace Novaroma.Services.Imdb {
 
                 AddLimitParameter(searchParams, "release_date", releaseYearStart, releaseYearEnd);
                 AddLimitParameter(searchParams, "user_rating", ratingMin, ratingMax);
-                AddLimitParameter(searchParams, "num_votes", numberOfVotesMin, numberOfVotesMax);
+                AddLimitParameter(searchParams, "num_votes", voteCountMin, voteCountMax);
                 AddLimitParameter(searchParams, "runtime", runtimeMin, runtimeMax);
 
                 if (genres != null)
@@ -157,7 +157,7 @@ namespace Novaroma.Services.Imdb {
                         genreStr = genreNode.TextContent.Trim();
 
                     float? rating = null;
-                    int? numberOfVotes = null;
+                    int? voteCount = null;
                     var ratingNode = titleNode.QuerySelector("div[class='rating rating-list']");
                     if (ratingNode != null) {
                         var ratingInfoStr = ratingNode.Attributes.First(a => a.Name == "title").Value;
@@ -166,8 +166,8 @@ namespace Novaroma.Services.Imdb {
                             var ratingStr = match.Groups[1].Value.Replace(",", ".");
                             rating = float.Parse(ratingStr, new NumberFormatInfo { CurrencyDecimalSeparator = "." });
 
-                            var numberOfVotesStr = match.Groups[2].Value.Replace(",", "").Replace(".", "");
-                            numberOfVotes = int.Parse(numberOfVotesStr);
+                            var voteCountStr = match.Groups[2].Value.Replace(",", "").Replace(".", "");
+                            voteCount = int.Parse(voteCountStr);
                         }
                     }
 
@@ -189,7 +189,7 @@ namespace Novaroma.Services.Imdb {
                             poster = await client.DownloadDataTaskAsync(posterUrl);
                     }
 
-                    var result = new ImdbAdvancedInfoSearchResult(this, imdbId, resultUrl, title, poster, year, isTvShow, outline, credits, rating, numberOfVotes, runtime, genreStr);
+                    var result = new ImdbAdvancedInfoSearchResult(this, imdbId, resultUrl, title, poster, year, isTvShow, outline, credits, rating, voteCount, runtime, genreStr);
                     results.Add(result);
                 }
 
@@ -244,7 +244,9 @@ namespace Novaroma.Services.Imdb {
                     if (originalTitle == null)
                         originalTitle = title;
 
-                    var credits = string.Join(", ", overviewNode.QuerySelectorAll("div[itemprop='actors'] a span").Select(n => n.TextContent));
+                    var director = string.Join(", ", overviewNode.QuerySelectorAll("div[itemprop='director'] a span").Select(n => n.TextContent));
+                    var actors = string.Join(", ", overviewNode.QuerySelectorAll("div[itemprop='actors'] a span").Select(n => n.TextContent));
+                    var credits = Helper.JoinStrings(" - ", director, actors);
 
                     var yearStr = overviewNode.QuerySelector("span[class='nobr']").TextContent;
                     int? year = null;
@@ -413,10 +415,10 @@ namespace Novaroma.Services.Imdb {
 
         async Task<IEnumerable<IAdvancedInfoSearchResult>> IAdvancedInfoProvider.AdvancedSearch(
                 string query, MediaTypes mediaTypes, int? releaseYearStart, int? releaseYearEnd,
-                float? ratingMin, float? ratingMax, int? numberOfVotesMin, int? numberOfVotesMax,
+                float? ratingMin, float? ratingMax, int? voteCountMin, int? voteCountMax,
                 int? runtimeMin, int? runtimeMax, IEnumerable<string> genres, Language language) {
             var t = await AdvancedSearch(query, mediaTypes, releaseYearStart, releaseYearEnd, ratingMin, ratingMax,
-                                         numberOfVotesMin, numberOfVotesMax, runtimeMin, runtimeMax, genres, language);
+                                         voteCountMin, voteCountMax, runtimeMin, runtimeMax, genres, language);
             return t;
         }
 
