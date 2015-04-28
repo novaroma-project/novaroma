@@ -290,7 +290,7 @@ namespace Novaroma.MyServices {
         }
 
         public Task Activate() {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion

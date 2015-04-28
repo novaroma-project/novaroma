@@ -343,9 +343,8 @@ namespace Novaroma.Win.ViewModels {
             = mediaSearchModel.RuntimeMax
             = null;
 
-            mediaSearchModel.RatingMin
-            = mediaSearchModel.RatingMax
-            = null;
+            mediaSearchModel.RatingMin = 0;
+            mediaSearchModel.RatingMax = 10;
 
             mediaSearchModel.NotWatched
             = mediaSearchModel.Downloaded

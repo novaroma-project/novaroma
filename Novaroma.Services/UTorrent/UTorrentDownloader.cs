@@ -27,14 +27,7 @@ namespace Novaroma.Services.UTorrent {
             var client = CreateClient();
             var uri = new Uri(searchResult.MagnetUri);
 
-            AddUrlResponse result;
-            try {
-                result = await client.AddUrlTorrentAsync(uri, searchResult.Name);
-            }
-            catch (ServerUnavailableException) {
-                throw new ServiceUnavailableException(ServiceName);
-            }
-
+            var result = await client.AddUrlTorrentAsync(uri, searchResult.Name);
             if (result.Error != null) throw result.Error;
 
             return result.AddedTorrent.Hash;
