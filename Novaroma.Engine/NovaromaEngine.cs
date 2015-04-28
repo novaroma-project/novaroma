@@ -1092,21 +1092,17 @@ namespace Novaroma.Engine {
                     var q = context.TvShows;
                     if (!q.Any()) return QueryResult<TvShow>.Empty;
 
-                    var currentDate = DateTime.UtcNow;
-                    if (searchModel.NotWatched.HasValue)
-                        q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.IsWatched == !searchModel.NotWatched && e.AirDate < currentDate)));
-
-                    if (searchModel.Downloaded.HasValue)
-                        q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => string.IsNullOrEmpty(e.FilePath) == !searchModel.Downloaded.Value)));
-
-                    if (searchModel.SubtitleDownloaded.HasValue)
-                        q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.SubtitleDownloaded == searchModel.SubtitleDownloaded.Value)));
-
-                    if (searchModel.NotFound.HasValue)
-                        q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.NotFound == searchModel.NotFound)));
-
-                    if (searchModel.SubtitleNotFound.HasValue)
-                        q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.SubtitleNotFound == searchModel.SubtitleNotFound)));
+                    var currentDate = DateTime.UtcNow.AddHours(-8);
+                    q = q.Where(t => 
+                        t.Seasons.Any(s =>
+                            s.Episodes.Any(e => (searchModel.NotWatched == null || (e.AirDate < currentDate && e.IsWatched != searchModel.NotWatched))
+                                             && (searchModel.Downloaded == null || string.IsNullOrEmpty(e.FilePath) == !searchModel.Downloaded)
+                                             && (searchModel.SubtitleDownloaded == null || e.SubtitleDownloaded == searchModel.SubtitleDownloaded)
+                                             && (searchModel.NotFound == null || e.NotFound == searchModel.NotFound)
+                                             && (searchModel.SubtitleNotFound == null || e.SubtitleNotFound == searchModel.SubtitleNotFound)
+                            )
+                        )
+                    );
 
                     if (searchModel.Ended.HasValue)
                         q = q.Where(x => x.IsActive == !searchModel.Ended.Value);
