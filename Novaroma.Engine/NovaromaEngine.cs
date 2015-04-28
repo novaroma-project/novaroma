@@ -1098,11 +1098,14 @@ namespace Novaroma.Engine {
                             s.Episodes.Any(e => (searchModel.NotWatched == null || (e.AirDate < currentDate && e.IsWatched != searchModel.NotWatched))
                                              && (searchModel.Downloaded == null || string.IsNullOrEmpty(e.FilePath) == !searchModel.Downloaded)
                                              && (searchModel.SubtitleDownloaded == null || e.SubtitleDownloaded == searchModel.SubtitleDownloaded)
-                                             && (searchModel.NotFound == null || e.NotFound == searchModel.NotFound)
-                                             && (searchModel.SubtitleNotFound == null || e.SubtitleNotFound == searchModel.SubtitleNotFound)
                             )
                         )
                     );
+
+                    if (searchModel.NotFound != null)
+                        q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.NotFound == searchModel.NotFound.Value)));
+                    if (searchModel.SubtitleNotFound != null)
+                        q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.SubtitleNotFound == searchModel.SubtitleNotFound.Value)));
 
                     if (searchModel.Ended.HasValue)
                         q = q.Where(x => x.IsActive == !searchModel.Ended.Value);
