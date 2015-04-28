@@ -4,7 +4,7 @@
 Name = Novaroma 0.9.5
 Description = New features added, bugs fixed and some features improved.
 URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.5/Novaroma.v0.9.5.setup.exe
-Size = 11193464
+Size = 11193622
 FilePath = [APPDIR]Novaroma.exe
 Version = 0.9.5
 Replaces = All
