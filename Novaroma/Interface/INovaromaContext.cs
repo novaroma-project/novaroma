@@ -9,7 +9,6 @@ namespace Novaroma.Interface {
     public interface INovaromaContext: IDisposable {
         void Insert(IEntity entity);
         void Update(IEntity entity);
-        void Attach(IEntity entity);
         void Delete(IEntity entity);
         IQueryable<Media> Medias { get; }
         IQueryable<Movie> Movies { get; }

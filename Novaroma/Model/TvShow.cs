@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Novaroma.Interface.Model;
 using Novaroma.Interface.Track;
 
 namespace Novaroma.Model {
@@ -67,12 +68,6 @@ namespace Novaroma.Model {
             }
         }
 
-        public TvShowEpisode UnseenEpisode {
-            get {
-                return Seasons.SelectMany(s => s.Episodes).FirstOrDefault(e => !e.IsWatched);
-            }
-        }
-
         public bool? AllBackgroundDownload {
             get {
                 int nc = 0, tc = 0;
@@ -127,9 +122,42 @@ namespace Novaroma.Model {
             }
         }
 
+        public TvShowEpisode UnseenEpisode {
+            get {
+                return Seasons.SelectMany(s => s.Episodes).FirstOrDefault(e => !e.IsWatched);
+            }
+        }
+
         protected override void RaisePropertyChanged(string propertyName = null) {
             base.RaisePropertyChanged(propertyName);
             base.RaisePropertyChanged("UnseenEpisode");
+        }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<TvShow>(entity);
+
+            CopyFrom(external);
+
+            AutoDownload = external.AutoDownload;
+            IsActive = external.IsActive;
+            Status = external.Status;
+            LastUpdateDate = external.LastUpdateDate;
+
+            var c = Seasons.Count;
+            var ec = external.Seasons.Count;
+            while (c > ec) Seasons.Remove(Seasons.ElementAt(--c));
+
+            for (var i = 0; i < ec; i++) {
+                TvShowSeason season;
+                if (c < i + 1) {
+                    season = new TvShowSeason {TvShowId = Id, TvShow = this};
+                    Seasons.Add(season);
+                }
+                else
+                    season = Seasons.ElementAt(i);
+
+                season.CopyFrom(external.Seasons.ElementAt(i));
+            }
         }
 
         public void MergeEpisodes(IEnumerable<ITvShowEpisodeInfo> episodes) {

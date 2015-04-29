@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Novaroma.Interface.Model;
 
 namespace Novaroma.Model {
 
-    public class Media : EntityBase {
+    public abstract class Media : EntityBase {
         private string _serviceName;
         private string _serviceId;
         private string _serviceUrl;
@@ -28,7 +29,7 @@ namespace Novaroma.Model {
         private ICollection<MediaGenre> _genres;
         private ICollection<ServiceMapping> _serviceMappings;
 
-        public Media() {
+        protected Media() {
             Genres = new List<MediaGenre>();
             ServiceMappings = new List<ServiceMapping>();
         }
@@ -70,12 +71,6 @@ namespace Novaroma.Model {
 
                 _imdbId = value;
                 RaisePropertyChanged("ImdbId");
-            }
-        }
-
-        public string ImdbUrl {
-            get {
-                return string.IsNullOrEmpty(ImdbId) ? string.Empty : string.Format(Constants.ImdbTitleUrl, ImdbId);
             }
         }
 
@@ -266,6 +261,75 @@ namespace Novaroma.Model {
 
                 _serviceMappings = value;
                 RaisePropertyChanged("ServiceMappings");
+            }
+        }
+
+        public string ImdbUrl {
+            get {
+                return string.IsNullOrEmpty(ImdbId) ? string.Empty : string.Format(Constants.ImdbTitleUrl, ImdbId);
+            }
+        }
+
+        protected void CopyFrom(Media media) {
+            ServiceName = media.ServiceName;
+            ServiceId = media.ServiceId;
+            ServiceUrl = media.ServiceUrl;
+            ImdbId = media.ImdbId;
+            Title = media.Title;
+            OriginalTitle = media.OriginalTitle;
+            Outline = media.Outline;
+            Poster = media.Poster;
+            Year = media.Year;
+            Credits = media.Credits;
+            Rating = media.Rating;
+            VoteCount = media.VoteCount;
+            Runtime = media.Runtime;
+            Directory = media.Directory;
+            VideoQuality = media.VideoQuality;
+            ExtraKeywords = media.ExtraKeywords;
+            ExcludeKeywords = media.ExcludeKeywords;
+            MinSize = media.MinSize;
+            MaxSize = media.MaxSize;
+            Language = media.Language;
+            IsDeleted = media.IsDeleted;
+
+            CopyGenres(media);
+            CopyServiceMappings(media);
+        }
+
+        private void CopyGenres(Media media) {
+            var c = Genres.Count;
+            var ec = media.Genres.Count;
+            while (c > ec) Genres.Remove(Genres.ElementAt(--c));
+
+            for (var i = 0; i < ec; i++) {
+                MediaGenre genre;
+                if (c < i + 1) {
+                    genre = new MediaGenre();
+                    Genres.Add(genre);
+                }
+                else
+                    genre = Genres.ElementAt(i);
+
+                genre.CopyFrom(media.Genres.ElementAt(i));
+            }
+        }
+
+        private void CopyServiceMappings(Media media) {
+            var c = ServiceMappings.Count;
+            var ec = media.ServiceMappings.Count;
+            while (c > ec) ServiceMappings.Remove(ServiceMappings.ElementAt(--c));
+
+            for (var i = 0; i < ec; i++) {
+                ServiceMapping serviceMapping;
+                if (c < i + 1) {
+                    serviceMapping = new ServiceMapping();
+                    ServiceMappings.Add(serviceMapping);
+                }
+                else
+                    serviceMapping = ServiceMappings.ElementAt(i);
+
+                serviceMapping.CopyFrom(media.ServiceMappings.ElementAt(i));
             }
         }
     }

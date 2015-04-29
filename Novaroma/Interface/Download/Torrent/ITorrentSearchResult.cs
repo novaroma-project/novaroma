@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using Novaroma.Interface.Download.Torrent.Provider;
 using Novaroma.Properties;
 
@@ -21,6 +20,5 @@ namespace Novaroma.Interface.Download.Torrent {
         [Display(Name = "Age", ResourceType = typeof(Resources))]
         string Age { get; }
         string MagnetUri { get; }
-        Task<byte[]> Download();
     }
 }

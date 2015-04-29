@@ -49,5 +49,14 @@ namespace Novaroma.Model {
                 RaisePropertyChanged("LogDate");
             }
         }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<Log>(entity);
+
+            LogType = external.LogType;
+            Message = external.Message;
+            Detail = external.Detail;
+            LogDate = external.LogDate;
+        }
     }
 }

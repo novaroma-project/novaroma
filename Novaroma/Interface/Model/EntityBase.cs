@@ -23,8 +23,6 @@ namespace Novaroma.Interface.Model {
             }
         }
 
-        object IEntity.Id { get { return Id; } }
-
         [IgnoreDataMember]
         public virtual bool IsModified {
             get { return _isModified; }
@@ -35,6 +33,12 @@ namespace Novaroma.Interface.Model {
             IsModified = true;
 
             base.RaisePropertyChanged(propertyName);
+        }
+
+        protected abstract void CopyFrom(IEntity entity);
+
+        void IEntity.CopyFrom(IEntity entity) {
+            CopyFrom(entity);
         }
     }
 }

@@ -5,6 +5,7 @@ using Db4objects.Db4o.Linq;
 using Novaroma.Interface;
 using Novaroma.Interface.Model;
 using Novaroma.Model;
+using Novaroma.Properties;
 
 namespace Novaroma.Engine {
 
@@ -55,16 +56,29 @@ namespace Novaroma.Engine {
         }
 
         public void Update(IEntity entity) {
+            var uuid = _container.Ext().GetID(entity);
+            if (uuid <= 0) {
+                var extEntity = entity;
+                entity = _container.AsQueryable<IEntity>().FirstOrDefault(e => e.Id == extEntity.Id);
+                if (entity == null)
+                    throw new NovaromaException(string.Format(Resources.EntityNotFoundInDb, extEntity.Id));
+                entity.CopyFrom(extEntity);
+            }
+
             entity.IsModified = false;
             _container.Store(entity);
         }
 
-        public void Attach(IEntity entity) {
-            _container.Store(entity);
-        }
+        public void Delete(IEntity entity) {
+            var uuid = _container.Ext().GetID(entity);
+            if (uuid <= 0) {
+                var extEntity = entity;
+                entity = _container.AsQueryable<IEntity>().FirstOrDefault(e => e.Id == extEntity.Id);
+                if (entity == null)
+                    throw new NovaromaException(string.Format(Resources.EntityNotFoundInDb, extEntity.Id));
+            }
 
-        public void Delete(IEntity o) {
-            _container.Delete(o);
+            _container.Delete(entity);
         }
 
         public IQueryable<Media> Medias {

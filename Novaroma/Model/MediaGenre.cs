@@ -18,5 +18,15 @@ namespace Novaroma.Model {
         public override string ToString() {
             return Name;
         }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<MediaGenre>(entity);
+
+            CopyFrom(external);
+        }
+
+        internal void CopyFrom(MediaGenre genre) {
+            Name = genre.Name;
+        }
     }
 }

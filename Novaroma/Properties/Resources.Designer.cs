@@ -809,6 +809,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entity not found in database, Id: &apos;{0}&apos;.
+        /// </summary>
+        public static string EntityNotFoundInDb {
+            get {
+                return ResourceManager.GetString("EntityNotFoundInDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Episode.
         /// </summary>
         public static string Episode {
@@ -1352,6 +1361,15 @@ namespace Novaroma.Properties {
         public static string IncludeEmail {
             get {
                 return ResourceManager.GetString("IncludeEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incompatible types: Cannot copy values from &apos;{0}&apos; type to &apos;{1}&apos; type.
+        /// </summary>
+        public static string IncompatilbleTypes_CopyFrom {
+            get {
+                return ResourceManager.GetString("IncompatilbleTypes_CopyFrom", resourceCulture);
             }
         }
         

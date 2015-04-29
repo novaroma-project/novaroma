@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using Novaroma.Interface.Download.Torrent.Provider;
 using Novaroma.Properties;
 
@@ -17,10 +15,9 @@ namespace Novaroma.Interface.Download.Torrent {
         private readonly int? _files;
         private readonly string _age;
         private readonly string _magnetUri;
-        private readonly Func<TorrentSearchResult, Task<byte[]>> _download;
 
-        public TorrentSearchResult(ITorrentDownloader service, ITorrentProvider provider, string url, string name, int seed, int leech, double size, 
-                                   int? files, string age, string magnetUri, Func<TorrentSearchResult, Task<byte[]>> download) {
+        public TorrentSearchResult(ITorrentDownloader service, ITorrentProvider provider, string url, string name, 
+                                   int seed, int leech, double size, int? files, string age, string magnetUri) {
             _service = service;
             _provider = provider;
             _url = url;
@@ -31,7 +28,6 @@ namespace Novaroma.Interface.Download.Torrent {
             _files = files;
             _age = age;
             _magnetUri = magnetUri;
-            _download = download;
         }
 
         #region ITorrentSearchResult Members
@@ -77,10 +73,6 @@ namespace Novaroma.Interface.Download.Torrent {
 
         public string MagnetUri {
             get { return _magnetUri; }
-        }
-
-        public Task<byte[]> Download() {
-            return _download(this);
         }
 
         #endregion

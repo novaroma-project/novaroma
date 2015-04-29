@@ -16,12 +16,6 @@ namespace Novaroma.Services.ThePirateBay {
     public class ThePirateBayTorrentProvider : ITorrentMovieProvider, ITorrentTvShowProvider, IConfigurable {
         private readonly ThePirateBaySettings _settings = new ThePirateBaySettings();
 
-        private static Task<byte[]> DownloadTorrent(ITorrentSearchResult searchResult) {
-            using (var client = new NovaromaWebClient()) {
-                return client.DownloadDataTaskAsync(searchResult.Url);
-            }
-        }
-
         public override string ToString() {
             return ServiceName;
         }
@@ -108,7 +102,7 @@ namespace Novaroma.Services.ThePirateBay {
 
                     var mainTd = tds[1];
                     var anchor = mainTd.Children[0].Children[0];
-                    var torrentUrl = anchor.Attributes.First(a => a.Name == "href").Value;
+                    var torrentUrl = Helper.CombineUrls(Settings.BaseUrl, anchor.Attributes.First(a => a.Name == "href").Value);
                     var torrentName = anchor.TextContent.Trim();
                     if (excludeList.Any(e => torrentName.IndexOf(e, StringComparison.OrdinalIgnoreCase) > 0)) continue;
 
@@ -135,7 +129,7 @@ namespace Novaroma.Services.ThePirateBay {
                     var seed = Convert.ToInt32(tds[2].TextContent);
                     var leech = Convert.ToInt32(tds[3].TextContent);
 
-                    results.Add(new TorrentSearchResult(service, this, torrentUrl, torrentName, seed, leech, size, null, age, magnetUri, DownloadTorrent));
+                    results.Add(new TorrentSearchResult(service, this, torrentUrl, torrentName, seed, leech, size, null, age, magnetUri));
                 }
             }
 

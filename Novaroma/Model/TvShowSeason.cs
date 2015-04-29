@@ -112,6 +112,26 @@ namespace Novaroma.Model {
                 TvShow.IsModified = true;
         }
 
+        internal void CopyFrom(TvShowSeason season) {
+            Season = season.Season;
+
+            var c = Episodes.Count;
+            var ec = season.Episodes.Count;
+            while (c > ec) Episodes.Remove(Episodes.ElementAt(--c));
+
+            for (var i = 0; i < ec; i++) {
+                TvShowEpisode episode;
+                if (c < i + 1) {
+                    episode = new TvShowEpisode();
+                    Episodes.Add(episode);
+                }
+                else
+                    episode = Episodes.ElementAt(i);
+
+                episode.CopyFrom(season.Episodes.ElementAt(i));
+            }
+        }
+
         internal void OnEpisodeBackgroundDownloadChange() {
             RaisePropertyChanged("AllBackgroundDownload");
             if (TvShow != null)

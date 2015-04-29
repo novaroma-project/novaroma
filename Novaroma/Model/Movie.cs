@@ -101,6 +101,21 @@ namespace Novaroma.Model {
             }
         }
 
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<Movie>(entity);
+
+            CopyFrom(external);
+
+            BackgroundDownload = external.BackgroundDownload;
+            DownloadKey = external.DownloadKey;
+            NotFound = external.NotFound;
+            FilePath = external.FilePath;
+            BackgroundSubtitleDownload = external.BackgroundSubtitleDownload;
+            SubtitleNotFound = external.SubtitleNotFound;
+            SubtitleDownloaded = external.SubtitleDownloaded;
+            IsWatched = external.IsWatched;
+        }
+
         #region IDownloadable Members
 
         string IDownloadable.GetSearchQuery() {

@@ -37,5 +37,16 @@ namespace Novaroma.Model {
                 RaisePropertyChanged("ServiceId");
             }
         }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<ServiceMapping>(entity);
+
+            CopyFrom(external);
+        }
+
+        internal void CopyFrom(ServiceMapping mapping) {
+            ServiceName = mapping.ServiceName;
+            ServiceId = mapping.ServiceId;
+        }
     }
 }

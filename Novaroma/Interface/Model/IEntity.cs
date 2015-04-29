@@ -1,7 +1,10 @@
-﻿namespace Novaroma.Interface.Model {
+﻿using System;
+
+namespace Novaroma.Interface.Model {
 
     public interface IEntity {
-        object Id { get; }
+        Guid Id { get; }
         bool IsModified { get; set; }
+        void CopyFrom(IEntity entity);
     }
 }

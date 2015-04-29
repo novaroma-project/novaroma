@@ -25,5 +25,12 @@ namespace Novaroma.Model {
                 RaisePropertyChanged("Value");
             }
         }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<Setting>(entity);
+
+            SettingName = external.SettingName;
+            Value = external.Value;
+        }
     }
 }

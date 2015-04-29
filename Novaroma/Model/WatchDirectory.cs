@@ -14,5 +14,11 @@ namespace Novaroma.Model {
                 RaisePropertyChanged("Directory");
             }
         }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<WatchDirectory>(entity);
+
+            Directory = external.Directory;
+        }
     }
 }

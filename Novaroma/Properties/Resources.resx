@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,1045 +59,1051 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="About" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
-	<data name="AdvancedInfoProvider" xml:space="preserve">
+  <data name="AdvancedInfoProvider" xml:space="preserve">
     <value>Advanced Info Provider</value>
   </data>
-	<data name="AdvancedSearchResultCount" xml:space="preserve">
+  <data name="AdvancedSearchResultCount" xml:space="preserve">
     <value>Advanced Search Result Count</value>
   </data>
-	<data name="AirDate" xml:space="preserve">
+  <data name="AirDate" xml:space="preserve">
     <value>Air Date</value>
   </data>
-	<data name="All" xml:space="preserve">
+  <data name="All" xml:space="preserve">
     <value>All</value>
   </data>
-	<data name="AreYouSure" xml:space="preserve">
+  <data name="AreYouSure" xml:space="preserve">
     <value>Are you sure?</value>
   </data>
-	<data name="AutoDownloadNewEpisodes" xml:space="preserve">
+  <data name="AutoDownloadNewEpisodes" xml:space="preserve">
     <value>Auto Download New Episodes</value>
   </data>
-	<data name="Back" xml:space="preserve">
+  <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
-	<data name="Cancel" xml:space="preserve">
+  <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-	<data name="Directory" xml:space="preserve">
+  <data name="Directory" xml:space="preserve">
     <value>Directory</value>
   </data>
-	<data name="Downloader" xml:space="preserve">
+  <data name="Downloader" xml:space="preserve">
     <value>Downloader</value>
   </data>
-	<data name="Edit" xml:space="preserve">
+  <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-	<data name="Episode" xml:space="preserve">
+  <data name="Episode" xml:space="preserve">
     <value>Episode</value>
   </data>
-	<data name="EpisodeName" xml:space="preserve">
+  <data name="EpisodeName" xml:space="preserve">
     <value>Episode Name</value>
   </data>
-	<data name="Episodes" xml:space="preserve">
+  <data name="Episodes" xml:space="preserve">
     <value>Episodes</value>
   </data>
-	<data name="Filter" xml:space="preserve">
+  <data name="Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
-	<data name="Filters" xml:space="preserve">
+  <data name="Filters" xml:space="preserve">
     <value>Filters</value>
   </data>
-	<data name="Finish" xml:space="preserve">
+  <data name="Finish" xml:space="preserve">
     <value>Finish</value>
   </data>
-	<data name="FoundMedia" xml:space="preserve">
+  <data name="FoundMedia" xml:space="preserve">
     <value>Found Media</value>
   </data>
-	<data name="Genre" xml:space="preserve">
+  <data name="Genre" xml:space="preserve">
     <value>Genre</value>
   </data>
-	<data name="ImdbId" xml:space="preserve">
+  <data name="ImdbId" xml:space="preserve">
     <value>Imdb Id</value>
   </data>
-	<data name="InfoProvider" xml:space="preserve">
+  <data name="InfoProvider" xml:space="preserve">
     <value>Info Provider</value>
   </data>
-	<data name="IsDeleted" xml:space="preserve">
+  <data name="IsDeleted" xml:space="preserve">
     <value>Deleted?</value>
   </data>
-	<data name="IsWatched" xml:space="preserve">
+  <data name="IsWatched" xml:space="preserve">
     <value>Watched?</value>
   </data>
-	<data name="Main" xml:space="preserve">
+  <data name="Main" xml:space="preserve">
     <value>Main</value>
   </data>
-	<data name="MontyNi" xml:space="preserve">
+  <data name="MontyNi" xml:space="preserve">
     <value>Ni!</value>
   </data>
-	<data name="MontyNudgeNudge" xml:space="preserve">
+  <data name="MontyNudgeNudge" xml:space="preserve">
     <value>Nudge, nudge, wink, wink. Know what I mean?</value>
   </data>
-	<data name="MovieDirectory" xml:space="preserve">
+  <data name="MovieDirectory" xml:space="preserve">
     <value>Movie Directory</value>
   </data>
-	<data name="MovieProviders" xml:space="preserve">
+  <data name="MovieProviders" xml:space="preserve">
     <value>Movie Providers</value>
   </data>
-	<data name="Movies" xml:space="preserve">
+  <data name="Movies" xml:space="preserve">
     <value>Movies</value>
   </data>
-	<data name="New" xml:space="preserve">
+  <data name="New" xml:space="preserve">
     <value>New</value>
   </data>
-	<data name="Next" xml:space="preserve">
+  <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
-	<data name="NotWatched" xml:space="preserve">
+  <data name="NotWatched" xml:space="preserve">
     <value>Not Watched</value>
   </data>
-	<data name="Outline" xml:space="preserve">
+  <data name="Outline" xml:space="preserve">
     <value>Outline</value>
   </data>
-	<data name="Overview" xml:space="preserve">
+  <data name="Overview" xml:space="preserve">
     <value>Overview</value>
   </data>
-	<data name="Password" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
-	<data name="Port" xml:space="preserve">
+  <data name="Port" xml:space="preserve">
     <value>Port</value>
   </data>
-	<data name="Poster" xml:space="preserve">
+  <data name="Poster" xml:space="preserve">
     <value>Poster</value>
   </data>
-	<data name="Previous" xml:space="preserve">
+  <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
-	<data name="Rating" xml:space="preserve">
+  <data name="Rating" xml:space="preserve">
     <value>Rating</value>
   </data>
-	<data name="ReleaseYear" xml:space="preserve">
+  <data name="ReleaseYear" xml:space="preserve">
     <value>Release Year</value>
   </data>
-	<data name="Remove" xml:space="preserve">
+  <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
-	<data name="StopWatching" xml:space="preserve">
+  <data name="StopWatching" xml:space="preserve">
     <value>Stop Watching</value>
   </data>
-	<data name="Runtime" xml:space="preserve">
+  <data name="Runtime" xml:space="preserve">
     <value>Runtime</value>
   </data>
-	<data name="Save" xml:space="preserve">
+  <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
-	<data name="Search" xml:space="preserve">
+  <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
-	<data name="Season" xml:space="preserve">
+  <data name="Season" xml:space="preserve">
     <value>Season</value>
   </data>
-	<data name="Seasons" xml:space="preserve">
+  <data name="Seasons" xml:space="preserve">
     <value>Seasons</value>
   </data>
-	<data name="Select" xml:space="preserve">
+  <data name="Select" xml:space="preserve">
     <value>Select</value>
   </data>
-	<data name="Services" xml:space="preserve">
+  <data name="Services" xml:space="preserve">
     <value>Services</value>
   </data>
-	<data name="Settings" xml:space="preserve">
+  <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
-	<data name="ShowTracker" xml:space="preserve">
+  <data name="ShowTracker" xml:space="preserve">
     <value>Show Tracker</value>
   </data>
-	<data name="SubtitleDownloaders" xml:space="preserve">
+  <data name="SubtitleDownloaders" xml:space="preserve">
     <value>Subtitle Downloaders</value>
   </data>
-	<data name="Title" xml:space="preserve">
+  <data name="Title" xml:space="preserve">
     <value>Title</value>
   </data>
-	<data name="TvShowDirectory" xml:space="preserve">
+  <data name="TvShowDirectory" xml:space="preserve">
     <value>Tv Show Directory</value>
   </data>
-	<data name="TvShowProviders" xml:space="preserve">
+  <data name="TvShowProviders" xml:space="preserve">
     <value>Tv Show Providers</value>
   </data>
-	<data name="TvShows" xml:space="preserve">
+  <data name="TvShows" xml:space="preserve">
     <value>Tv Shows</value>
   </data>
-	<data name="TvShowSeasonDirectoryTemplate" xml:space="preserve">
+  <data name="TvShowSeasonDirectoryTemplate" xml:space="preserve">
     <value>Season Directory Template</value>
   </data>
-	<data name="UseAdvancedSearch" xml:space="preserve">
+  <data name="UseAdvancedSearch" xml:space="preserve">
     <value>Use Advanced Search</value>
   </data>
-	<data name="UserName" xml:space="preserve">
+  <data name="UserName" xml:space="preserve">
     <value>User Name</value>
   </data>
-	<data name="Vote" xml:space="preserve">
+  <data name="Vote" xml:space="preserve">
     <value>Vote</value>
   </data>
-	<data name="VoteCount" xml:space="preserve">
+  <data name="VoteCount" xml:space="preserve">
     <value>Vote Count</value>
   </data>
-	<data name="Watched" xml:space="preserve">
+  <data name="Watched" xml:space="preserve">
     <value>Watched</value>
   </data>
-	<data name="Year" xml:space="preserve">
+  <data name="Year" xml:space="preserve">
     <value>Year</value>
   </data>
-	<data name="DownloadInterval" xml:space="preserve">
+  <data name="DownloadInterval" xml:space="preserve">
     <value>Download Interval (min)</value>
   </data>
-	<data name="Clear" xml:space="preserve">
+  <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
-	<data name="SubtitleLanguages" xml:space="preserve">
+  <data name="SubtitleLanguages" xml:space="preserve">
     <value>Subtitle Languages</value>
   </data>
-	<data name="English" xml:space="preserve">
+  <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
-	<data name="Turkish" xml:space="preserve">
+  <data name="Turkish" xml:space="preserve">
     <value>Turkish</value>
   </data>
-	<data name="NotSelected" xml:space="preserve">
+  <data name="NotSelected" xml:space="preserve">
     <value>Not Selected</value>
   </data>
-	<data name="Selected" xml:space="preserve">
+  <data name="Selected" xml:space="preserve">
     <value>Selected</value>
   </data>
-	<data name="Language" xml:space="preserve">
+  <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
-	<data name="TvShowUpdateInterval" xml:space="preserve">
+  <data name="TvShowUpdateInterval" xml:space="preserve">
     <value>Tv Show Update Interval (hours)</value>
   </data>
-	<data name="Activities" xml:space="preserve">
+  <data name="Activities" xml:space="preserve">
     <value>Activities</value>
   </data>
-	<data name="MovieDownloaded" xml:space="preserve">
+  <data name="MovieDownloaded" xml:space="preserve">
     <value>'{0}' download completed</value>
   </data>
-	<data name="MovieSubtitleDownloaded" xml:space="preserve">
+  <data name="MovieSubtitleDownloaded" xml:space="preserve">
     <value>'{0}' subtitle downloaded</value>
   </data>
-	<data name="TvShowEpisodeDownloaded" xml:space="preserve">
+  <data name="TvShowEpisodeDownloaded" xml:space="preserve">
     <value>'{0}' season {1} episode {2} download completed</value>
   </data>
-	<data name="TvShowEpisodeSubtitleDownloaded" xml:space="preserve">
+  <data name="TvShowEpisodeSubtitleDownloaded" xml:space="preserve">
     <value>'{0}' season {1} episode {2} subtitle downloaded</value>
   </data>
-	<data name="Description" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
-	<data name="MovieDownloadStarted" xml:space="preserve">
+  <data name="MovieDownloadStarted" xml:space="preserve">
     <value>'{0}' download started</value>
   </data>
-	<data name="TvShowEpisodeDownloadStarted" xml:space="preserve">
+  <data name="TvShowEpisodeDownloadStarted" xml:space="preserve">
     <value>'{0}' season {1} episode {2} download started</value>
   </data>
-	<data name="BackgroundDownload" xml:space="preserve">
+  <data name="BackgroundDownload" xml:space="preserve">
     <value>Download</value>
   </data>
-	<data name="MinuteReduced" xml:space="preserve">
+  <data name="MinuteReduced" xml:space="preserve">
     <value>min.</value>
   </data>
-	<assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-	<data name="Img_Logo_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_logo_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="BaseUrl" xml:space="preserve">
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Img_Logo_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_logo_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BaseUrl" xml:space="preserve">
     <value>Url</value>
   </data>
-	<data name="Path" xml:space="preserve">
+  <data name="Path" xml:space="preserve">
     <value>Path</value>
   </data>
-	<data name="MovieDetails" xml:space="preserve">
+  <data name="MovieDetails" xml:space="preserve">
     <value>Movie Details</value>
   </data>
-	<data name="Date" xml:space="preserve">
+  <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
-	<data name="Dutch" xml:space="preserve">
+  <data name="Dutch" xml:space="preserve">
     <value>Dutch</value>
   </data>
-	<data name="French" xml:space="preserve">
+  <data name="French" xml:space="preserve">
     <value>French</value>
   </data>
-	<data name="German" xml:space="preserve">
+  <data name="German" xml:space="preserve">
     <value>German</value>
   </data>
-	<data name="Italian" xml:space="preserve">
+  <data name="Italian" xml:space="preserve">
     <value>Italian</value>
   </data>
-	<data name="Russian" xml:space="preserve">
+  <data name="Russian" xml:space="preserve">
     <value>Russian</value>
   </data>
-	<data name="Exit" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
-	<data name="OrderBy" xml:space="preserve">
+  <data name="OrderBy" xml:space="preserve">
     <value>Order By</value>
   </data>
-	<data name="Discover" xml:space="preserve">
+  <data name="Discover" xml:space="preserve">
     <value>Discover</value>
   </data>
-	<data name="ExcludeExisting" xml:space="preserve">
+  <data name="ExcludeExisting" xml:space="preserve">
     <value>Exclude Existing</value>
   </data>
-	<data name="MovieSearchPattern" xml:space="preserve">
+  <data name="MovieSearchPattern" xml:space="preserve">
     <value>Movie Search Pattern</value>
   </data>
-	<data name="MovieSearchPatternDescription" xml:space="preserve">
+  <data name="MovieSearchPatternDescription" xml:space="preserve">
     <value>Available parameters: %movieName%, %year%, %imdbId%</value>
   </data>
-	<data name="TvShowEpisodeSearchPattern" xml:space="preserve">
+  <data name="TvShowEpisodeSearchPattern" xml:space="preserve">
     <value>Tv Show Episode Search Pattern</value>
   </data>
-	<data name="TvShowEpisodeSearchPatternDescription" xml:space="preserve">
+  <data name="TvShowEpisodeSearchPatternDescription" xml:space="preserve">
     <value>Available parameters: %showName%, %imdbId%, %season%, %episode%</value>
   </data>
-	<data name="ExecuteBackgroundDownloads" xml:space="preserve">
+  <data name="ExecuteBackgroundDownloads" xml:space="preserve">
     <value>Execute Downloads</value>
   </data>
-	<data name="ExecuteBackgroundTvShowUpdates" xml:space="preserve">
+  <data name="ExecuteBackgroundTvShowUpdates" xml:space="preserve">
     <value>Execute Tv Show Updates</value>
   </data>
-	<data name="MediaTypes" xml:space="preserve">
+  <data name="MediaTypes" xml:space="preserve">
     <value>Type</value>
   </data>
-	<data name="Feedback" xml:space="preserve">
+  <data name="Feedback" xml:space="preserve">
     <value>Feedback</value>
   </data>
-	<data name="SendAFrown" xml:space="preserve">
+  <data name="SendAFrown" xml:space="preserve">
     <value>Send a Frown</value>
   </data>
-	<data name="SendASmile" xml:space="preserve">
+  <data name="SendASmile" xml:space="preserve">
     <value>Send a Smile</value>
   </data>
-	<data name="TellUsWhatYouThink" xml:space="preserve">
+  <data name="TellUsWhatYouThink" xml:space="preserve">
     <value>Tell us what you think</value>
   </data>
-	<data name="IncludeEmail" xml:space="preserve">
+  <data name="IncludeEmail" xml:space="preserve">
     <value>Include email address</value>
   </data>
-	<data name="FrownWatermark" xml:space="preserve">
+  <data name="FrownWatermark" xml:space="preserve">
     <value>Tell us what you didn't like or what went wrong</value>
   </data>
-	<data name="SmileWatermark" xml:space="preserve">
+  <data name="SmileWatermark" xml:space="preserve">
     <value>Tell us what you liked</value>
   </data>
-	<data name="ItemsPerPage" xml:space="preserve">
+  <data name="ItemsPerPage" xml:space="preserve">
     <value>Items Per Page</value>
   </data>
-	<data name="Page" xml:space="preserve">
+  <data name="Page" xml:space="preserve">
     <value>Page</value>
   </data>
-	<data name="Message" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
-	<data name="ErrorLogs" xml:space="preserve">
+  <data name="ErrorLogs" xml:space="preserve">
     <value>Error Logs</value>
   </data>
-	<data name="Send" xml:space="preserve">
+  <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
-	<data name="Download" xml:space="preserve">
+  <data name="Download" xml:space="preserve">
     <value>Download</value>
   </data>
-	<data name="Img_AddMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_addmedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_DownloadSubtitle_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_downloadsubtitle_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_Download_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_download_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_NewMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_newmedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_Watch_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_watch_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_StopWatching_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_stopwatching_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="NotifyIconToolTip" xml:space="preserve">
+  <data name="Img_AddMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_addmedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_DownloadSubtitle_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_downloadsubtitle_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_Download_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_download_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_NewMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_newmedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_Watch_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_watch_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_StopWatching_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_stopwatching_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NotifyIconToolTip" xml:space="preserve">
     <value>Double-click for window, right-click for menu</value>
   </data>
-	<data name="Img_Exit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_exit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_DiscoverMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_discovermedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_TvShowUpdate_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_tvshowupdate_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="ExcludeKeywords" xml:space="preserve">
+  <data name="Img_Exit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_exit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_DiscoverMedia_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_discovermedia_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_TvShowUpdate_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_tvshowupdate_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExcludeKeywords" xml:space="preserve">
     <value>Exclude Keywords</value>
   </data>
-	<data name="ExcludeKeywordsDescription" xml:space="preserve">
+  <data name="ExcludeKeywordsDescription" xml:space="preserve">
     <value>Search results containing at least one of these will be extracted from the list</value>
   </data>
-	<data name="VideoQuality" xml:space="preserve">
+  <data name="VideoQuality" xml:space="preserve">
     <value>Video Quality</value>
   </data>
-	<data name="DefaultTvShowExtraKeywords" xml:space="preserve">
+  <data name="DefaultTvShowExtraKeywords" xml:space="preserve">
     <value>Default Tv Show Extra Keywords</value>
   </data>
-	<data name="ExtraKeywordsDescription" xml:space="preserve">
+  <data name="ExtraKeywordsDescription" xml:space="preserve">
     <value>Will be added to provider search query</value>
   </data>
-	<data name="DefaultMovieVideoQuality" xml:space="preserve">
+  <data name="DefaultMovieVideoQuality" xml:space="preserve">
     <value>Default Movie Video Quality</value>
   </data>
-	<data name="DefaultTvShowVideoQuality" xml:space="preserve">
+  <data name="DefaultTvShowVideoQuality" xml:space="preserve">
     <value>Default Tv Show Video Quality</value>
   </data>
-	<data name="DefaultMovieExcludeKeywords" xml:space="preserve">
+  <data name="DefaultMovieExcludeKeywords" xml:space="preserve">
     <value>Default Movie Exclude Keywords</value>
   </data>
-	<data name="DefaultTvShowExcludeKeywords" xml:space="preserve">
+  <data name="DefaultTvShowExcludeKeywords" xml:space="preserve">
     <value>Default Tv Show Exclude Keywords</value>
   </data>
-	<data name="Any" xml:space="preserve">
+  <data name="Any" xml:space="preserve">
     <value>Any</value>
   </data>
-	<data name="P1080" xml:space="preserve">
+  <data name="P1080" xml:space="preserve">
     <value>1080p</value>
   </data>
-	<data name="P480" xml:space="preserve">
+  <data name="P480" xml:space="preserve">
     <value>480p</value>
   </data>
-	<data name="P720" xml:space="preserve">
+  <data name="P720" xml:space="preserve">
     <value>720p</value>
   </data>
-	<data name="EmailAddress" xml:space="preserve">
+  <data name="EmailAddress" xml:space="preserve">
     <value>Email address</value>
   </data>
-	<data name="Documentary" xml:space="preserve">
+  <data name="Documentary" xml:space="preserve">
     <value>Documentary</value>
   </data>
-	<data name="UpdateMovieInfo" xml:space="preserve">
+  <data name="UpdateMovieInfo" xml:space="preserve">
     <value>Update Movie Info</value>
   </data>
-	<data name="UpdateTvShowInfo" xml:space="preserve">
+  <data name="UpdateTvShowInfo" xml:space="preserve">
     <value>Update Tv Show Info</value>
   </data>
-	<data name="Delete" xml:space="preserve">
+  <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
-	<data name="Play" xml:space="preserve">
+  <data name="Play" xml:space="preserve">
     <value>Play</value>
   </data>
-	<data name="PlayUnseenEpisode" xml:space="preserve">
+  <data name="PlayUnseenEpisode" xml:space="preserve">
     <value>Play Unseen Episode</value>
   </data>
-	<data name="DefaultMovieExtraKeywords" xml:space="preserve">
+  <data name="DefaultMovieExtraKeywords" xml:space="preserve">
     <value>Default Movie Extra Keywords</value>
   </data>
-	<data name="ExtraKeywords" xml:space="preserve">
+  <data name="ExtraKeywords" xml:space="preserve">
     <value>Extra Keywords</value>
   </data>
-	<data name="BackgroundSubtitleDownload" xml:space="preserve">
+  <data name="BackgroundSubtitleDownload" xml:space="preserve">
     <value>Subtitle Download</value>
   </data>
-	<data name="Votes" xml:space="preserve">
+  <data name="Votes" xml:space="preserve">
     <value>Votes</value>
   </data>
-	<data name="UpdateTvShow" xml:space="preserve">
+  <data name="UpdateTvShow" xml:space="preserve">
     <value>Update Tv Show</value>
   </data>
-	<data name="Downloaded" xml:space="preserve">
+  <data name="Downloaded" xml:space="preserve">
     <value>Downloaded</value>
   </data>
-	<data name="Name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-	<data name="Availability" xml:space="preserve">
+  <data name="Availability" xml:space="preserve">
     <value>Availability</value>
   </data>
-	<data name="SubtitleDownloaded" xml:space="preserve">
+  <data name="SubtitleDownloaded" xml:space="preserve">
     <value>Subtitle Downloaded</value>
   </data>
-	<data name="Age" xml:space="preserve">
+  <data name="Age" xml:space="preserve">
     <value>Age</value>
   </data>
-	<data name="FileCount" xml:space="preserve">
+  <data name="FileCount" xml:space="preserve">
     <value>File Count</value>
   </data>
-	<data name="Leech" xml:space="preserve">
+  <data name="Leech" xml:space="preserve">
     <value>Leech</value>
   </data>
-	<data name="Seed" xml:space="preserve">
+  <data name="Seed" xml:space="preserve">
     <value>Seed</value>
   </data>
-	<data name="SizeMB" xml:space="preserve">
+  <data name="SizeMB" xml:space="preserve">
     <value>Size (MB)</value>
   </data>
-	<data name="Provider" xml:space="preserve">
+  <data name="Provider" xml:space="preserve">
     <value>Provider</value>
   </data>
-	<data name="DownloadSubtitle" xml:space="preserve">
+  <data name="DownloadSubtitle" xml:space="preserve">
     <value>Download Subtitle</value>
   </data>
-	<data name="DiscoverFiles" xml:space="preserve">
+  <data name="DiscoverFiles" xml:space="preserve">
     <value>Discover Files</value>
   </data>
-	<data name="DownloadCount" xml:space="preserve">
+  <data name="DownloadCount" xml:space="preserve">
     <value>Download Count</value>
   </data>
-	<data name="SearchResultNotFound" xml:space="preserve">
+  <data name="SearchResultNotFound" xml:space="preserve">
     <value>Search result is not found. You can search again manually</value>
   </data>
-	<data name="SearchResultNotFoundForSubtitle" xml:space="preserve">
+  <data name="SearchResultNotFoundForSubtitle" xml:space="preserve">
     <value>Search result is not found for subtitle. You can search again manually</value>
   </data>
-	<data name="SubtitleSearch" xml:space="preserve">
+  <data name="SubtitleSearch" xml:space="preserve">
     <value>Subtitle Search</value>
   </data>
-	<data name="CheckAndUpdateDirectoryFiles" xml:space="preserve">
+  <data name="CheckAndUpdateDirectoryFiles" xml:space="preserve">
     <value>Check and Update Directory Files</value>
   </data>
-	<data name="GoToDirectory" xml:space="preserve">
+  <data name="GoToDirectory" xml:space="preserve">
     <value>Go To Directory</value>
   </data>
-	<data name="ManualDownload" xml:space="preserve">
+  <data name="ManualDownload" xml:space="preserve">
     <value>Manual Download</value>
   </data>
-	<data name="ManualSubtitleDownload" xml:space="preserve">
+  <data name="ManualSubtitleDownload" xml:space="preserve">
     <value>Manual Subtitle Download</value>
   </data>
-	<data name="ImdbIdNotFound" xml:space="preserve">
+  <data name="ImdbIdNotFound" xml:space="preserve">
     <value>Imdb Id not found</value>
   </data>
-	<data name="ServiceIdNotFound" xml:space="preserve">
+  <data name="ServiceIdNotFound" xml:space="preserve">
     <value>{0} Id not found</value>
   </data>
-	<data name="UnsupportedSearchResult" xml:space="preserve">
+  <data name="UnsupportedSearchResult" xml:space="preserve">
     <value>Unsupported search result</value>
   </data>
-	<data name="ServiceUnavailable" xml:space="preserve">
+  <data name="ServiceUnavailable" xml:space="preserve">
     <value>Service Unavailable: {0}</value>
   </data>
-	<data name="DeleteExtensions" xml:space="preserve">
+  <data name="DeleteExtensions" xml:space="preserve">
     <value>Delete Extensions</value>
   </data>
-	<data name="DeleteExtensionsDescription" xml:space="preserve">
+  <data name="DeleteExtensionsDescription" xml:space="preserve">
     <value>Files with these extensions will be deleted after each download complete (; separated)</value>
   </data>
-	<data name="LogDate" xml:space="preserve">
+  <data name="LogDate" xml:space="preserve">
     <value>Log Date</value>
   </data>
-	<data name="NotFound" xml:space="preserve">
+  <data name="NotFound" xml:space="preserve">
     <value>Not Found</value>
   </data>
-	<data name="SubtitleNotFound" xml:space="preserve">
+  <data name="SubtitleNotFound" xml:space="preserve">
     <value>Subtitle Not Found</value>
   </data>
-	<data name="Img_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_Logo_Window" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_logo_window.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Advanced" xml:space="preserve">
+  <data name="Img_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_Logo_Window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_logo_window.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
-	<data name="SelectAFile" xml:space="preserve">
+  <data name="SelectAFile" xml:space="preserve">
     <value>Select a file</value>
   </data>
-	<data name="BackupDatabase" xml:space="preserve">
+  <data name="BackupDatabase" xml:space="preserve">
     <value>Backup Database</value>
   </data>
-	<data name="Add" xml:space="preserve">
+  <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-	<data name="ScriptServices" xml:space="preserve">
+  <data name="ScriptServices" xml:space="preserve">
     <value>Script Services</value>
   </data>
-	<data name="MovieTorrentProvider" xml:space="preserve">
+  <data name="MovieTorrentProvider" xml:space="preserve">
     <value>Movie Torrent Provider</value>
   </data>
-	<data name="TvShowTorrentProvider" xml:space="preserve">
+  <data name="TvShowTorrentProvider" xml:space="preserve">
     <value>Tv Show Torrent Provider</value>
   </data>
-	<data name="DownloadEventHandlers" xml:space="preserve">
+  <data name="DownloadEventHandlers" xml:space="preserve">
     <value>Download Event Handlers</value>
   </data>
-	<data name="LoadDefaultCode" xml:space="preserve">
+  <data name="LoadDefaultCode" xml:space="preserve">
     <value>Load Default Code</value>
   </data>
-	<data name="Build" xml:space="preserve">
+  <data name="Build" xml:space="preserve">
     <value>Build</value>
   </data>
-	<data name="CompiledCodeNovaromaServiceRequired" xml:space="preserve">
+  <data name="CompiledCodeNovaromaServiceRequired" xml:space="preserve">
     <value>Cannot find any Novaroma Service in compiled code</value>
   </data>
-	<data name="Errors" xml:space="preserve">
+  <data name="Errors" xml:space="preserve">
     <value>Errors</value>
   </data>
-	<data name="Warnings" xml:space="preserve">
+  <data name="Warnings" xml:space="preserve">
     <value>Warnings</value>
   </data>
-	<data name="Column" xml:space="preserve">
+  <data name="Column" xml:space="preserve">
     <value>Column</value>
   </data>
-	<data name="Line" xml:space="preserve">
+  <data name="Line" xml:space="preserve">
     <value>Line</value>
   </data>
-	<data name="RestartNovaroma" xml:space="preserve">
+  <data name="RestartNovaroma" xml:space="preserve">
     <value>Restart Novaroma</value>
   </data>
-	<data name="CompiledCodeParameterlessCtorRequired" xml:space="preserve">
+  <data name="CompiledCodeParameterlessCtorRequired" xml:space="preserve">
     <value>All exposed service types must have a parameterless public constructor</value>
   </data>
-	<data name="ScriptService" xml:space="preserve">
+  <data name="ScriptService" xml:space="preserve">
     <value>Script Service</value>
   </data>
-	<data name="DownloadEventHandler" xml:space="preserve">
+  <data name="DownloadEventHandler" xml:space="preserve">
     <value>Download Event Handler</value>
   </data>
-	<data name="SubtitleDownloader" xml:space="preserve">
+  <data name="SubtitleDownloader" xml:space="preserve">
     <value>Subtitle Downloader</value>
   </data>
-	<data name="ClearActvitiesAndLogs" xml:space="preserve">
+  <data name="ClearActvitiesAndLogs" xml:space="preserve">
     <value>Clear Actvities and Logs</value>
   </data>
-	<data name="MovieSubtitleNotFound" xml:space="preserve">
+  <data name="MovieSubtitleNotFound" xml:space="preserve">
     <value>'{0}' subtitle could not be found</value>
   </data>
-	<data name="TvShowEpisodeSubtitleNotFound" xml:space="preserve">
+  <data name="TvShowEpisodeSubtitleNotFound" xml:space="preserve">
     <value>'{0}' season {1} episode {2} subtitle could not be found</value>
   </data>
-	<data name="SubtitleNotDownloaded_DownloadersNotSelected" xml:space="preserve">
+  <data name="SubtitleNotDownloaded_DownloadersNotSelected" xml:space="preserve">
     <value>Could not download subtitle: downloaders are not selected. You can select downloaders from Settings</value>
   </data>
-	<data name="SubtitleNotDownloaded_LanguagesNotSelected" xml:space="preserve">
+  <data name="SubtitleNotDownloaded_LanguagesNotSelected" xml:space="preserve">
     <value>Could not download subtitle: languages are not selected. You can select languages from Settings</value>
   </data>
-	<data name="SubtitleNotDownloaded_FileNotFound" xml:space="preserve">
+  <data name="SubtitleNotDownloaded_FileNotFound" xml:space="preserve">
     <value>Could not download subtitle: '{0}' file not found</value>
   </data>
-	<data name="FileNotFound" xml:space="preserve">
+  <data name="FileNotFound" xml:space="preserve">
     <value>File not found: '{0}'</value>
   </data>
-	<data name="Configuration" xml:space="preserve">
+  <data name="Configuration" xml:space="preserve">
     <value>Configuration</value>
   </data>
-	<data name="UtorrentWebUISettings" xml:space="preserve">
+  <data name="UtorrentWebUISettings" xml:space="preserve">
     <value>μTorrent Web UI Settings</value>
   </data>
-	<data name="VideoFiles" xml:space="preserve">
+  <data name="VideoFiles" xml:space="preserve">
     <value>Video Files</value>
   </data>
-	<data name="Img_Logo_48x48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_logo_48x48.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_Edit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_edit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="BuyCoffee" xml:space="preserve">
+  <data name="Img_Logo_48x48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_logo_48x48.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_Edit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_edit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BuyCoffee" xml:space="preserve">
     <value>Buy us a coffee</value>
   </data>
-	<data name="AddSubdirectories" xml:space="preserve">
+  <data name="AddSubdirectories" xml:space="preserve">
     <value>Add Sub-Directories</value>
   </data>
-	<data name="Img_AddSubdirectories_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_addsubdirectories_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="Img_NovaromaFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\images\img_novaromafolder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-	<data name="MakeSpecialFolder" xml:space="preserve">
+  <data name="Img_AddSubdirectories_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_addsubdirectories_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Img_NovaromaFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\img_novaromafolder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MakeSpecialFolder" xml:space="preserve">
     <value>Customize Folders</value>
   </data>
-	<data name="MakeSpecialFolderDescription" xml:space="preserve">
+  <data name="MakeSpecialFolderDescription" xml:space="preserve">
     <value>Novaroma folders will have novaroma icon, tv show and movie folders will have poster on windows explorer</value>
   </data>
-	<data name="PluginService" xml:space="preserve">
+  <data name="PluginService" xml:space="preserve">
     <value>Plug-in Service</value>
   </data>
-	<data name="Plugins" xml:space="preserve">
+  <data name="Plugins" xml:space="preserve">
     <value>Plug-ins</value>
   </data>
-	<data name="DirectoryToAdd" xml:space="preserve">
+  <data name="DirectoryToAdd" xml:space="preserve">
     <value>'{0}' will be added to novaroma directory watch list</value>
   </data>
-	<data name="DeleteDirectoriesAlso" xml:space="preserve">
+  <data name="DeleteDirectoriesAlso" xml:space="preserve">
     <value>Delete Directories Also</value>
   </data>
-	<data name="DeleteDirectoriesAlsoDescription" xml:space="preserve">
+  <data name="DeleteDirectoriesAlsoDescription" xml:space="preserve">
     <value>After deleting a movie or tv show, also delete it's directory</value>
   </data>
-	<data name="MarkAsWatched" xml:space="preserve">
+  <data name="MarkAsWatched" xml:space="preserve">
     <value>Mark as Watched</value>
   </data>
-	<data name="Movie" xml:space="preserve">
+  <data name="Movie" xml:space="preserve">
     <value>Movie</value>
   </data>
-	<data name="TvShow" xml:space="preserve">
+  <data name="TvShow" xml:space="preserve">
     <value>Tv Show</value>
   </data>
-	<data name="NovaromaSlogan" xml:space="preserve">
+  <data name="NovaromaSlogan" xml:space="preserve">
     <value>Sit back, relax and just watch!</value>
   </data>
-	<data name="VisitWebSite" xml:space="preserve">
+  <data name="VisitWebSite" xml:space="preserve">
     <value>Visit Website</value>
   </data>
-	<data name="HowToAddMovie" xml:space="preserve">
+  <data name="HowToAddMovie" xml:space="preserve">
     <value>How to add movie ?</value>
   </data>
-	<data name="HowToAddTvShow" xml:space="preserve">
+  <data name="HowToAddTvShow" xml:space="preserve">
     <value>How to add tv show ?</value>
   </data>
-	<data name="HowTo" xml:space="preserve">
+  <data name="HowTo" xml:space="preserve">
     <value>How to</value>
   </data>
-	<data name="Url_HowToAddMovie" xml:space="preserve">
+  <data name="Url_HowToAddMovie" xml:space="preserve">
     <value>http://www.novaroma.net/how-to-add-movie.html</value>
   </data>
-	<data name="Url_HowToAddTvShow" xml:space="preserve">
+  <data name="Url_HowToAddTvShow" xml:space="preserve">
     <value>http://www.novaroma.net/how-to-add-tv-show.html</value>
   </data>
-	<data name="Url_HowToConfigureUtorrentWebUISettings" xml:space="preserve">
+  <data name="Url_HowToConfigureUtorrentWebUISettings" xml:space="preserve">
     <value>http://www.novaroma.net/how-to-configure-utorrent-web-ui-settings.html</value>
   </data>
-	<data name="InvalidEmail" xml:space="preserve">
+  <data name="InvalidEmail" xml:space="preserve">
     <value>Invalid email address</value>
   </data>
-	<data name="GoToPluginDirectory" xml:space="preserve">
+  <data name="GoToPluginDirectory" xml:space="preserve">
     <value>Go to plugin directory</value>
   </data>
-	<data name="TvShowFileNameFormatInfo" xml:space="preserve">
+  <data name="TvShowFileNameFormatInfo" xml:space="preserve">
     <value>If video files are not found, you can change file name like the example below</value>
   </data>
-	<data name="AddScriptService" xml:space="preserve">
+  <data name="AddScriptService" xml:space="preserve">
     <value>Add Script Service</value>
   </data>
-	<data name="PluginAddInfo" xml:space="preserve">
+  <data name="PluginAddInfo" xml:space="preserve">
     <value>You must restart novaroma after any changes to plugin folder to be effective</value>
   </data>
-	<data name="PluginDirectory" xml:space="preserve">
+  <data name="PluginDirectory" xml:space="preserve">
     <value>Plugin Directory</value>
   </data>
-	<data name="CheckForUpdates" xml:space="preserve">
+  <data name="CheckForUpdates" xml:space="preserve">
     <value>Check for Updates</value>
   </data>
-	<data name="SubtitleDownloadInterval" xml:space="preserve">
+  <data name="SubtitleDownloadInterval" xml:space="preserve">
     <value>Subtitle Download Interval (min)</value>
   </data>
-	<data name="Afrikaans" xml:space="preserve">
+  <data name="Afrikaans" xml:space="preserve">
     <value>Afrikaans</value>
   </data>
-	<data name="Albanian" xml:space="preserve">
+  <data name="Albanian" xml:space="preserve">
     <value>Albanian</value>
   </data>
-	<data name="Arabic" xml:space="preserve">
+  <data name="Arabic" xml:space="preserve">
     <value>Arabic</value>
   </data>
-	<data name="Armenian" xml:space="preserve">
+  <data name="Armenian" xml:space="preserve">
     <value>Armenian</value>
   </data>
-	<data name="Basque" xml:space="preserve">
+  <data name="Basque" xml:space="preserve">
     <value>Basque</value>
   </data>
-	<data name="Belarusian" xml:space="preserve">
+  <data name="Belarusian" xml:space="preserve">
     <value>Belarusian</value>
   </data>
-	<data name="Bengali" xml:space="preserve">
+  <data name="Bengali" xml:space="preserve">
     <value>Bengali</value>
   </data>
-	<data name="Bosnian" xml:space="preserve">
+  <data name="Bosnian" xml:space="preserve">
     <value>Bosnian</value>
   </data>
-	<data name="Breton" xml:space="preserve">
+  <data name="Breton" xml:space="preserve">
     <value>Breton</value>
   </data>
-	<data name="Bulgarian" xml:space="preserve">
+  <data name="Bulgarian" xml:space="preserve">
     <value>Bulgarian</value>
   </data>
-	<data name="Burmese" xml:space="preserve">
+  <data name="Burmese" xml:space="preserve">
     <value>Burmese</value>
   </data>
-	<data name="Catalan" xml:space="preserve">
+  <data name="Catalan" xml:space="preserve">
     <value>Catalan</value>
   </data>
-	<data name="ChineseBilingual" xml:space="preserve">
+  <data name="ChineseBilingual" xml:space="preserve">
     <value>Chinese (Bilingual)</value>
   </data>
-	<data name="ChineseSimplified" xml:space="preserve">
+  <data name="ChineseSimplified" xml:space="preserve">
     <value>Chinese (Simplified)</value>
   </data>
-	<data name="ChineseTraditional" xml:space="preserve">
+  <data name="ChineseTraditional" xml:space="preserve">
     <value>Chinese (Traditional)</value>
   </data>
-	<data name="Croatian" xml:space="preserve">
+  <data name="Croatian" xml:space="preserve">
     <value>Croatian</value>
   </data>
-	<data name="Czech" xml:space="preserve">
+  <data name="Czech" xml:space="preserve">
     <value>Czech</value>
   </data>
-	<data name="Danish" xml:space="preserve">
+  <data name="Danish" xml:space="preserve">
     <value>Danish</value>
   </data>
-	<data name="Esperanto" xml:space="preserve">
+  <data name="Esperanto" xml:space="preserve">
     <value>Esperanto</value>
   </data>
-	<data name="Estonian" xml:space="preserve">
+  <data name="Estonian" xml:space="preserve">
     <value>Estonian</value>
   </data>
-	<data name="Finnish" xml:space="preserve">
+  <data name="Finnish" xml:space="preserve">
     <value>Finnish</value>
   </data>
-	<data name="Galician" xml:space="preserve">
+  <data name="Galician" xml:space="preserve">
     <value>Galician</value>
   </data>
-	<data name="Georgian" xml:space="preserve">
+  <data name="Georgian" xml:space="preserve">
     <value>Georgian</value>
   </data>
-	<data name="Greek" xml:space="preserve">
+  <data name="Greek" xml:space="preserve">
     <value>Greek</value>
   </data>
-	<data name="Hebrew" xml:space="preserve">
+  <data name="Hebrew" xml:space="preserve">
     <value>Hebrew</value>
   </data>
-	<data name="Hindi" xml:space="preserve">
+  <data name="Hindi" xml:space="preserve">
     <value>Hindi</value>
   </data>
-	<data name="Hungarian" xml:space="preserve">
+  <data name="Hungarian" xml:space="preserve">
     <value>Hungarian</value>
   </data>
-	<data name="Icelandic" xml:space="preserve">
+  <data name="Icelandic" xml:space="preserve">
     <value>Icelandic</value>
   </data>
-	<data name="Indonesian" xml:space="preserve">
+  <data name="Indonesian" xml:space="preserve">
     <value>Indonesian</value>
   </data>
-	<data name="Japanese" xml:space="preserve">
+  <data name="Japanese" xml:space="preserve">
     <value>Japanese</value>
   </data>
-	<data name="Kazakh" xml:space="preserve">
+  <data name="Kazakh" xml:space="preserve">
     <value>Kazakh</value>
   </data>
-	<data name="Khmer" xml:space="preserve">
+  <data name="Khmer" xml:space="preserve">
     <value>Khmer</value>
   </data>
-	<data name="Korean" xml:space="preserve">
+  <data name="Korean" xml:space="preserve">
     <value>Korean</value>
   </data>
-	<data name="Latvian" xml:space="preserve">
+  <data name="Latvian" xml:space="preserve">
     <value>Latvian</value>
   </data>
-	<data name="Lithuanian" xml:space="preserve">
+  <data name="Lithuanian" xml:space="preserve">
     <value>Lithuanian</value>
   </data>
-	<data name="Luxembourgish" xml:space="preserve">
+  <data name="Luxembourgish" xml:space="preserve">
     <value>Luxembourgish</value>
   </data>
-	<data name="Macedonian" xml:space="preserve">
+  <data name="Macedonian" xml:space="preserve">
     <value>Macedonian</value>
   </data>
-	<data name="Malay" xml:space="preserve">
+  <data name="Malay" xml:space="preserve">
     <value>Malay</value>
   </data>
-	<data name="Malayalam" xml:space="preserve">
+  <data name="Malayalam" xml:space="preserve">
     <value>Malayalam</value>
   </data>
-	<data name="Manipuri" xml:space="preserve">
+  <data name="Manipuri" xml:space="preserve">
     <value>Manipuri</value>
   </data>
-	<data name="Mongolian" xml:space="preserve">
+  <data name="Mongolian" xml:space="preserve">
     <value>Mongolian</value>
   </data>
-	<data name="Montenegrin" xml:space="preserve">
+  <data name="Montenegrin" xml:space="preserve">
     <value>Montenegrin</value>
   </data>
-	<data name="Norwegian" xml:space="preserve">
+  <data name="Norwegian" xml:space="preserve">
     <value>Norwegian</value>
   </data>
-	<data name="Occitan" xml:space="preserve">
+  <data name="Occitan" xml:space="preserve">
     <value>Occitan</value>
   </data>
-	<data name="Persian" xml:space="preserve">
+  <data name="Persian" xml:space="preserve">
     <value>Persian</value>
   </data>
-	<data name="Polish" xml:space="preserve">
+  <data name="Polish" xml:space="preserve">
     <value>Polish</value>
   </data>
-	<data name="Portuguese" xml:space="preserve">
+  <data name="Portuguese" xml:space="preserve">
     <value>Portuguese</value>
   </data>
-	<data name="Romanian" xml:space="preserve">
+  <data name="Romanian" xml:space="preserve">
     <value>Romanian</value>
   </data>
-	<data name="Serbian" xml:space="preserve">
+  <data name="Serbian" xml:space="preserve">
     <value>Serbian</value>
   </data>
-	<data name="Sinhalese" xml:space="preserve">
+  <data name="Sinhalese" xml:space="preserve">
     <value>Sinhalese</value>
   </data>
-	<data name="Slovak" xml:space="preserve">
+  <data name="Slovak" xml:space="preserve">
     <value>Slovak</value>
   </data>
-	<data name="Slovenian" xml:space="preserve">
+  <data name="Slovenian" xml:space="preserve">
     <value>Slovenian</value>
   </data>
-	<data name="Spanish" xml:space="preserve">
+  <data name="Spanish" xml:space="preserve">
     <value>Spanish</value>
   </data>
-	<data name="Swahili" xml:space="preserve">
+  <data name="Swahili" xml:space="preserve">
     <value>Swahili</value>
   </data>
-	<data name="Swedish" xml:space="preserve">
+  <data name="Swedish" xml:space="preserve">
     <value>Swedish</value>
   </data>
-	<data name="Syriac" xml:space="preserve">
+  <data name="Syriac" xml:space="preserve">
     <value>Syriac</value>
   </data>
-	<data name="Tagalog" xml:space="preserve">
+  <data name="Tagalog" xml:space="preserve">
     <value>Tagalog</value>
   </data>
-	<data name="Tamil" xml:space="preserve">
+  <data name="Tamil" xml:space="preserve">
     <value>Tamil</value>
   </data>
-	<data name="Telugu" xml:space="preserve">
+  <data name="Telugu" xml:space="preserve">
     <value>Telugu</value>
   </data>
-	<data name="Thai" xml:space="preserve">
+  <data name="Thai" xml:space="preserve">
     <value>Thai</value>
   </data>
-	<data name="Ukrainian" xml:space="preserve">
+  <data name="Ukrainian" xml:space="preserve">
     <value>Ukrainian</value>
   </data>
-	<data name="Urdu" xml:space="preserve">
+  <data name="Urdu" xml:space="preserve">
     <value>Urdu</value>
   </data>
-	<data name="Vietnamese" xml:space="preserve">
+  <data name="Vietnamese" xml:space="preserve">
     <value>Vietnamese</value>
   </data>
-	<data name="Help" xml:space="preserve">
+  <data name="Help" xml:space="preserve">
     <value>Help</value>
   </data>
-	<data name="Url_Help" xml:space="preserve">
+  <data name="Url_Help" xml:space="preserve">
     <value>http://www.novaroma.net/help.html</value>
   </data>
-	<data name="DeleteCompletedTorrents" xml:space="preserve">
+  <data name="DeleteCompletedTorrents" xml:space="preserve">
     <value>Delete Completed Torrents</value>
   </data>
-	<data name="Searching" xml:space="preserve">
+  <data name="Searching" xml:space="preserve">
     <value>Searching</value>
   </data>
-	<data name="Url_Donate" xml:space="preserve">
+  <data name="Url_Donate" xml:space="preserve">
     <value>http://www.novaroma.net/donate.html</value>
   </data>
-	<data name="UpdateAvailable" xml:space="preserve">
+  <data name="UpdateAvailable" xml:space="preserve">
     <value>Update Available</value>
   </data>
-	<data name="MovieFileNameTemplate" xml:space="preserve">
+  <data name="MovieFileNameTemplate" xml:space="preserve">
     <value>Movie File Rename Template</value>
   </data>
-	<data name="MovieFileNameTemplateDescription" xml:space="preserve">
+  <data name="MovieFileNameTemplateDescription" xml:space="preserve">
     <value>Available parameters: %movieName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
   </data>
-	<data name="TvShowEpisodeFileNameTemplate" xml:space="preserve">
+  <data name="TvShowEpisodeFileNameTemplate" xml:space="preserve">
     <value>Episode File Rename Template</value>
   </data>
-	<data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
+  <data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
     <value>Available parameters: %showName%, %season%, %episode%, %episodeName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
   </data>
-	<data name="Ended" xml:space="preserve">
+  <data name="Ended" xml:space="preserve">
     <value>Ended</value>
   </data>
-	<data name="DefaultMaxSize" xml:space="preserve">
+  <data name="DefaultMaxSize" xml:space="preserve">
     <value>Default Maximum Size (MB)
 </value>
   </data>
-	<data name="DefaultMinSize" xml:space="preserve">
+  <data name="DefaultMinSize" xml:space="preserve">
     <value>Default Minimum Size (MB)</value>
   </data>
-	<data name="MaxSize" xml:space="preserve">
+  <data name="MaxSize" xml:space="preserve">
     <value>Max Size (MB)</value>
   </data>
-	<data name="MinSize" xml:space="preserve">
+  <data name="MinSize" xml:space="preserve">
     <value>Min Size (MB)</value>
   </data>
-	<data name="MinSizeDescription" xml:space="preserve">
+  <data name="MinSizeDescription" xml:space="preserve">
     <value>Search results bigger than this size will be extracted from the list</value>
   </data>
-	<data name="MaxSizeDescription" xml:space="preserve">
+  <data name="MaxSizeDescription" xml:space="preserve">
     <value>Search results smaller than this size will be extracted from the list</value>
   </data>
-	<data name="MinCannotExceedMax" xml:space="preserve">
+  <data name="MinCannotExceedMax" xml:space="preserve">
     <value>Minimum value cannot be greater than maximum value</value>
   </data>
-	<data name="SaveSearch" xml:space="preserve">
+  <data name="SaveSearch" xml:space="preserve">
     <value>Save search selections as default</value>
+  </data>
+  <data name="IncompatilbleTypes_CopyFrom" xml:space="preserve">
+    <value>Incompatible types: Cannot copy values from '{0}' type to '{1}' type</value>
+  </data>
+  <data name="EntityNotFoundInDb" xml:space="preserve">
+    <value>Entity not found in database, Id: '{0}'</value>
   </data>
 </root>

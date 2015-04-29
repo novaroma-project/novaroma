@@ -172,6 +172,21 @@ namespace Novaroma.Model {
                 TvShowSeason.TvShow.IsModified = true;
         }
 
+        internal void CopyFrom(TvShowEpisode episode) {
+            Episode = episode.Episode;
+            Name = episode.Name;
+            Overview = episode.Overview;
+            AirDate = episode.AirDate;
+            BackgroundDownload = episode.BackgroundDownload;
+            DownloadKey = episode.DownloadKey;
+            NotFound = episode.NotFound;
+            FilePath = episode.FilePath;
+            BackgroundSubtitleDownload = episode.BackgroundSubtitleDownload;
+            SubtitleNotFound = episode.SubtitleNotFound;
+            SubtitleDownloaded = episode.SubtitleDownloaded;
+            IsWatched = episode.IsWatched;
+        }
+
         #region IDownloadable Members
 
         VideoQuality IDownloadable.VideoQuality {

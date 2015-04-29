@@ -16,12 +16,6 @@ namespace Novaroma.Services.Kickass {
     public class KickassTorrentProvider : ITorrentMovieProvider, ITorrentTvShowProvider, IConfigurable {
         private static readonly KickassSettings _settings = new KickassSettings();
 
-        private static Task<byte[]> DownloadTorrent(ITorrentSearchResult searchResult) {
-            using (var client = new NovaromaWebClient()) {
-                return client.DownloadDataTaskAsync(searchResult.Url);
-            }
-        }
-
         public override string ToString() {
             return ServiceName;
         }
@@ -132,7 +126,7 @@ namespace Novaroma.Services.Kickass {
                     var seed = int.Parse(tds[4].TextContent);
                     var leech = int.Parse(tds[5].TextContent);
 
-                    results.Add(new TorrentSearchResult(service, this, torrentUrl, torrentName, seed, leech, size, files, age, magnetUri, DownloadTorrent));
+                    results.Add(new TorrentSearchResult(service, this, torrentUrl, torrentName, seed, leech, size, files, age, magnetUri));
                 }
             }
 

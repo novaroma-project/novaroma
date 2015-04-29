@@ -48,5 +48,14 @@ namespace Novaroma.Model {
                 RaisePropertyChanged("IsRead");
             }
         }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<Activity>(entity);
+
+            Description = external.Description;
+            ActivityDate = external.ActivityDate;
+            Path = external.Path;
+            IsRead = external.IsRead;
+        }
     }
 }

@@ -25,5 +25,12 @@ namespace Novaroma.Model {
                 RaisePropertyChanged("Code");
             }
         }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<ScriptService>(entity);
+
+            Name = external.Name;
+            Code = external.Code;
+        }
     }
 }

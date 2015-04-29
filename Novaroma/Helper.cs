@@ -28,14 +28,7 @@ namespace Novaroma {
         public static string[] SubtitleExtensions = { ".srt", ".sub", ".ass" };
         private static readonly IEnumerable<char> _paranthesis = new List<char> { '(', '[', '{' };
 
-        public static void SetCulture(Language language) {
-            var cultureCode = GetTwoLetterLanguageCode(language);
-            var cultureInfo = CultureInfo.GetCultureInfo(cultureCode);
-            Thread.CurrentThread.CurrentCulture = cultureInfo;
-            Thread.CurrentThread.CurrentUICulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-        }
+        #region File-Directory Helpers
 
         public static bool IsVideoFile(string filePath) {
             return IsVideoFile(new FileInfo(filePath));
@@ -139,6 +132,71 @@ namespace Novaroma {
                 episode = tmpEpisode;
         }
 
+        public static string MakeValidFileName(string path, char replaceChar = '-') {
+            var invalidChars = Path.GetInvalidFileNameChars();
+            return new string(path.Select(c => invalidChars.Contains(c) ? replaceChar : c).ToArray());
+        }
+
+        public static void CopyDirectory(string source, string destination, string deleteExtensionsStr, IEnumerable<string> files = null) {
+            var sourceInfo = new DirectoryInfo(source);
+            if (!sourceInfo.Exists) return;
+
+            var sourceFiles = sourceInfo.GetFiles().ToList();
+            if (files != null) {
+                var fileList = files.ToList();
+                if (fileList.Any())
+                    sourceFiles = sourceFiles.Where(fi => fileList.Any(f => string.Equals(f, fi.Name, StringComparison.OrdinalIgnoreCase))).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(deleteExtensionsStr)) {
+                var deleteExtensions = deleteExtensionsStr.Split(';');
+                sourceFiles = sourceFiles.Where(fi => deleteExtensions.All(e => !string.Equals(e.Trim(), fi.Extension, StringComparison.OrdinalIgnoreCase))).ToList();
+            }
+
+            if (!Directory.Exists(destination))
+                Directory.CreateDirectory(destination);
+
+            foreach (var file in sourceFiles) {
+                var destinationFilePath = Path.Combine(destination, file.Name);
+                if (!File.Exists(destinationFilePath))
+                    file.CopyTo(destinationFilePath);
+            }
+        }
+
+        public static void MakeSpecialFolder(DirectoryInfo directoryInfo, Icon icon, string description) {
+            var iconPath = Path.Combine(directoryInfo.FullName, "Folder.ico");
+            if (File.Exists(iconPath))
+                File.Delete(iconPath);
+
+            using (var fs = new FileStream(iconPath, FileMode.Create))
+                icon.Save(fs);
+            File.SetAttributes(iconPath, FileAttributes.Hidden);
+
+            MakeSpecialFolder(directoryInfo, description);
+        }
+
+        private static void MakeSpecialFolder(DirectoryInfo directoryInfo, string description, string iconPath = null) {
+            if (iconPath == null) iconPath = @".\Folder.ico";
+            var iniContent = string.Format(
+@"[.ShellClassInfo]
+ConfirmFileOp=0
+IconResource={0}
+IconIndex=0
+InfoTip={1}", iconPath, description);
+
+            var desktopIniPath = Path.Combine(directoryInfo.FullName, "desktop.ini");
+            if (File.Exists(desktopIniPath))
+                File.Delete(desktopIniPath);
+
+            File.WriteAllText(desktopIniPath, iniContent);
+            File.SetAttributes(directoryInfo.FullName, FileAttributes.System);
+            File.SetAttributes(desktopIniPath, FileAttributes.System | FileAttributes.Hidden);
+        }
+
+        #endregion
+
+        #region Search Query Helpers
+
         public static string PopulateMovieSearchQuery(Movie movie, string query = Constants.DefaultMovieSearchPattern) {
             return PopulateMovieSearchQuery(query, movie.OriginalTitle, movie.Year, movie.ImdbId, movie.ExtraKeywords);
         }
@@ -196,8 +254,11 @@ namespace Novaroma {
             return show.Directory;
         }
 
-        public static TMedia MapToModel<TMedia>(IMediaInfo mediaInfo)
-            where TMedia : Media, new() {
+        #endregion
+
+        #region Model Helpers
+
+        public static TMedia MapToModel<TMedia>(IMediaInfo mediaInfo) where TMedia : Media, new() {
 
             if (mediaInfo == null) return default(TMedia);
 
@@ -407,95 +468,6 @@ namespace Novaroma {
             subtitleFileInfo.MoveTo(newSubtitleFilePath);
         }
 
-        public static string MakeValidFileName(string path, char replaceChar = '-') {
-            var invalidChars = Path.GetInvalidFileNameChars();
-            return new string(path.Select(c => invalidChars.Contains(c) ? replaceChar : c).ToArray());
-        }
-
-        public static IEnumerable GetEnumInfo(Type enumType) {
-            var method = typeof(Helper).GetMethod("GetEnumInfo", new Type[] { });
-            return method.MakeGenericMethod(enumType).Invoke(null, null) as IEnumerable;
-        }
-
-        public static IEnumerable<EnumInfo<TEnum>> GetEnumInfo<TEnum>() {
-            var enumType = typeof(TEnum);
-            var memberNames = Enum.GetNames(enumType);
-            var infos = new List<EnumInfo<TEnum>>();
-            foreach (var memberName in memberNames) {
-                var enumItem = (TEnum)Enum.Parse(enumType, memberName);
-                var enumValue = Convert.ToInt32(enumItem);
-                var display = GetMemberAttribute<DisplayAttribute>(enumType, memberName);
-                infos.Add(new EnumInfo<TEnum>(enumItem, enumValue, memberName, display));
-            }
-            return infos;
-        }
-
-        public static TAttribute GetMemberAttribute<TType, TAttribute>(string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute : Attribute {
-            return GetMemberAttribute<TAttribute>(typeof(TType), memberName, checkMetadataType, inherit);
-        }
-
-        public static TAttribute GetMemberAttribute<TAttribute>(Type type, string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute : Attribute {
-            var member = type.GetMember(memberName).First();
-            return member.GetAttribute<TAttribute>(checkMetadataType, inherit);
-        }
-
-        public static string GetTwoLetterLanguageCode(Language language) {
-            var langInfo = GetMemberAttribute<LanguageInfoAttribute>(typeof(Language), language.ToString());
-            return langInfo.TwoLetterCode;
-        }
-
-        public static string GetThreeLetterLanguageCode(Language language) {
-            var langInfo = GetMemberAttribute<LanguageInfoAttribute>(typeof(Language), language.ToString());
-            return langInfo.ThreeLetterCode;
-        }
-
-        public static void CopyDirectory(string source, string destination, string deleteExtensionsStr, IEnumerable<string> files = null) {
-            var sourceInfo = new DirectoryInfo(source);
-            if (!sourceInfo.Exists) return;
-
-            var sourceFiles = sourceInfo.GetFiles().ToList();
-            if (files != null) {
-                var fileList = files.ToList();
-                if (fileList.Any())
-                    sourceFiles = sourceFiles.Where(fi => fileList.Any(f => string.Equals(f, fi.Name, StringComparison.OrdinalIgnoreCase))).ToList();
-            }
-
-            if (!string.IsNullOrEmpty(deleteExtensionsStr)) {
-                var deleteExtensions = deleteExtensionsStr.Split(';');
-                sourceFiles = sourceFiles.Where(fi => deleteExtensions.All(e => !string.Equals(e.Trim(), fi.Extension, StringComparison.OrdinalIgnoreCase))).ToList();
-            }
-
-            if (!Directory.Exists(destination))
-                Directory.CreateDirectory(destination);
-
-            foreach (var file in sourceFiles) {
-                var destinationFilePath = Path.Combine(destination, file.Name);
-                if (!File.Exists(destinationFilePath))
-                    file.CopyTo(destinationFilePath);
-            }
-        }
-
-        public static string CombineUrls(params string[] parts) {
-            var sb = new StringBuilder();
-
-            foreach (var partTmp in parts) {
-                var part = partTmp;
-
-                if (part.StartsWith("/"))
-                    part = part.Substring(1);
-
-                sb.Append(part);
-                if (!part.EndsWith("/"))
-                    sb.Append("/");
-            }
-
-            return sb.ToString();
-        }
-
-        public static string JoinStrings(string separator, params string[] strings) {
-            return string.Join(separator, strings.Where(s => !string.IsNullOrEmpty(s)));
-        }
-
         public static void MakeSpecialFolder(Media media) {
             if (media.Poster == null) return;
 
@@ -512,36 +484,6 @@ namespace Novaroma {
 
             var genres = string.Join(" | ", media.Genres.Select(g => g.Name));
             MakeSpecialFolder(directoryInfo, icon, genres + " - " + media.Rating + " - " + media.VoteCount + " " + Resources.Votes);
-        }
-
-        public static void MakeSpecialFolder(DirectoryInfo directoryInfo, Icon icon, string description) {
-            var iconPath = Path.Combine(directoryInfo.FullName, "Folder.ico");
-            if (File.Exists(iconPath))
-                File.Delete(iconPath);
-
-            using (var fs = new FileStream(iconPath, FileMode.Create))
-                icon.Save(fs);
-            File.SetAttributes(iconPath, FileAttributes.Hidden);
-
-            MakeSpecialFolder(directoryInfo, description);
-        }
-
-        private static void MakeSpecialFolder(DirectoryInfo directoryInfo, string description, string iconPath = null) {
-            if (iconPath == null) iconPath = @".\Folder.ico";
-            var iniContent = string.Format(
-@"[.ShellClassInfo]
-ConfirmFileOp=0
-IconResource={0}
-IconIndex=0
-InfoTip={1}", iconPath, description);
-
-            var desktopIniPath = Path.Combine(directoryInfo.FullName, "desktop.ini");
-            if (File.Exists(desktopIniPath))
-                File.Delete(desktopIniPath);
-
-            File.WriteAllText(desktopIniPath, iniContent);
-            File.SetAttributes(directoryInfo.FullName, FileAttributes.System);
-            File.SetAttributes(desktopIniPath, FileAttributes.System | FileAttributes.Hidden);
         }
 
         public static void CreateMediaInfo(Media media) {
@@ -567,22 +509,103 @@ InfoTip={1}", iconPath, description);
             File.SetAttributes(infoPath, FileAttributes.Hidden);
         }
 
-        public static IShellService CreateShellServiceClient() {
-            return CreateShellServiceClient(TimeSpan.FromSeconds(5));
+        public static T ConvertTo<T>(object obj) where T: class  {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
+            var external = obj as T;
+            if (external == null)
+                throw new NovaromaException(string.Format(Resources.IncompatilbleTypes_CopyFrom, obj.GetType().Name, typeof(T).Name));
+
+            return external;
         }
 
-        public static IShellService CreateShellServiceClient(TimeSpan timeout) {
-            var binding = new NetNamedPipeBinding {
-                OpenTimeout = timeout,
-                MaxReceivedMessageSize = 20000000,
-                MaxBufferPoolSize = 20000000,
-                MaxBufferSize = 20000000
-            };
-            const string endpointAddress = Constants.NetPipeUri + Constants.NetPipeEndpointName;
-            var endpoint = new EndpointAddress(endpointAddress);
-            var channelFactory = new ChannelFactory<IShellService>(binding, endpoint);
-            return channelFactory.CreateChannel();
+        #endregion
+
+        #region Enum Helpers
+
+        public static IEnumerable GetEnumInfo(Type enumType) {
+            var method = typeof(Helper).GetMethod("GetEnumInfo", new Type[] { });
+            return method.MakeGenericMethod(enumType).Invoke(null, null) as IEnumerable;
         }
+
+        public static IEnumerable<EnumInfo<TEnum>> GetEnumInfo<TEnum>() {
+            var enumType = typeof(TEnum);
+            var memberNames = Enum.GetNames(enumType);
+            var infos = new List<EnumInfo<TEnum>>();
+            foreach (var memberName in memberNames) {
+                var enumItem = (TEnum)Enum.Parse(enumType, memberName);
+                var enumValue = Convert.ToInt32(enumItem);
+                var display = GetMemberAttribute<DisplayAttribute>(enumType, memberName);
+                infos.Add(new EnumInfo<TEnum>(enumItem, enumValue, memberName, display));
+            }
+            return infos;
+        }
+
+        #endregion
+
+        #region Attribute Helpers
+
+        public static TAttribute GetMemberAttribute<TType, TAttribute>(string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute : Attribute {
+            return GetMemberAttribute<TAttribute>(typeof(TType), memberName, checkMetadataType, inherit);
+        }
+
+        public static TAttribute GetMemberAttribute<TAttribute>(Type type, string memberName, bool checkMetadataType = false, bool inherit = false) where TAttribute : Attribute {
+            var member = type.GetMember(memberName).First();
+            return member.GetAttribute<TAttribute>(checkMetadataType, inherit);
+        }
+
+        #endregion
+
+        #region Culture Helpers
+
+        public static void SetCulture(Language language) {
+            var cultureCode = GetTwoLetterLanguageCode(language);
+            var cultureInfo = CultureInfo.GetCultureInfo(cultureCode);
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+        }
+
+        public static string GetTwoLetterLanguageCode(Language language) {
+            var langInfo = GetMemberAttribute<LanguageInfoAttribute>(typeof(Language), language.ToString());
+            return langInfo.TwoLetterCode;
+        }
+
+        public static string GetThreeLetterLanguageCode(Language language) {
+            var langInfo = GetMemberAttribute<LanguageInfoAttribute>(typeof(Language), language.ToString());
+            return langInfo.ThreeLetterCode;
+        }
+
+        #endregion
+
+        #region String Helpers
+
+        public static string CombineUrls(params string[] parts) {
+            var sb = new StringBuilder();
+
+            foreach (var partTmp in parts) {
+                var part = partTmp;
+
+                if (part.StartsWith("/"))
+                    part = part.Substring(1);
+
+                sb.Append(part);
+                if (!part.EndsWith("/"))
+                    sb.Append("/");
+            }
+
+            return sb.ToString();
+        }
+
+        public static string JoinStrings(string separator, params string[] strings) {
+            return string.Join(separator, strings.Where(s => !string.IsNullOrEmpty(s)));
+        }
+
+        #endregion
+
+        #region Task Helpers
 
         public async static Task RunTask(Func<Task> taskGetter, IExceptionHandler exceptionHandler,
                 [CallerMemberName] string callerName = null,
@@ -619,6 +642,25 @@ InfoTip={1}", iconPath, description);
             }
 
             return default(TResult);
+        }
+
+        #endregion
+
+        public static IShellService CreateShellServiceClient() {
+            return CreateShellServiceClient(TimeSpan.FromSeconds(5));
+        }
+
+        public static IShellService CreateShellServiceClient(TimeSpan timeout) {
+            var binding = new NetNamedPipeBinding {
+                OpenTimeout = timeout,
+                MaxReceivedMessageSize = 20000000,
+                MaxBufferPoolSize = 20000000,
+                MaxBufferSize = 20000000
+            };
+            const string endpointAddress = Constants.NetPipeUri + Constants.NetPipeEndpointName;
+            var endpoint = new EndpointAddress(endpointAddress);
+            var channelFactory = new ChannelFactory<IShellService>(binding, endpoint);
+            return channelFactory.CreateChannel();
         }
 
         public static CompilerResults CompileCode(string code) {
