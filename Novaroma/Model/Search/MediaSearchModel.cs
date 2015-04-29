@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
@@ -301,6 +300,7 @@ namespace Novaroma.Model.Search {
                 { "RuntimeMax", RuntimeMax },
                 { "RuntimeMin", RuntimeMin },
                 { "SelectedOrderValue", SelectedOrder.Order.Value },
+                { "SelectedOrderDescending", SelectedOrder.IsDescending },
                 { "SubtitleDownloaded", SubtitleDownloaded },
                 { "SubtitleNotFound", SubtitleNotFound }
             };
@@ -339,6 +339,9 @@ namespace Novaroma.Model.Search {
             RuntimeMax = (int?)json["RuntimeMax"];
             RuntimeMin = (int?)json["RuntimeMin"];
             SelectedOrder = OrderList.First(o => o.Order.Value == (decimal)json["SelectedOrderValue"]);
+            var isDescending = (bool?) json["SelectedOrderDescending"];
+            if (isDescending.HasValue)
+                SelectedOrder.IsDescending = isDescending.Value;
             SubtitleDownloaded = (bool?)json["SubtitleDownloaded"];
             SubtitleNotFound = (bool?)json["SubtitleNotFound"];
         }

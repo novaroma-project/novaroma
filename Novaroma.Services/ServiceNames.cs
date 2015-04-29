@@ -11,5 +11,6 @@
         public const string Freebase = "freebase";
         public const string UTorrent = "bittorrent/utorrent";
         public const string ThePirateBay = "thepiratebay";
+        public const string Transmission = "transmission";
     }
 }

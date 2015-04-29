@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,72 +13,66 @@ using Novaroma.Interface;
 using Novaroma.Interface.Download;
 using Novaroma.Interface.Download.Torrent;
 using Novaroma.Interface.Download.Torrent.Provider;
-using UTorrent.Api;
+using Transmission.API.RPC.Entity;
+using Trans = Transmission.API.RPC;
+using Fields = Transmission.API.RPC.Entity.TorrentFields;
 
-namespace Novaroma.Services.UTorrent {
+namespace Novaroma.Services.Transmission {
 
-    public class UTorrentDownloader : TorrentDownloaderBase, IConfigurable {
-        private readonly UTorrentSettings _settings;
+    public class TransmissionDownloader : TorrentDownloaderBase, IConfigurable {
+        private readonly TransmissionSettings _settings;
 
-        public UTorrentDownloader(IExceptionHandler exceptionHandler, IEnumerable<ITorrentMovieProvider> movieProviders, IEnumerable<ITorrentTvShowProvider> tvShowProviders)
+        public TransmissionDownloader(IExceptionHandler exceptionHandler, IEnumerable<ITorrentMovieProvider> movieProviders, IEnumerable<ITorrentTvShowProvider> tvShowProviders)
             : base(exceptionHandler) {
-            _settings = new UTorrentSettings(movieProviders, tvShowProviders);
+            _settings = new TransmissionSettings(movieProviders, tvShowProviders);
         }
 
-        public override async Task<string> Download(string path, ITorrentSearchResult searchResult) {
-            var client = CreateClient();
-            var uri = new Uri(searchResult.MagnetUri);
+        public override Task<string> Download(string path, ITorrentSearchResult searchResult) {
+            return Task.Run(() => {
+                var client = CreateClient();
 
-            var result = await client.AddUrlTorrentAsync(uri, searchResult.Name);
-            if (result.Error != null) throw result.Error;
+                var torrent = new NewTorrent { Filename = searchResult.MagnetUri, DownloadDirectory = path };
+                var result = client.AddTorrent(torrent);
+                if (!string.IsNullOrEmpty(result.ErrorString)) throw new NovaromaException(result.ErrorString + " ("+ result.Error +")");
 
-            return result.AddedTorrent.Hash;
+                return result.HashString;
+            });
         }
 
-        public override async Task Refresh() {
-            var client = CreateClient();
-            var torrents = await client.GetListAsync();
+        public override Task Refresh() {
+            return Task.Run(() => {
+                var client = CreateClient();
+                var torrents = client.GetTorrents(new[] {Fields.ID, Fields.HASH_STRING, Fields.PERCENT_DONE, Fields.DOWNLOAD_DIR, Fields.FILES});
 
-            var completeds = torrents.Result.Torrents.Where(t => t.Downloaded > 0 && t.Remaining == 0);
-            foreach (var completed in completeds) {
-                var hash = completed.Hash;
-                var files = (await client.GetFilesAsync(hash)).Result.Files.SelectMany(fc => fc.Value.Select(f => f.Name));
-                var sourcePath = completed.Path;
+                var completeds = torrents.Torrents.Where(t => t.PercentDone >= 1);
+                foreach (var completed in completeds) {
+                    var sourcePath = completed.DownloadDir;
 
-                var args = new DownloadCompletedEventArgs(hash, sourcePath, files);
-                OnDownloadCompleted(args);
-                if (args.Found && Settings.DeleteCompletedTorrents) {
-                    if (args.Moved) {
-                        await client.DeleteTorrentAsync(hash);
-                        Directory.Delete(sourcePath, true);
-                    }
-                    else
-                        await client.StopTorrentAsync(hash);
+                    var args = new DownloadCompletedEventArgs(completed.HashString, sourcePath, completed.Files.Select(f => f.Name));
+                    OnDownloadCompleted(args);
+                    if (args.Found && Settings.DeleteCompletedTorrents)
+                        client.RemoveTorrents(new[] {completed.ID}, args.Moved);
                 }
-            }
+            });
         }
 
-        protected virtual UTorrentClient CreateClient() {
-            if (!Process.GetProcessesByName("uTorrent").Any() && !Process.GetProcessesByName("BitTorrent").Any()) {
-                string path;
-                var registryExePath = (Registry.GetValue(@"HKEY_CLASSES_ROOT\uTorrent\shell\open\command", "", null)
-                                      ?? Registry.GetValue(@"HKEY_CLASSES_ROOT\bittorrent\shell\open\command", "", null)) as string;
+        protected virtual Trans.Client CreateClient() {
+            if (!Process.GetProcessesByName("transmission-qt").Any()) {
+                var registryExePath = Registry.GetValue(@"HKEY_CLASSES_ROOT\transmission-qt\shell\open\command", "", null) as string;
                 if (registryExePath != null) {
                     var idx1 = registryExePath.IndexOf('"') + 1;
                     var idx2 = registryExePath.IndexOf('"', idx1);
                     if (idx2 == -1) idx2 = registryExePath.Length;
-                    path = registryExePath.Substring(idx1, idx2 - idx1);
+                    var path = registryExePath.Substring(idx1, idx2 - idx1);
+
+                    Process.Start(path, "/minimized");
                 }
-                else {
-                    var currentDirectory = Directory.GetCurrentDirectory();
-                    path = Path.Combine(currentDirectory, "uTorrent\\uTorrent.exe");
-                }
-                Process.Start(path, "/minimized");
             }
 
-            return Settings.Port.HasValue
-                ? new UTorrentClient("127.0.0.1", Settings.Port.Value, Settings.UserName, Settings.Password)
-                : new UTorrentClient(Settings.UserName, Settings.Password);
+            var client = new Trans.Client("http://127.0.0.1:9091/transmission/rpc", Settings.Port.ToString(CultureInfo.InvariantCulture));
+            if (!string.IsNullOrEmpty(Settings.UserName) || !string.IsNullOrEmpty(Settings.Password))
+                client.SetAuth(Settings.UserName, Settings.Password);
+            return client;
         }
 
         public override Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year, string imdbId, VideoQuality videoQuality = VideoQuality.Any,
@@ -128,7 +123,7 @@ namespace Novaroma.Services.UTorrent {
         }
 
         protected override string ServiceName {
-            get { return ServiceNames.UTorrent; }
+            get { return ServiceNames.Transmission; }
         }
 
         protected override IEnumerable<ITorrentMovieProvider> MovieProviders {
@@ -139,7 +134,7 @@ namespace Novaroma.Services.UTorrent {
             get { return Settings.TvShowProviderSelection.SelectedItems; }
         }
 
-        public UTorrentSettings Settings {
+        public TransmissionSettings Settings {
             get { return _settings; }
         }
 

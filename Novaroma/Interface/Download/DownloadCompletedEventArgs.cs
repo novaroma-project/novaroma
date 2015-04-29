@@ -27,5 +27,7 @@ namespace Novaroma.Interface.Download {
         }
 
         public bool Found { get; set; }
+
+        public bool Moved { get; set; }
     }
 }

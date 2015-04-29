@@ -268,27 +268,31 @@ namespace Novaroma.Engine {
         private void DownloaderOnDownloadCompleted(object sender, DownloadCompletedEventArgs args) {
             if (!Directory.Exists(args.DownloadDirectory)) return;
 
+            var directoryInfo = new DirectoryInfo(args.DownloadDirectory);
+            var files = directoryInfo.GetFiles().ToList();
+            var downloadFiles = args.Files != null && args.Files.Any()
+                ? files.Where(f => args.Files.Any(df => string.Equals(f.Name, df, StringComparison.OrdinalIgnoreCase))).ToList()
+                : files;
+            var videoFiles = downloadFiles.Where(Helper.IsVideoFile).ToList();
+
             using (var context = _contextFactory.CreateContext()) {
                 var episode = context.TvShows.Episodes().FirstOrDefault(e => e.DownloadKey == args.DownloadKey);
 
                 if (episode != null) {
+                    args.Found = true;
                     var directory = Helper.GetTvShowSeasonDirectory(Settings.TvShowSeasonDirectoryTemplate, episode);
-                    if (Directory.Exists(args.DownloadDirectory)) {
-                        if (args.DownloadDirectory != directory) {
-                            Helper.CopyDirectory(args.DownloadDirectory, directory, Settings.DeleteExtensions, args.Files);
-                            args.Found = true;
-                        }
-
-                        var directoryInfo = new DirectoryInfo(args.DownloadDirectory);
-                        var videoFiles = directoryInfo.GetFiles().Where(Helper.IsVideoFile).ToList();
-                        var episodeFile = videoFiles.FirstOrDefault(f => {
-                            int? s, e;
-                            Helper.DetectEpisodeInfo(f, episode.TvShowSeason.TvShow, out s, out e);
-                            return s == episode.TvShowSeason.Season && e == episode.Episode;
-                        }) ?? videoFiles.FirstOrDefault();
-                        if (episodeFile != null)
-                            episode.FilePath = Directory.GetFiles(directory, episodeFile.Name).FirstOrDefault();
+                    if (args.DownloadDirectory != directory) {
+                        Helper.CopyDirectory(args.DownloadDirectory, directory, Settings.DeleteExtensions, args.Files);
+                        args.Moved = true;
                     }
+
+                    var episodeFile = videoFiles.FirstOrDefault(f => {
+                        int? s, e;
+                        Helper.DetectEpisodeInfo(f, episode.TvShowSeason.TvShow, out s, out e);
+                        return s == episode.TvShowSeason.Season && e == episode.Episode;
+                    }) ?? videoFiles.FirstOrDefault();
+                    if (episodeFile != null)
+                        episode.FilePath = args.Moved ? Directory.GetFiles(directory, episodeFile.Name).FirstOrDefault() : episodeFile.FullName;
                     episode.DownloadKey = string.Empty;
 
                     try {
@@ -321,15 +325,15 @@ namespace Novaroma.Engine {
                     var movie = context.Movies.FirstOrDefault(m => m.DownloadKey == args.DownloadKey);
 
                     if (movie != null) {
-                        if (Directory.Exists(args.DownloadDirectory)) {
-                            if (args.DownloadDirectory != movie.Directory) {
-                                Helper.CopyDirectory(args.DownloadDirectory, movie.Directory, Settings.DeleteExtensions, args.Files);
-                                args.Found = true;
-                            }
-
-                            var fileName = Helper.GetFirstVideoFileName(args.DownloadDirectory);
-                            movie.FilePath = Directory.GetFiles(movie.Directory, fileName).FirstOrDefault();
+                        args.Found = true;
+                        if (args.DownloadDirectory != movie.Directory) {
+                            Helper.CopyDirectory(args.DownloadDirectory, movie.Directory, Settings.DeleteExtensions, args.Files);
+                            args.Moved = true;
                         }
+
+                        var firstVideoFile = videoFiles.FirstOrDefault();
+                        if (firstVideoFile != null)
+                            movie.FilePath = args.Moved ? Directory.GetFiles(movie.Directory, firstVideoFile.Name).FirstOrDefault() : firstVideoFile.FullName;
                         movie.DownloadKey = string.Empty;
 
                         try {
@@ -354,9 +358,20 @@ namespace Novaroma.Engine {
                             DownloadSubtitleForMovie(movie).Wait();
                     }
                     else if (SubtitlesEnabled) {
-                        var files = Directory.GetFiles(args.DownloadDirectory).Where(Helper.IsVideoFile).ToList();
-                        foreach (var file in files)
-                            DownloadSubtitle(file).Wait();
+                        foreach (var videoFile in videoFiles)
+                            DownloadSubtitle(videoFile.FullName).Wait();
+                    }
+                }
+
+                if (!args.Moved && !string.IsNullOrEmpty(Settings.DeleteExtensions)) {
+                    var deleteExtensions = Settings.DeleteExtensions.Split(';');
+                    var deleteFiles = downloadFiles.Where(f => deleteExtensions.Any(de => string.Equals(de, f.Extension, StringComparison.OrdinalIgnoreCase)));
+                    try {
+                        foreach (var deleteFile in deleteFiles)
+                            deleteFile.Delete();
+                    }
+                    catch (Exception ex) {
+                        _exceptionHandler.HandleException(ex);
                     }
                 }
             }
@@ -1093,7 +1108,7 @@ namespace Novaroma.Engine {
                     if (!q.Any()) return QueryResult<TvShow>.Empty;
 
                     var currentDate = DateTime.UtcNow.AddHours(-8);
-                    q = q.Where(t => 
+                    q = q.Where(t =>
                         t.Seasons.Any(s =>
                             s.Episodes.Any(e => (searchModel.NotWatched == null || (e.AirDate < currentDate && e.IsWatched != searchModel.NotWatched))
                                              && (searchModel.Downloaded == null || string.IsNullOrEmpty(e.FilePath) == !searchModel.Downloaded)
@@ -1143,7 +1158,7 @@ namespace Novaroma.Engine {
                 var downloader = Settings.Downloader.SelectedItem;
                 if (downloader == null) return string.Empty;
 
-                var downloadKey = await downloader.DownloadMovie(movie.Directory, movie.OriginalTitle, movie.Year, movie.ImdbId, movie.VideoQuality, 
+                var downloadKey = await downloader.DownloadMovie(movie.Directory, movie.OriginalTitle, movie.Year, movie.ImdbId, movie.VideoQuality,
                                                                  movie.ExtraKeywords, movie.ExcludeKeywords, movie.MinSize, movie.MaxSize);
                 Helper.SetDownloadProperties(downloadKey, movie);
 

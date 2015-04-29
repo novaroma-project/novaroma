@@ -39,8 +39,9 @@
     <Reference Include="AngleSharp">
       <HintPath>..\packages\AngleSharp.0.7.0\lib\portable-windows8+net45+windowsphone8+wpa\AngleSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OSDBnet, Version=0.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -52,6 +53,9 @@
     <Reference Include="System.Web" />
     <Reference Include="TMDbLib">
       <HintPath>..\packages\TMDbLib.0.7.7\lib\net40\TMDbLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Transsmission.API.RPC">
+      <HintPath>..\References\Transsmission.API.RPC.dll</HintPath>
     </Reference>
     <Reference Include="UTorrent.Api">
       <HintPath>..\packages\UTorrentClientApi.0.2.1\lib\net\UTorrent.Api.dll</HintPath>
@@ -78,10 +82,13 @@
     <Compile Include="ThePirateBay\ThePirateBayTorrentProvider.cs" />
     <Compile Include="Tmdb\TmdbTracker.cs" />
     <Compile Include="TorrentProviderSettingsBase.cs" />
+    <Compile Include="Transmission\TransmissionDownloader.cs" />
+    <Compile Include="Transmission\TransmissionSettings.cs" />
     <Compile Include="UTorrent\UTorrentDownloader.cs" />
     <Compile Include="UTorrent\UTorrentSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
