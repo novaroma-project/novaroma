@@ -281,7 +281,7 @@ namespace Novaroma.Engine {
                 if (episode != null) {
                     args.Found = true;
                     var directory = Helper.GetTvShowSeasonDirectory(Settings.TvShowSeasonDirectoryTemplate, episode);
-                    if (args.DownloadDirectory != directory) {
+                    if (string.Equals(args.DownloadDirectory, directory, StringComparison.CurrentCultureIgnoreCase)) {
                         Helper.CopyDirectory(args.DownloadDirectory, directory, Settings.DeleteExtensions, args.Files);
                         args.Moved = true;
                     }
@@ -326,7 +326,7 @@ namespace Novaroma.Engine {
 
                     if (movie != null) {
                         args.Found = true;
-                        if (args.DownloadDirectory != movie.Directory) {
+                        if (!string.Equals(args.DownloadDirectory, movie.Directory, StringComparison.CurrentCultureIgnoreCase)) {
                             Helper.CopyDirectory(args.DownloadDirectory, movie.Directory, Settings.DeleteExtensions, args.Files);
                             args.Moved = true;
                         }
