@@ -281,7 +281,7 @@ namespace Novaroma.Engine {
                 if (episode != null) {
                     args.Found = true;
                     var directory = Helper.GetTvShowSeasonDirectory(Settings.TvShowSeasonDirectoryTemplate, episode);
-                    if (string.Equals(args.DownloadDirectory, directory, StringComparison.CurrentCultureIgnoreCase)) {
+                    if (!string.Equals(args.DownloadDirectory, directory, StringComparison.CurrentCultureIgnoreCase)) {
                         Helper.CopyDirectory(args.DownloadDirectory, directory, Settings.DeleteExtensions, args.Files);
                         args.Moved = true;
                     }

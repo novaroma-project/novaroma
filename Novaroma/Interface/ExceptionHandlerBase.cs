@@ -14,21 +14,10 @@ namespace Novaroma.Interface {
             await LogException(exception, callerName, callerFilePath, callerLine);
         }
 
-        protected async Task LogException(Exception exception, string callerName, string callerFilePath, int callerLine) {
-            var aggregateException = exception as AggregateException;
-            if (aggregateException != null) {
-                var exceptions = aggregateException.Flatten();
-                foreach (var innerException in exceptions.InnerExceptions)
-                    await LogException(innerException, callerName, callerFilePath, callerLine);
-
-                return;
-            }
-
+        protected virtual async Task LogException(Exception exception, string callerName, string callerFilePath, int callerLine) {
             // ReSharper disable ExplicitCallerInfoArgument
-            await Logger.LogError(exception.Message, exception.StackTrace, callerName, callerFilePath, callerLine);
+            await Logger.LogError(exception.Message, exception.ToString(), callerName, callerFilePath, callerLine);
             // ReSharper restore ExplicitCallerInfoArgument
-            if (exception.InnerException != null)
-                await LogException(exception.InnerException, callerName, callerFilePath, callerLine);
         }
     }
 }
