@@ -73,12 +73,16 @@ namespace Novaroma {
                 .FirstOrDefault();
         }
 
-        public static void DetectEpisodeInfo(FileInfo fileInfo, TvShow tvShow, out int? season, out int? episode) {
+        public static void DetectEpisodeInfo(string fileName, string title, out int? season, out int? episode, int? maxSeason = null) {
+            DetectEpisodeInfo(new FileInfo(fileName), title, out season, out episode, maxSeason);
+        }
+
+        public static void DetectEpisodeInfo(FileInfo fileInfo, string title, out int? season, out int? episode, int? maxSeason = null) {
             season = null;
             episode = null;
 
             var name = fileInfo.NameWithoutExtension();
-            var titleRegex = tvShow.Title.Replace(" ", ".");
+            var titleRegex = title.Replace(" ", ".");
             name = Regex.Replace(name, titleRegex, string.Empty, RegexOptions.IgnoreCase);
             name = Regex.Replace(name, "480p|720p|1080p|x264", string.Empty, RegexOptions.IgnoreCase);
 
@@ -86,7 +90,7 @@ namespace Novaroma {
             var matches = Regex.Matches(name, @"(\d{1,2})\D*(\d{1,2})");
             if (matches.Count == 0)
                 matches = Regex.Matches(name, @"(\d)");
-            if (matches.Count > 1 && tvShow.Seasons.Max(s => s.Season) < 19) {
+            if (matches.Count > 1 && maxSeason.HasValue && maxSeason.Value < 19) {
                 for (var i = 0; i < matches.Count; i++) {
                     var r = matches[i].Groups[0].Value;
                     int y;
@@ -105,7 +109,7 @@ namespace Novaroma {
             var matchStr = match.Groups[0].Value;
 
             if (matchStr.Length < 3) {
-                if (fileInfo.Directory != null) {
+                if (fileInfo.Exists && fileInfo.Directory != null) {
                     var seasonResult = Regex.Match(fileInfo.Directory.Name, @"(\d{1,2})");
                     if (seasonResult.Success)
                         tmpSeasonStr = seasonResult.Groups[0].Value;
@@ -354,7 +358,7 @@ InfoTip={1}", iconPath, description);
 
             foreach (var videoFile in videoFiles) {
                 int? season, episode;
-                DetectEpisodeInfo(videoFile, tvShow, out season, out episode);
+                DetectEpisodeInfo(videoFile, tvShow.Title, out season, out episode, tvShow.Seasons.Max(s => s.Season));
                 if (!season.HasValue || !episode.HasValue) continue;
 
                 var tvEpisode = episodes.FirstOrDefault(e => e.TvShowSeason.Season == season && e.Episode == episode.Value);

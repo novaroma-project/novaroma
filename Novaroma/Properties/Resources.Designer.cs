@@ -1842,6 +1842,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; search result is empty. You can search again manually.
+        /// </summary>
+        public static string MovieSearchResultNotFound {
+            get {
+                return ResourceManager.GetString("MovieSearchResultNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; subtitle downloaded.
         /// </summary>
         public static string MovieSubtitleDownloaded {
@@ -2274,7 +2283,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search result is not found. You can search again manually.
+        ///   Looks up a localized string similar to Search result is empty. You can search again manually.
         /// </summary>
         public static string SearchResultNotFound {
             get {
@@ -2283,7 +2292,7 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search result is not found for subtitle. You can search again manually.
+        ///   Looks up a localized string similar to Search result is empty for subtitle. You can search again manually.
         /// </summary>
         public static string SearchResultNotFoundForSubtitle {
             get {
@@ -2661,6 +2670,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Web UI Settings.
+        /// </summary>
+        public static string TorrentWebUISettings {
+            get {
+                return ResourceManager.GetString("TorrentWebUISettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Turkish.
         /// </summary>
         public static string Turkish {
@@ -2738,6 +2756,15 @@ namespace Novaroma.Properties {
         public static string TvShowEpisodeSearchPatternDescription {
             get {
                 return ResourceManager.GetString("TvShowEpisodeSearchPatternDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; season {1} episode {2} search result is empty. You can search again manually.
+        /// </summary>
+        public static string TvShowEpisodeSearchResultNotFound {
+            get {
+                return ResourceManager.GetString("TvShowEpisodeSearchResultNotFound", resourceCulture);
             }
         }
         
@@ -2913,6 +2940,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://www.novaroma.net/how-to-configure-transmission-web-ui-settings.html.
+        /// </summary>
+        public static string Url_HowToConfigureTransmissionWebUISettings {
+            get {
+                return ResourceManager.GetString("Url_HowToConfigureTransmissionWebUISettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://www.novaroma.net/how-to-configure-utorrent-web-ui-settings.html.
         /// </summary>
         public static string Url_HowToConfigureUtorrentWebUISettings {
@@ -2936,15 +2972,6 @@ namespace Novaroma.Properties {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to μTorrent Web UI Settings.
-        /// </summary>
-        public static string UtorrentWebUISettings {
-            get {
-                return ResourceManager.GetString("UtorrentWebUISettings", resourceCulture);
             }
         }
         

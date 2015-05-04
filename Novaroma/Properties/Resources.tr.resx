@@ -714,8 +714,8 @@
   <data name="Configuration" xml:space="preserve">
     <value>Tercihler</value>
   </data>
-  <data name="UtorrentWebUISettings" xml:space="preserve">
-    <value>μTorrent Web UI Ayarları</value>
+  <data name="TorrentWebUISettings" xml:space="preserve">
+    <value>{0} Web UI Ayarları</value>
   </data>
   <data name="VideoFiles" xml:space="preserve">
     <value>Video Dosyaları</value>
@@ -1056,5 +1056,14 @@
   </data>
   <data name="EntityNotFoundInDb" xml:space="preserve">
     <value>Varlık veritabanında bulunamadı, Id: '{0}'</value>
+  </data>
+  <data name="MovieSearchResultNotFound" xml:space="preserve">
+    <value>'{0}' arama sonucu bulunamadı. Seçerek arama yapabilirsiniz</value>
+  </data>
+  <data name="TvShowEpisodeSearchResultNotFound" xml:space="preserve">
+    <value>'{0}' sezon {1} bölüm {2} arama sonucu bulunamadı. Seçerek arama yapabilirsiniz</value>
+  </data>
+  <data name="Url_HowToConfigureTransmissionWebUISettings" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-configure-transmission-web-ui-settings.html</value>
   </data>
 </root>

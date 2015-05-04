@@ -24,6 +24,8 @@ namespace Novaroma.Interface.Download {
         
         Task Refresh();
 
+        bool IsAvailable { get; }
+
         event EventHandler<DownloadCompletedEventArgs> DownloadCompleted;
     }
 }

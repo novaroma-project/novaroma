@@ -8,7 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using MahApps.Metro.Controls;
+using Novaroma.Engine;
 using Novaroma.Interface;
+using Novaroma.Services.Transmission;
 using Novaroma.Services.UTorrent;
 using Novaroma.Win.UserControls;
 using Novaroma.Win.ViewModels;
@@ -16,28 +18,46 @@ using Novaroma.Win.ViewModels;
 namespace Novaroma.Win.Views {
 
     public partial class ConfigurationWindow {
-        private readonly INovaromaEngine _engine;
+        private readonly IConfigurable _configurableEngine;
+        private readonly NovaromaEngine _engine;
+        private readonly IConfigurable _downloader;
         private readonly IExceptionHandler _exceptionHandler;
         private readonly IDialogService _dialogService;
-        private readonly UTorrentDownloader _uTorrentDownloader;
         private readonly string _initialMovieDir;
         private readonly string _initialTvShowDir;
 
         private readonly INotifyPropertyChanged _engineSettings;
-        private readonly UTorrentSettings _torrentSettings;
+        private readonly INotifyPropertyChanged _torrentSettings;
 
-        public ConfigurationWindow(INovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService, UTorrentDownloader uTorrentDownloader) {
+        public ConfigurationWindow(NovaromaEngine engine, IExceptionHandler exceptionHandler, IDialogService dialogService) {
             InitializeComponent();
 
+            _configurableEngine = engine;
             _engine = engine;
+            _downloader = engine.Settings.Downloader.SelectedItem as IConfigurable;
             _exceptionHandler = exceptionHandler;
             _dialogService = dialogService;
-            _uTorrentDownloader = uTorrentDownloader;
-            _initialMovieDir = _engine.MovieDirectory;
-            _initialTvShowDir = _engine.TvShowDirectory;
+            _initialMovieDir = engine.MovieDirectory;
+            _initialTvShowDir = engine.TvShowDirectory;
 
             _engineSettings = engine.Settings;
-            _torrentSettings = uTorrentDownloader.Settings;
+
+            var utor = _downloader as UTorrentDownloader;
+            if (utor != null && utor.IsAvailable) {
+                _torrentSettings = utor.Settings;
+                TorrentHowToHyperink.NavigateUri = new Uri(Properties.Resources.Url_HowToConfigureUtorrentWebUISettings);
+            }
+            else {
+                var trantor = _downloader as TransmissionDownloader;
+                if (trantor != null) {
+                    _torrentSettings = trantor.Settings;
+                    TorrentHowToHyperink.NavigateUri = new Uri(Properties.Resources.Url_HowToConfigureTransmissionWebUISettings);
+                }
+            }
+            if (_torrentSettings == null)
+                TorrentSettingsExpander.Visibility = Visibility.Collapsed;
+            else if (_downloader != null)
+                TorrentSettingsExpander.Tag = string.Format(Properties.Resources.TorrentWebUISettings, _downloader.SettingName);
 
             DataContext = this;
 
@@ -62,8 +82,9 @@ namespace Novaroma.Win.Views {
             PortTextBox.GetBindingExpression(NumericUpDown.ValueProperty).UpdateSource();
             // ReSharper restore PossibleNullReferenceException
 
-            await _engine.SaveSettings(_engine.SettingName, _engine.SerializeSettings());
-            await _engine.SaveSettings(_uTorrentDownloader.SettingName, _uTorrentDownloader.SerializeSettings());
+            await _engine.SaveSettings(_configurableEngine.SettingName, _configurableEngine.SerializeSettings());
+            if (_downloader != null)
+                await _engine.SaveSettings(_downloader.SettingName, _downloader.SerializeSettings());
 
             await AddDirectories(_engine.MovieDirectory, _initialMovieDir);
             await AddDirectories(_engine.TvShowDirectory, _initialTvShowDir);
@@ -86,7 +107,7 @@ namespace Novaroma.Win.Views {
             get { return _engineSettings; }
         }
 
-        public UTorrentSettings TorrentSettings {
+        public INotifyPropertyChanged TorrentSettings {
             get { return _torrentSettings; }
         }
 

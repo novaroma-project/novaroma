@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Novaroma.Interface.Download.Torrent.Provider;
 using Novaroma.Properties;
@@ -9,7 +8,6 @@ using Novaroma.Properties;
 namespace Novaroma.Interface.Download.Torrent {
 
     public abstract class TorrentDownloaderBase : ITorrentDownloader {
-        private const string EpisodeCheckRegex = @"{0}.*?{1}";
         protected readonly IExceptionHandler ExceptionHandler;
 
         protected TorrentDownloaderBase(IExceptionHandler exceptionHandler) {
@@ -20,7 +18,7 @@ namespace Novaroma.Interface.Download.Torrent {
                                                                                  string extraKeywords = null, string excludeKeywords = null,
                                                                                  int? minSize = null, int? maxSize = null) {
             var results = new List<ITorrentSearchResult>();
-            var tasks = MovieProviders.RunTasks(p => 
+            var tasks = MovieProviders.RunTasks(p =>
                 p.SearchMovie(name, year, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize, this)
                     .ContinueWith(t => results.AddRange(t.Result)),
                 ExceptionHandler
@@ -34,34 +32,39 @@ namespace Novaroma.Interface.Download.Torrent {
                                                                                          VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null,
                                                                                          int? minSize = null, int? maxSize = null) {
             var results = new List<ITorrentSearchResult>();
-            var tasks = TvShowProviders.RunTasks(p => 
+            var tasks = TvShowProviders.RunTasks(p =>
                 p.SearchTvShowEpisode(name, season, episode, episodeName, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize, this)
                     .ContinueWith(t => results.AddRange(t.Result)),
                 ExceptionHandler
             );
 
             await Task.WhenAll(tasks);
-            var checkRegex = string.Format(EpisodeCheckRegex, season, episode);
-            return  results
-                .Where(r => Regex.IsMatch(r.Name, checkRegex))
+            return results
+                .Where(r => {
+                    int? s, e;
+                    Helper.DetectEpisodeInfo(r.Name, name, out s, out e);
+                    return (s == null || s == season) && e == episode;
+                })
                 .OrderByDescending(r => r.Seed)
                 .ToList();
         }
 
-        public virtual async Task<IEnumerable<ITorrentSearchResult>> Search(string query, VideoQuality videoQuality = VideoQuality.Any, string excludeKeywords = null, 
+        public virtual async Task<IEnumerable<ITorrentSearchResult>> Search(string query, VideoQuality videoQuality = VideoQuality.Any, string excludeKeywords = null,
                                                                             int? minSize = null, int? maxSize = null) {
             var providers = ((IEnumerable<ITorrentProvider>)MovieProviders).Union(TvShowProviders);
 
             var results = new List<ITorrentSearchResult>();
-            var tasks = providers.RunTasks(p => 
+            var tasks = providers.RunTasks(p =>
                 p.Search(query, videoQuality, excludeKeywords, minSize, maxSize, this)
-                    .ContinueWith(t => results.AddRange(t.Result)),
+                 .ContinueWith(t => results.AddRange(t.Result)),
                 ExceptionHandler
             );
 
             await Task.WhenAll(tasks);
             return results.OrderByDescending(r => r.Seed);
         }
+
+        public abstract bool IsAvailable { get; }
 
         protected abstract IEnumerable<ITorrentMovieProvider> MovieProviders { get; }
 
@@ -94,7 +97,7 @@ namespace Novaroma.Interface.Download.Torrent {
 
         #region IDownloader Members
 
-        async Task<IEnumerable<IDownloadSearchResult>> IDownloader.SearchMovie(string name, int? year, string imdbId, VideoQuality videoQuality, string extraKeywords, 
+        async Task<IEnumerable<IDownloadSearchResult>> IDownloader.SearchMovie(string name, int? year, string imdbId, VideoQuality videoQuality, string extraKeywords,
                                                                                string excludeKeywords, int? minSize, int? maxSize) {
             return await SearchMovie(name, year, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize);
         }

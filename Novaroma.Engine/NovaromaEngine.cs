@@ -286,9 +286,11 @@ namespace Novaroma.Engine {
                         args.Moved = true;
                     }
 
+                    var season = episode.TvShowSeason;
+                    var show = season.TvShow;
                     var episodeFile = videoFiles.FirstOrDefault(f => {
                         int? s, e;
-                        Helper.DetectEpisodeInfo(f, episode.TvShowSeason.TvShow, out s, out e);
+                        Helper.DetectEpisodeInfo(f, show.Title, out s, out e, show.Seasons.Max(ts => ts.Season));
                         return s == episode.TvShowSeason.Season && e == episode.Episode;
                     }) ?? videoFiles.FirstOrDefault();
                     if (episodeFile != null)
@@ -305,8 +307,6 @@ namespace Novaroma.Engine {
                         _exceptionHandler.HandleException(ex);
                     }
 
-                    var season = episode.TvShowSeason;
-                    var show = season.TvShow;
                     var activity = CreateActivity(
                         string.Format(Resources.TvShowEpisodeDownloaded, show.Title, season.Season, episode.Episode),
                         episode.FilePath
@@ -1164,9 +1164,12 @@ namespace Novaroma.Engine {
 
                 if (!string.IsNullOrEmpty(downloadKey)) {
                     var activity = CreateActivity(string.Format(Resources.MovieDownloadStarted, movie.Title), movie.FilePath);
+                    await SaveChanges(new[] {activity}, new[] {movie});
+                }
+                else {
+                    var activity = CreateActivity(string.Format(Resources.MovieSearchResultNotFound, movie.Title), string.Empty);
                     await SaveChanges(new[] { activity }, new[] { movie });
                 }
-                else await UpdateEntity(movie);
 
                 return downloadKey;
             }
@@ -1192,9 +1195,12 @@ namespace Novaroma.Engine {
 
                 if (!string.IsNullOrEmpty(downloadKey)) {
                     var activity = CreateActivity(string.Format(Resources.TvShowEpisodeDownloadStarted, show.Title, season.Season, episode.Episode), episode.FilePath);
-                    await SaveChanges(new[] { activity }, new[] { episode.TvShowSeason.TvShow });
+                    await SaveChanges(new[] {activity}, new[] {episode.TvShowSeason.TvShow});
                 }
-                else await UpdateEntity(episode.TvShowSeason.TvShow);
+                else {
+                    var activity = CreateActivity(string.Format(Resources.TvShowEpisodeSearchResultNotFound, show.Title, season.Season, episode.Episode), string.Empty);
+                    await SaveChanges(new[] { activity }, new[] { show });
+                }
 
                 return downloadKey;
             }
@@ -1204,8 +1210,10 @@ namespace Novaroma.Engine {
         }
 
         public Task RefreshDownloaders() {
-            var tasks = Settings.Downloader.Items.RunTasks(d => d.Refresh(), _exceptionHandler);
-            return Task.WhenAll(tasks);
+            var downloader = Settings.Downloader.SelectedItem;
+            if (downloader == null) return Task.FromResult(true);
+
+            return Helper.RunTask(downloader.Refresh, _exceptionHandler);
         }
 
         public async Task<bool> DownloadSubtitleForMovie(Movie movie) {

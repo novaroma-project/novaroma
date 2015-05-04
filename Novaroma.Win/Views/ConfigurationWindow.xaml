@@ -55,9 +55,8 @@
             <controls:ToggleSwitch Grid.Row="5" Grid.Column="1" IsChecked="{Binding DeleteDirectoriesAlso}" />
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
-            <Expander  Visibility="{Binding IsTorrentSettingVisible}" IsExpanded="True"
-                  Tag="{Binding Source={StaticResource Resources}, Path=UtorrentWebUISettings}"
-                  DataContext="{Binding TorrentSettings}" HeaderTemplate="{StaticResource ExpanderClickableHeaderTemplate}">
+            <Expander Name="TorrentSettingsExpander" IsExpanded="True" DataContext="{Binding TorrentSettings}" 
+                      HeaderTemplate="{StaticResource ExpanderClickableHeaderTemplate}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -80,8 +79,7 @@
                 </Grid>
             </Expander>
             <TextBlock VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 15 20 0">
-                <Hyperlink TextDecorations="None" NavigateUri="{Binding Source={StaticResource Resources}, Path=Url_HowToConfigureUtorrentWebUISettings}" 
-                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                <Hyperlink Name="TorrentHowToHyperink" TextDecorations="None" RequestNavigate="Hyperlink_OnRequestNavigate">
                     <TextBlock Text="{Binding Source={StaticResource Resources}, Path=HowTo}" Foreground="Black" FontWeight="Bold"/>
                 </Hyperlink>
             </TextBlock>

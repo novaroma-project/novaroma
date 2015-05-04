@@ -614,10 +614,10 @@
     <value>Download Count</value>
   </data>
   <data name="SearchResultNotFound" xml:space="preserve">
-    <value>Search result is not found. You can search again manually</value>
+    <value>Search result is empty. You can search again manually</value>
   </data>
   <data name="SearchResultNotFoundForSubtitle" xml:space="preserve">
-    <value>Search result is not found for subtitle. You can search again manually</value>
+    <value>Search result is empty for subtitle. You can search again manually</value>
   </data>
   <data name="SubtitleSearch" xml:space="preserve">
     <value>Subtitle Search</value>
@@ -751,8 +751,8 @@
   <data name="Configuration" xml:space="preserve">
     <value>Configuration</value>
   </data>
-  <data name="UtorrentWebUISettings" xml:space="preserve">
-    <value>μTorrent Web UI Settings</value>
+  <data name="TorrentWebUISettings" xml:space="preserve">
+    <value>{0} Web UI Settings</value>
   </data>
   <data name="VideoFiles" xml:space="preserve">
     <value>Video Files</value>
@@ -1105,5 +1105,14 @@
   </data>
   <data name="EntityNotFoundInDb" xml:space="preserve">
     <value>Entity not found in database, Id: '{0}'</value>
+  </data>
+  <data name="MovieSearchResultNotFound" xml:space="preserve">
+    <value>'{0}' search result is empty. You can search again manually</value>
+  </data>
+  <data name="TvShowEpisodeSearchResultNotFound" xml:space="preserve">
+    <value>'{0}' season {1} episode {2} search result is empty. You can search again manually</value>
+  </data>
+  <data name="Url_HowToConfigureTransmissionWebUISettings" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-configure-transmission-web-ui-settings.html</value>
   </data>
 </root>

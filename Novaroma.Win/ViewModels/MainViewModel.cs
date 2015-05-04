@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Novaroma.Engine;
 using Novaroma.Interface;
 using Novaroma.Model;
 using Novaroma.Model.Search;
@@ -652,8 +653,11 @@ namespace Novaroma.Win.ViewModels {
         #endregion
 
         public void InitialConfiguration() {
+            var engine = _engine as NovaromaEngine;
+            if (engine == null) return;
+
             var uTorrentDownloader = IoCContainer.Resolve<UTorrentDownloader>();
-            new ConfigurationWindow(_engine, _exceptionHandler, DialogService, uTorrentDownloader).ShowDialog();
+            new ConfigurationWindow(engine, _exceptionHandler, DialogService).ShowDialog();
         }
 
         private async Task LoadSavedSearchModels() {

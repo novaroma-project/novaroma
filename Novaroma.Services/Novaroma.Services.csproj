@@ -81,6 +81,7 @@
     <Compile Include="ThePirateBay\ThePirateBaySettings.cs" />
     <Compile Include="ThePirateBay\ThePirateBayTorrentProvider.cs" />
     <Compile Include="Tmdb\TmdbTracker.cs" />
+    <Compile Include="TorrentDownloaderSettingsBase.cs" />
     <Compile Include="TorrentProviderSettingsBase.cs" />
     <Compile Include="Transmission\TransmissionDownloader.cs" />
     <Compile Include="Transmission\TransmissionSettings.cs" />

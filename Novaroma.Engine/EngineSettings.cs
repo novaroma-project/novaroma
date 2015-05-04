@@ -11,6 +11,7 @@ using Novaroma.Interface.Model;
 using Novaroma.Interface.Subtitle;
 using Novaroma.Interface.Track;
 using Novaroma.Properties;
+using Novaroma.Services.UTorrent;
 
 namespace Novaroma.Engine {
 
@@ -63,7 +64,22 @@ namespace Novaroma.Engine {
             _infoProvider = new SettingSingleSelection<IInfoProvider>(serviceList.OfType<IInfoProvider>());
             _advancedInfoProvider = new SettingSingleSelection<IAdvancedInfoProvider>(serviceList.OfType<IAdvancedInfoProvider>());
             _showTracker = new SettingSingleSelection<IShowTracker>(serviceList.OfType<IShowTracker>());
-            _downloader = new SettingSingleSelection<IDownloader>(serviceList.OfType<IDownloader>());
+
+            var downloaders = new List<IDownloader>();
+            IDownloader selectedDownloader = null;
+            foreach (var downloader in serviceList.OfType<IDownloader>()) {
+                if (downloader.IsAvailable) {
+                    selectedDownloader = downloader;
+                    downloaders.Insert(0, downloader);
+                }
+                else {
+                    downloaders.Add(downloader);
+                    if (selectedDownloader == null && downloader is UTorrentDownloader)
+                        selectedDownloader = downloader;
+                }
+            }
+            _downloader = new SettingSingleSelection<IDownloader>(downloaders);
+            _downloader.SelectedItem = selectedDownloader;
             _subtitleDownloaders = new SettingMultiSelection<ISubtitleDownloader>(serviceList.OfType<ISubtitleDownloader>());
             _downloadEventHandlers = new SettingMultiSelection<IDownloadEventHandler>(serviceList.OfType<IDownloadEventHandler>());
         }
