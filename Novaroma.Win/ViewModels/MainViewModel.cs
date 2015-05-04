@@ -657,7 +657,6 @@ namespace Novaroma.Win.ViewModels {
             var engine = _engine as NovaromaEngine;
             if (engine == null) return;
 
-            var uTorrentDownloader = IoCContainer.Resolve<UTorrentDownloader>();
             new ConfigurationWindow(engine, _exceptionHandler, DialogService).ShowDialog();
         }
 
