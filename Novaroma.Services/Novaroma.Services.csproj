@@ -39,6 +39,9 @@
     <Reference Include="AngleSharp">
       <HintPath>..\packages\AngleSharp.0.7.0\lib\portable-windows8+net45+windowsphone8+wpa\AngleSharp.dll</HintPath>
     </Reference>
+    <Reference Include="CookComputing.XmlRpcV2">
+      <HintPath>..\packages\xmlrpcnet.3.0.0.266\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -47,8 +50,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\OSDBnet.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="TMDbLib">
@@ -57,11 +64,13 @@
     <Reference Include="Transsmission.API.RPC">
       <HintPath>..\References\Transsmission.API.RPC.dll</HintPath>
     </Reference>
-    <Reference Include="UTorrent.Api">
-      <HintPath>..\packages\UTorrentClientApi.0.2.1\lib\net\UTorrent.Api.dll</HintPath>
+    <Reference Include="UTorrent.Api, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\UTorrentClientApi.1.0.0.2\lib\net\UTorrent.Api.dll</HintPath>
     </Reference>
-    <Reference Include="UTorrent.Api.Data">
-      <HintPath>..\packages\UTorrentClientApi.0.2.1\lib\net\UTorrent.Api.Data.dll</HintPath>
+    <Reference Include="UTorrent.Api.Data, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\UTorrentClientApi.1.0.0.2\lib\net\UTorrent.Api.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
