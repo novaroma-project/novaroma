@@ -546,6 +546,7 @@ namespace Novaroma.Win.ViewModels {
                     var subtitleFilePath = Novaroma.Helper.GetSubtitleFilePath(fileInfo);
                     if (File.Exists(subtitleFilePath))
                         File.Delete(subtitleFilePath);
+                    fileInfo.IsReadOnly = false;
                     fileInfo.Delete();
 
                     episode.FilePath = string.Empty;

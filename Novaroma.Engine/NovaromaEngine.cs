@@ -318,8 +318,14 @@ namespace Novaroma.Engine {
                     OnTvShowsChanged();
                     OnActivitiesChanged();
 
-                    if (episode.BackgroundSubtitleDownload)
-                        DownloadSubtitleForTvShowEpisode(episode).Wait();
+                    if (episode.BackgroundSubtitleDownload) {
+                        try {
+                            DownloadSubtitleForTvShowEpisode(episode).Wait();
+                        }
+                        catch (Exception ex) {
+                            _exceptionHandler.HandleException(ex);
+                        }
+                    }
                 }
                 else {
                     var movie = context.Movies.FirstOrDefault(m => m.DownloadKey == args.DownloadKey);
@@ -934,8 +940,17 @@ namespace Novaroma.Engine {
                         foreach (var deletedMedia in deletedMediaList) {
                             try {
                                 var dir = deletedMedia.Directory;
-                                if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
-                                    Directory.Delete(dir, true);
+                                if (!string.IsNullOrEmpty(dir)) {
+                                    var directoryInfo = new DirectoryInfo(dir);
+                                    if (directoryInfo.Exists) {
+                                        var files = directoryInfo.GetFiles("*", SearchOption.AllDirectories).Where(f => f.IsReadOnly);
+                                        foreach (var fileInfo in files) {
+                                            fileInfo.IsReadOnly = false;
+                                            fileInfo.Delete();
+                                        }
+                                        directoryInfo.Delete(true);
+                                    }
+                                }
                             }
                             catch (Exception ex) {
                                 _exceptionHandler.HandleException(ex);
