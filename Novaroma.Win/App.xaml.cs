@@ -71,7 +71,7 @@ namespace Novaroma.Win {
                 MaxBufferPoolSize = 20000000,
                 MaxBufferSize = 20000000
             };
-            var webEndpoint = _webServiceHost.AddServiceEndpoint(typeof(IWebUIService), webBinding, "http://localhost/NovaromaWebUI");
+            var webEndpoint = _webServiceHost.AddServiceEndpoint(typeof(IWebUIService), webBinding, "http://0.0.0.0:8042");
             webEndpoint.Behaviors.Add(new WebHttpBehavior());
             _webServiceHost.AddDependencyInjectionBehavior<IWebUIService>(IoCContainer.BaseContainer);
             _webServiceHost.Open();
