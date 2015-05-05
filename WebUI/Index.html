@@ -10,8 +10,8 @@
         <ul data-bind="foreach: $data">
             <li>
                 <div>
+					<img width:50 height:25 id="ItemPreview" data-bind="attr: { src: 'data:image/png;base64,' + Poster }" />
                     <span data-bind="text: Title"></span>
-					<img id="ItemPreview" data-bind="attr: { src: 'data:image/png;base64,' + Poster }" />
                 </div>
                 <ul data-bind="foreach: Episodes">
                     <li>
@@ -27,8 +27,6 @@
             $.ajax({
                 url: "api/GetUnseenEpisodes",
                 success: function(tvShows) {
-					for (var i = 0; i < tvShows.length; i++)
-						tvShows[i].Poster = "data:image/png;base64," + tvShows[i].Poster;
                     ko.applyBindings(tvShows);
                 }
             });
