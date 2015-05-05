@@ -10,6 +10,7 @@ namespace Novaroma.Interface {
         void Insert(IEntity entity);
         void Update(IEntity entity);
         void Delete(IEntity entity);
+        IQueryable<TEntity> GetEntities<TEntity>() where TEntity: IEntity;
         IQueryable<Media> Medias { get; }
         IQueryable<Movie> Movies { get; }
         IQueryable<TvShow> TvShows { get; }

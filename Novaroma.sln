@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novaroma", "Novaroma\Novaroma.csproj", "{2F7AAD0C-5E2E-4263-853B-45A4FEB63D2A}"
 EndProject
@@ -33,6 +33,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", 
 		References\Transsmission.API.RPC.dll = References\Transsmission.API.RPC.dll
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{C4EDBCD5-C569-4284-8193-87657B1DE3DD}"
+	ProjectSection(SolutionItems) = preProject
+		WebUI\Index.html = WebUI\Index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0F0DDA03-18A6-4FA0-BE23-4E90DF9EE678}"
+	ProjectSection(SolutionItems) = preProject
+		WebUI\Scripts\jquery-2.1.3.min.js = WebUI\Scripts\jquery-2.1.3.min.js
+		WebUI\Scripts\knockout-3.3.0.js = WebUI\Scripts\knockout-3.3.0.js
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,5 +73,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0F0DDA03-18A6-4FA0-BE23-4E90DF9EE678} = {C4EDBCD5-C569-4284-8193-87657B1DE3DD}
 	EndGlobalSection
 EndGlobal

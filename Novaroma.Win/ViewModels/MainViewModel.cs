@@ -10,8 +10,6 @@ using Novaroma.Interface;
 using Novaroma.Model;
 using Novaroma.Model.Search;
 using Novaroma.Properties;
-using Novaroma.Services.UTorrent;
-using Novaroma.Win.Infrastructure;
 using Novaroma.Win.Utilities;
 using Novaroma.Win.Views;
 

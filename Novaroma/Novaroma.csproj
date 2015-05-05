@@ -59,6 +59,10 @@
     <Compile Include="CultureLanguageComparer.cs" />
     <Compile Include="DirectorySelection.cs" />
     <Compile Include="DirectoryWatchStatus.cs" />
+    <Compile Include="DTO\EpisodeDTO.cs" />
+    <Compile Include="DTO\MediaDTO.cs" />
+    <Compile Include="DTO\MovieDTO.cs" />
+    <Compile Include="DTO\TvShowDTO.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Interface\Download\DownloadCompletedEventArgs.cs" />
     <Compile Include="Interface\Download\IDownloader.cs" />
@@ -82,6 +86,7 @@
     <Compile Include="Interface\IRuntimeService.cs" />
     <Compile Include="Interface\IPluginService.cs" />
     <Compile Include="Interface\IShellService.cs" />
+    <Compile Include="Interface\IWebUIService.cs" />
     <Compile Include="Interface\Model\IDownloadable.cs" />
     <Compile Include="Interface\Model\IEntity.cs" />
     <Compile Include="Interface\Model\ModelBase.cs" />

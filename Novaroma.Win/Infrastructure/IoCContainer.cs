@@ -77,6 +77,11 @@ namespace Novaroma.Win.Infrastructure {
                     .AsSelf()
                     .SingleInstance();
 
+                builder.RegisterType<WebUIService>()
+                    .As<IWebUIService>()
+                    .AsSelf()
+                    .SingleInstance();
+
                 builder.RegisterModule(new QuartzAutofacFactoryModule());
                 builder.RegisterModule(new QuartzAutofacJobsModule(typeof(DownloadJob).Assembly));
 

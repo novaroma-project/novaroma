@@ -31,6 +31,7 @@ namespace Novaroma.Interface {
 
         Task<IDictionary<string, object>> ConvertImdbId(Media media);
 
+        Task<TEntity> GetEntity<TEntity>(Guid id) where TEntity: IEntity;
         Task<Media> GetMedia(IInfoSearchResult searchResult);
         Task<Media> GetImdbMedia(string imdbId);
         Task UpdateMediaInfo(Media media);
@@ -50,6 +51,7 @@ namespace Novaroma.Interface {
         Task<IDownloadable> GetDownloadable(string path);
         Task<Movie> GetMovieByFile(string filePath);
         Task<TvShowEpisode> GetTvShowEpisode(string filePath);
+        Task<IEnumerable<TvShowEpisode>> GetUnseenEpisodes(int? maxCount = null);
         Task<IEnumerable<Media>> GetMediaList(IEnumerable<string> directories);
         Task<IEnumerable<Media>> GetMedias(IEnumerable<string> imdbIds);
         Task<QueryResult<Media>> GetMedias(MediaSearchModel searchModel);

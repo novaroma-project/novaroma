@@ -81,6 +81,10 @@ namespace Novaroma.Engine {
             _container.Delete(entity);
         }
 
+        public IQueryable<TEntity> GetEntities<TEntity>() where TEntity : IEntity {
+            return _container.AsQueryable<TEntity>();
+        }
+
         public IQueryable<Media> Medias {
             get { return _container.AsQueryable<Media>(); }
         }

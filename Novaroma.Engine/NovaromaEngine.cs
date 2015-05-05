@@ -796,6 +796,14 @@ namespace Novaroma.Engine {
             return retVal;
         }
 
+        public Task<TEntity> GetEntity<TEntity>(Guid id) where TEntity : IEntity {
+            return Task.Run(() => {
+                using (var context = _contextFactory.CreateContext()) {
+                    return context.GetEntities<TEntity>().FirstOrDefault(e => e.Id == id);
+                }
+            });
+        }
+
         public async Task<Media> GetMedia(IInfoSearchResult searchResult) {
             if (searchResult.IsTvShow) {
                 var tvShowInfo = await GetTvShowInfo(searchResult);
@@ -1054,7 +1062,22 @@ namespace Novaroma.Engine {
         public Task<TvShowEpisode> GetTvShowEpisode(string filePath) {
             return Task.Run(() => {
                 using (var context = _contextFactory.CreateContext()) {
-                    return context.TvShows.Episodes().FirstOrDefault(e => string.Equals(e.FilePath, filePath, StringComparison.OrdinalIgnoreCase));
+                    return context.TvShows
+                        .Episodes()
+                        .FirstOrDefault(e => string.Equals(e.FilePath, filePath, StringComparison.OrdinalIgnoreCase));
+                }
+            });
+        }
+
+        public Task<IEnumerable<TvShowEpisode>> GetUnseenEpisodes(int? maxCount = null) {
+            return Task.Run(() => {
+                using (var context = _contextFactory.CreateContext()) {
+                    var take = !maxCount.HasValue || maxCount <= 0 ? 1000 : maxCount.Value;
+                    return context.TvShows
+                        .Episodes()
+                        .Where(e => !e.IsWatched && e.AirDate.Value.AddHours(8) < DateTime.UtcNow)
+                        .Take(take)
+                        .AsEnumerable();
                 }
             });
         }
@@ -1179,7 +1202,7 @@ namespace Novaroma.Engine {
 
                 if (!string.IsNullOrEmpty(downloadKey)) {
                     var activity = CreateActivity(string.Format(Resources.MovieDownloadStarted, movie.Title), movie.FilePath);
-                    await SaveChanges(new[] {activity}, new[] {movie});
+                    await SaveChanges(new[] { activity }, new[] { movie });
                 }
                 else {
                     var activity = CreateActivity(string.Format(Resources.MovieSearchResultNotFound, movie.Title), string.Empty);
@@ -1210,7 +1233,7 @@ namespace Novaroma.Engine {
 
                 if (!string.IsNullOrEmpty(downloadKey)) {
                     var activity = CreateActivity(string.Format(Resources.TvShowEpisodeDownloadStarted, show.Title, season.Season, episode.Episode), episode.FilePath);
-                    await SaveChanges(new[] {activity}, new[] {episode.TvShowSeason.TvShow});
+                    await SaveChanges(new[] { activity }, new[] { episode.TvShowSeason.TvShow });
                 }
                 else {
                     var activity = CreateActivity(string.Format(Resources.TvShowEpisodeSearchResultNotFound, show.Title, season.Season, episode.Episode), string.Empty);

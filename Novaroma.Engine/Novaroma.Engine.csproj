@@ -63,6 +63,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbLogger.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="NovaromaDb4OContext.cs" />
     <Compile Include="NovaromaEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebUIService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Novaroma.Services\Novaroma.Services.csproj">
@@ -86,9 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config">

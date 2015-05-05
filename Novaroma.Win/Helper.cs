@@ -161,7 +161,8 @@ namespace Novaroma.Win {
 
         public static void ExitApplication() {
             IoCContainer.Resolve<IScheduler>().Shutdown(false);
-            App.ServiceHost.Close();
+            App.ShellServiceHost.Close();
+            App.WebServiceHost.Close();
             App.NotifyIcon.Dispose();
             Application.Current.Shutdown();
         }
