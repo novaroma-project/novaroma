@@ -4,7 +4,7 @@ using Novaroma.Interface.Model;
 
 namespace Novaroma.Model {
 
-    public abstract class Media : EntityBase {
+    public class Media : EntityBase {
         private string _serviceName;
         private string _serviceId;
         private string _serviceUrl;
@@ -331,6 +331,12 @@ namespace Novaroma.Model {
 
                 serviceMapping.CopyFrom(media.ServiceMappings.ElementAt(i));
             }
+        }
+
+        protected override void CopyFrom(IEntity entity) {
+            var external = Helper.ConvertTo<Media>(entity);
+
+            CopyFrom(external);
         }
     }
 }
