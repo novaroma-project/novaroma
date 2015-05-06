@@ -1,9 +1,0 @@
-;aiu; 
-      
-[Novaroma0.9.2]
-Name = Novaroma 0.9.2
-Description = First Release.
-URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.2/Novaroma.v0.9.2.setup.exe
-Size = 10936381
-FilePath = [APPDIR]Novaroma.exe
-Version = 0.9.2
