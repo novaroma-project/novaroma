@@ -1514,7 +1514,7 @@ namespace Novaroma.Engine {
         }
 
         public bool SubtitlesNeeded(Language? videoLanguage) {
-            return SubtitlesEnabled && (videoLanguage == null || !SubtitleLanguages.Contains(videoLanguage.Value));
+            return SubtitlesEnabled && (videoLanguage == null || SubtitleLanguages.Any(sl => sl != videoLanguage.Value));
         }
 
         public bool SubtitlesEnabled {
