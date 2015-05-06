@@ -1,5 +1,14 @@
 ;aiu; 
 
+[Novaroma0.9.6]
+Name = Novaroma 0.9.6
+Description = New features added, bugs fixed and some features improved.
+URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.6/Novaroma.v0.9.6.setup.exe
+Size = 11493000
+FilePath = [APPDIR]Novaroma.exe
+Version = 0.9.5
+Replaces = All
+
 [Novaroma0.9.5]
 Name = Novaroma 0.9.5
 Description = New features added, bugs fixed and some features improved.
@@ -7,7 +16,6 @@ URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.5/Nova
 Size = 11193180
 FilePath = [APPDIR]Novaroma.exe
 Version = 0.9.5
-Replaces = All
    
 [Novaroma0.9.4]
 Name = Novaroma 0.9.4
