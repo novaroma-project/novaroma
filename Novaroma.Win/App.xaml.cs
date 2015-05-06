@@ -44,12 +44,12 @@ namespace Novaroma.Win {
                 return;
             }
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
                 | SecurityProtocolType.Tls11
                 | SecurityProtocolType.Tls12
                 | SecurityProtocolType.Ssl3;
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            
+
             IoCContainer.Build();
 
             var engine = IoCContainer.Resolve<INovaromaEngine>();
@@ -65,16 +65,7 @@ namespace Novaroma.Win {
             _shellServiceHost.AddDependencyInjectionBehavior<IShellService>(IoCContainer.BaseContainer);
             _shellServiceHost.Open();
 
-            _webServiceHost = new ServiceHost(typeof(WebUIService), new Uri[]{});
-            var webBinding = new WebHttpBinding {
-                MaxReceivedMessageSize = 20000000,
-                MaxBufferPoolSize = 20000000,
-                MaxBufferSize = 20000000
-            };
-            var webEndpoint = _webServiceHost.AddServiceEndpoint(typeof(IWebUIService), webBinding, "http://0.0.0.0:8042");
-            webEndpoint.Behaviors.Add(new WebHttpBehavior());
-            _webServiceHost.AddDependencyInjectionBehavior<IWebUIService>(IoCContainer.BaseContainer);
-            _webServiceHost.Open();
+            HostWebUIService();
 
             var mainWindow = IoCContainer.Resolve<MainWindow>();
             var mainViewModel = IoCContainer.Resolve<MainViewModel>();
@@ -89,6 +80,24 @@ namespace Novaroma.Win {
             if (e.Args.Length > 0) {
                 var service = IoCContainer.Resolve<IShellService>();
                 await service.HandleExeArgs(e.Args);
+            }
+        }
+
+        private static void HostWebUIService(int port = 8042) {
+            try {
+                _webServiceHost = new ServiceHost(typeof(WebUIService), new Uri[] { });
+                var webBinding = new WebHttpBinding {
+                    MaxReceivedMessageSize = 20000000,
+                    MaxBufferPoolSize = 20000000,
+                    MaxBufferSize = 20000000
+                };
+                var webEndpoint = _webServiceHost.AddServiceEndpoint(typeof(IWebUIService), webBinding, "http://0.0.0.0:" + port);
+                webEndpoint.Behaviors.Add(new WebHttpBehavior());
+                _webServiceHost.AddDependencyInjectionBehavior<IWebUIService>(IoCContainer.BaseContainer);
+                _webServiceHost.Open();
+            }
+            catch (Exception ex) {
+                Current.Dispatcher.Invoke(() => NotifyIcon.ShowBalloonTip("Novaroma", ex.Message, BalloonIcon.Error));
             }
         }
 
