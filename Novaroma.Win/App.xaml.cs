@@ -65,7 +65,7 @@ namespace Novaroma.Win {
             _shellServiceHost.AddDependencyInjectionBehavior<IShellService>(IoCContainer.BaseContainer);
             _shellServiceHost.Open();
 
-            HostWebUIService();
+            //HostWebUIService();
 
             var mainWindow = IoCContainer.Resolve<MainWindow>();
             var mainViewModel = IoCContainer.Resolve<MainViewModel>();

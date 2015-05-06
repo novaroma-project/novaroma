@@ -90,6 +90,8 @@ namespace Novaroma {
             var matches = Regex.Matches(name, @"(\d{1,2})\D*(\d{1,2})");
             if (matches.Count == 0)
                 matches = Regex.Matches(name, @"(\d)");
+            if (matches.Count == 0) return;
+
             if (matches.Count > 1 && maxSeason.HasValue && maxSeason.Value < 19) {
                 for (var i = 0; i < matches.Count; i++) {
                     var r = matches[i].Groups[0].Value;
