@@ -76,6 +76,7 @@
     <Compile Include="NovaromaDb4OContext.cs" />
     <Compile Include="NovaromaEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebUIService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Novaroma.Services\Novaroma.Services.csproj">
