@@ -138,8 +138,13 @@ namespace Novaroma {
                 episode = tmpEpisode;
         }
 
-        public static string MakeValidFileName(string path, char replaceChar = '-') {
+        public static string MakeValidFileName(string name, char replaceChar = '-') {
             var invalidChars = Path.GetInvalidFileNameChars();
+            return new string(name.Select(c => invalidChars.Contains(c) ? replaceChar : c).ToArray());
+        }
+
+        public static string MakeValidDirectory(string path, char replaceChar = '-') {
+            var invalidChars = Path.GetInvalidFileNameChars().Except(new[] {'\\'});
             return new string(path.Select(c => invalidChars.Contains(c) ? replaceChar : c).ToArray());
         }
 

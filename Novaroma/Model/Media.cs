@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Novaroma.Interface.Model;
 
@@ -168,6 +169,18 @@ namespace Novaroma.Model {
             get { return _directory; }
             set {
                 if (_directory == value) return;
+
+                var rootIdx = value.IndexOf(':');
+                string root, path;
+                if (rootIdx > 0) {
+                    root = value.Substring(0, rootIdx + 1);
+                    path = Helper.MakeValidDirectory(value.Substring(rootIdx + 1));
+                }
+                else {
+                    root = string.Empty;
+                    path = Helper.MakeValidDirectory(value);
+                }
+                value = root + path;
 
                 _directory = value;
                 RaisePropertyChanged("Directory");
