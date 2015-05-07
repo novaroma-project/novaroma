@@ -86,7 +86,6 @@
     <Compile Include="Interface\IRuntimeService.cs" />
     <Compile Include="Interface\IPluginService.cs" />
     <Compile Include="Interface\IShellService.cs" />
-    <Compile Include="Interface\IWebUIService.cs" />
     <Compile Include="Interface\Model\IDownloadable.cs" />
     <Compile Include="Interface\Model\IEntity.cs" />
     <Compile Include="Interface\Model\ModelBase.cs" />
