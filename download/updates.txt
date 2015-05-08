@@ -4,7 +4,7 @@
 Name = Novaroma 0.9.7
 Description = Important Bugs fixed and some features improved.
 URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.7/Novaroma.v0.9.7.setup.exe
-Size = 11514470
+Size = 11514312
 FilePath = [APPDIR]Novaroma.exe
 Version = 0.9.7
 Replaces = All
