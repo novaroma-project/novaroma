@@ -23,7 +23,7 @@ namespace Novaroma.Win.Infrastructure {
 
                 var location = Environment.CurrentDirectory;
                 var pluginPath = Path.Combine(location, "Plugins");
-                var assemblies = new List<Assembly> {Assembly.GetAssembly(typeof(Services.ServiceNames)), Assembly.GetExecutingAssembly()};
+                var assemblies = new List<Assembly> { Assembly.GetAssembly(typeof(Services.ServiceNames)), Assembly.GetExecutingAssembly() };
                 var pluginDirInfo = new DirectoryInfo(pluginPath);
                 if (pluginDirInfo.Exists) {
                     var dllFiles = pluginDirInfo.GetFiles("*.dll", SearchOption.AllDirectories);
@@ -74,6 +74,11 @@ namespace Novaroma.Win.Infrastructure {
 
                 builder.RegisterType<ShellService>()
                     .As<IShellService>()
+                    .AsSelf()
+                    .SingleInstance();
+
+                builder.RegisterType<WebUIService>()
+                    .As<IWebUIService>()
                     .AsSelf()
                     .SingleInstance();
 

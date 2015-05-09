@@ -3,11 +3,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Navigation;
 using Autofac.Integration.Wcf;
 using Hardcodet.Wpf.TaskbarNotification;
+using Novaroma.Engine;
 using Novaroma.Interface;
 using Novaroma.Win.Infrastructure;
 using Novaroma.Win.ViewModels;
@@ -17,6 +19,7 @@ namespace Novaroma.Win {
 
     public partial class App {
         private static readonly Lazy<ObjectDataProvider> _resourceProvider = new Lazy<ObjectDataProvider>(() => (ObjectDataProvider)Current.FindResource("Resources"));
+        private static ServiceHost _webServiceHost;
         private static ServiceHost _shellServiceHost;
         private static TaskbarIcon _notifyIcon;
 
@@ -52,15 +55,8 @@ namespace Novaroma.Win {
             var engine = IoCContainer.Resolve<INovaromaEngine>();
             engine.LanguageChanged += EngineOnLanguageChanged;
 
-            _shellServiceHost = new ServiceHost(typeof(ShellService), new Uri(Constants.NetPipeUri));
-            var shellBinding = new NetNamedPipeBinding {
-                MaxReceivedMessageSize = 20000000,
-                MaxBufferPoolSize = 20000000,
-                MaxBufferSize = 20000000
-            };
-            _shellServiceHost.AddServiceEndpoint(typeof(IShellService), shellBinding, Constants.NetPipeEndpointName);
-            _shellServiceHost.AddDependencyInjectionBehavior<IShellService>(IoCContainer.BaseContainer);
-            _shellServiceHost.Open();
+            HostShellService();
+            HostWebUIService();
 
             var mainWindow = IoCContainer.Resolve<MainWindow>();
             var mainViewModel = IoCContainer.Resolve<MainViewModel>();
@@ -78,6 +74,36 @@ namespace Novaroma.Win {
             }
         }
 
+        private static void HostShellService() {
+            _shellServiceHost = new ServiceHost(typeof(ShellService), new Uri(Constants.NetPipeUri));
+            var shellBinding = new NetNamedPipeBinding {
+                MaxReceivedMessageSize = 20000000,
+                MaxBufferPoolSize = 20000000,
+                MaxBufferSize = 20000000
+            };
+            _shellServiceHost.AddServiceEndpoint(typeof(IShellService), shellBinding, Constants.NetPipeEndpointName);
+            _shellServiceHost.AddDependencyInjectionBehavior<IShellService>(IoCContainer.BaseContainer);
+            _shellServiceHost.Open();
+        }
+
+        private static void HostWebUIService(int port = 8042) {
+            try {
+                _webServiceHost = new ServiceHost(typeof(WebUIService), new Uri[] { });
+                var webBinding = new WebHttpBinding {
+                    MaxReceivedMessageSize = 20000000,
+                    MaxBufferPoolSize = 20000000,
+                    MaxBufferSize = 20000000
+                };
+                var webEndpoint = _webServiceHost.AddServiceEndpoint(typeof(IWebUIService), webBinding, "http://0.0.0.0:" + port);
+                webEndpoint.Behaviors.Add(new WebHttpBehavior());
+                _webServiceHost.AddDependencyInjectionBehavior<IWebUIService>(IoCContainer.BaseContainer);
+                _webServiceHost.Open();
+            }
+            catch (Exception ex) {
+                Current.Dispatcher.Invoke(() => NotifyIcon.ShowBalloonTip("Novaroma", ex.Message, BalloonIcon.Error));
+            }
+        }
+
         private static void EngineOnLanguageChanged(object sender, EventArgs e) {
             _resourceProvider.Value.Refresh();
         }
@@ -88,6 +114,10 @@ namespace Novaroma.Win {
 
         public static ServiceHost ShellServiceHost {
             get { return _shellServiceHost; }
+        }
+
+        public static ServiceHost WebServiceHost {
+            get { return _webServiceHost; }
         }
 
         public static TaskbarIcon NotifyIcon {
