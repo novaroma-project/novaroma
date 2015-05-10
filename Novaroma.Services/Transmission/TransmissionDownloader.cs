@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,10 +42,12 @@ namespace Novaroma.Services.Transmission {
                 var torrents = client.GetTorrents(new[] {Fields.ID, Fields.HASH_STRING, Fields.PERCENT_DONE, Fields.DOWNLOAD_DIR, Fields.FILES});
 
                 var completeds = torrents.Torrents.Where(t => t.PercentDone >= 1);
-                foreach (var completed in completeds) {
+                foreach (var completedTmp in completeds) {
+                    var completed = completedTmp;
                     var sourcePath = completed.DownloadDir;
 
-                    var args = new DownloadCompletedEventArgs(completed.HashString, sourcePath, completed.Files.Select(f => f.Name));
+                    var files = completed.Files.Select(f => Path.GetFileName(Path.Combine(completed.DownloadDir, f.Name)));
+                    var args = new DownloadCompletedEventArgs(completed.HashString, sourcePath, files);
                     OnDownloadCompleted(args);
                     if (args.Found && Settings.DeleteCompletedTorrents)
                         client.RemoveTorrents(new[] {completed.ID}, args.Moved);
