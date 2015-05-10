@@ -269,7 +269,7 @@ namespace Novaroma.Engine {
             if (!Directory.Exists(args.DownloadDirectory)) return;
 
             var directoryInfo = new DirectoryInfo(args.DownloadDirectory);
-            var files = directoryInfo.GetFiles().ToList();
+            var files = directoryInfo.GetFiles("*", SearchOption.AllDirectories).ToList();
             var downloadFiles = args.Files != null && args.Files.Any()
                 ? files.Where(f => args.Files.Any(df => string.Equals(f.Name, df, StringComparison.OrdinalIgnoreCase))).ToList()
                 : files;
@@ -546,12 +546,9 @@ namespace Novaroma.Engine {
         }
 
         private async Task<FileInfo> ValidateSubtitleDownload(string filePath) {
-            if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException("filePath");
-
+            FileInfo fileInfo = null;
             Activity activity = null;
-            var fileInfo = new FileInfo(filePath);
-            if (!fileInfo.Exists)
+            if (string.IsNullOrEmpty(filePath) || !(fileInfo = new FileInfo(filePath)).Exists)
                 activity = CreateActivity(string.Format(Resources.SubtitleNotDownloaded_FileNotFound, filePath), filePath);
             else if (!SubtitleLanguages.Any())
                 activity = CreateActivity(Resources.SubtitleNotDownloaded_LanguagesNotSelected, string.Empty);

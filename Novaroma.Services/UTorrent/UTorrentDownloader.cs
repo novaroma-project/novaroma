@@ -40,10 +40,11 @@ namespace Novaroma.Services.UTorrent {
             var completeds = torrents.Result.Torrents.Where(t => t.Downloaded > 0 && t.Remaining == 0);
             foreach (var completed in completeds) {
                 var hash = completed.Hash;
-                var files = (await client.GetFilesAsync(hash)).Result.Files.SelectMany(fc => fc.Value.Select(f => f.Name));
+                var files = (await client.GetFilesAsync(hash)).Result.Files;
+                var fileNames = files.SelectMany(fc => fc.Value.Select(f => f.Name));
                 var sourcePath = completed.Path;
 
-                var args = new DownloadCompletedEventArgs(hash, sourcePath, files);
+                var args = new DownloadCompletedEventArgs(hash, sourcePath, fileNames);
                 OnDownloadCompleted(args);
                 if (args.Found && Settings.DeleteCompletedTorrents) {
                     if (args.Moved) {
