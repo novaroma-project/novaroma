@@ -58,7 +58,8 @@ namespace Novaroma.Services.Transmission {
         private static readonly object _processCheckLocker = new object();
         protected virtual Trans.Client CreateClient() {
             lock (_processCheckLocker) {
-                if (!Process.GetProcessesByName("transmission-qt").Any()) {
+                var processes = Process.GetProcesses().Where(p => p.ProcessName.StartsWith("TRANS"));
+                if (!Process.GetProcessesByName("TRANSM~1").Any()) {
                     var installPath = InstallPath;
                     if (!string.IsNullOrEmpty(installPath)) {
                         Process.Start(installPath, "--minimized");
