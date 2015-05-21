@@ -716,14 +716,14 @@ namespace Novaroma.Win.ViewModels {
             var path = activity.Path;
             if (string.IsNullOrWhiteSpace(path)) return;
 
+            var args = string.Empty;
             var idx = path.IndexOf('>');
             if (idx > 0) {
-                var args = path.Substring(idx + 1).Trim();
+                args = path.Substring(idx + 1).Trim();
                 path = path.Substring(0, idx).Trim();
-                Process.Start(path, args);
             }
-            else
-                Process.Start(activity.Path);
+            if (File.Exists(path))
+                Process.Start(path, args);
         }
 
         private void SendASmile() {

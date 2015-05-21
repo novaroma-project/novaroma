@@ -137,7 +137,6 @@
     <Compile Include="ResourceHelper.cs" />
     <Compile Include="SeasonComparer.cs" />
     <Compile Include="ServiceType.cs" />
-    <Compile Include="ServiceUnavailableException.cs" />
     <Compile Include="SettingSingleSelection.cs" />
     <Compile Include="SettingMultiSelection.cs" />
     <Compile Include="Interface\Download\Torrent\TorrentSearchResult.cs" />

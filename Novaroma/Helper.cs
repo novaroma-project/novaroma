@@ -74,6 +74,7 @@ namespace Novaroma {
         }
 
         public static void DetectEpisodeInfo(string fileName, string title, out int? season, out int? episode, int? maxSeason = null) {
+            fileName = MakeValidFileName(fileName);
             DetectEpisodeInfo(new FileInfo(fileName), title, out season, out episode, maxSeason);
         }
 
@@ -87,7 +88,7 @@ namespace Novaroma {
             name = Regex.Replace(name, "480p|720p|1080p|x264", string.Empty, RegexOptions.IgnoreCase);
 
             Match match = null;
-            var matches = Regex.Matches(name, @"(\d{1,2})\D*(\d{1,2})");
+            var matches = Regex.Matches(name, @"(\d{1,2})(\D*)?(\d{1,2})");
             if (matches.Count == 0)
                 matches = Regex.Matches(name, @"(\d)");
             if (matches.Count == 0) return;
@@ -110,26 +111,32 @@ namespace Novaroma {
             string tmpEpisodeStr;
             var matchStr = match.Groups[0].Value;
 
-            if (matchStr.Length < 3) {
-                if (fileInfo.Exists && fileInfo.Directory != null) {
-                    var seasonResult = Regex.Match(fileInfo.Directory.Name, @"(\d{1,2})");
-                    if (seasonResult.Success)
-                        tmpSeasonStr = seasonResult.Groups[0].Value;
-                    else season = 1;
-                }
-                tmpEpisodeStr = matchStr;
-            }
-            else if (matchStr.Length == 3) {
-                tmpSeasonStr = matchStr.Substring(0, 1);
-                tmpEpisodeStr = matchStr.Substring(1);
-            }
-            else if (matchStr.Length == 4) {
-                tmpSeasonStr = matchStr.Substring(0, 2);
-                tmpEpisodeStr = matchStr.Substring(2);
+            if (!string.IsNullOrEmpty(match.Groups[2].Value)) {
+                tmpSeasonStr = match.Groups[1].Value;
+                tmpEpisodeStr = match.Groups[3].Value;
             }
             else {
-                tmpSeasonStr = match.Groups[1].Value;
-                tmpEpisodeStr = match.Groups[2].Value;
+                if (matchStr.Length < 3) {
+                    if (fileInfo.Exists && fileInfo.Directory != null) {
+                        var seasonResult = Regex.Match(fileInfo.Directory.Name, @"(\d{1,2})");
+                        if (seasonResult.Success)
+                            tmpSeasonStr = seasonResult.Groups[0].Value;
+                        else season = 1;
+                    }
+                    tmpEpisodeStr = matchStr;
+                }
+                else if (matchStr.Length == 3) {
+                    tmpSeasonStr = matchStr.Substring(0, 1);
+                    tmpEpisodeStr = matchStr.Substring(1);
+                }
+                else if (matchStr.Length == 4) {
+                    tmpSeasonStr = matchStr.Substring(0, 2);
+                    tmpEpisodeStr = matchStr.Substring(2);
+                }
+                else {
+                    tmpSeasonStr = match.Groups[1].Value;
+                    tmpEpisodeStr = match.Groups[2].Value;
+                }
             }
 
             if (!string.IsNullOrEmpty(tmpSeasonStr) && int.TryParse(tmpSeasonStr, out tmpSeason))
@@ -144,7 +151,7 @@ namespace Novaroma {
         }
 
         public static string MakeValidDirectory(string path, char replaceChar = '-') {
-            var invalidChars = Path.GetInvalidFileNameChars().Except(new[] {'\\'});
+            var invalidChars = Path.GetInvalidFileNameChars().Except(new[] { '\\' });
             return new string(path.Select(c => invalidChars.Contains(c) ? replaceChar : c).ToArray());
         }
 
@@ -520,7 +527,7 @@ InfoTip={1}", iconPath, description);
             File.SetAttributes(infoPath, FileAttributes.Hidden);
         }
 
-        public static T ConvertTo<T>(object obj) where T: class  {
+        public static T ConvertTo<T>(object obj) where T : class {
             if (obj == null)
                 throw new ArgumentNullException("obj");
 

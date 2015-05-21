@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Windows;
@@ -43,12 +42,6 @@ namespace Novaroma.Win {
                 Current.Shutdown();
                 return;
             }
-
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
-                | SecurityProtocolType.Tls11
-                | SecurityProtocolType.Tls12
-                | SecurityProtocolType.Ssl3;
-            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
             IoCContainer.Build();
 
