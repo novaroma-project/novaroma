@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -58,8 +59,8 @@ namespace Novaroma.Services.Transmission {
         private static readonly object _processCheckLocker = new object();
         protected virtual Trans.Client CreateClient() {
             lock (_processCheckLocker) {
-                var processes = Process.GetProcesses().Where(p => p.ProcessName.StartsWith("TRANS"));
-                if (!Process.GetProcessesByName("TRANSM~1").Any()) {
+                if (!Process.GetProcesses().Any(p => p.ProcessName.Equals("transmission-qt", StringComparison.OrdinalIgnoreCase) 
+                                                  || p.ProcessName.Equals("TRANSM~1", StringComparison.OrdinalIgnoreCase))) {
                     var installPath = InstallPath;
                     if (!string.IsNullOrEmpty(installPath)) {
                         Process.Start(installPath, "--minimized");

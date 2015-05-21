@@ -27,7 +27,7 @@ namespace Novaroma.Services.ThePirateBay {
         #region ITorrentMovieProvider Members
 
         public async Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year = null, string imdbId = null, VideoQuality videoQuality = VideoQuality.Any,
-                                                                         string extraKeywords = null, string excludeKeywords = null, 
+                                                                         string extraKeywords = null, string excludeKeywords = null,
                                                                          int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
             var query = Settings.MovieSearchPattern;
 
@@ -39,17 +39,26 @@ namespace Novaroma.Services.ThePirateBay {
                 results = await Search(query, videoQuality, excludeKeywords, minSize, maxSize, service);
             }
 
-            if (query == ThePirateBaySettings.ImdbSearchQuery && extraKeywords != null) {
+            if (query == ThePirateBaySettings.ImdbSearchQuery) {
+                string filter;
                 switch (videoQuality) {
                     case VideoQuality.P720:
-                        extraKeywords += " 720";
+                        filter = "720p";
                         break;
                     case VideoQuality.P1080:
-                        extraKeywords += " 1080";
+                        filter = "1080p";
+                        break;
+                    default:
+                        filter = string.Empty;
                         break;
                 }
-                var extras = extraKeywords.Split(' ');
-                results = results.Where(r => extras.All(e => r.Name.Contains(e)));
+                if (extraKeywords != null)
+                    filter += " " + extraKeywords;
+
+                if (filter != string.Empty) {
+                    var filters = filter.Split(' ');
+                    results = results.Where(r => filters.All(e => r.Name.Contains(e)));
+                }
             }
 
             return results;
@@ -59,7 +68,7 @@ namespace Novaroma.Services.ThePirateBay {
 
         #region ITorrentTvShowProvider Members
 
-        public Task<IEnumerable<ITorrentSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName, string imdbId = null, 
+        public Task<IEnumerable<ITorrentSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName, string imdbId = null,
                                                                            VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null,
                                                                            int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
             var query = Settings.TvShowEpisodeSearchPattern;
@@ -75,11 +84,11 @@ namespace Novaroma.Services.ThePirateBay {
                                                                     int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
             if (videoQuality != VideoQuality.Any) {
                 switch (videoQuality) {
-                    case VideoQuality.P1080:
-                        search += " 1080p";
-                        break;
                     case VideoQuality.P720:
                         search += " 720p";
+                        break;
+                    case VideoQuality.P1080:
+                        search += " 1080p";
                         break;
                 }
             }
@@ -113,7 +122,7 @@ namespace Novaroma.Services.ThePirateBay {
                     var idx2 = detDesc.IndexOf(",", idx1 + 1, StringComparison.Ordinal);
                     var age = detDesc.Substring(0, idx1).Replace("Uploaded", string.Empty).Trim();
                     if (idx2 == -1) idx2 = detDesc.Length;
-                    
+
                     var sizeParts = detDesc.Substring(idx1 + 1, idx2 - idx1 - 1).Replace("Size", string.Empty).Trim().Split((char)160);
                     var sizeStr = sizeParts[0];
                     var sizeType = sizeParts[1];
