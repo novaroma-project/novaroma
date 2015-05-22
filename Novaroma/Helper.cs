@@ -74,6 +74,7 @@ namespace Novaroma {
         }
 
         public static void DetectEpisodeInfo(string fileName, string title, out int? season, out int? episode, int? maxSeason = null) {
+            fileName = MakeValidFileName(fileName);
             DetectEpisodeInfo(new FileInfo(fileName), title, out season, out episode, maxSeason);
         }
 

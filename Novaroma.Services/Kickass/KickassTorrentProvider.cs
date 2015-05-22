@@ -60,11 +60,11 @@ namespace Novaroma.Services.Kickass {
                                                                     int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
             if (videoQuality != VideoQuality.Any) {
                 switch (videoQuality) {
-                    case VideoQuality.P1080:
-                        search += " 1080p";
-                        break;
                     case VideoQuality.P720:
                         search += " 720p";
+                        break;
+                    case VideoQuality.P1080:
+                        search += " 1080p";
                         break;
                 }
             }
@@ -74,7 +74,6 @@ namespace Novaroma.Services.Kickass {
                 search += excludeKeywords.Replace(" ", " -");
             }
             
-            var results = new List<TorrentSearchResult>();
             var url = Helper.CombineUrls(Settings.BaseUrl, "usearch", search);
             using (var client = new NovaromaWebClient()) {
                 string html;
@@ -84,7 +83,7 @@ namespace Novaroma.Services.Kickass {
                 catch (WebException ex) {
                     var errorResponse = ex.Response as HttpWebResponse;
                     if (errorResponse != null && errorResponse.StatusCode == HttpStatusCode.NotFound)
-                        return results;
+                        return Enumerable.Empty<TorrentSearchResult>();
 
                     throw;
                 }
@@ -93,6 +92,7 @@ namespace Novaroma.Services.Kickass {
                 var items = document.All
                     .Where(n => n.TagName == "TR" && (n.ClassName == "even" || n.ClassName == "odd"));
 
+                var results = new List<TorrentSearchResult>();
                 foreach (var item in items) {
                     var tds = item.QuerySelectorAll("td");
                     var divs = tds[0].QuerySelectorAll("div");
@@ -128,9 +128,9 @@ namespace Novaroma.Services.Kickass {
 
                     results.Add(new TorrentSearchResult(service, this, torrentUrl, torrentName, seed, leech, size, files, age, magnetUri));
                 }
-            }
 
-            return results;
+                return results;
+            }
         }
 
         #endregion

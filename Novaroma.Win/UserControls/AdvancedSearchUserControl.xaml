@@ -14,8 +14,8 @@
                 <WrapPanel>
                     <DockPanel Margin="10 10 0 10" Width="260">
                         <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Title}" Width="60"/>
-                        <TextBox Name="SearchTextBox" MinWidth="100"
-                             Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox Name="SearchTextBox" Margin="0 0 3 0"
+                                 Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
                     </DockPanel>
                     <DockPanel Margin="10 10 0 10" Width="260">
                         <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Year}" Width="60"/>
@@ -65,11 +65,11 @@
                     </DockPanel>
                     <DockPanel Margin="10 10 0 10" Width="260">
                         <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=Genre}" Width="60"/>
-                        <userControls:MultiSelectComboBox VerticalAlignment="Top" ItemsSource="{Binding Path=Genres.Selections}" />
+                        <userControls:MultiSelectComboBox VerticalAlignment="Top" ItemsSource="{Binding Path=Genres.Selections}" Margin="0 0 3 0" />
                     </DockPanel>
                     <DockPanel Margin="10 10 0 10" Width="260">
                         <Label FontWeight="Bold" Content="{Binding Source={StaticResource Resources}, Path=MediaTypes}" Width="60"/>
-                        <userControls:MultiSelectComboBox VerticalAlignment="Top" ItemsSource="{Binding Path=MediaTypes.Selections}" />
+                        <userControls:MultiSelectComboBox VerticalAlignment="Top" ItemsSource="{Binding Path=MediaTypes.Selections}" Margin="0 0 3 0" />
                     </DockPanel>
                     <DockPanel Margin="10 10 0 10" Width="150">
                         <CheckBox  Content="{Binding Source={StaticResource Resources}, Path=ExcludeExisting}" VerticalAlignment="Center"
