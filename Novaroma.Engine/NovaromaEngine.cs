@@ -945,17 +945,8 @@ namespace Novaroma.Engine {
                         foreach (var deletedMedia in deletedMediaList) {
                             try {
                                 var dir = deletedMedia.Directory;
-                                if (!string.IsNullOrEmpty(dir)) {
-                                    var directoryInfo = new DirectoryInfo(dir);
-                                    if (directoryInfo.Exists) {
-                                        var files = directoryInfo.GetFiles("*", SearchOption.AllDirectories).Where(f => f.IsReadOnly);
-                                        foreach (var fileInfo in files) {
-                                            fileInfo.IsReadOnly = false;
-                                            fileInfo.Delete();
-                                        }
-                                        directoryInfo.Delete(true);
-                                    }
-                                }
+                                if (!string.IsNullOrEmpty(dir))
+                                    Helper.DeleteDirectory(dir);
                             }
                             catch (Exception ex) {
                                 _exceptionHandler.HandleException(ex);
