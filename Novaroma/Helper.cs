@@ -181,6 +181,21 @@ namespace Novaroma {
             }
         }
 
+        public static void DeleteDirectory(string path) {
+            var directoryInfo = new DirectoryInfo(path);
+            if (directoryInfo.Exists)
+                DeleteDirectory(directoryInfo);
+        }
+
+        public static void DeleteDirectory(DirectoryInfo directoryInfo) {
+            var deleteFiles = directoryInfo.GetFiles("*", SearchOption.AllDirectories).Where(f => f.IsReadOnly);
+            foreach (var fileInfo in deleteFiles) {
+                fileInfo.IsReadOnly = false;
+                fileInfo.Delete();
+            }
+            directoryInfo.Delete(true);
+        }
+
         public static void MakeSpecialFolder(DirectoryInfo directoryInfo, Icon icon, string description) {
             var iconPath = Path.Combine(directoryInfo.FullName, "Folder.ico");
             if (File.Exists(iconPath))

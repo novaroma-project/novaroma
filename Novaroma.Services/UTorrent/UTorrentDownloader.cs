@@ -47,19 +47,16 @@ namespace Novaroma.Services.UTorrent {
                 var args = new DownloadCompletedEventArgs(hash, sourcePath, fileNames);
                 OnDownloadCompleted(args);
                 if (args.Found && Settings.DeleteCompletedTorrents) {
-                    if (args.Moved) {
-                        await client.DeleteTorrentAsync(hash);
-                        Directory.Delete(sourcePath, true);
-                    }
-                    else
-                        await client.StopTorrentAsync(hash);
+                    await client.DeleteTorrentAsync(hash);
+                    if (args.Moved)
+                        Helper.DeleteDirectory(sourcePath);
                 }
             }
         }
 
         private static readonly object _processCheckLocker = new object();
         protected virtual UTorrentClient CreateClient() {
-            lock (this) {
+            lock (_processCheckLocker) {
                 if (!Process.GetProcessesByName("uTorrent").Any() && !Process.GetProcessesByName("BitTorrent").Any()) {
                     var installPath = InstallPath;
                     if (string.IsNullOrEmpty(InstallPath)) {
