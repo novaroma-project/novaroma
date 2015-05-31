@@ -164,6 +164,9 @@ namespace Novaroma {
         [Display(Name = "Portuguese", ResourceType = typeof(Resources))]
         [LanguageInfo("pt", "por")]
         Portuguese,
+        [Display(Name = "PortugueseBrazilian", ResourceType = typeof(Resources))]
+        [LanguageInfo("pb", "pob")]
+        PortugueseBrazilian,
         [Display(Name = "Romanian", ResourceType = typeof(Resources))]
         [LanguageInfo("ro", "rum")]
         Romanian,

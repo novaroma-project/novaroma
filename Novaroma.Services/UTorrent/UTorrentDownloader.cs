@@ -48,6 +48,7 @@ namespace Novaroma.Services.UTorrent {
                 OnDownloadCompleted(args);
                 if (args.Found && Settings.DeleteCompletedTorrents) {
                     await client.DeleteTorrentAsync(hash);
+                    await Task.Delay(1618);
                     if (args.Moved)
                         Helper.DeleteDirectory(sourcePath);
                 }

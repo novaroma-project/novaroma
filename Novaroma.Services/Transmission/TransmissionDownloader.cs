@@ -29,7 +29,7 @@ namespace Novaroma.Services.Transmission {
             return Task.Run(() => {
                 var client = CreateClient();
 
-                var torrent = new NewTorrent { Filename = searchResult.MagnetUri, DownloadDirectory = path };
+                var torrent = new NewTorrent { Filename = searchResult.MagnetUri, DownloadDirectory = Path.Combine(path, searchResult.Name) };
                 var result = client.AddTorrent(torrent);
                 if (!string.IsNullOrEmpty(result.ErrorString)) throw new NovaromaException(result.ErrorString + " ("+ result.Error +")");
 
@@ -50,8 +50,12 @@ namespace Novaroma.Services.Transmission {
                     var files = completed.Files.Select(f => Path.GetFileName(Path.Combine(completed.DownloadDir, f.Name)));
                     var args = new DownloadCompletedEventArgs(completed.HashString, sourcePath, files);
                     OnDownloadCompleted(args);
-                    if (args.Found && Settings.DeleteCompletedTorrents)
-                        client.RemoveTorrents(new[] {completed.ID}, args.Moved);
+
+                    if (args.Found && Settings.DeleteCompletedTorrents) {
+                        client.RemoveTorrents(new[] { completed.ID }, args.Moved);
+                        if (args.Moved)
+                            Helper.DeleteDirectory(sourcePath);
+                    }
                 }
             });
         }

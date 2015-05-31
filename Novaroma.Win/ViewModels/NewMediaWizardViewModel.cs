@@ -330,15 +330,7 @@ namespace Novaroma.Win.ViewModels {
             var result = await DialogService.Confirm(Resources.MontyNi, Resources.AreYouSure);
             if (!result) return;
 
-            var fileInfo = new FileInfo(episode.FilePath);
-
-            var subtitleFilePath = Novaroma.Helper.GetSubtitleFilePath(fileInfo);
-            if (File.Exists(subtitleFilePath))
-                File.Delete(subtitleFilePath);
-            fileInfo.Delete();
-
-            episode.FilePath = string.Empty;
-            episode.SubtitleDownloaded = false;
+            Novaroma.Helper.DeleteTvShowEpisode(episode, _exceptionHandler);
         }
 
         private static bool CanDeleteTvShowEpisode(object prm) {

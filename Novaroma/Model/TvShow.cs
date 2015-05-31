@@ -160,7 +160,7 @@ namespace Novaroma.Model {
             }
         }
 
-        public void MergeEpisodes(IEnumerable<ITvShowEpisodeInfo> episodes) {
+        public void MergeEpisodes(IEnumerable<ITvShowEpisodeInfo> episodes, bool subtitlesNeeded) {
             episodes = episodes.OrderBy(e => e.Season, new SeasonComparer()).ThenBy(e => e.Episode);
 
             ITvShowEpisodeInfo lastEpisode = null;
@@ -177,6 +177,7 @@ namespace Novaroma.Model {
                     season.Episodes.Add(episode);
                     episode.Episode = episodeInfo.Episode;
                     episode.BackgroundDownload = AutoDownload;
+                    episode.BackgroundSubtitleDownload = AutoDownload && subtitlesNeeded;
                 }
 
                 episode.AirDate = episodeInfo.AirDate;
@@ -202,14 +203,14 @@ namespace Novaroma.Model {
             }
         }
 
-        public void Update(ITvShowUpdate tvShowUpdate) {
+        public void Update(ITvShowUpdate tvShowUpdate, bool subtitlesNeeded) {
             if (tvShowUpdate == null) return;
 
             IsActive = tvShowUpdate.IsActive;
             Status = tvShowUpdate.Status;
             LastUpdateDate = tvShowUpdate.UpdateDate;
 
-            MergeEpisodes(tvShowUpdate.UpdateEpisodes);
+            MergeEpisodes(tvShowUpdate.UpdateEpisodes, subtitlesNeeded);
         }
 
         internal void OnSeasonBackgroundDownloadChange() {
