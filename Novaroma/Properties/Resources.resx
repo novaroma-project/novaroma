@@ -1115,4 +1115,10 @@
   <data name="Url_HowToConfigureTransmissionWebUISettings" xml:space="preserve">
     <value>http://www.novaroma.net/how-to-configure-transmission-web-ui-settings.html</value>
   </data>
+  <data name="UseLocalTitles" xml:space="preserve">
+    <value>Use local titles</value>
+  </data>
+  <data name="PortugueseBrazilian" xml:space="preserve">
+    <value>Portuguese-Brazilian</value>
+  </data>
 </root>

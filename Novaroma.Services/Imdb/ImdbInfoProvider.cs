@@ -45,10 +45,15 @@ namespace Novaroma.Services.Imdb {
 
                 var urlStr = string.Format(BASIC_SEARCH_URL, query);
                 var url = new Uri(urlStr);
-                var document = await DocumentBuilder.HtmlAsync(url);
+                string documentStr;
+                using (var client = new NovaromaWebClient()) {
+                    if (!Settings.UseLocalTitles)
+                        client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
+                    documentStr = await client.DownloadStringTaskAsync(url);
+                }
+                var document = DocumentBuilder.Html(documentStr);
 
-                var items = document.All
-                    .Where(n => n.TagName == "TR" && (n.ClassName == "findResult even" || n.ClassName == "findResult odd"));
+                var items = document.All.Where(n => n.TagName == "TR" && (n.ClassName == "findResult even" || n.ClassName == "findResult odd"));
 
                 var results = new List<ImdbInfoSearchResult>();
                 foreach (var item in items) {
@@ -116,7 +121,13 @@ namespace Novaroma.Services.Imdb {
 
                 var urlStr = string.Format(ADVANCED_SEARCH_URL, Settings.AdvancedSearchResultCount, queryString);
                 var url = new Uri(urlStr);
-                var document = await DocumentBuilder.HtmlAsync(url);
+                string documentStr;
+                using (var client = new NovaromaWebClient()) {
+                    if (!Settings.UseLocalTitles)
+                        client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
+                    documentStr = await client.DownloadStringTaskAsync(url);
+                }
+                var document = DocumentBuilder.Html(documentStr);
 
                 var items = document.All
                     .Where(n => n.TagName == "TR" && (n.ClassName == "even detailed" || n.ClassName == "odd detailed"));
@@ -219,8 +230,13 @@ namespace Novaroma.Services.Imdb {
             return Task.Run(async () => {
                 var urlStr = string.Format(TITLE_URL, id);
                 var url = new Uri(urlStr);
-
-                var document = await DocumentBuilder.HtmlAsync(url);
+                string documentStr;
+                using (var client = new NovaromaWebClient()) {
+                    if (!Settings.UseLocalTitles)
+                        client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
+                    documentStr = await client.DownloadStringTaskAsync(url);
+                }
+                var document = DocumentBuilder.Html(documentStr);
 
                 using (var client = new NovaromaWebClient()) {
                     byte[] poster = null;
@@ -280,7 +296,13 @@ namespace Novaroma.Services.Imdb {
                         var fullDescLinkNode = descriptionNode.Children.FirstOrDefault(c => c.TagName == "A" && c.TextContent.Contains("See full summary"));
                         if (fullDescLinkNode != null) {
                             var descUrl = new Url(Helper.CombineUrls(BASE_URL, fullDescLinkNode.Attributes.First().Value));
-                            var descriptionHtml = await DocumentBuilder.HtmlAsync(descUrl);
+                            string descriptionHtmlStr;
+                            using (var descriptionClient = new NovaromaWebClient()) {
+                                if (!Settings.UseLocalTitles)
+                                    descriptionClient.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
+                                descriptionHtmlStr = await descriptionClient.DownloadStringTaskAsync(descUrl);
+                            }
+                            var descriptionHtml = DocumentBuilder.Html(descriptionHtmlStr);
                             var plotSummaryNode = descriptionHtml.QuerySelectorAll("p[class='plotSummary']").FirstOrDefault();
                             if (plotSummaryNode != null)
                                 description = plotSummaryNode.TextContent.Trim();
@@ -372,7 +394,7 @@ namespace Novaroma.Services.Imdb {
         private static string AsString(object o) {
             if (o == null) return string.Empty;
             if (o is float || o is double || o is decimal)
-                return ((float) o).ToString(CultureInfo.InvariantCulture);
+                return ((float)o).ToString(CultureInfo.InvariantCulture);
             return o.ToString();
         }
 
@@ -452,6 +474,10 @@ namespace Novaroma.Services.Imdb {
             var o = (JObject)JsonConvert.DeserializeObject(settings);
             Settings.UseAdvancedSearch = Convert.ToBoolean(o["UseAdvancedSearch"]);
             Settings.AdvancedSearchResultCount = Convert.ToInt32(o["AdvancedSearchResultCount"]);
+
+            var useLocalTitles = o["UseLocalTitles"];
+            if (useLocalTitles != null)
+                Settings.UseLocalTitles = Convert.ToBoolean(useLocalTitles);
         }
 
         #endregion

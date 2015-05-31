@@ -374,7 +374,7 @@ namespace Novaroma.Engine {
                     var deleteFiles = downloadFiles.Where(f => deleteExtensions.Any(de => string.Equals(de, f.Extension, StringComparison.OrdinalIgnoreCase)));
                     try {
                         foreach (var deleteFile in deleteFiles)
-                            deleteFile.Delete();
+                            Helper.DeleteFile(deleteFile);
                     }
                     catch (Exception ex) {
                         _exceptionHandler.HandleException(ex);
@@ -713,11 +713,10 @@ namespace Novaroma.Engine {
                             .ContinueWith(t => RemoveDirectoryWatcher(directory));
 
                         var iniPath = Path.Combine(directory, "desktop.ini");
-                        if (File.Exists(iniPath))
-                            File.Delete(iniPath);
+                        Helper.DeleteFile(iniPath);
+
                         var icoPath = Path.Combine(directory, "Folder.ico");
-                        if (File.Exists(icoPath))
-                            File.Delete(icoPath);
+                        Helper.DeleteFile(icoPath);
                     }
                 }
             });
@@ -805,7 +804,7 @@ namespace Novaroma.Engine {
             if (searchResult.IsTvShow) {
                 var tvShowInfo = await GetTvShowInfo(searchResult);
                 var tvShow = Helper.MapToModel<TvShow>(tvShowInfo);
-                await GetTvShowUpdate(tvShow).ContinueWith(tt => tvShow.Update(tt.Result));
+                await GetTvShowUpdate(tvShow).ContinueWith(tt => tvShow.Update(tt.Result, SubtitlesNeeded(tvShow.Language)));
                 SetTvShowDirectory(tvShow);
                 return tvShow;
             }
@@ -825,7 +824,7 @@ namespace Novaroma.Engine {
                 var tvShowInfo = mediaInfo as ITvShowInfo;
                 if (tvShowInfo != null) {
                     var tvShow = Helper.MapToModel<TvShow>(tvShowInfo);
-                    await GetTvShowUpdate(tvShow).ContinueWith(tt => tvShow.Update(tt.Result));
+                    await GetTvShowUpdate(tvShow).ContinueWith(tt => tvShow.Update(tt.Result, SubtitlesNeeded(tvShow.Language)));
                     SetTvShowDirectory(tvShow);
                     return tvShow;
                 }
@@ -1308,7 +1307,7 @@ namespace Novaroma.Engine {
             await UpdateMediaInfo(tvShow);
             var update = await GetTvShowUpdate(tvShow);
             if (update != null) {
-                tvShow.Update(update);
+                tvShow.Update(update, SubtitlesNeeded(tvShow.Language));
                 await UpdateEntity(tvShow);
             }
         }

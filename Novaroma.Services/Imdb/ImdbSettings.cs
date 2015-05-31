@@ -7,6 +7,7 @@ namespace Novaroma.Services.Imdb {
     public class ImdbSettings : ModelBase {
         private bool _useAdvancedSearch = true;
         private int _advancedSearchResultCount = 42;
+        private bool _useLocalTitles;
 
         [Display(Name = "UseAdvancedSearch", ResourceType = typeof(Resources))]
         public bool UseAdvancedSearch {
@@ -27,6 +28,17 @@ namespace Novaroma.Services.Imdb {
 
                 _advancedSearchResultCount = value;
                 RaisePropertyChanged("AdvancedSearchResultCount");
+            }
+        }
+
+        [Display(Name = "UseLocalTitles", ResourceType = typeof(Resources))]
+        public bool UseLocalTitles {
+            get { return _useLocalTitles; }
+            set {
+                if (_useLocalTitles == value) return;
+
+                _useLocalTitles = value;
+                RaisePropertyChanged("UseLocalTitles");
             }
         }
     }

@@ -182,24 +182,37 @@ namespace Novaroma {
         }
 
         public static void DeleteDirectory(string path) {
-            var directoryInfo = new DirectoryInfo(path);
-            if (directoryInfo.Exists)
-                DeleteDirectory(directoryInfo);
+            DeleteDirectory(new DirectoryInfo(path));
         }
 
         public static void DeleteDirectory(DirectoryInfo directoryInfo) {
+            if (!directoryInfo.Exists) return;
+            
             var deleteFiles = directoryInfo.GetFiles("*", SearchOption.AllDirectories).Where(f => f.IsReadOnly);
-            foreach (var fileInfo in deleteFiles) {
-                fileInfo.IsReadOnly = false;
-                fileInfo.Delete();
-            }
+            foreach (var fileInfo in deleteFiles)
+                DeleteFile(fileInfo);
+
+            directoryInfo.Attributes &= ~FileAttributes.ReadOnly;
             directoryInfo.Delete(true);
+        }
+
+        public static bool DeleteFile(string path) {
+            return DeleteFile(new FileInfo(path));
+        }
+
+        public static bool DeleteFile(FileInfo fileInfo) {
+            if (!fileInfo.Exists) return false;
+
+            if (fileInfo.IsReadOnly)
+                fileInfo.IsReadOnly = false;
+
+            fileInfo.Delete();
+            return true;
         }
 
         public static void MakeSpecialFolder(DirectoryInfo directoryInfo, Icon icon, string description) {
             var iconPath = Path.Combine(directoryInfo.FullName, "Folder.ico");
-            if (File.Exists(iconPath))
-                File.Delete(iconPath);
+            DeleteFile(iconPath);
 
             using (var fs = new FileStream(iconPath, FileMode.Create))
                 icon.Save(fs);
@@ -218,8 +231,7 @@ IconIndex=0
 InfoTip={1}", iconPath, description);
 
             var desktopIniPath = Path.Combine(directoryInfo.FullName, "desktop.ini");
-            if (File.Exists(desktopIniPath))
-                File.Delete(desktopIniPath);
+            DeleteFile(desktopIniPath);
 
             File.WriteAllText(desktopIniPath, iniContent);
             File.SetAttributes(directoryInfo.FullName, FileAttributes.System);
@@ -405,6 +417,24 @@ InfoTip={1}", iconPath, description);
             }
         }
 
+        public static void DeleteTvShowEpisode(TvShowEpisode episode, IExceptionHandler exceptionHandler) {
+            try {
+                var fileInfo = new FileInfo(episode.FilePath);
+                
+                var subtitleFilePath = GetSubtitleFilePath(fileInfo);
+                if (!string.IsNullOrEmpty(subtitleFilePath))
+                    DeleteFile(subtitleFilePath);
+
+                DeleteFile(fileInfo);
+
+                episode.FilePath = string.Empty;
+                episode.SubtitleDownloaded = false;
+            }
+            catch (Exception ex) {
+                exceptionHandler.HandleException(ex);
+            }
+        }
+
         public static void SetDownloadProperties(string downloadKey, IDownloadable downloadable) {
             if (!string.IsNullOrEmpty(downloadKey)) {
                 downloadable.BackgroundDownload = false;
@@ -480,8 +510,7 @@ InfoTip={1}", iconPath, description);
             RenameSubtitleFile(videoFileInfo, template);
 
             var newFilePath = Path.Combine(videoFileInfo.DirectoryName, template) + videoFileInfo.Extension;
-            if (File.Exists(newFilePath))
-                File.Delete(newFilePath);
+            DeleteFile(newFilePath);
             videoFileInfo.MoveTo(newFilePath);
             return newFilePath;
         }
@@ -496,8 +525,7 @@ InfoTip={1}", iconPath, description);
             if (!subtitleFileInfo.Exists) return;
 
             var newSubtitleFilePath = Path.Combine(videoFileInfo.DirectoryName, template) + subtitleFileInfo.Extension;
-            if (File.Exists(newSubtitleFilePath))
-                File.Delete(newSubtitleFilePath);
+            DeleteFile(newSubtitleFilePath);
             subtitleFileInfo.MoveTo(newSubtitleFilePath);
         }
 
@@ -536,8 +564,8 @@ InfoTip={1}", iconPath, description);
             };
 
             var serializedMedia = JsonConvert.SerializeObject(media, serializerSettings);
-            if (File.Exists(infoPath))
-                File.Delete(infoPath);
+
+            DeleteFile(infoPath);
             File.WriteAllText(infoPath, serializedMedia, Encoding.UTF8);
             File.SetAttributes(infoPath, FileAttributes.Hidden);
         }

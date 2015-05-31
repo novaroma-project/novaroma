@@ -34,11 +34,11 @@
                 <userControls:MultiSelectComboBox Grid.Column="3" ItemsSource="{Binding Path=SubtitleLanguages.Selections}" Width="200" />
             </Grid>
             <Button Grid.Column="1" Name="SearchButton" HorizontalAlignment="Right" Margin="5"
-                ToolTip="{Binding Source={StaticResource Resources}, Path=Search}" 
-                Command="{Binding SearchCommand, UpdateSourceTrigger=PropertyChanged}"
-                IsDefault="{Binding ElementName=SearchGrid, Path=IsKeyboardFocusWithin}">
+                    ToolTip="{Binding Source={StaticResource Resources}, Path=Search}" 
+                    Command="{Binding SearchCommand}"
+                    IsDefault="{Binding ElementName=SearchGrid, Path=IsKeyboardFocusWithin}">
                 <userControls:IconUserControl Width="20" Height="20" Visual="{StaticResource ni_search}"
-                     Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                                              Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
             </Button>
         </Grid>
         <DataGrid Grid.Row="1" SelectionMode="Single"

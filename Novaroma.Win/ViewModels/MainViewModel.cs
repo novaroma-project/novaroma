@@ -538,22 +538,8 @@ namespace Novaroma.Win.ViewModels {
             PinTvShowFlyout = true;
 
             var result = await DialogService.Confirm(Resources.MontyNi, Resources.AreYouSure);
-            if (result) {
-                try {
-                    var fileInfo = new FileInfo(episode.FilePath);
-                    var subtitleFilePath = Novaroma.Helper.GetSubtitleFilePath(fileInfo);
-                    if (File.Exists(subtitleFilePath))
-                        File.Delete(subtitleFilePath);
-                    fileInfo.IsReadOnly = false;
-                    fileInfo.Delete();
-
-                    episode.FilePath = string.Empty;
-                    episode.SubtitleDownloaded = false;
-                }
-                catch (Exception ex) {
-                    _exceptionHandler.HandleException(ex);
-                }
-            }
+            if (result)
+                Novaroma.Helper.DeleteTvShowEpisode(episode, _exceptionHandler);
 
             PinTvShowFlyout = false;
         }

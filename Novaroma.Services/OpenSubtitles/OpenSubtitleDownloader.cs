@@ -63,9 +63,7 @@ namespace Novaroma.Services.OpenSubtitles {
                     if (!subtitleFile.Exists) return false;
                     if (string.Equals(subtitlePath, newSubtitlePath, StringComparison.OrdinalIgnoreCase)) return true;
 
-                    if (File.Exists(newSubtitlePath))
-                        File.Delete(newSubtitlePath);
-
+                    Helper.DeleteFile(newSubtitlePath);
                     subtitleFile.MoveTo(newSubtitlePath);
 
                     return true;
