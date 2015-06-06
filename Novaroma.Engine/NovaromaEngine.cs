@@ -290,7 +290,7 @@ namespace Novaroma.Engine {
                     var show = season.TvShow;
                     var episodeFile = videoFiles.FirstOrDefault(f => {
                         int? s, e;
-                        Helper.DetectEpisodeInfo(f, show.Title, out s, out e, show.Seasons.Max(ts => ts.Season));
+                        Helper.DetectEpisodeInfo(f.NameWithoutExtension(), show.Title, out s, out e, f, show.Seasons.Max(ts => ts.Season));
                         return s == episode.TvShowSeason.Season && e == episode.Episode;
                     }) ?? videoFiles.FirstOrDefault();
                     if (episodeFile != null)
