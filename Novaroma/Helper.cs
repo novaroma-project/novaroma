@@ -73,16 +73,10 @@ namespace Novaroma {
                 .FirstOrDefault();
         }
 
-        public static void DetectEpisodeInfo(string fileName, string title, out int? season, out int? episode, int? maxSeason = null) {
-            fileName = MakeValidFileName(fileName);
-            DetectEpisodeInfo(new FileInfo(fileName), title, out season, out episode, maxSeason);
-        }
-
-        public static void DetectEpisodeInfo(FileInfo fileInfo, string title, out int? season, out int? episode, int? maxSeason = null) {
+        public static void DetectEpisodeInfo(string name, string title, out int? season, out int? episode, FileInfo fileInfo = null, int? maxSeason = null) {
             season = null;
             episode = null;
 
-            var name = fileInfo.NameWithoutExtension();
             var titleRegex = title.Replace(" ", ".");
             name = Regex.Replace(name, titleRegex, string.Empty, RegexOptions.IgnoreCase);
             name = Regex.Replace(name, "480p|720p|1080p|x264", string.Empty, RegexOptions.IgnoreCase);
@@ -117,7 +111,7 @@ namespace Novaroma {
             }
             else {
                 if (matchStr.Length < 3) {
-                    if (fileInfo.Exists && fileInfo.Directory != null) {
+                    if (fileInfo != null && fileInfo.Exists && fileInfo.Directory != null) {
                         var seasonResult = Regex.Match(fileInfo.Directory.Name, @"(\d{1,2})");
                         if (seasonResult.Success)
                             tmpSeasonStr = seasonResult.Groups[0].Value;
@@ -187,12 +181,13 @@ namespace Novaroma {
 
         public static void DeleteDirectory(DirectoryInfo directoryInfo) {
             if (!directoryInfo.Exists) return;
-            
+
             var deleteFiles = directoryInfo.GetFiles("*", SearchOption.AllDirectories).Where(f => f.IsReadOnly);
             foreach (var fileInfo in deleteFiles)
                 DeleteFile(fileInfo);
 
-            directoryInfo.Attributes &= ~FileAttributes.ReadOnly;
+            if ((directoryInfo.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                directoryInfo.Attributes &= ~FileAttributes.ReadOnly;
             directoryInfo.Delete(true);
         }
 
@@ -399,7 +394,7 @@ InfoTip={1}", iconPath, description);
 
             foreach (var videoFile in videoFiles) {
                 int? season, episode;
-                DetectEpisodeInfo(videoFile, tvShow.Title, out season, out episode, tvShow.Seasons.Max(s => s.Season));
+                DetectEpisodeInfo(videoFile.NameWithoutExtension(), tvShow.Title, out season, out episode, videoFile, tvShow.Seasons.Max(s => s.Season));
                 if (!season.HasValue || !episode.HasValue) continue;
 
                 var tvEpisode = episodes.FirstOrDefault(e => e.TvShowSeason.Season == season && e.Episode == episode.Value);
@@ -420,7 +415,7 @@ InfoTip={1}", iconPath, description);
         public static void DeleteTvShowEpisode(TvShowEpisode episode, IExceptionHandler exceptionHandler) {
             try {
                 var fileInfo = new FileInfo(episode.FilePath);
-                
+
                 var subtitleFilePath = GetSubtitleFilePath(fileInfo);
                 if (!string.IsNullOrEmpty(subtitleFilePath))
                     DeleteFile(subtitleFilePath);
