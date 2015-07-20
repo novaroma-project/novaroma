@@ -82,7 +82,7 @@ namespace Novaroma {
             name = Regex.Replace(name, "480p|720p|1080p|x264", string.Empty, RegexOptions.IgnoreCase);
 
             Match match = null;
-            var matches = Regex.Matches(name, @"(\d{1,2})(\D*)?(\d{1,2})");
+            var matches = Regex.Matches(name, @"(\d{1,2})(\D{0,9})?(\d{1,2})");
             if (matches.Count == 0)
                 matches = Regex.Matches(name, @"(\d)");
             if (matches.Count == 0) return;
@@ -312,7 +312,8 @@ InfoTip={1}", iconPath, description);
             media.Credits = mediaInfo.Credits;
             media.ImdbId = mediaInfo.ImdbId;
             media.Language = mediaInfo.Language;
-            media.OriginalTitle = mediaInfo.OriginalTitle;
+            if (string.IsNullOrWhiteSpace(media.OriginalTitle))
+                media.OriginalTitle = mediaInfo.OriginalTitle;
             media.Outline = mediaInfo.Outline;
             media.Poster = mediaInfo.Poster;
             media.Rating = mediaInfo.Rating;

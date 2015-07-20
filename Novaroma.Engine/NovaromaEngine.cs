@@ -421,7 +421,7 @@ namespace Novaroma.Engine {
             if (searchModel.RatingMin.HasValue && searchModel.RatingMin.Value > 0)
                 query = query.Where(x => x.Rating >= searchModel.RatingMin);
 
-            if (searchModel.RatingMax.HasValue && searchModel.RatingMax.Value > 0)
+            if (searchModel.RatingMax.HasValue && searchModel.RatingMax.Value > 0 && searchModel.RatingMax.Value < 10)
                 query = query.Where(x => x.Rating <= searchModel.RatingMax);
 
             if (searchModel.VoteCountMin.HasValue)
@@ -1132,22 +1132,24 @@ namespace Novaroma.Engine {
                     var q = context.TvShows;
                     if (!q.Any()) return QueryResult<TvShow>.Empty;
 
-                    var currentDate = DateTime.UtcNow.AddHours(-8);
-                    q = q.Where(t =>
-                        t.Seasons.Any(s =>
-                            s.Episodes.Any(e => (searchModel.NotWatched == null || (e.AirDate < currentDate && e.IsWatched != searchModel.NotWatched))
-                                             && (searchModel.Downloaded == null || string.IsNullOrEmpty(e.FilePath) == !searchModel.Downloaded)
-                                             && (searchModel.SubtitleDownloaded == null || e.SubtitleDownloaded == searchModel.SubtitleDownloaded)
+                    if (searchModel.NotWatched != null || searchModel.Downloaded != null || searchModel.SubtitleDownloaded != null) {
+                        var currentDate = DateTime.UtcNow.AddHours(-8);
+                        q = q.Where(t =>
+                            t.Seasons.Any(s =>
+                                s.Episodes.Any(e => (searchModel.NotWatched == null || (e.AirDate < currentDate && e.IsWatched != searchModel.NotWatched))
+                                                 && (searchModel.Downloaded == null || string.IsNullOrEmpty(e.FilePath) == !searchModel.Downloaded)
+                                                 && (searchModel.SubtitleDownloaded == null || e.SubtitleDownloaded == searchModel.SubtitleDownloaded)
+                                )
                             )
-                        )
-                    );
+                        );
+                    }
 
                     if (searchModel.NotFound != null)
                         q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.NotFound == searchModel.NotFound.Value)));
                     if (searchModel.SubtitleNotFound != null)
                         q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.SubtitleNotFound == searchModel.SubtitleNotFound.Value)));
 
-                    if (searchModel.Ended.HasValue)
+                    if (searchModel.Ended != null)
                         q = q.Where(x => x.IsActive == !searchModel.Ended.Value);
 
                     return FilterMediaQuery(q, searchModel);
