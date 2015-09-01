@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -774,7 +775,7 @@ namespace Novaroma.Engine {
         }
 
         public async Task<IDictionary<string, object>> ConvertImdbId(Media media) {
-            var serviceIdsList = new List<IDictionary<string, object>>();
+            var serviceIdsList = new ConcurrentBag<IDictionary<string, object>>();
             var tasks = _imdbIdConverters.RunTasks(iic =>
                 iic.GetServiceIds(media.ImdbId)
                     .ContinueWith(t => serviceIdsList.Add(t.Result)),
@@ -1408,7 +1409,7 @@ namespace Novaroma.Engine {
             await Task.Run(() => _subtitleSemaphore.WaitOne());
 
             try {
-                var results = new List<ISubtitleSearchResult>();
+                var results = new ConcurrentBag<ISubtitleSearchResult>();
                 await Task.WhenAll(
                     Settings
                         .SubtitleDownloaders

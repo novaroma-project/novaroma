@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Novaroma.Interface.Download.Torrent {
         public virtual async Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year, string imdbId, VideoQuality videoQuality = VideoQuality.Any,
                                                                                  string extraKeywords = null, string excludeKeywords = null,
                                                                                  int? minSize = null, int? maxSize = null) {
-            var results = new List<ITorrentSearchResult>();
+            var results = new ConcurrentBag<ITorrentSearchResult>();
             var tasks = MovieProviders.RunTasks(p =>
                 p.SearchMovie(name, year, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize, this)
                     .ContinueWith(t => results.AddRange(t.Result)),
@@ -31,7 +32,7 @@ namespace Novaroma.Interface.Download.Torrent {
         public virtual async Task<IEnumerable<ITorrentSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName, string imdbId,
                                                                                          VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null,
                                                                                          int? minSize = null, int? maxSize = null) {
-            var results = new List<ITorrentSearchResult>();
+            var results = new ConcurrentBag<ITorrentSearchResult>();
             var tasks = TvShowProviders.RunTasks(p =>
                 p.SearchTvShowEpisode(name, season, episode, episodeName, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize, this)
                     .ContinueWith(t => results.AddRange(t.Result)),
@@ -53,7 +54,7 @@ namespace Novaroma.Interface.Download.Torrent {
                                                                             int? minSize = null, int? maxSize = null) {
             var providers = ((IEnumerable<ITorrentProvider>)MovieProviders).Union(TvShowProviders);
 
-            var results = new List<ITorrentSearchResult>();
+            var results = new ConcurrentBag<ITorrentSearchResult>();
             var tasks = providers.RunTasks(p =>
                 p.Search(query, videoQuality, excludeKeywords, minSize, maxSize, this)
                  .ContinueWith(t => results.AddRange(t.Result)),
