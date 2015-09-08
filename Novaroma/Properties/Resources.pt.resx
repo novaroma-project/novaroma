@@ -1,0 +1,1083 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Atividades</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
+  <data name="AddScriptService" xml:space="preserve">
+    <value>Adicionar Serviço de Script</value>
+  </data>
+  <data name="AddSubdirectories" xml:space="preserve">
+    <value>Adicionar Sub Diretórios</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Avançado</value>
+  </data>
+  <data name="AdvancedInfoProvider" xml:space="preserve">
+    <value>Provedor de Info Avançada</value>
+  </data>
+  <data name="AdvancedSearchResultCount" xml:space="preserve">
+    <value>Contagem de Resultados da Pesquisa Avançada</value>
+  </data>
+  <data name="Afrikaans" xml:space="preserve">
+    <value>Afrikaans</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Idade</value>
+  </data>
+  <data name="AirDate" xml:space="preserve">
+    <value>Data de Exibição</value>
+  </data>
+  <data name="Albanian" xml:space="preserve">
+    <value>Albanian</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>Qualquer</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>Árabe</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Tens a certeza?</value>
+  </data>
+  <data name="Armenian" xml:space="preserve">
+    <value>Armênio</value>
+  </data>
+  <data name="AutoDownloadNewEpisodes" xml:space="preserve">
+    <value>Auto Download de Novos Episódios</value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Disponibilidade</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Retroceder</value>
+  </data>
+  <data name="BackgroundDownload" xml:space="preserve">
+    <value>Baixar</value>
+  </data>
+  <data name="BackgroundSubtitleDownload" xml:space="preserve">
+    <value>Baixar Legenda</value>
+  </data>
+  <data name="BackupDatabase" xml:space="preserve">
+    <value>Cópia de Segurança da Base de Dados</value>
+  </data>
+  <data name="BaseUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="Basque" xml:space="preserve">
+    <value>Basco</value>
+  </data>
+  <data name="Belarusian" xml:space="preserve">
+    <value>Bielorusso</value>
+  </data>
+  <data name="Bengali" xml:space="preserve">
+    <value>Bengali</value>
+  </data>
+  <data name="Bosnian" xml:space="preserve">
+    <value>Bósnio</value>
+  </data>
+  <data name="Breton" xml:space="preserve">
+    <value>Bretão</value>
+  </data>
+  <data name="Build" xml:space="preserve">
+    <value>Construir</value>
+  </data>
+  <data name="Bulgarian" xml:space="preserve">
+    <value>Búlgaro</value>
+  </data>
+  <data name="Burmese" xml:space="preserve">
+    <value>Birmanês</value>
+  </data>
+  <data name="BuyCoffee" xml:space="preserve">
+    <value>Compra-nos um café</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Catalan" xml:space="preserve">
+    <value>Catalão</value>
+  </data>
+  <data name="CheckAndUpdateDirectoryFiles" xml:space="preserve">
+    <value>Verificar e Atualizar Ficheiros do Diretório</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Verificar Atualizações</value>
+  </data>
+  <data name="ChineseBilingual" xml:space="preserve">
+    <value>Chinês (bilingue)</value>
+  </data>
+  <data name="ChineseSimplified" xml:space="preserve">
+    <value>Chinês (Simplificado)</value>
+  </data>
+  <data name="ChineseTraditional" xml:space="preserve">
+    <value>Chinese (Tradicional)</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Limpar</value>
+  </data>
+  <data name="ClearActvitiesAndLogs" xml:space="preserve">
+    <value>Limpar Atividades e Registos</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Coluna</value>
+  </data>
+  <data name="CompiledCodeNovaromaServiceRequired" xml:space="preserve">
+    <value>Não é possível encontrar nenhum serviço Novaroma no código compilado</value>
+  </data>
+  <data name="CompiledCodeParameterlessCtorRequired" xml:space="preserve">
+    <value>Todos os tipos de serviços expostos têm de ter um construtor público sem parâmetros</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuração</value>
+  </data>
+  <data name="Croatian" xml:space="preserve">
+    <value>Croata</value>
+  </data>
+  <data name="Czech" xml:space="preserve">
+    <value>Tcheco</value>
+  </data>
+  <data name="Danish" xml:space="preserve">
+    <value>Dinamarquês</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="DefaultMaxSize" xml:space="preserve">
+    <value>Tamanho Máximo por Defeito (MB)</value>
+  </data>
+  <data name="DefaultMinSize" xml:space="preserve">
+    <value>Tamanho Mínimo por Defeito (MB)</value>
+  </data>
+  <data name="DefaultMovieExcludeKeywords" xml:space="preserve">
+    <value>Palavras Chave do Filme Excluídas por Predefinição</value>
+  </data>
+  <data name="DefaultMovieExtraKeywords" xml:space="preserve">
+    <value>Palavras Chave Adicionais Prédefinidas do Filme</value>
+  </data>
+  <data name="DefaultMovieVideoQuality" xml:space="preserve">
+    <value>Qualidade do Vídeo Predefinida</value>
+  </data>
+  <data name="DefaultTvShowExcludeKeywords" xml:space="preserve">
+    <value>Palavras Chave Excluidas de Séries de TV por Predefinição</value>
+  </data>
+  <data name="DefaultTvShowExtraKeywords" xml:space="preserve">
+    <value>Palavras Chave Adicionais de Séries de TV por Predefinição</value>
+  </data>
+  <data name="DefaultTvShowVideoQuality" xml:space="preserve">
+    <value>Qualidade de Video das Series de TV por Predefinição</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Apagar</value>
+  </data>
+  <data name="DeleteCompletedTorrents" xml:space="preserve">
+    <value>Apagar Torrents Finalizados</value>
+  </data>
+  <data name="DeleteDirectoriesAlso" xml:space="preserve">
+    <value>Apagar Também diretórios</value>
+  </data>
+  <data name="DeleteDirectoriesAlsoDescription" xml:space="preserve">
+    <value>Depois de eliminar um filme ou Série de TV, apagar também o diretório</value>
+  </data>
+  <data name="DeleteExtensions" xml:space="preserve">
+    <value>Apagar Extensões</value>
+  </data>
+  <data name="DeleteExtensionsDescription" xml:space="preserve">
+    <value>Os arquivos com estas extensões serão apagados depois de cada download completo (; separados)</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="Directory" xml:space="preserve">
+    <value>Diretório</value>
+  </data>
+  <data name="DirectoryToAdd" xml:space="preserve">
+    <value>{0}' será adicionado à lista de observação do diretório do novaroma</value>
+  </data>
+  <data name="Discover" xml:space="preserve">
+    <value>Descubrir</value>
+  </data>
+  <data name="DiscoverFiles" xml:space="preserve">
+    <value>Descubrir Ficheiros</value>
+  </data>
+  <data name="Documentary" xml:space="preserve">
+    <value>Documentário</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Baixar</value>
+  </data>
+  <data name="DownloadCount" xml:space="preserve">
+    <value>Contagem de Downloads</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>Ficheiros Baixados</value>
+  </data>
+  <data name="Downloader" xml:space="preserve">
+    <value>Downloader</value>
+  </data>
+  <data name="DownloadEventHandler" xml:space="preserve">
+    <value>Baixar tratador de eventos</value>
+  </data>
+  <data name="DownloadEventHandlers" xml:space="preserve">
+    <value>Baixar tratadores de eventos</value>
+  </data>
+  <data name="DownloadInterval" xml:space="preserve">
+    <value>Intervalo do Download (min)</value>
+  </data>
+  <data name="DownloadSubtitle" xml:space="preserve">
+    <value>Baixar Legenda</value>
+  </data>
+  <data name="Dutch" xml:space="preserve">
+    <value>Holandês</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Endereço de Email</value>
+  </data>
+  <data name="Ended" xml:space="preserve">
+    <value>Terminou</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Inglês</value>
+  </data>
+  <data name="EntityNotFoundInDb" xml:space="preserve">
+    <value>A entidade não foi encontrada na base de dados, Id: '{0}'</value>
+  </data>
+  <data name="Episode" xml:space="preserve">
+    <value>Episódio</value>
+  </data>
+  <data name="EpisodeName" xml:space="preserve">
+    <value>Nome do Episódio</value>
+  </data>
+  <data name="Episodes" xml:space="preserve">
+    <value>Episódios</value>
+  </data>
+  <data name="ErrorLogs" xml:space="preserve">
+    <value>Registo de Erros</value>
+  </data>
+  <data name="Errors" xml:space="preserve">
+    <value>Erros</value>
+  </data>
+  <data name="Esperanto" xml:space="preserve">
+    <value>Esperanto</value>
+  </data>
+  <data name="Estonian" xml:space="preserve">
+    <value>Estoniano</value>
+  </data>
+  <data name="ExcludeExisting" xml:space="preserve">
+    <value>Excluir Existentes</value>
+  </data>
+  <data name="ExcludeKeywords" xml:space="preserve">
+    <value>Excluir Palavras Chave</value>
+  </data>
+  <data name="ExcludeKeywordsDescription" xml:space="preserve">
+    <value>Resultados da pesquisa que contenham pelo menos um destes serão extraidos da lista</value>
+  </data>
+  <data name="ExecuteBackgroundDownloads" xml:space="preserve">
+    <value>Executar Downloads</value>
+  </data>
+  <data name="ExecuteBackgroundTvShowUpdates" xml:space="preserve">
+    <value>Executar Atualizações das Séries de TV</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Sair</value>
+  </data>
+  <data name="ExtraKeywords" xml:space="preserve">
+    <value>Palavras Chave Adicionais</value>
+  </data>
+  <data name="ExtraKeywordsDescription" xml:space="preserve">
+    <value>Será adicionado à consulta de pesquisa do provedor</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="FileCount" xml:space="preserve">
+    <value>Contagem de Ficheiros</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Ficheiro não encontrado: '{0}'</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtro</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Finalizado</value>
+  </data>
+  <data name="Finnish" xml:space="preserve">
+    <value>Finlandês</value>
+  </data>
+  <data name="FoundMedia" xml:space="preserve">
+    <value>Media encontrada</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Françês</value>
+  </data>
+  <data name="FrownWatermark" xml:space="preserve">
+    <value>Diz-nos o que não gostaste ou o que aconteceu de errado</value>
+  </data>
+  <data name="Galician" xml:space="preserve">
+    <value>Galician</value>
+  </data>
+  <data name="Genre" xml:space="preserve">
+    <value>Género</value>
+  </data>
+  <data name="Georgian" xml:space="preserve">
+    <value>Georgian</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Russo</value>
+  </data>
+  <data name="GoToDirectory" xml:space="preserve">
+    <value>Ir para o Diretório</value>
+  </data>
+  <data name="GoToPluginDirectory" xml:space="preserve">
+    <value>Ir para o Diretório de Plugins</value>
+  </data>
+  <data name="Greek" xml:space="preserve">
+    <value>Grego</value>
+  </data>
+  <data name="Hebrew" xml:space="preserve">
+    <value>Hebraico</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Ajuda</value>
+  </data>
+  <data name="Hindi" xml:space="preserve">
+    <value>Hindi</value>
+  </data>
+  <data name="HowTo" xml:space="preserve">
+    <value>Como fazer</value>
+  </data>
+  <data name="HowToAddMovie" xml:space="preserve">
+    <value>Como adicionar um filme ?</value>
+  </data>
+  <data name="HowToAddTvShow" xml:space="preserve">
+    <value>Como adicionar uma série de tv)</value>
+  </data>
+  <data name="Hungarian" xml:space="preserve">
+    <value>Húngaro</value>
+  </data>
+  <data name="Icelandic" xml:space="preserve">
+    <value>islandês</value>
+  </data>
+  <data name="ImdbId" xml:space="preserve">
+    <value>Id Imdb</value>
+  </data>
+  <data name="ImdbIdNotFound" xml:space="preserve">
+    <value>Id Imdb não encontrado</value>
+  </data>
+  <data name="IncludeEmail" xml:space="preserve">
+    <value>Incluir endereço de email</value>
+  </data>
+  <data name="IncompatilbleTypes_CopyFrom" xml:space="preserve">
+    <value>Tipos incompatíveis: Não é possível copiar os valores do tipo '{0}' para o tipo '{1}'</value>
+  </data>
+  <data name="Indonesian" xml:space="preserve">
+    <value>indonésio</value>
+  </data>
+  <data name="InfoProvider" xml:space="preserve">
+    <value>Provedor de Info</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Endereço de email inválido</value>
+  </data>
+  <data name="IsDeleted" xml:space="preserve">
+    <value>Apagado?</value>
+  </data>
+  <data name="IsWatched" xml:space="preserve">
+    <value>Visto?</value>
+  </data>
+  <data name="Italian" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="ItemsPerPage" xml:space="preserve">
+    <value>Items por página</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>Japonês</value>
+  </data>
+  <data name="Kazakh" xml:space="preserve">
+    <value>cazaque</value>
+  </data>
+  <data name="Khmer" xml:space="preserve">
+    <value>Khmer</value>
+  </data>
+  <data name="Korean" xml:space="preserve">
+    <value>Coreano</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Línguagem</value>
+  </data>
+  <data name="Latvian" xml:space="preserve">
+    <value>Letão</value>
+  </data>
+  <data name="Leech" xml:space="preserve">
+    <value>Leech</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>Linha</value>
+  </data>
+  <data name="Lithuanian" xml:space="preserve">
+    <value>Lituano</value>
+  </data>
+  <data name="LoadDefaultCode" xml:space="preserve">
+    <value>Carregar Código Prédefinido</value>
+  </data>
+  <data name="LogDate" xml:space="preserve">
+    <value>Data do Registo</value>
+  </data>
+  <data name="Luxembourgish" xml:space="preserve">
+    <value>Luxemburguês</value>
+  </data>
+  <data name="Macedonian" xml:space="preserve">
+    <value>Macedónio</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Principal</value>
+  </data>
+  <data name="MakeSpecialFolder" xml:space="preserve">
+    <value>Personalizar Pastas</value>
+  </data>
+  <data name="MakeSpecialFolderDescription" xml:space="preserve">
+    <value>Novaroma folders will have novaroma icon, tv show and movie folders will have poster on windows explorer</value>
+  </data>
+  <data name="Malay" xml:space="preserve">
+    <value>Malaico</value>
+  </data>
+  <data name="Malayalam" xml:space="preserve">
+    <value>Malayalam</value>
+  </data>
+  <data name="Manipuri" xml:space="preserve">
+    <value>Manipuri</value>
+  </data>
+  <data name="ManualDownload" xml:space="preserve">
+    <value>Download Manual</value>
+  </data>
+  <data name="ManualSubtitleDownload" xml:space="preserve">
+    <value>Baixar a Legenda Manualmente</value>
+  </data>
+  <data name="MarkAsWatched" xml:space="preserve">
+    <value>Marcar como Visto</value>
+  </data>
+  <data name="MaxSize" xml:space="preserve">
+    <value>Tamanho Máximo (MB)</value>
+  </data>
+  <data name="MaxSizeDescription" xml:space="preserve">
+    <value>Resultados da pesquisa mais pequenos que este tamanho serão extraídos da lista</value>
+  </data>
+  <data name="MediaTypes" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Mensagem</value>
+  </data>
+  <data name="MinCannotExceedMax" xml:space="preserve">
+    <value>O tamanho mínimo não pode ser superior ao tamanho máximo</value>
+  </data>
+  <data name="MinSize" xml:space="preserve">
+    <value>Tamanho Mínimo (MB)</value>
+  </data>
+  <data name="MinSizeDescription" xml:space="preserve">
+    <value>Resultados da pesquisa maiores que este tamanho serão extraídos da lista</value>
+  </data>
+  <data name="MinuteReduced" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <data name="Mongolian" xml:space="preserve">
+    <value>Mongol</value>
+  </data>
+  <data name="Montenegrin" xml:space="preserve">
+    <value>Montenegrino</value>
+  </data>
+  <data name="MontyNi" xml:space="preserve">
+    <value>Ni!</value>
+  </data>
+  <data name="MontyNudgeNudge" xml:space="preserve">
+    <value>Nudge, nudge, wink, wink. Sabes o que eu quero dizer?</value>
+  </data>
+  <data name="Movie" xml:space="preserve">
+    <value>Filme</value>
+  </data>
+  <data name="MovieDetails" xml:space="preserve">
+    <value>Detalhes do Filme</value>
+  </data>
+  <data name="MovieDirectory" xml:space="preserve">
+    <value>Diretório do Filme</value>
+  </data>
+  <data name="MovieDownloaded" xml:space="preserve">
+    <value>{0}' download finalizado</value>
+  </data>
+  <data name="MovieDownloadStarted" xml:space="preserve">
+    <value>{0}' download iniciado</value>
+  </data>
+  <data name="MovieFileNameTemplate" xml:space="preserve">
+    <value>Modelo de Renomeação do Ficheiro do Filme</value>
+  </data>
+  <data name="MovieFileNameTemplateDescription" xml:space="preserve">
+    <value>Parâmetros Disponíveis: %movieName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
+  </data>
+  <data name="MovieProviders" xml:space="preserve">
+    <value>Provedores do Filme</value>
+  </data>
+  <data name="Movies" xml:space="preserve">
+    <value>Filmes</value>
+  </data>
+  <data name="MovieSearchPattern" xml:space="preserve">
+    <value>Padrão de Pesquisa do Filme</value>
+  </data>
+  <data name="MovieSearchPatternDescription" xml:space="preserve">
+    <value>Parâmetros Disponíveis: %movieName%, %year%, %imdbId%</value>
+  </data>
+  <data name="MovieSearchResultNotFound" xml:space="preserve">
+    <value>{0}' Sem resultados de pesquisa. Podes procurar novamente de forma manual</value>
+  </data>
+  <data name="MovieSubtitleDownloaded" xml:space="preserve">
+    <value>{0}' Legendas baixadas</value>
+  </data>
+  <data name="MovieSubtitleNotFound" xml:space="preserve">
+    <value>{0}' Não foi possível encontrar a legenda</value>
+  </data>
+  <data name="MovieTorrentProvider" xml:space="preserve">
+    <value>Provedor de Torrents de Filme</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Seguinte</value>
+  </data>
+  <data name="Norwegian" xml:space="preserve">
+    <value>Norueguês</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Não Encontrado</value>
+  </data>
+  <data name="NotifyIconToolTip" xml:space="preserve">
+    <value>Duplo Clique para Janela, Clique Direito para menú</value>
+  </data>
+  <data name="NotSelected" xml:space="preserve">
+    <value>Não Selecionado</value>
+  </data>
+  <data name="NotWatched" xml:space="preserve">
+    <value>Não Visualizado</value>
+  </data>
+  <data name="NovaromaSlogan" xml:space="preserve">
+    <value>Senta-te, relaxa e disfruta simplesmente!</value>
+  </data>
+  <data name="Occitan" xml:space="preserve">
+    <value>Occitan</value>
+  </data>
+  <data name="OrderBy" xml:space="preserve">
+    <value>Ordenar Por</value>
+  </data>
+  <data name="Outline" xml:space="preserve">
+    <value>Esboço</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Visão geral</value>
+  </data>
+  <data name="P1080" xml:space="preserve">
+    <value>1080p</value>
+  </data>
+  <data name="P480" xml:space="preserve">
+    <value>480p</value>
+  </data>
+  <data name="P720" xml:space="preserve">
+    <value>720p</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Página</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Palavra Passe</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Caminho</value>
+  </data>
+  <data name="Persian" xml:space="preserve">
+    <value>Persa</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Visualizar</value>
+  </data>
+  <data name="PlayUnseenEpisode" xml:space="preserve">
+    <value>Visualizar Episódio Não Visto</value>
+  </data>
+  <data name="PluginAddInfo" xml:space="preserve">
+    <value>Precisas de reiniciar o novaroma após qualquer alteração à pasta de plugins para ser efetivo</value>
+  </data>
+  <data name="PluginDirectory" xml:space="preserve">
+    <value>Diretório de Pluguin</value>
+  </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Plug-ins</value>
+  </data>
+  <data name="PluginService" xml:space="preserve">
+    <value>Serviço de Plug-in</value>
+  </data>
+  <data name="Polish" xml:space="preserve">
+    <value>Polonês</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Porta</value>
+  </data>
+  <data name="Portuguese" xml:space="preserve">
+    <value>Português</value>
+  </data>
+  <data name="PortugueseBrazilian" xml:space="preserve">
+    <value>Portuguese-Brazilian</value>
+  </data>
+  <data name="Poster" xml:space="preserve">
+    <value>Poster</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Provedor</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Avaliação</value>
+  </data>
+  <data name="ReleaseYear" xml:space="preserve">
+    <value>Ano de Estreia</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remover</value>
+  </data>
+  <data name="RestartNovaroma" xml:space="preserve">
+    <value>Reiniciar Novaroma</value>
+  </data>
+  <data name="Romanian" xml:space="preserve">
+    <value>Romanian</value>
+  </data>
+  <data name="Runtime" xml:space="preserve">
+    <value>Runtime</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Russo</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="SaveSearch" xml:space="preserve">
+    <value>Guardar as seleções de pesquisa como predefinição</value>
+  </data>
+  <data name="ScriptService" xml:space="preserve">
+    <value>Serviço de Script</value>
+  </data>
+  <data name="ScriptServices" xml:space="preserve">
+    <value>Serviços de Script</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Pesquisar</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>A Pesquisar</value>
+  </data>
+  <data name="SearchResultNotFound" xml:space="preserve">
+    <value>Pesquisa sem resultados. Podes procurar novamente de forma manual</value>
+  </data>
+  <data name="SearchResultNotFoundForSubtitle" xml:space="preserve">
+    <value>Pesquisa de legendas sem resultados. Podes procurar novamente de forma manual</value>
+  </data>
+  <data name="Season" xml:space="preserve">
+    <value>Temporada</value>
+  </data>
+  <data name="Seasons" xml:space="preserve">
+    <value>Temporadas</value>
+  </data>
+  <data name="Seed" xml:space="preserve">
+    <value>Semente</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Selecionar</value>
+  </data>
+  <data name="SelectAFile" xml:space="preserve">
+    <value>Selecionar um ficheiro</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selecionado</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+  <data name="SendAFrown" xml:space="preserve">
+    <value>Enviar um emoticon negativo</value>
+  </data>
+  <data name="SendASmile" xml:space="preserve">
+    <value>Enviar um emoticon positivo</value>
+  </data>
+  <data name="Serbian" xml:space="preserve">
+    <value>Sérvio</value>
+  </data>
+  <data name="ServiceIdNotFound" xml:space="preserve">
+    <value>{0} Id não encontrado</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Serviços</value>
+  </data>
+  <data name="ServiceUnavailable" xml:space="preserve">
+    <value>Serviço Indisponível: {0}</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Definições</value>
+  </data>
+  <data name="ShowTracker" xml:space="preserve">
+    <value>Mostrar Tracker</value>
+  </data>
+  <data name="Sinhalese" xml:space="preserve">
+    <value>Cingalesês</value>
+  </data>
+  <data name="SizeMB" xml:space="preserve">
+    <value>Tamanho (MB)</value>
+  </data>
+  <data name="Slovak" xml:space="preserve">
+    <value>Slovaco</value>
+  </data>
+  <data name="Slovenian" xml:space="preserve">
+    <value>Esloveno</value>
+  </data>
+  <data name="SmileWatermark" xml:space="preserve">
+    <value>Diz-nos o que gostaste</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Espanhol</value>
+  </data>
+  <data name="StopWatching" xml:space="preserve">
+    <value>Parar a visualização</value>
+  </data>
+  <data name="SubtitleDownloaded" xml:space="preserve">
+    <value>Legenda Baixada</value>
+  </data>
+  <data name="SubtitleDownloader" xml:space="preserve">
+    <value>Provedor de Legendas</value>
+  </data>
+  <data name="SubtitleDownloaders" xml:space="preserve">
+    <value>Provedores de Legendas</value>
+  </data>
+  <data name="SubtitleDownloadInterval" xml:space="preserve">
+    <value>Intervalo de Download de Legendas (min)</value>
+  </data>
+  <data name="SubtitleLanguages" xml:space="preserve">
+    <value>Linguagem das Legendas</value>
+  </data>
+  <data name="SubtitleNotDownloaded_DownloadersNotSelected" xml:space="preserve">
+    <value>Não foi possível baixar a legenda: Os provedores não estão selecionados. Podes seleciona-los nas Definições</value>
+  </data>
+  <data name="SubtitleNotDownloaded_FileNotFound" xml:space="preserve">
+    <value>Não foi possível baixar a legenda: '{0}' ficheiro não encontrado</value>
+  </data>
+  <data name="SubtitleNotDownloaded_LanguagesNotSelected" xml:space="preserve">
+    <value>Não foi possível baixar a legenda: A linguagem não está selecionada. Podes selecionar a linguagem nas Definições</value>
+  </data>
+  <data name="SubtitleNotFound" xml:space="preserve">
+    <value>Legenda não Disponível</value>
+  </data>
+  <data name="SubtitleSearch" xml:space="preserve">
+    <value>Pesquisa de Legenda</value>
+  </data>
+  <data name="Swahili" xml:space="preserve">
+    <value>Swahili</value>
+  </data>
+  <data name="Swedish" xml:space="preserve">
+    <value>Sueco</value>
+  </data>
+  <data name="Syriac" xml:space="preserve">
+    <value>Syriac</value>
+  </data>
+  <data name="Tagalog" xml:space="preserve">
+    <value>Tagalog</value>
+  </data>
+  <data name="Tamil" xml:space="preserve">
+    <value>Tamil</value>
+  </data>
+  <data name="TellUsWhatYouThink" xml:space="preserve">
+    <value>Diz-nos o que pensas</value>
+  </data>
+  <data name="Telugu" xml:space="preserve">
+    <value>Telugu</value>
+  </data>
+  <data name="Thai" xml:space="preserve">
+    <value>Tailandês</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="TorrentWebUISettings" xml:space="preserve">
+    <value>{0} Definições Web UI</value>
+  </data>
+  <data name="Turkish" xml:space="preserve">
+    <value>Turkish</value>
+  </data>
+  <data name="TvShow" xml:space="preserve">
+    <value>Série de TV</value>
+  </data>
+  <data name="TvShowDirectory" xml:space="preserve">
+    <value>Diretório da Série de TV</value>
+  </data>
+  <data name="TvShowEpisodeDownloaded" xml:space="preserve">
+    <value>{0}' temporada {1} episodio {2} download completado</value>
+  </data>
+  <data name="TvShowEpisodeDownloadStarted" xml:space="preserve">
+    <value>{0}' temporada {1} episodio {2} download iniciou</value>
+  </data>
+  <data name="TvShowEpisodeFileNameTemplate" xml:space="preserve">
+    <value>Modelo de Renomeação do Ficheiro do Episódio</value>
+  </data>
+  <data name="TvShowEpisodeFileNameTemplateDescription" xml:space="preserve">
+    <value>Parâmetros Disponíveis: %showName%, %season%, %episode%, %episodeName%, %year%, %rating%, %genres%, %voteCount%, %runtime%, %videoQuality%</value>
+  </data>
+  <data name="TvShowEpisodeSearchPattern" xml:space="preserve">
+    <value>Padrão de Pesquisa do Episódio da Série de TV</value>
+  </data>
+  <data name="TvShowEpisodeSearchPatternDescription" xml:space="preserve">
+    <value>Parâmetros Disponíveis: %showName%, %imdbId%, %season%, %episode%</value>
+  </data>
+  <data name="TvShowEpisodeSearchResultNotFound" xml:space="preserve">
+    <value>{0}' temporada {1} episódio {2} Pesquisa sem resultados. Podes pesquisar novamente de forma manual</value>
+  </data>
+  <data name="TvShowEpisodeSubtitleDownloaded" xml:space="preserve">
+    <value>{0}' temporada {1} episódio {2} A legenda foi baixada</value>
+  </data>
+  <data name="TvShowEpisodeSubtitleNotFound" xml:space="preserve">
+    <value>{0}' temporada {1} episódio {2}A  legenda não foi encontrada</value>
+  </data>
+  <data name="TvShowFileNameFormatInfo" xml:space="preserve">
+    <value>Se os ficheiros de vídeo não forem encontrados, podes mudar o nome de ficheiro como no exemplo em baixo</value>
+  </data>
+  <data name="TvShowProviders" xml:space="preserve">
+    <value>Provedores das Séries de TV</value>
+  </data>
+  <data name="TvShows" xml:space="preserve">
+    <value>Séries de TV</value>
+  </data>
+  <data name="TvShowSeasonDirectoryTemplate" xml:space="preserve">
+    <value>Modelo do Diretório da Temporada</value>
+  </data>
+  <data name="TvShowTorrentProvider" xml:space="preserve">
+    <value>Provedor de Torrent da Série de TV</value>
+  </data>
+  <data name="TvShowUpdateInterval" xml:space="preserve">
+    <value>Intervalo de Atualização da Série de TV (horas)</value>
+  </data>
+  <data name="Ukrainian" xml:space="preserve">
+    <value>Ucraniano</value>
+  </data>
+  <data name="UnsupportedSearchResult" xml:space="preserve">
+    <value>Resultado da Pesquisa Não Suportado</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Atualização Disponível</value>
+  </data>
+  <data name="UpdateMovieInfo" xml:space="preserve">
+    <value>Atualizar Info do Filme</value>
+  </data>
+  <data name="UpdateTvShow" xml:space="preserve">
+    <value>Atualizar Série de TV</value>
+  </data>
+  <data name="UpdateTvShowInfo" xml:space="preserve">
+    <value>Atualizar Info da Série de TV</value>
+  </data>
+  <data name="Urdu" xml:space="preserve">
+    <value>Urdu</value>
+  </data>
+  <data name="Url_Donate" xml:space="preserve">
+    <value>http://www.novaroma.net/donate.html</value>
+  </data>
+  <data name="Url_Help" xml:space="preserve">
+    <value>http://www.novaroma.net/help.html</value>
+  </data>
+  <data name="Url_HowToAddMovie" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-add-movie.html</value>
+  </data>
+  <data name="Url_HowToAddTvShow" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-add-tv-show.html</value>
+  </data>
+  <data name="Url_HowToConfigureTransmissionWebUISettings" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-configure-transmission-web-ui-settings.html</value>
+  </data>
+  <data name="Url_HowToConfigureUtorrentWebUISettings" xml:space="preserve">
+    <value>http://www.novaroma.net/how-to-configure-utorrent-web-ui-settings.html</value>
+  </data>
+  <data name="UseAdvancedSearch" xml:space="preserve">
+    <value>Usar Pesquisa Avançada</value>
+  </data>
+  <data name="UseLocalTitles" xml:space="preserve">
+    <value>Usar nomes locais</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nome de Utilizador</value>
+  </data>
+  <data name="VideoFiles" xml:space="preserve">
+    <value>Ficheiros do Vídeo</value>
+  </data>
+  <data name="VideoQuality" xml:space="preserve">
+    <value>Qualidade do Vídeo</value>
+  </data>
+  <data name="Vietnamese" xml:space="preserve">
+    <value>Vietnamita</value>
+  </data>
+  <data name="VisitWebSite" xml:space="preserve">
+    <value>Visitar o Website</value>
+  </data>
+  <data name="Vote" xml:space="preserve">
+    <value>Avaliar</value>
+  </data>
+  <data name="VoteCount" xml:space="preserve">
+    <value>Avaliação</value>
+  </data>
+  <data name="Votes" xml:space="preserve">
+    <value>Votos</value>
+  </data>
+  <data name="Warnings" xml:space="preserve">
+    <value>Avisos</value>
+  </data>
+  <data name="Watched" xml:space="preserve">
+    <value>Visualizado</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Ano</value>
+  </data>
+  <data name="MinSeed" xml:space="preserve">
+    <value>Semente mínimo</value>
+  </data>
+  <data name="DefaultMinSeed" xml:space="preserve">
+    <value>Semente mínimo defeito</value>
+  </data>
+  <data name="MinSeedDescription" xml:space="preserve">
+    <value>Resultados da pesquisa com semeadora menor do que esse valor será extraído a partir da lista</value>
+  </data>
+</root>

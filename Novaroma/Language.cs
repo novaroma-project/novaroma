@@ -11,6 +11,9 @@ namespace Novaroma {
         [Display(Name = "Turkish", ResourceType = typeof(Resources))]
         [LanguageInfo("tr", "tur", true)]
         Turkish,
+        [Display(Name = "Portuguese", ResourceType = typeof(Resources))]
+        [LanguageInfo("pt", "por", true)]
+        Portuguese,
         [Display(Name = "Afrikaans", ResourceType = typeof(Resources))]
         [LanguageInfo("af", "afr")]
         Afrikaans,
@@ -161,9 +164,6 @@ namespace Novaroma {
         [Display(Name = "Polish", ResourceType = typeof(Resources))]
         [LanguageInfo("pl", "pol")]
         Polish,
-        [Display(Name = "Portuguese", ResourceType = typeof(Resources))]
-        [LanguageInfo("pt", "por")]
-        Portuguese,
         [Display(Name = "PortugueseBrazilian", ResourceType = typeof(Resources))]
         [LanguageInfo("pb", "pob")]
         PortugueseBrazilian,

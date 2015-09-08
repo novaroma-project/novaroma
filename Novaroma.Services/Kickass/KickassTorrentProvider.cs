@@ -28,7 +28,7 @@ namespace Novaroma.Services.Kickass {
 
         public Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year = null, string imdbId = null, VideoQuality videoQuality = VideoQuality.Any,
                                                                    string extraKeywords = null, string excludeKeywords = null, 
-                                                                   int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
+                                                                   int? minSize = null, int? maxSize = null, int? minSeed = null, ITorrentDownloader service = null) {
             var query = Settings.MovieSearchPattern;
 
             if (!string.IsNullOrEmpty(imdbId))
@@ -36,7 +36,7 @@ namespace Novaroma.Services.Kickass {
 
             query = Helper.PopulateMovieSearchQuery(query, name, year, imdbId, extraKeywords);
             query += " category:movies";
-            return Search(query, videoQuality, excludeKeywords, minSize, maxSize, service);
+            return Search(query, videoQuality, excludeKeywords, minSize, maxSize, minSeed, service);
         }
 
         #endregion
@@ -45,11 +45,11 @@ namespace Novaroma.Services.Kickass {
 
         public Task<IEnumerable<ITorrentSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName, string imdbId = null, VideoQuality videoQuality = VideoQuality.Any,
                                                                            string extraKeywords = null, string excludeKeywords = null,
-                                                                           int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
+                                                                           int? minSize = null, int? maxSize = null, int? minSeed = null, ITorrentDownloader service = null) {
             var query = Settings.TvShowEpisodeSearchPattern;
             query = Helper.PopulateTvShowEpisodeSearchQuery(query, name, season, episode, imdbId, extraKeywords);
             query += " category:tv";
-            return Search(query, videoQuality, excludeKeywords, minSize, maxSize, service);
+            return Search(query, videoQuality, excludeKeywords, minSize, maxSize, minSeed, service);
         }
 
         #endregion
@@ -57,7 +57,7 @@ namespace Novaroma.Services.Kickass {
         #region ITorrentProvider Members
 
         public async Task<IEnumerable<ITorrentSearchResult>> Search(string search, VideoQuality videoQuality = VideoQuality.Any, string excludeKeywords = null,
-                                                                    int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
+                                                                    int? minSize = null, int? maxSize = null, int? minSeed = null, ITorrentDownloader service = null) {
             if (videoQuality != VideoQuality.Any) {
                 switch (videoQuality) {
                     case VideoQuality.P720:
@@ -99,8 +99,9 @@ namespace Novaroma.Services.Kickass {
 
                     var torrentDiv = divs[0];
                     var torrentLinks = torrentDiv.QuerySelectorAll("a");
-                    var magnetUri = torrentLinks.First(n => n.ClassName == "imagnet icon16").Attributes.First(a => a.Name == "href").Value;
-                    var torrentUrl = torrentLinks.First(n => n.ClassName == "idownload icon16").Attributes.First(a => a.Name == "href").Value;
+                    var tlc = torrentLinks.Length;
+                    var magnetUri = torrentLinks[tlc - 2].Attributes.First(a => a.Name == "href").Value;
+                    var torrentUrl = torrentLinks[tlc - 1].Attributes.First(a => a.Name == "href").Value;
 
                     var torrentNameDiv = divs[1];
                     var torrentName = torrentNameDiv.QuerySelectorAll("a").First(n => n.ClassName == "cellMainLink").TextContent;
@@ -113,9 +114,11 @@ namespace Novaroma.Services.Kickass {
                         size = Math.Round(size/1024, 2);
                     else if (sizeType == "GB")
                         size = size*1024;
-
                     if (minSize.HasValue && size < minSize.Value) continue;
                     if (maxSize.HasValue && size > maxSize.Value) continue;
+
+                    var seed = int.Parse(tds[4].TextContent);
+                    if (minSeed.HasValue && seed < minSeed.Value) continue;
 
                     int? files = null;
                     int filesTmp;
@@ -123,7 +126,6 @@ namespace Novaroma.Services.Kickass {
                     if (int.TryParse(filesStr, out filesTmp))
                         files = filesTmp;
                     var age = tds[3].TextContent;
-                    var seed = int.Parse(tds[4].TextContent);
                     var leech = int.Parse(tds[5].TextContent);
 
                     results.Add(new TorrentSearchResult(service, this, torrentUrl, torrentName, seed, leech, size, files, age, magnetUri));

@@ -125,11 +125,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.tr.Designer.cs">
-      <DependentUpon>Resources.tr.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="QueryResult.cs" />
     <Compile Include="ReferencePreservingDataContractFormatAttribute.cs" />
     <Compile Include="ReferencePreservingDataContractSerializerOperationBehavior.cs" />
@@ -154,6 +149,7 @@
     <Compile Include="Language.cs" />
     <Compile Include="Interface\Track\IShowTracker.cs" />
     <Compile Include="Interface\Track\ITvShowEpisodeInfo.cs" />
+    <Compile Include="Single.cs" />
     <Compile Include="VideoQuality.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,14 +160,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.tr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.tr.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pt.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

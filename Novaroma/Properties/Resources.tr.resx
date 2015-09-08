@@ -1072,4 +1072,13 @@
   <data name="PortugueseBrazilian" xml:space="preserve">
     <value>Portuguese-Brazilian</value>
   </data>
+  <data name="MinSeed" xml:space="preserve">
+    <value>Minimum Besleme</value>
+  </data>
+  <data name="DefaultMinSeed" xml:space="preserve">
+    <value>Varsayılan minimum besleme</value>
+  </data>
+  <data name="MinSeedDescription" xml:space="preserve">
+    <value>Arama sonuçlarından bu değerden az besleyeni olanlar atlanacak</value>
+  </data>
 </root>

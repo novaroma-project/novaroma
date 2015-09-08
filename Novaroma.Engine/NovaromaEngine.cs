@@ -936,8 +936,8 @@ namespace Novaroma.Engine {
                         try {
                             Helper.CreateMediaInfo(media);
                         }
-                        catch (Exception ex) {
-                            _exceptionHandler.HandleException(ex);
+                        catch {
+                            // ignored
                         }
                     }
 

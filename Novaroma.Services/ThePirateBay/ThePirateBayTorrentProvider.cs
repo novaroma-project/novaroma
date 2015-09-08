@@ -28,15 +28,15 @@ namespace Novaroma.Services.ThePirateBay {
 
         public async Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year = null, string imdbId = null, VideoQuality videoQuality = VideoQuality.Any,
                                                                          string extraKeywords = null, string excludeKeywords = null,
-                                                                         int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
+                                                                         int? minSize = null, int? maxSize = null, int? minSeed = null, ITorrentDownloader service = null) {
             var query = Settings.MovieSearchPattern;
 
             IEnumerable<ITorrentSearchResult> results;
             if (query == ThePirateBaySettings.ImdbSearchQuery)
-                results = await Search(imdbId, VideoQuality.Any, excludeKeywords, minSize, maxSize, service);
+                results = await Search(imdbId, VideoQuality.Any, excludeKeywords, minSize, maxSize, minSeed, service);
             else {
                 query = Helper.PopulateMovieSearchQuery(query, name, year, imdbId, extraKeywords);
-                results = await Search(query, videoQuality, excludeKeywords, minSize, maxSize, service);
+                results = await Search(query, videoQuality, excludeKeywords, minSize, maxSize, minSeed, service);
             }
 
             if (query == ThePirateBaySettings.ImdbSearchQuery) {
@@ -70,10 +70,10 @@ namespace Novaroma.Services.ThePirateBay {
 
         public Task<IEnumerable<ITorrentSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName, string imdbId = null,
                                                                            VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null,
-                                                                           int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
+                                                                           int? minSize = null, int? maxSize = null, int? minSeed = null, ITorrentDownloader service = null) {
             var query = Settings.TvShowEpisodeSearchPattern;
             query = Helper.PopulateTvShowEpisodeSearchQuery(query, name, season, episode, imdbId, extraKeywords);
-            return Search(query, videoQuality, excludeKeywords, minSize, maxSize, service);
+            return Search(query, videoQuality, excludeKeywords, minSize, maxSize, minSeed, service);
         }
 
         #endregion
@@ -81,7 +81,7 @@ namespace Novaroma.Services.ThePirateBay {
         #region ITorrentProvider Members
 
         public async Task<IEnumerable<ITorrentSearchResult>> Search(string search, VideoQuality videoQuality = VideoQuality.Any, string excludeKeywords = null,
-                                                                    int? minSize = null, int? maxSize = null, ITorrentDownloader service = null) {
+                                                                    int? minSize = null, int? maxSize = null, int? minSeed = null, ITorrentDownloader service = null) {
             if (videoQuality != VideoQuality.Any) {
                 switch (videoQuality) {
                     case VideoQuality.P720:
@@ -131,11 +131,12 @@ namespace Novaroma.Services.ThePirateBay {
                         size = Math.Round(size / 1024, 2);
                     else if (sizeType == "GiB")
                         size = size * 1024;
-
                     if (minSize.HasValue && size < minSize.Value) continue;
                     if (maxSize.HasValue && size > maxSize.Value) continue;
 
                     var seed = Convert.ToInt32(tds[2].TextContent);
+                    if (minSeed.HasValue && seed < minSeed.Value) continue;
+
                     var leech = Convert.ToInt32(tds[3].TextContent);
 
                     results.Add(new TorrentSearchResult(service, this, torrentUrl, torrentName, seed, leech, size, null, age, magnetUri));
