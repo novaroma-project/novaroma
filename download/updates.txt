@@ -6,7 +6,7 @@ Description = Portuguese language added, important bugs fixed and some features 
 URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.9/Novaroma.v0.9.9.setup.exe
 Size = 11525957
 FilePath = [APPDIR]Novaroma.exe
-Version = 0.9.8
+Version = 0.9.9
 Replaces = All
 
 [Novaroma0.9.8]
