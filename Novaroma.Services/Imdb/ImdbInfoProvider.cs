@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using AngleSharp;
-using AngleSharp.DOM;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
@@ -240,244 +239,115 @@ namespace Novaroma.Services.Imdb {
                 var document = DocumentBuilder.Html(documentStr);
 
                 using (var client = new NovaromaWebClient()) {
-                    return await GetTitle(client, document, id);
+                    byte[] poster = null;
+                    var posterNode = document.QuerySelector("td[id='img_primary'] div a img");
+                    Task<byte[]> posterTask = null;
+                    if (posterNode != null) {
+                        var posterUrl = posterNode.Attributes.First(a => a.Name == "src").Value;
+                        posterTask = client.DownloadDataTaskAsync(posterUrl);
+                    }
+
+                    var overviewNode = document.QuerySelector("td[id='overview-top']");
+
+                    var title = overviewNode.QuerySelector("span[itemprop='name']").TextContent;
+                    var originalTitleNode = overviewNode.QuerySelector("span[class='title-extra']");
+                    string originalTitle = null;
+                    if (originalTitleNode != null) {
+                        var matches = Regex.Match(originalTitleNode.TextContent, @"\""(.*?)\""");
+                        if (matches.Groups.Count > 1)
+                            originalTitle = matches.Groups[1].Value;
+                    }
+                    if (originalTitle == null)
+                        originalTitle = title;
+
+                    var director = string.Join(", ", overviewNode.QuerySelectorAll("div[itemprop='director'] a span").Select(n => n.TextContent));
+                    var actors = string.Join(", ", overviewNode.QuerySelectorAll("div[itemprop='actors'] a span").Select(n => n.TextContent));
+                    var credits = Helper.JoinStrings(" - ", director, actors);
+
+                    var yearStr = overviewNode.QuerySelector("span[class='nobr']").TextContent;
+                    int? year = null;
+                    if (yearStr.Length > 4) {
+                        int yearTmp;
+                        if (int.TryParse(yearStr.Substring(1, 4), out yearTmp))
+                            year = yearTmp;
+                    }
+
+                    float? rating = null;
+                    int? voteCount = null;
+                    var ratingNode = overviewNode.QuerySelector("div[itemprop='aggregateRating']");
+                    if (ratingNode != null) {
+                        var ratingValueNode = ratingNode.QuerySelector("span[itemprop='ratingValue']");
+                        if (ratingValueNode != null) {
+                            var ratingStr = ratingValueNode.TextContent.Replace(",", ".");
+                            rating = float.Parse(ratingStr, new NumberFormatInfo { CurrencyDecimalSeparator = "." });
+                        }
+
+                        var voteNode = ratingNode.QuerySelector("span[itemprop='ratingCount']");
+                        if (voteNode != null) {
+                            var voteCountStr = voteNode.TextContent;
+                            voteCountStr = voteCountStr.Replace(",", "").Replace(".", "");
+                            voteCount = int.Parse(voteCountStr);
+                        }
+                    }
+
+                    var description = string.Empty;
+                    var descriptionNode = overviewNode.QuerySelector("p[itemprop='description']");
+                    if (descriptionNode != null) {
+                        var fullDescLinkNode = descriptionNode.Children.FirstOrDefault(c => c.TagName == "A" && c.TextContent.Contains("See full summary"));
+                        if (fullDescLinkNode != null) {
+                            var descUrl = new Url(Helper.CombineUrls(BASE_URL, fullDescLinkNode.Attributes.First().Value));
+                            string descriptionHtmlStr;
+                            using (var descriptionClient = new NovaromaWebClient()) {
+                                if (!Settings.UseLocalTitles)
+                                    descriptionClient.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
+                                descriptionHtmlStr = await descriptionClient.DownloadStringTaskAsync(descUrl);
+                            }
+                            var descriptionHtml = DocumentBuilder.Html(descriptionHtmlStr);
+                            var plotSummaryNode = descriptionHtml.QuerySelectorAll("p[class='plotSummary']").FirstOrDefault();
+                            if (plotSummaryNode != null)
+                                description = plotSummaryNode.TextContent.Trim();
+                        }
+                        else
+                            description = descriptionNode.TextContent.Trim();
+                    }
+
+                    int? runtime = 0;
+                    var isTvShow = false;
+                    IEnumerable<string> genres = null;
+                    var infobarNode = overviewNode.QuerySelector("div[class='infobar']");
+                    if (infobarNode != null) {
+                        var runtimeNode = infobarNode.QuerySelector("time[itemprop='duration']");
+                        if (runtimeNode != null) {
+                            var runtimeStr = runtimeNode.Attributes.First(a => a.Name == "datetime").Value;
+                            if (runtimeStr.Length > 3)
+                                runtime = int.Parse(runtimeStr.Substring(2, runtimeStr.Length - 3).Replace(",", ""));
+                        }
+                        isTvShow = infobarNode.TextContent.Trim().Contains("TV Series");
+
+                        genres = infobarNode.QuerySelectorAll("span[itemprop='genre']").Select(n => n.TextContent.Trim());
+                    }
+
+                    if (posterTask != null)
+                        poster = await posterTask;
+
+                    Language? titleLanguage = null;
+                    var detailsNode = document.QuerySelectorAll("div[id='titleDetails']").FirstOrDefault();
+                    if (detailsNode != null) {
+                        var languageLabel = detailsNode.QuerySelectorAll("h4[class='inline']").FirstOrDefault(h => h.TextContent == "Language:");
+                        if (languageLabel != null)
+                            titleLanguage = GetLanguage(languageLabel.NextElementSibling.Text());
+                    }
+
+                    var mediaUrl = string.Format(TITLE_URL, id);
+                    IMediaInfo mediaInfo;
+                    if (isTvShow)
+                        mediaInfo = new ImdbTvShowInfo(this, id, mediaUrl, id, title, originalTitle, description, poster, year, credits, rating, voteCount, runtime, titleLanguage, genres, null);
+                    else
+                        mediaInfo = new ImdbMovieInfo(this, id, mediaUrl, id, title, originalTitle, description, poster, year, credits, rating, voteCount, runtime, titleLanguage, genres, null);
+
+                    return mediaInfo;
                 }
             });
-        }
-
-        private async Task<IMediaInfo> GetTitle(NovaromaWebClient client, IDocument document, string id) {
-            var tableNode = document.QuerySelector("table[id='title-overview-widget-layout']");
-            IMediaInfo title;
-            if (tableNode == null) {
-                title = await GetTitleNew(client, document, id);
-            }
-            else {
-                title = await GetTitleOld(client, document, id);
-            }
-            return title;
-        }
-
-        private async Task<IMediaInfo> GetTitleNew(NovaromaWebClient client, IDocument document, string id) {
-            byte[] poster = null;
-            var posterNode = document.QuerySelector("div[class='poster'] a img");
-            Task<byte[]> posterTask = null;
-            if (posterNode != null) {
-                var posterUrl = posterNode.Attributes.First(a => a.Name == "src").Value;
-                posterTask = client.DownloadDataTaskAsync(posterUrl);
-            }
-
-            var overviewNode = document.QuerySelector("div[class='title-overview']");
-
-            var titleBarNode = overviewNode.QuerySelector("div[class='title_bar_wrapper']");
-            var title = titleBarNode.QuerySelector("h1[itemprop='name']").TextContent;
-            var originalTitleNode = titleBarNode.QuerySelector("div[class='originalTitle']");
-            string originalTitle = null;
-            if (originalTitleNode != null) {
-                var matches = Regex.Match(originalTitleNode.TextContent, @"\""(.*?)\""");
-                if (matches.Groups.Count > 1)
-                    originalTitle = matches.Groups[1].Value;
-            }
-            if (originalTitle == null)
-                originalTitle = title;
-
-            var plotNode = overviewNode.QuerySelector("div[class='plot_summary_wrapper']");
-            var director = string.Join(", ", plotNode.QuerySelectorAll("span[itemprop='director'] a span").Select(n => n.TextContent));
-            var actors = string.Join(", ", plotNode.QuerySelectorAll("span[itemprop='actors'] a span").Select(n => n.TextContent));
-            var credits = Helper.JoinStrings(" - ", director, actors);
-
-            int? year = null;
-            var ratingWidgetTitleNode = document.QuerySelector("div[id='ratingWidget'] p");
-            var yearText = ratingWidgetTitleNode.ChildNodes[2];
-            if (yearText != null) {
-                var yearStr = yearText.TextContent.Trim();
-                if (yearStr.Length > 4) {
-                    int yearTmp;
-                    if (int.TryParse(yearStr.Substring(1, 4), out yearTmp))
-                        year = yearTmp;
-                }
-            }
-
-            float? rating = null;
-            int? voteCount = null;
-            var ratingNode = overviewNode.QuerySelector("div[class='ratingValue']");
-            if (ratingNode != null) {
-                var ratingValueNode = ratingNode.QuerySelector("span[itemprop='ratingValue']");
-                if (ratingValueNode != null) {
-                    var ratingStr = ratingValueNode.TextContent.Replace(",", ".");
-                    rating = float.Parse(ratingStr, new NumberFormatInfo { CurrencyDecimalSeparator = "." });
-                }
-
-                var voteNode = ratingNode.QuerySelector("span[itemprop='ratingCount']");
-                if (voteNode != null) {
-                    var voteCountStr = voteNode.TextContent;
-                    voteCountStr = voteCountStr.Replace(",", "").Replace(".", "");
-                    voteCount = int.Parse(voteCountStr);
-                }
-            }
-
-            var description = string.Empty;
-            var descriptionNode = plotNode.QuerySelector("div[itemprop='description']");
-            if (descriptionNode != null) {
-                var fullDescLinkNode = descriptionNode.Children.FirstOrDefault(c => c.TagName == "A" && c.TextContent.Contains("See full summary"));
-                if (fullDescLinkNode != null) {
-                    var descUrl = new Url(Helper.CombineUrls(BASE_URL, fullDescLinkNode.Attributes.First().Value));
-                    string descriptionHtmlStr;
-                    using (var descriptionClient = new NovaromaWebClient()) {
-                        if (!Settings.UseLocalTitles)
-                            descriptionClient.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
-                        descriptionHtmlStr = await descriptionClient.DownloadStringTaskAsync(descUrl);
-                    }
-                    var descriptionHtml = DocumentBuilder.Html(descriptionHtmlStr);
-                    var plotSummaryNode = descriptionHtml.QuerySelectorAll("div[class='plotSummary']").FirstOrDefault();
-                    if (plotSummaryNode != null)
-                        description = plotSummaryNode.TextContent.Trim();
-                }
-                else
-                    description = descriptionNode.TextContent.Trim();
-            }
-
-            int? runtime = 0;
-            var isTvShow = false;
-            IEnumerable<string> genres = null;
-            var runtimeNode = titleBarNode.QuerySelector("time[itemprop='duration']");
-            if (runtimeNode != null) {
-                var runtimeStr = runtimeNode.Attributes.First(a => a.Name == "datetime").Value;
-                if (runtimeStr.Length > 3)
-                    runtime = int.Parse(runtimeStr.Substring(2, runtimeStr.Length - 3).Replace(",", ""));
-            }
-            isTvShow = titleBarNode.TextContent.Trim().Contains("TV Series");
-
-            genres = titleBarNode.QuerySelectorAll("span[itemprop='genre']").Select(n => n.TextContent.Trim());
-
-            if (posterTask != null)
-                poster = await posterTask;
-
-            Language? titleLanguage = null;
-            var detailsNode = document.QuerySelectorAll("div[id='titleDetails']").FirstOrDefault();
-            if (detailsNode != null) {
-                var languageLabel = detailsNode.QuerySelectorAll("h4[class='inline']").FirstOrDefault(h => h.TextContent == "Language:");
-                if (languageLabel != null)
-                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.Text());
-            }
-
-            var mediaUrl = string.Format(TITLE_URL, id);
-            IMediaInfo mediaInfo;
-            if (isTvShow)
-                mediaInfo = new ImdbTvShowInfo(this, id, mediaUrl, id, title, originalTitle, description, poster, year, credits, rating, voteCount, runtime, titleLanguage, genres, null);
-            else
-                mediaInfo = new ImdbMovieInfo(this, id, mediaUrl, id, title, originalTitle, description, poster, year, credits, rating, voteCount, runtime, titleLanguage, genres, null);
-
-            return mediaInfo;
-        }
-
-        private async Task<IMediaInfo> GetTitleOld(NovaromaWebClient client, IDocument document, string id) {
-            byte[] poster = null;
-            var posterNode = document.QuerySelector("td[id='img_primary'] div a img");
-            Task<byte[]> posterTask = null;
-            if (posterNode != null) {
-                var posterUrl = posterNode.Attributes.First(a => a.Name == "src").Value;
-                posterTask = client.DownloadDataTaskAsync(posterUrl);
-            }
-
-            var overviewNode = document.QuerySelector("td[id='overview-top']");
-
-            var title = overviewNode.QuerySelector("span[itemprop='name']").TextContent;
-            var originalTitleNode = overviewNode.QuerySelector("span[class='title-extra']");
-            string originalTitle = null;
-            if (originalTitleNode != null) {
-                var matches = Regex.Match(originalTitleNode.TextContent, @"\""(.*?)\""");
-                if (matches.Groups.Count > 1)
-                    originalTitle = matches.Groups[1].Value;
-            }
-            if (originalTitle == null)
-                originalTitle = title;
-
-            var director = string.Join(", ", overviewNode.QuerySelectorAll("div[itemprop='director'] a span").Select(n => n.TextContent));
-            var actors = string.Join(", ", overviewNode.QuerySelectorAll("div[itemprop='actors'] a span").Select(n => n.TextContent));
-            var credits = Helper.JoinStrings(" - ", director, actors);
-
-            var yearStr = overviewNode.QuerySelector("span[class='nobr']").TextContent;
-            int? year = null;
-            if (yearStr.Length > 4) {
-                int yearTmp;
-                if (int.TryParse(yearStr.Substring(1, 4), out yearTmp))
-                    year = yearTmp;
-            }
-
-            float? rating = null;
-            int? voteCount = null;
-            var ratingNode = overviewNode.QuerySelector("div[itemprop='aggregateRating']");
-            if (ratingNode != null) {
-                var ratingValueNode = ratingNode.QuerySelector("span[itemprop='ratingValue']");
-                if (ratingValueNode != null) {
-                    var ratingStr = ratingValueNode.TextContent.Replace(",", ".");
-                    rating = float.Parse(ratingStr, new NumberFormatInfo { CurrencyDecimalSeparator = "." });
-                }
-
-                var voteNode = ratingNode.QuerySelector("span[itemprop='ratingCount']");
-                if (voteNode != null) {
-                    var voteCountStr = voteNode.TextContent;
-                    voteCountStr = voteCountStr.Replace(",", "").Replace(".", "");
-                    voteCount = int.Parse(voteCountStr);
-                }
-            }
-
-            var description = string.Empty;
-            var descriptionNode = overviewNode.QuerySelector("p[itemprop='description']");
-            if (descriptionNode != null) {
-                var fullDescLinkNode = descriptionNode.Children.FirstOrDefault(c => c.TagName == "A" && c.TextContent.Contains("See full summary"));
-                if (fullDescLinkNode != null) {
-                    var descUrl = new Url(Helper.CombineUrls(BASE_URL, fullDescLinkNode.Attributes.First().Value));
-                    string descriptionHtmlStr;
-                    using (var descriptionClient = new NovaromaWebClient()) {
-                        if (!Settings.UseLocalTitles)
-                            descriptionClient.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
-                        descriptionHtmlStr = await descriptionClient.DownloadStringTaskAsync(descUrl);
-                    }
-                    var descriptionHtml = DocumentBuilder.Html(descriptionHtmlStr);
-                    var plotSummaryNode = descriptionHtml.QuerySelectorAll("p[class='plotSummary']").FirstOrDefault();
-                    if (plotSummaryNode != null)
-                        description = plotSummaryNode.TextContent.Trim();
-                }
-                else
-                    description = descriptionNode.TextContent.Trim();
-            }
-
-            int? runtime = 0;
-            var isTvShow = false;
-            IEnumerable<string> genres = null;
-            var infobarNode = overviewNode.QuerySelector("div[class='infobar']");
-            if (infobarNode != null) {
-                var runtimeNode = infobarNode.QuerySelector("time[itemprop='duration']");
-                if (runtimeNode != null) {
-                    var runtimeStr = runtimeNode.Attributes.First(a => a.Name == "datetime").Value;
-                    if (runtimeStr.Length > 3)
-                        runtime = int.Parse(runtimeStr.Substring(2, runtimeStr.Length - 3).Replace(",", ""));
-                }
-                isTvShow = infobarNode.TextContent.Trim().Contains("TV Series");
-
-                genres = infobarNode.QuerySelectorAll("span[itemprop='genre']").Select(n => n.TextContent.Trim());
-            }
-
-            if (posterTask != null)
-                poster = await posterTask;
-
-            Language? titleLanguage = null;
-            var detailsNode = document.QuerySelectorAll("div[id='titleDetails']").FirstOrDefault();
-            if (detailsNode != null) {
-                var languageLabel = detailsNode.QuerySelectorAll("h4[class='inline']").FirstOrDefault(h => h.TextContent == "Language:");
-                if (languageLabel != null)
-                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.Text());
-            }
-
-            var mediaUrl = string.Format(TITLE_URL, id);
-            IMediaInfo mediaInfo;
-            if (isTvShow)
-                mediaInfo = new ImdbTvShowInfo(this, id, mediaUrl, id, title, originalTitle, description, poster, year, credits, rating, voteCount, runtime, titleLanguage, genres, null);
-            else
-                mediaInfo = new ImdbMovieInfo(this, id, mediaUrl, id, title, originalTitle, description, poster, year, credits, rating, voteCount, runtime, titleLanguage, genres, null);
-
-            return mediaInfo;
         }
 
         private static void AddLimitParameter<T>(ICollection<string> searchParams, string paramName, T? min, T? max) where T : struct {
