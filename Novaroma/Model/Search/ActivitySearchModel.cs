@@ -1,5 +1,4 @@
-﻿using Novaroma.Interface;
-using Novaroma.Interface.Model;
+﻿using Novaroma.Interface.Model;
 
 namespace Novaroma.Model.Search {
 
@@ -9,7 +8,7 @@ namespace Novaroma.Model.Search {
         private bool? _notRead;
 
         public ActivitySearchModel() {
-            _pageSize = 20;
+            _pageSize = 100;
             _page = 1;
         }
 

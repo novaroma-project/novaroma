@@ -79,8 +79,8 @@ namespace Novaroma.Services.Transmission {
             return client;
         }
 
-        public override Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year, string imdbId, VideoQuality videoQuality = VideoQuality.Any,
-                                                                            string extraKeywords = null, string excludeKeywords = null, int? minSize = null, int? maxSize = null) {
+        public override Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year, string imdbId, VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, 
+                                                                            string excludeKeywords = null, int? minSize = null, int? maxSize = null, int? minSeed = null) {
             if (videoQuality == VideoQuality.Any)
                 videoQuality = Settings.DefaultMovieVideoQuality.SelectedItem.Item;
             if (string.IsNullOrEmpty(extraKeywords))
@@ -91,13 +91,15 @@ namespace Novaroma.Services.Transmission {
                 minSize = Settings.DefaultMinSize;
             if (maxSize == null)
                 maxSize = Settings.DefaultMaxSize;
+            if (minSeed == null)
+                minSeed = Settings.DefaultMinSeed;
 
-            return base.SearchMovie(name, year, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize);
+            return base.SearchMovie(name, year, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize, minSeed);
         }
 
         public override Task<IEnumerable<ITorrentSearchResult>> SearchTvShowEpisode(string name, int season, int episode, string episodeName, string imdbId,
                                                                                     VideoQuality videoQuality = VideoQuality.Any, string extraKeywords = null, string excludeKeywords = null,
-                                                                                    int? minSize = null, int? maxSize = null) {
+                                                                                    int? minSize = null, int? maxSize = null, int? minSeed = null) {
             if (videoQuality == VideoQuality.Any)
                 videoQuality = Settings.DefaultTvShowVideoQuality.SelectedItem.Item;
             if (string.IsNullOrEmpty(extraKeywords))
@@ -108,12 +110,14 @@ namespace Novaroma.Services.Transmission {
                 minSize = Settings.DefaultMinSize;
             if (maxSize == null)
                 maxSize = Settings.DefaultMaxSize;
+            if (minSeed == null)
+                minSeed = Settings.DefaultMinSeed;
 
-            return base.SearchTvShowEpisode(name, season, episode, episodeName, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize);
+            return base.SearchTvShowEpisode(name, season, episode, episodeName, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize, minSeed);
         }
 
         public override Task<IEnumerable<ITorrentSearchResult>> Search(string query, VideoQuality videoQuality = VideoQuality.Any, string excludeKeywords = null,
-                                                                       int? minSize = null, int? maxSize = null) {
+                                                                       int? minSize = null, int? maxSize = null, int? minSeed = null) {
             if (videoQuality == VideoQuality.Any)
                 videoQuality = Settings.DefaultTvShowVideoQuality.SelectedItem.Item;
             if (string.IsNullOrEmpty(excludeKeywords))
@@ -122,8 +126,10 @@ namespace Novaroma.Services.Transmission {
                 minSize = Settings.DefaultMinSize;
             if (maxSize == null)
                 maxSize = Settings.DefaultMaxSize;
+            if (minSeed == null)
+                minSeed = Settings.DefaultMinSeed;
 
-            return base.Search(query, videoQuality, excludeKeywords, minSize, maxSize);
+            return base.Search(query, videoQuality, excludeKeywords, minSize, maxSize, minSeed);
         }
 
         public override bool IsAvailable {

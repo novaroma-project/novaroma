@@ -1,9 +1,11 @@
-﻿using Novaroma.Interface.Subtitle;
+﻿using System.ComponentModel.DataAnnotations;
+using Novaroma.Interface.Subtitle;
+using Novaroma.Properties;
 using OSDBnet;
 
 namespace Novaroma.Services.OpenSubtitles {
 
-    public class OpenSubtitleSearchResult: ISubtitleSearchResult {
+    public class OpenSubtitleSearchResult : ISubtitleSearchResult {
         private readonly OpenSubtitleDownloader _service;
         private readonly Subtitle _subtitle;
 
@@ -22,14 +24,17 @@ namespace Novaroma.Services.OpenSubtitles {
 
         #region ISubtitleSearchResult Members
 
+        [Display(Name = "Provider", ResourceType = typeof(Resources))]
         ISubtitleDownloader ISubtitleSearchResult.Service {
             get { return Service; }
         }
 
+        [Display(Name = "Name", ResourceType = typeof(Resources))]
         public string Name {
             get { return _subtitle.SubtitleFileName; }
         }
 
+        [Display(Name = "Language", ResourceType = typeof(Resources))]
         public string Language {
             get { return _subtitle.LanguageName; }
         }
@@ -38,6 +43,7 @@ namespace Novaroma.Services.OpenSubtitles {
             get { return _subtitle.SubTitleDownloadLink.AbsolutePath; }
         }
 
+        [Display(Name = "DownloadCount", ResourceType = typeof(Resources))]
         public int DownloadCount {
             get { return 0; }
         }

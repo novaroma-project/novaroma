@@ -5,6 +5,10 @@ namespace Novaroma {
 
     public class NovaromaWebClient : WebClient {
 
+        public NovaromaWebClient() {
+            Encoding = System.Text.Encoding.UTF8;
+        }
+
         protected override WebRequest GetWebRequest(Uri address) {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
                                                    | SecurityProtocolType.Tls11

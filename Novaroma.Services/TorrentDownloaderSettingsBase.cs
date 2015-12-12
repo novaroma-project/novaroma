@@ -24,6 +24,7 @@ namespace Novaroma.Services {
         private string _defaultTvShowExcludeKeywords;
         private int? _defaultMinSize;
         private int? _defaultMaxSize;
+        private int? _defaultMinSeed;
 
         protected TorrentDownloaderSettingsBase(IEnumerable<ITorrentMovieProvider> movieProviders, IEnumerable<ITorrentTvShowProvider> tvShowProviders) {
             _movieProviderSelection = new SettingMultiSelection<ITorrentMovieProvider>(movieProviders);
@@ -163,6 +164,17 @@ namespace Novaroma.Services {
             }
         }
 
+        [Display(Name = "DefaultMinSeed", GroupName = "Searching", ResourceType = typeof(Resources))]
+        public int? DefaultMinSeed {
+            get { return _defaultMinSeed; }
+            set {
+                if (_defaultMinSeed == value) return;
+
+                _defaultMinSeed = value;
+                RaisePropertyChanged("DefaultMinSeed");
+            }
+        }
+
         protected override IEnumerable<ValidationResult> Validate() {
             var result = base.Validate() ?? Enumerable.Empty<ValidationResult>();
 
@@ -192,7 +204,8 @@ namespace Novaroma.Services {
                 DefaultTvShowExtraKeywords,
                 DefaultTvShowVideoQuality = DefaultTvShowVideoQuality.SelectedItem.Name,
                 DefaultMinSize,
-                DefaultMaxSize
+                DefaultMaxSize,
+                DefaultMinSeed
             };
             return JsonConvert.SerializeObject(o);
         }
@@ -237,6 +250,7 @@ namespace Novaroma.Services {
 
             DefaultMinSize = (int?)o["DefaultMinSize"];
             DefaultMaxSize = (int?)o["DefaultMaxSize"];
+            DefaultMinSeed = (int?)o["DefaultMinSeed"];
         }
     }
 }

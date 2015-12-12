@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -421,7 +422,7 @@ namespace Novaroma.Engine {
             if (searchModel.RatingMin.HasValue && searchModel.RatingMin.Value > 0)
                 query = query.Where(x => x.Rating >= searchModel.RatingMin);
 
-            if (searchModel.RatingMax.HasValue && searchModel.RatingMax.Value > 0)
+            if (searchModel.RatingMax.HasValue && searchModel.RatingMax.Value > 0 && searchModel.RatingMax.Value < 10)
                 query = query.Where(x => x.Rating <= searchModel.RatingMax);
 
             if (searchModel.VoteCountMin.HasValue)
@@ -774,7 +775,7 @@ namespace Novaroma.Engine {
         }
 
         public async Task<IDictionary<string, object>> ConvertImdbId(Media media) {
-            var serviceIdsList = new List<IDictionary<string, object>>();
+            var serviceIdsList = new ConcurrentBag<IDictionary<string, object>>();
             var tasks = _imdbIdConverters.RunTasks(iic =>
                 iic.GetServiceIds(media.ImdbId)
                     .ContinueWith(t => serviceIdsList.Add(t.Result)),
@@ -935,8 +936,8 @@ namespace Novaroma.Engine {
                         try {
                             Helper.CreateMediaInfo(media);
                         }
-                        catch (Exception ex) {
-                            _exceptionHandler.HandleException(ex);
+                        catch {
+                            // ignored
                         }
                     }
 
@@ -1132,22 +1133,24 @@ namespace Novaroma.Engine {
                     var q = context.TvShows;
                     if (!q.Any()) return QueryResult<TvShow>.Empty;
 
-                    var currentDate = DateTime.UtcNow.AddHours(-8);
-                    q = q.Where(t =>
-                        t.Seasons.Any(s =>
-                            s.Episodes.Any(e => (searchModel.NotWatched == null || (e.AirDate < currentDate && e.IsWatched != searchModel.NotWatched))
-                                             && (searchModel.Downloaded == null || string.IsNullOrEmpty(e.FilePath) == !searchModel.Downloaded)
-                                             && (searchModel.SubtitleDownloaded == null || e.SubtitleDownloaded == searchModel.SubtitleDownloaded)
+                    if (searchModel.NotWatched != null || searchModel.Downloaded != null || searchModel.SubtitleDownloaded != null) {
+                        var currentDate = DateTime.UtcNow.AddHours(-8);
+                        q = q.Where(t =>
+                            t.Seasons.Any(s =>
+                                s.Episodes.Any(e => (searchModel.NotWatched == null || (e.AirDate < currentDate && e.IsWatched != searchModel.NotWatched))
+                                                 && (searchModel.Downloaded == null || string.IsNullOrEmpty(e.FilePath) == !searchModel.Downloaded)
+                                                 && (searchModel.SubtitleDownloaded == null || e.SubtitleDownloaded == searchModel.SubtitleDownloaded)
+                                )
                             )
-                        )
-                    );
+                        );
+                    }
 
                     if (searchModel.NotFound != null)
                         q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.NotFound == searchModel.NotFound.Value)));
                     if (searchModel.SubtitleNotFound != null)
                         q = q.Where(t => t.Seasons.Any(s => s.Episodes.Any(e => e.SubtitleNotFound == searchModel.SubtitleNotFound.Value)));
 
-                    if (searchModel.Ended.HasValue)
+                    if (searchModel.Ended != null)
                         q = q.Where(x => x.IsActive == !searchModel.Ended.Value);
 
                     return FilterMediaQuery(q, searchModel);
@@ -1406,7 +1409,7 @@ namespace Novaroma.Engine {
             await Task.Run(() => _subtitleSemaphore.WaitOne());
 
             try {
-                var results = new List<ISubtitleSearchResult>();
+                var results = new ConcurrentBag<ISubtitleSearchResult>();
                 await Task.WhenAll(
                     Settings
                         .SubtitleDownloaders

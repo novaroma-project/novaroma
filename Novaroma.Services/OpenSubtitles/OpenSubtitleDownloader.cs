@@ -12,7 +12,7 @@ namespace Novaroma.Services.OpenSubtitles {
     public class OpenSubtitleDownloader : ISubtitleDownloader {
         public const string UserAgent = "novaroma v0.1";
 
-        public async Task<IEnumerable<OpenSubtitleSearchResult>> SearchForFile(string videoFilePath, Language[] languages, string imdbId = null) {
+        public Task<IEnumerable<OpenSubtitleSearchResult>> SearchForFile(string videoFilePath, Language[] languages, string imdbId = null) {
             if (videoFilePath == null)
                 throw new ArgumentNullException("videoFilePath");
 
@@ -20,33 +20,47 @@ namespace Novaroma.Services.OpenSubtitles {
             if (!fileInfo.Exists)
                 throw new FileNotFoundException(string.Format(Resources.FileNotFound, videoFilePath), videoFilePath);
 
-            return await Task.Run(() => {
-                using (var client = Osdb.Login(UserAgent)) {
-                    var languageIds = languages.Select(GetLanguageId).ToList();
-                    var languageIdsPrm = string.Join(",", languages.Select(GetLanguageId));
+            return Task.Run(() => {
+                try {
+                    using (var client = Osdb.Login(UserAgent)) {
+                        var languageIds = languages.Select(GetLanguageId).ToList();
+                        var languageIdsPrm = string.Join(",", languages.Select(GetLanguageId));
 
-                    var results = client.SearchSubtitlesFromFile(languageIdsPrm, videoFilePath);
-                    results = results.OrderBy(s => s.LanguageId, new SubtitleLanguageComparer(languageIds)).ToList();
+                        var results = client.SearchSubtitlesFromFile(languageIdsPrm, videoFilePath);
+                        results = results.OrderBy(s => s.LanguageId, new SubtitleLanguageComparer(languageIds)).ToList();
 
-                    return results.Select(r => new OpenSubtitleSearchResult(this, r));
+                        return results.Select(r => new OpenSubtitleSearchResult(this, r));
+                    }
+                }
+                catch (Exception ex) {
+                    if (ex.Message == "Unexpected error response 401 Unauthorized")
+                        return Enumerable.Empty<OpenSubtitleSearchResult>();
+                    throw;
                 }
             });
         }
 
         public Task<IEnumerable<OpenSubtitleSearchResult>> Search(string query, Language[] languages, string imdbId = null) {
             return Task.Run(() => {
-                using (var client = Osdb.Login(UserAgent)) {
-                    var languageIds = languages.Select(GetLanguageId).ToList();
-                    var languageIdsPrm = string.Join(",", languages.Select(GetLanguageId));
+                try {
+                    using (var client = Osdb.Login(UserAgent)) {
+                        var languageIds = languages.Select(GetLanguageId).ToList();
+                        var languageIdsPrm = string.Join(",", languages.Select(GetLanguageId));
 
-                    var results = client.SearchSubtitlesFromQuery(languageIdsPrm, query);
-                    results = results.OrderBy(s => s.LanguageId, new SubtitleLanguageComparer(languageIds)).ToList();
-                    return results.Select(r => new OpenSubtitleSearchResult(this, r));
+                        var results = client.SearchSubtitlesFromQuery(languageIdsPrm, query);
+                        results = results.OrderBy(s => s.LanguageId, new SubtitleLanguageComparer(languageIds)).ToList();
+                        return results.Select(r => new OpenSubtitleSearchResult(this, r));
+                    }
+                }
+                catch (Exception ex) {
+                    if (ex.Message == "Unexpected error response 401 Unauthorized")
+                        return Enumerable.Empty<OpenSubtitleSearchResult>();
+                    throw;
                 }
             });
         }
 
-        public async Task<bool> Download(string videoFilePath, OpenSubtitleSearchResult searchResult) {
+        public Task<bool> Download(string videoFilePath, OpenSubtitleSearchResult searchResult) {
             if (videoFilePath == null)
                 throw new ArgumentNullException("videoFilePath");
 
@@ -54,19 +68,26 @@ namespace Novaroma.Services.OpenSubtitles {
             if (!fileInfo.Exists)
                 throw new FileNotFoundException(string.Format(Resources.FileNotFound, videoFilePath), videoFilePath);
 
-            return await Task.Run(() => {
-                using (var client = Osdb.Login(UserAgent)) {
-                    var subtitlePath = client.DownloadSubtitleToPath(fileInfo.DirectoryName, searchResult.Subtitle);
-                    var subtitleFile = new FileInfo(subtitlePath);
-                    var newSubtitlePath = Helper.ReplaceExtension(fileInfo, subtitleFile.Extension);
+            return Task.Run(() => {
+                try {
+                    using (var client = Osdb.Login(UserAgent)) {
+                        var subtitlePath = client.DownloadSubtitleToPath(fileInfo.DirectoryName, searchResult.Subtitle);
+                        var subtitleFile = new FileInfo(subtitlePath);
+                        var newSubtitlePath = Helper.ReplaceExtension(fileInfo, subtitleFile.Extension);
 
-                    if (!subtitleFile.Exists) return false;
-                    if (string.Equals(subtitlePath, newSubtitlePath, StringComparison.OrdinalIgnoreCase)) return true;
+                        if (!subtitleFile.Exists) return false;
+                        if (string.Equals(subtitlePath, newSubtitlePath, StringComparison.OrdinalIgnoreCase)) return true;
 
-                    Helper.DeleteFile(newSubtitlePath);
-                    subtitleFile.MoveTo(newSubtitlePath);
+                        Helper.DeleteFile(newSubtitlePath);
+                        subtitleFile.MoveTo(newSubtitlePath);
 
-                    return true;
+                        return true;
+                    }
+                }
+                catch (Exception ex) {
+                    if (ex.Message == "Unexpected error response 401 Unauthorized")
+                        return false;
+                    throw;
                 }
             });
         }

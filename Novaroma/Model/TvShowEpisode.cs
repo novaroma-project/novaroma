@@ -160,7 +160,9 @@ namespace Novaroma.Model {
 
                 if (_isWatched) {
                     BackgroundDownload = false;
+                    NotFound = false;
                     BackgroundSubtitleDownload = false;
+                    SubtitleNotFound = false;
                 }
             }
         }

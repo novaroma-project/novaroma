@@ -1121,4 +1121,13 @@
   <data name="PortugueseBrazilian" xml:space="preserve">
     <value>Portuguese-Brazilian</value>
   </data>
+  <data name="MinSeed" xml:space="preserve">
+    <value>Minimum seed</value>
+  </data>
+  <data name="DefaultMinSeed" xml:space="preserve">
+    <value>Default minimum seed</value>
+  </data>
+  <data name="MinSeedDescription" xml:space="preserve">
+    <value>Search results with seeder smaller than this value will be extracted from the list</value>
+  </data>
 </root>

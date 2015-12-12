@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -12,6 +13,11 @@ using Novaroma.Model;
 namespace Novaroma {
 
     public static class Extensions {
+
+        public static void AddRange<T>(this ConcurrentBag<T> bag, IEnumerable<T> items) {
+            foreach (var item in items)
+                bag.Add(item);
+        }
 
         public static IEnumerable<T> WithoutLast<T>(this IEnumerable<T> source) {
             using (var e = source.GetEnumerator()) {
