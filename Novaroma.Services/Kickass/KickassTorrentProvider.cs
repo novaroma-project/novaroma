@@ -95,15 +95,14 @@ namespace Novaroma.Services.Kickass {
                 var results = new List<TorrentSearchResult>();
                 foreach (var item in items) {
                     var tds = item.QuerySelectorAll("td");
-                    var divs = tds[0].QuerySelectorAll("div");
 
-                    var torrentDiv = divs[0];
+                    var torrentDiv = tds[0].QuerySelector("div[class='iaconbox center floatright']");
                     var torrentLinks = torrentDiv.QuerySelectorAll("a");
                     var tlc = torrentLinks.Length;
                     var magnetUri = torrentLinks[tlc - 2].Attributes.First(a => a.Name == "href").Value;
                     var torrentUrl = torrentLinks[tlc - 1].Attributes.First(a => a.Name == "href").Value;
 
-                    var torrentNameDiv = divs[1];
+                    var torrentNameDiv = tds[0].QuerySelector("div[class='torrentname']");
                     var torrentName = torrentNameDiv.QuerySelectorAll("a").First(n => n.ClassName == "cellMainLink").TextContent;
 
                     var sizeParts = tds[1].TextContent.Split(' ');
