@@ -269,11 +269,11 @@ namespace Novaroma.Services.Imdb {
             var overviewNode = document.QuerySelector("div[class='title-overview']");
 
             var titleBarNode = overviewNode.QuerySelector("div[class='title_bar_wrapper']");
-            var title = titleBarNode.QuerySelector("h1[itemprop='name']").TextContent;
+            var title = titleBarNode.QuerySelector("h1[itemprop='name']").TextContent.Trim();
             var originalTitleNode = titleBarNode.QuerySelector("div[class='originalTitle']");
             string originalTitle = null;
             if (originalTitleNode != null) {
-                var matches = Regex.Match(originalTitleNode.TextContent, @"\""(.*?)\""");
+                var matches = Regex.Match(originalTitleNode.TextContent.Trim(), @"\""(.*?)\""");
                 if (matches.Groups.Count > 1)
                     originalTitle = matches.Groups[1].Value;
             }
