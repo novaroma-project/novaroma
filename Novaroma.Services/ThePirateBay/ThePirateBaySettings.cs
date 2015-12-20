@@ -3,7 +3,7 @@
     public class ThePirateBaySettings : TorrentProviderSettingsBase {
         internal const string ImdbSearchQuery = "%imdbId%";
 
-        public ThePirateBaySettings(): base("https://thepiratebay.se/") {
+        public ThePirateBaySettings(): base("https://thepiratebay.vg/") {
             MovieSearchPattern = ImdbSearchQuery;
         }
     }
