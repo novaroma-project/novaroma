@@ -1,5 +1,14 @@
 ;aiu; 
 
+[Novaroma0.9.9.2]
+Name = Novaroma 0.9.9.2
+Description = Critical errors fixed.
+URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.9.2/Novaroma.v0.9.9.2.setup.exe
+Size = 11511301
+FilePath = [APPDIR]Novaroma.exe
+Version = 0.9.9.2
+Replaces = All
+
 [Novaroma0.9.9.1]
 Name = Novaroma 0.9.9.1
 Description = Manual subtitle search fixed.
@@ -7,7 +16,6 @@ URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.9.1/No
 Size = 11526238
 FilePath = [APPDIR]Novaroma.exe
 Version = 0.9.9.1
-Replaces = All
 
 [Novaroma0.9.9]
 Name = Novaroma 0.9.9
