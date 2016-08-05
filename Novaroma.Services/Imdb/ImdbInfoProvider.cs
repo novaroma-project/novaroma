@@ -26,7 +26,7 @@ namespace Novaroma.Services.Imdb {
         private const string BASE_URL = @"http://www.imdb.com/";
         private const string BASIC_SEARCH_URL = @"http://www.imdb.com/find?q={0}&s=tt&ttype=ft,tv&ref_=fn_ft";
         private const string ADVANCED_SEARCH_URL = @"http://www.imdb.com/search/title?count={0}&{1}";
-        private const string DEFAULT_POSTER_URL = @"http://i.media-imdb.com/images/SF1f0a42ee1aa08d477a576fbbf7562eed/realm/feature.gif";
+        private const string DEFAULT_POSTER_URL = @"http://ia.media-imdb.com/images/G/01/imdb/images/nopicture/large/film-184890147._CB282517447_.png";
         private const string TITLE_URL = @"http://www.imdb.com/title/{0}/";
 
         public async Task<IEnumerable<IInfoSearchResult>> Search(string query, Language language = Language.English) {
@@ -130,20 +130,20 @@ namespace Novaroma.Services.Imdb {
                 }
                 var document = DocumentBuilder.Html(documentStr);
 
-                var items = document.All
-                    .Where(n => n.TagName == "TR" && (n.ClassName == "even detailed" || n.ClassName == "odd detailed"));
+                var items = document.All.Where(n => n.ClassName == "lister-item mode-advanced");
 
                 var results = new List<ImdbAdvancedInfoSearchResult>();
                 foreach (var item in items) {
-                    var linkNode = item.QuerySelector("td[class='image'] a");
+                    var linkNode = item.QuerySelector("div[class='lister-item-image float-left'] a");
                     var link = linkNode.Attributes.First(a => a.Name == "href").Value;
                     var resultUrl = Helper.CombineUrls(BASE_URL, link);
                     var imdbId = Regex.Match(link, @"\/.*\/(.*)\/").Groups[1].Value;
-                    var posterUrl = linkNode.QuerySelector("td[class='image'] a img").Attributes.First(a => a.Name == "src").Value;
+                    var posterUrl = linkNode.QuerySelector("img").Attributes.First(a => a.Name == "loadlate").Value;
 
-                    var titleNode = item.QuerySelector("td[class='title']");
+                    var contentNode = item.QuerySelector("div[class='lister-item-content']");
+                    var titleNode = contentNode.QuerySelector("h3[class='lister-item-header']");
                     var title = titleNode.QuerySelector("a").TextContent.Trim();
-                    var yearType = titleNode.QuerySelector("span[class='year_type']").TextContent.Trim();
+                    var yearType = titleNode.QuerySelector("span[class='lister-item-year text-muted unbold']").TextContent.Trim();
                     var isTvShow = yearType.Contains(" Series)") || yearType.Contains("Mini-Series)");
 
                     int? year = null;
@@ -152,48 +152,52 @@ namespace Novaroma.Services.Imdb {
                         if (int.TryParse(yearType.Substring(1, 4), out yearTmp))
                             year = yearTmp;
                     }
+                    var textNodes = contentNode.QuerySelectorAll("p");
+                    var textNodesTextMuted = textNodes.Where(x => x.ClassName == "text-muted" || x.ClassName == "text-muted ").ToArray();
 
-                    var outlineNode = titleNode.QuerySelector("span[class='outline']");
-                    var outline = string.Empty;
-                    if (outlineNode != null)
-                        outline = outlineNode.TextContent.Trim();
-
-                    var creditNode = titleNode.QuerySelector("span[class='credit']");
-                    var credits = string.Empty;
-                    if (creditNode != null)
-                        credits = creditNode.TextContent.Trim();
-
-                    var genreNode = titleNode.QuerySelector("span[class='genre']");
                     var genreStr = string.Empty;
-                    if (genreNode != null)
-                        genreStr = genreNode.TextContent.Trim();
+                    var outline = string.Empty;
+                    int? runtime = null;
+
+                    if (textNodesTextMuted.Length > 0) {
+                        var genreNode = textNodesTextMuted[0].QuerySelector("span[class='genre']");
+                        if (genreNode != null)
+                            genreStr = genreNode.TextContent.Trim();
+
+                        var runtimeNode = textNodesTextMuted[0].QuerySelector("span[class='runtime']");
+                        if (runtimeNode != null) {
+                            var runtimeStr = runtimeNode.TextContent.Trim();
+                            var match = Regex.Match(runtimeStr, @"(\d.*?) ");
+                            if (match.Groups.Count == 2) {
+                                int runtimeTmp;
+                                if (int.TryParse(match.Groups[1].Value, out runtimeTmp))
+                                    runtime = runtimeTmp;
+                            }
+                        }
+
+                        if (textNodesTextMuted.Length > 1) {
+                            var outlineNode = textNodesTextMuted[1];
+                            outline = outlineNode.TextContent.Trim();
+                        }
+                    }
+
+                    var textNodesOther = textNodes.Where(x => x.ClassName != "text-muted").ToArray();
+                    var credits = string.Empty;
+                    if (textNodesOther.Length > 1)
+                        credits = textNodesOther[1].TextContent.Replace("\r","").Replace("\n","").Replace("  ","");
+
+                    int? voteCount = null;
+                    var voteNode = textNodes.FirstOrDefault(x => x.ClassName == "sort-num_votes-visible");
+                    if (voteNode != null) {
+                        var voteStr = voteNode.QuerySelector("span[name='nv']").Attributes.First(x => x.Name == "data-value").Value;
+                        voteCount = int.Parse(voteStr);
+                    }
 
                     float? rating = null;
-                    int? voteCount = null;
-                    var ratingNode = titleNode.QuerySelector("div[class='rating rating-list']");
-                    if (ratingNode != null) {
-                        var ratingInfoStr = ratingNode.Attributes.First(a => a.Name == "title").Value;
-                        var match = Regex.Match(ratingInfoStr, @"(\d.*?)/\d{2} \((.*?) ");
-                        if (match.Groups.Count == 3) {
-                            var ratingStr = match.Groups[1].Value.Replace(",", ".");
-                            rating = float.Parse(ratingStr, new NumberFormatInfo { CurrencyDecimalSeparator = "." });
+                    var ratingNode = contentNode.QuerySelector("div[class='ratings-bar'] strong");
+                    if (ratingNode != null)
+                        rating = float.Parse(ratingNode.TextContent.Trim(), new NumberFormatInfo { CurrencyDecimalSeparator = "." });
 
-                            var voteCountStr = match.Groups[2].Value.Replace(",", "").Replace(".", "");
-                            voteCount = int.Parse(voteCountStr);
-                        }
-                    }
-
-                    int? runtime = null;
-                    var runtimeNode = titleNode.QuerySelector("span[class='runtime']");
-                    if (runtimeNode != null) {
-                        var runtimeStr = runtimeNode.TextContent;
-                        var match = Regex.Match(runtimeStr, @"(\d.*?) ");
-                        if (match.Groups.Count == 2) {
-                            int runtimeTmp;
-                            if (int.TryParse(match.Groups[1].Value, out runtimeTmp))
-                                runtime = runtimeTmp;
-                        }
-                    }
 
                     byte[] poster = null;
                     using (var client = new NovaromaWebClient()) {
