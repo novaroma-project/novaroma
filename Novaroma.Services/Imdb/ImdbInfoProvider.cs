@@ -144,10 +144,12 @@ namespace Novaroma.Services.Imdb {
                     var titleNode = contentNode.QuerySelector("h3[class='lister-item-header']");
                     var title = titleNode.QuerySelector("a").TextContent.Trim();
                     var yearType = titleNode.QuerySelector("span[class='lister-item-year text-muted unbold']").TextContent.Trim();
-                    var isTvShow = yearType.Contains(" Series)") || yearType.Contains("Mini-Series)");
 
                     int? year = null;
+                    var isTvShow = false;
                     if (yearType.Length > 4) {
+                        isTvShow = yearType.Contains("–");
+
                         int yearTmp;
                         if (int.TryParse(yearType.Substring(1, 4), out yearTmp))
                             year = yearTmp;
