@@ -16,7 +16,6 @@ URL = https://github.com/novaroma-project/novaroma/releases/download/v0.9.9.2/No
 Size = 11511301
 FilePath = [APPDIR]Novaroma.exe
 Version = 0.9.9.2
-Replaces = All
 
 [Novaroma0.9.9.1]
 Name = Novaroma 0.9.9.1
