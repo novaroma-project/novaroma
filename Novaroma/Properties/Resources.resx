@@ -1130,4 +1130,7 @@
   <data name="MinSeedDescription" xml:space="preserve">
     <value>Search results with seeder smaller than this value will be extracted from the list</value>
   </data>
+  <data name="UseTorrentDirectory" xml:space="preserve">
+    <value>Use Torrent Directory</value>
+  </data>
 </root>

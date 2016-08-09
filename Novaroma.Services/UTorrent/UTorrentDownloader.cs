@@ -33,7 +33,7 @@ namespace Novaroma.Services.UTorrent {
             return result.AddedTorrent.Hash;
         }
 
-        public override async Task Refresh() {
+        public override async Task Refresh(bool downloadOnly) {
             var client = CreateClient();
             var torrents = await client.GetListAsync();
 
@@ -44,7 +44,7 @@ namespace Novaroma.Services.UTorrent {
                 var fileNames = files.SelectMany(fc => fc.Value.Select(f => f.Name));
                 var sourcePath = completed.Path;
 
-                var args = new DownloadCompletedEventArgs(hash, sourcePath, fileNames);
+                var args = new DownloadCompletedEventArgs(hash, sourcePath, fileNames, downloadOnly);
                 OnDownloadCompleted(args);
                 if (args.Found && Settings.DeleteCompletedTorrents) {
                     await client.DeleteTorrentAsync(hash);

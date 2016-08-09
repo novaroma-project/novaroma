@@ -146,7 +146,7 @@ namespace Novaroma.Interface.Download.Torrent {
             return Download(path, torrentSearchResult);
         }
 
-        public abstract Task Refresh();
+        public abstract Task Refresh(bool downloadOnly);
 
         public event EventHandler<DownloadCompletedEventArgs> DownloadCompleted;
 

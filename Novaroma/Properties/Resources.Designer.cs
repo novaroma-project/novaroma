@@ -3021,6 +3021,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Torrent Directory.
+        /// </summary>
+        public static string UseTorrentDirectory {
+            get {
+                return ResourceManager.GetString("UseTorrentDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Video Files.
         /// </summary>
         public static string VideoFiles {

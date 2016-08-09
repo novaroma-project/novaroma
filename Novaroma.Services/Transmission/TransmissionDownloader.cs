@@ -37,7 +37,7 @@ namespace Novaroma.Services.Transmission {
             });
         }
 
-        public override Task Refresh() {
+        public override Task Refresh(bool downloadOnly) {
             return Task.Run(() => {
                 var client = CreateClient();
                 var torrents = client.GetTorrents(new[] {Fields.ID, Fields.HASH_STRING, Fields.PERCENT_DONE, Fields.DOWNLOAD_DIR, Fields.FILES});
@@ -48,7 +48,7 @@ namespace Novaroma.Services.Transmission {
                     var sourcePath = completed.DownloadDir;
 
                     var files = completed.Files.Select(f => Path.GetFileName(Path.Combine(completed.DownloadDir, f.Name)));
-                    var args = new DownloadCompletedEventArgs(completed.HashString, sourcePath, files);
+                    var args = new DownloadCompletedEventArgs(completed.HashString, sourcePath, files, downloadOnly);
                     OnDownloadCompleted(args);
 
                     if (args.Found && Settings.DeleteCompletedTorrents) {

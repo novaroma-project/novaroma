@@ -281,33 +281,14 @@ namespace Novaroma.Engine {
 
                 if (episode != null) {
                     args.Found = true;
-                    var directory = Helper.GetTvShowSeasonDirectory(Settings.TvShowSeasonDirectoryTemplate, episode);
-                    if (!string.Equals(args.DownloadDirectory, directory, StringComparison.CurrentCultureIgnoreCase)) {
-                        Helper.CopyDirectory(args.DownloadDirectory, directory, Settings.DeleteExtensions, args.Files);
-                        args.Moved = true;
-                    }
+
+                    if (args.DownloadOnly)
+                        DownloadCompletedProcessForOnlyDownloadEpisode(episode, args, videoFiles);
+                    else
+                        DownloadCompletedProcessForEpisode(episode, args, videoFiles);
 
                     var season = episode.TvShowSeason;
                     var show = season.TvShow;
-                    var episodeFile = videoFiles.FirstOrDefault(f => {
-                        int? s, e;
-                        Helper.DetectEpisodeInfo(f.NameWithoutExtension(), show.Title, out s, out e, f, show.Seasons.Max(ts => ts.Season));
-                        return s == episode.TvShowSeason.Season && e == episode.Episode;
-                    }) ?? videoFiles.FirstOrDefault();
-                    if (episodeFile != null)
-                        episode.FilePath = args.Moved ? Directory.GetFiles(directory, episodeFile.Name).FirstOrDefault() : episodeFile.FullName;
-                    episode.DownloadKey = string.Empty;
-
-                    try {
-                        if (!episode.BackgroundSubtitleDownload)
-                            Helper.RenameEpisodeFile(episode, Settings.TvShowEpisodeFileNameTemplate);
-
-                        OnTvShowEpisodeDownloadCompleted(episode);
-                    }
-                    catch (Exception ex) {
-                        _exceptionHandler.HandleException(ex);
-                    }
-
                     var activity = CreateActivity(
                         string.Format(Resources.TvShowEpisodeDownloaded, show.Title, season.Season, episode.Episode),
                         episode.FilePath
@@ -333,25 +314,11 @@ namespace Novaroma.Engine {
 
                     if (movie != null) {
                         args.Found = true;
-                        if (!string.Equals(args.DownloadDirectory, movie.Directory, StringComparison.CurrentCultureIgnoreCase)) {
-                            Helper.CopyDirectory(args.DownloadDirectory, movie.Directory, Settings.DeleteExtensions, args.Files);
-                            args.Moved = true;
-                        }
 
-                        var firstVideoFile = videoFiles.FirstOrDefault();
-                        if (firstVideoFile != null)
-                            movie.FilePath = args.Moved ? Directory.GetFiles(movie.Directory, firstVideoFile.Name).FirstOrDefault() : firstVideoFile.FullName;
-                        movie.DownloadKey = string.Empty;
-
-                        try {
-                            if (!movie.BackgroundSubtitleDownload)
-                                Helper.RenameMovieFile(movie, Settings.MovieFileNameTemplate);
-
-                            OnMovieDownloadCompleted(movie);
-                        }
-                        catch (Exception ex) {
-                            _exceptionHandler.HandleException(ex);
-                        }
+                        if (args.DownloadOnly)
+                            DownloadCompletedProcessForOnlyDownloadMovie(movie, args, videoFiles);
+                        else
+                            DownloadCompletedProcessForMovie(movie, args, videoFiles);
 
                         var activity = CreateActivity(string.Format(Resources.MovieDownloaded, movie.Title), movie.FilePath);
                         context.Insert(activity);
@@ -384,11 +351,98 @@ namespace Novaroma.Engine {
             }
         }
 
-        private void MovieSubtitleDownloaded(Movie movie) {
+        private void DownloadCompletedProcessForOnlyDownloadMovie(Movie movie, DownloadCompletedEventArgs args, List<FileInfo> videoFiles) {
+            var firstVideoFile = videoFiles.FirstOrDefault();
+            if (firstVideoFile != null)
+                movie.FilePath = firstVideoFile.FullName;
+            movie.DownloadKey = string.Empty;
+
+            try {
+                OnMovieDownloadCompleted(movie);
+            }
+            catch (Exception ex) {
+                _exceptionHandler.HandleException(ex);
+            }
+        }
+
+        private void DownloadCompletedProcessForOnlyDownloadEpisode(TvShowEpisode episode, DownloadCompletedEventArgs args, List<FileInfo> videoFiles) {
+            var season = episode.TvShowSeason;
+            var show = season.TvShow;
+            var episodeFile = videoFiles.FirstOrDefault(f => {
+                int? s, e;
+                Helper.DetectEpisodeInfo(f.NameWithoutExtension(), show.Title, out s, out e, f, show.Seasons.Max(ts => ts.Season));
+                return s == episode.TvShowSeason.Season && e == episode.Episode;
+            }) ?? videoFiles.FirstOrDefault();
+            if (episodeFile != null)
+                episode.FilePath = episodeFile.FullName;
+            episode.DownloadKey = string.Empty;
+
+            try {
+                OnTvShowEpisodeDownloadCompleted(episode);
+            }
+            catch (Exception ex) {
+                _exceptionHandler.HandleException(ex);
+            }
+        }
+
+        private void DownloadCompletedProcessForMovie(Movie movie, DownloadCompletedEventArgs args, List<FileInfo> videoFiles) {
+            if (!string.Equals(args.DownloadDirectory, movie.Directory, StringComparison.CurrentCultureIgnoreCase)) {
+                Helper.CopyDirectory(args.DownloadDirectory, movie.Directory, Settings.DeleteExtensions, args.Files);
+                args.Moved = true;
+            }
+
+            var firstVideoFile = videoFiles.FirstOrDefault();
+            if (firstVideoFile != null)
+                movie.FilePath = args.Moved ? Directory.GetFiles(movie.Directory, firstVideoFile.Name).FirstOrDefault() : firstVideoFile.FullName;
+            movie.DownloadKey = string.Empty;
+
+            try {
+                if (!movie.BackgroundSubtitleDownload)
+                    Helper.RenameMovieFile(movie, Settings.MovieFileNameTemplate);
+
+                OnMovieDownloadCompleted(movie);
+            }
+            catch (Exception ex) {
+                _exceptionHandler.HandleException(ex);
+            }
+        }
+
+        private void DownloadCompletedProcessForEpisode(TvShowEpisode episode, DownloadCompletedEventArgs args, List<FileInfo> videoFiles) {
+            var directory = Helper.GetTvShowSeasonDirectory(Settings.TvShowSeasonDirectoryTemplate, episode);
+            if (!string.Equals(args.DownloadDirectory, directory, StringComparison.CurrentCultureIgnoreCase)) {
+                Helper.CopyDirectory(args.DownloadDirectory, directory, Settings.DeleteExtensions, args.Files);
+                args.Moved = true;
+            }
+
+            var season = episode.TvShowSeason;
+            var show = season.TvShow;
+            var episodeFile = videoFiles.FirstOrDefault(f => {
+                int? s, e;
+                Helper.DetectEpisodeInfo(f.NameWithoutExtension(), show.Title, out s, out e, f, show.Seasons.Max(ts => ts.Season));
+                return s == episode.TvShowSeason.Season && e == episode.Episode;
+            }) ?? videoFiles.FirstOrDefault();
+            if (episodeFile != null)
+                episode.FilePath = args.Moved ? Directory.GetFiles(directory, episodeFile.Name).FirstOrDefault() : episodeFile.FullName;
+            episode.DownloadKey = string.Empty;
+
+            try {
+                if (!episode.BackgroundSubtitleDownload)
+                    Helper.RenameEpisodeFile(episode, Settings.TvShowEpisodeFileNameTemplate);
+
+                OnTvShowEpisodeDownloadCompleted(episode);
+            }
+            catch (Exception ex) {
+                _exceptionHandler.HandleException(ex);
+            }
+        }
+
+        private void MovieSubtitleDownloaded(Movie movie, bool downloadOnly = false) {
             Helper.SetSubtitleDownloadProperties(true, movie);
 
             try {
-                Helper.RenameMovieFile(movie, Settings.MovieFileNameTemplate);
+                if (!downloadOnly)
+                    Helper.RenameMovieFile(movie, Settings.MovieFileNameTemplate);
+
                 OnMovieSubtitleDownloadCompleted(movie);
             }
             catch (Exception ex) {
@@ -396,11 +450,12 @@ namespace Novaroma.Engine {
             }
         }
 
-        private void EpisodeSubtitleDownloaded(TvShowEpisode episode) {
+        private void EpisodeSubtitleDownloaded(TvShowEpisode episode, bool downloadOnly = false) {
             Helper.SetSubtitleDownloadProperties(true, episode);
 
             try {
-                Helper.RenameEpisodeFile(episode, Settings.TvShowEpisodeFileNameTemplate);
+                if (!downloadOnly)
+                    Helper.RenameEpisodeFile(episode, Settings.TvShowEpisodeFileNameTemplate);
                 OnTvShowEpisodeSubtitleDownloadCompleted(episode);
             }
             catch (Exception ex) {
@@ -1241,7 +1296,7 @@ namespace Novaroma.Engine {
             var downloader = Settings.Downloader.SelectedItem;
             if (downloader == null) return Task.FromResult(true);
 
-            return Helper.RunTask(downloader.Refresh, _exceptionHandler);
+            return Helper.RunTask(() => downloader.Refresh(Settings.UseTorrentDirectory), _exceptionHandler);
         }
 
         public async Task<bool> DownloadSubtitleForMovie(Movie movie) {
@@ -1253,10 +1308,10 @@ namespace Novaroma.Engine {
 
                 var languages = SubtitleLanguages.ToArray();
                 foreach (var subtitleDownloader in Settings.SubtitleDownloaders.SelectedItems) {
-                    var result = await subtitleDownloader.DownloadForMovie(movie.OriginalTitle, movie.FilePath, languages, movie.ImdbId);
+                    var result = await subtitleDownloader.DownloadForMovie(movie.OriginalTitle, movie.FilePath, languages,Settings.UseTorrentDirectory, movie.ImdbId);
                     if (!result) continue;
 
-                    MovieSubtitleDownloaded(movie);
+                    MovieSubtitleDownloaded(movie, Settings.UseTorrentDirectory);
 
                     var activity = CreateActivity(string.Format(Resources.MovieSubtitleDownloaded, movie.Title), movie.FilePath);
                     await SaveChanges(new[] { activity }, new[] { movie });
@@ -1285,7 +1340,7 @@ namespace Novaroma.Engine {
 
                 var languages = SubtitleLanguages.ToArray();
                 foreach (var subtitleDownloader in Settings.SubtitleDownloaders.SelectedItems) {
-                    var result = await subtitleDownloader.DownloadForTvShowEpisode(show.OriginalTitle, season.Season, episode.Episode, episode.FilePath, languages, show.ImdbId);
+                    var result = await subtitleDownloader.DownloadForTvShowEpisode(show.OriginalTitle, season.Season, episode.Episode, episode.FilePath, languages,Settings.UseTorrentDirectory, show.ImdbId);
                     if (!result) continue;
 
                     EpisodeSubtitleDownloaded(episode);
@@ -1431,7 +1486,7 @@ namespace Novaroma.Engine {
             await Task.Run(() => _subtitleSemaphore.WaitOne());
 
             try {
-                var result = await searchResult.Service.Download(filePath, searchResult);
+                var result = await searchResult.Service.Download(filePath, searchResult, Settings.UseTorrentDirectory);
                 if (downloadable != null)
                     Helper.SetSubtitleDownloadProperties(result, downloadable);
 
@@ -1472,7 +1527,7 @@ namespace Novaroma.Engine {
 
                 var languages = SubtitleLanguages.ToArray();
                 foreach (var subtitleDownloader in Settings.SubtitleDownloaders.SelectedItems) {
-                    var result = await subtitleDownloader.Download(filePath, languages);
+                    var result = await subtitleDownloader.Download(filePath, languages, Settings.UseTorrentDirectory);
                     if (!result) continue;
 
                     return true;

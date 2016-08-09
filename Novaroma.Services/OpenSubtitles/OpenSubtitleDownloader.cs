@@ -60,7 +60,7 @@ namespace Novaroma.Services.OpenSubtitles {
             });
         }
 
-        public Task<bool> Download(string videoFilePath, OpenSubtitleSearchResult searchResult) {
+        public Task<bool> Download(string videoFilePath, OpenSubtitleSearchResult searchResult, bool downloadOnly) {
             if (videoFilePath == null)
                 throw new ArgumentNullException("videoFilePath");
 
@@ -72,14 +72,28 @@ namespace Novaroma.Services.OpenSubtitles {
                 try {
                     using (var client = Osdb.Login(UserAgent)) {
                         var subtitlePath = client.DownloadSubtitleToPath(fileInfo.DirectoryName, searchResult.Subtitle);
-                        var subtitleFile = new FileInfo(subtitlePath);
-                        var newSubtitlePath = Helper.ReplaceExtension(fileInfo, subtitleFile.Extension);
+                        if (downloadOnly) {
+                            var subtitleFileFullName = Path.Combine(subtitlePath, searchResult.Subtitle.SubtitleFileName);
 
-                        if (!subtitleFile.Exists) return false;
-                        if (string.Equals(subtitlePath, newSubtitlePath, StringComparison.OrdinalIgnoreCase)) return true;
+                            var fileNameWithoutExt = Path.GetFileNameWithoutExtension(subtitleFileFullName);
+                            var ext = Path.GetExtension(subtitleFileFullName);
 
-                        Helper.DeleteFile(newSubtitlePath);
-                        subtitleFile.MoveTo(newSubtitlePath);
+                            var newFileName = string.Format("[NOVAROMA]{0}.{1}", fileNameWithoutExt, ext);
+                            var newFileFullName = Path.Combine(subtitlePath, newFileName);
+
+                            File.Move(subtitleFileFullName, newFileFullName);
+                        }
+                        else {
+                            var subtitleFile = new FileInfo(subtitlePath);
+                            var newSubtitlePath = Helper.ReplaceExtension(fileInfo, subtitleFile.Extension);
+
+                            if (!subtitleFile.Exists) return false;
+                            if (string.Equals(subtitlePath, newSubtitlePath, StringComparison.OrdinalIgnoreCase)) return true;
+
+                            Helper.DeleteFile(newSubtitlePath);
+                            subtitleFile.MoveTo(newSubtitlePath);
+                        }
+
 
                         return true;
                     }
@@ -102,12 +116,12 @@ namespace Novaroma.Services.OpenSubtitles {
             return await SearchForFile(videoFilePath, languages, imdbId);
         }
 
-        async Task<bool> ISubtitleDownloader.DownloadForMovie(string name, string videoFilePath, Language[] languages, string imdbId) {
+        async Task<bool> ISubtitleDownloader.DownloadForMovie(string name, string videoFilePath, Language[] languages, bool downloadOnly, string imdbId) {
             var results = await SearchForFile(videoFilePath, languages, imdbId);
             var result = results.FirstOrDefault();
             if (result == null) return false;
 
-            return await Download(videoFilePath, result);
+            return await Download(videoFilePath, result, downloadOnly);
         }
 
         async Task<IEnumerable<ISubtitleSearchResult>> ISubtitleDownloader.SearchForTvShowEpisode(string name, int season, int episode, string videoFilePath,
@@ -115,31 +129,31 @@ namespace Novaroma.Services.OpenSubtitles {
             return await SearchForFile(videoFilePath, languages, imdbId);
         }
 
-        async Task<bool> ISubtitleDownloader.DownloadForTvShowEpisode(string name, int season, int episode, string videoFilePath, Language[] languages, string imdbId) {
+        async Task<bool> ISubtitleDownloader.DownloadForTvShowEpisode(string name, int season, int episode, string videoFilePath, Language[] languages, bool downloadOnly, string imdbId) {
             var results = await SearchForFile(videoFilePath, languages, imdbId);
             var result = results.FirstOrDefault();
             if (result == null) return false;
 
-            return await Download(videoFilePath, result);
+            return await Download(videoFilePath, result, downloadOnly);
         }
 
         async Task<IEnumerable<ISubtitleSearchResult>> ISubtitleDownloader.Search(string query, Language[] languages, string imdbId) {
             return await Search(query, languages);
         }
 
-        async Task<bool> ISubtitleDownloader.Download(string videoFilePath, ISubtitleSearchResult searchResult) {
+        async Task<bool> ISubtitleDownloader.Download(string videoFilePath, ISubtitleSearchResult searchResult, bool downloadOnly) {
             var openSubtitleSearchResult = searchResult as OpenSubtitleSearchResult;
             if (openSubtitleSearchResult == null)
                 throw new NovaromaException(Resources.UnsupportedSearchResult);
 
-            return await Download(videoFilePath, openSubtitleSearchResult);
+            return await Download(videoFilePath, openSubtitleSearchResult, downloadOnly);
         }
 
-        async Task<bool> ISubtitleDownloader.Download(string videoFilePath, Language[] languages, string imdbId) {
+        async Task<bool> ISubtitleDownloader.Download(string videoFilePath, Language[] languages, bool downloadOnly, string imdbId) {
             var results = await SearchForFile(videoFilePath, languages);
             var result = results.FirstOrDefault();
             if (result != null)
-                return await Download(videoFilePath, result);
+                return await Download(videoFilePath, result, downloadOnly);
 
             return false;
         }

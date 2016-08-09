@@ -22,7 +22,7 @@ namespace Novaroma.Interface.Download {
        
         Task<string> Download(string path, IDownloadSearchResult searchResult);
         
-        Task Refresh();
+        Task Refresh(bool downloadOnly);
 
         bool IsAvailable { get; }
 

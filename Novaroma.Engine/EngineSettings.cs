@@ -19,6 +19,7 @@ namespace Novaroma.Engine {
         private readonly SettingSingleSelection<EnumInfo<Language>> _languageSelection;
         private readonly DirectorySelection _movieDirectory;
         private readonly DirectorySelection _tvShowDirectory;
+        private bool _useTorrentDirectory;
         private string _movieFileNameTemplate;
         private string _tvShowSeasonDirectoryTemplate;
         private string _tvShowEpisodeFileNameTemplate;
@@ -97,6 +98,17 @@ namespace Novaroma.Engine {
         [Display(Name = "TvShowDirectory", GroupName = "Main", ResourceType = typeof(Resources))]
         public DirectorySelection TvShowDirectory {
             get { return _tvShowDirectory; }
+        }
+
+        [Display(Name = "UseTorrentDirectory", GroupName = "Main", ResourceType = typeof(Resources))]
+        public bool UseTorrentDirectory {
+            get { return _useTorrentDirectory; }
+            set {
+                if (_useTorrentDirectory == value) return;
+
+                _useTorrentDirectory = value;
+                RaisePropertyChanged("UseTorrentDirectory");
+            }
         }
 
         [Display(Name = "TvShowSeasonDirectoryTemplate", GroupName = "Main", ResourceType = typeof(Resources))]

@@ -1081,4 +1081,7 @@
   <data name="MinSeedDescription" xml:space="preserve">
     <value>Arama sonuçlarından bu değerden az besleyeni olanlar atlanacak</value>
   </data>
+  <data name="UseTorrentDirectory" xml:space="preserve">
+    <value>Torrent Klasörünü Kullan</value>
+  </data>
 </root>

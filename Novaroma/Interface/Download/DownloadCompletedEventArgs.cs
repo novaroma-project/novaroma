@@ -7,11 +7,13 @@ namespace Novaroma.Interface.Download {
         private readonly string _downloadKey;
         private readonly string _downloadDirectory;
         private readonly IEnumerable<string> _files;
+        private readonly bool _downloadOnly;
 
-        public DownloadCompletedEventArgs(string downloadKey, string downloadDirectory, IEnumerable<string> files) {
+        public DownloadCompletedEventArgs(string downloadKey, string downloadDirectory, IEnumerable<string> files, bool downloadOnly) {
             _downloadKey = downloadKey;
             _downloadDirectory = downloadDirectory;
             _files = files;
+            _downloadOnly = downloadOnly;
         }
 
         public string DownloadKey {
@@ -24,6 +26,10 @@ namespace Novaroma.Interface.Download {
 
         public string DownloadDirectory {
             get { return _downloadDirectory; }
+        }
+
+        public bool DownloadOnly {
+            get { return _downloadOnly; }
         }
 
         public bool Found { get; set; }
