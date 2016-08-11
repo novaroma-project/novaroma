@@ -1133,4 +1133,7 @@
   <data name="UseTorrentDirectory" xml:space="preserve">
     <value>Use Torrent Directory</value>
   </data>
+  <data name="TotalPage" xml:space="preserve">
+    <value>Total Page</value>
+  </data>
 </root>

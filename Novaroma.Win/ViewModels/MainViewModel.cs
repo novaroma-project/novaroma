@@ -88,11 +88,15 @@ namespace Novaroma.Win.ViewModels {
         private TvShow _selectedTvShow;
         private int _movieMaxPage;
         private int _tvShowMaxPage;
+        private int _activitiesMaxPage;
         private bool _enableMoviePreviousButton;
         private bool _enableMovieNextButton;
         private bool _enableTvShowPreviousButton;
         private bool _enableTvShowNextButton;
         private bool _pinTvShowFlyout;
+        private bool _enableActivitiesPreviousButton;
+        private bool _enableActivitiesNextButton;
+        private bool _isActivitiesBusy;
 
         #endregion
 
@@ -256,6 +260,7 @@ namespace Novaroma.Win.ViewModels {
             await LoadSavedSearchModels();
             _movieSearchModel.RefreshNeeded += (sender, args) => DoGetMovies();
             _tvShowSearchModel.RefreshNeeded += (sender, args) => DoGetTvShows();
+            _activitySearchModel.RefreshNeeded += (sender, args) => DoGetActivities();
 
             await Task.WhenAll(GetMovies(), GetTvShows(), GetActivities());
         }
@@ -307,9 +312,17 @@ namespace Novaroma.Win.ViewModels {
             await GetActivities();
         }
 
-        private async Task GetActivities() {
+        private async Task GetActivities()
+        {
+            IsActivitiesBusy = true;
             Activities = await _engine.GetActivities(_activitySearchModel);
-            NotReadActivityCount = _activities.Results.Count(a => !a.IsRead);
+            IsActivitiesBusy = false;
+            NotReadActivityCount = _activitySearchModel.NotReadActivityCount;
+
+            ActivitiesMaxPage = GetMaxPageCount(Activities.InlineCount, ActivitySearchModel.PageSize);
+            EnableActivitiesNextButton = ActivitySearchModel.Page < ActivitiesMaxPage;
+            EnableActivitiesPreviousButton = ActivitySearchModel.Page > 1;
+
         }
 
         private async void DoClearMovieSearchModel() {
@@ -815,6 +828,10 @@ namespace Novaroma.Win.ViewModels {
             get { return _tvShowSearchModel; }
         }
 
+        public ActivitySearchModel ActivitySearchModel {
+            get { return _activitySearchModel; }
+        }
+
         public RelayCommand SaveSearchModelCommand {
             get { return _saveSearchModelCommand; }
         }
@@ -1018,6 +1035,16 @@ namespace Novaroma.Win.ViewModels {
             }
         }
 
+        public bool IsActivitiesBusy {
+            get { return _isActivitiesBusy; }
+            set {
+                _isActivitiesBusy = value;
+
+                RaisePropertyChanged("IsActivitiesBusy");
+            }
+        }
+
+
         public int NotReadActivityCount {
             get { return _notReadActivityCount; }
             private set {
@@ -1111,6 +1138,16 @@ namespace Novaroma.Win.ViewModels {
             }
         }
 
+        public int ActivitiesMaxPage {
+            get { return _activitiesMaxPage; }
+            set {
+                if (_activitiesMaxPage == value) return;
+
+                _activitiesMaxPage = value;
+                RaisePropertyChanged("ActivitiesMaxPage");
+            }
+        }
+
         public bool EnableMoviePreviousButton {
             get { return _enableMoviePreviousButton; }
             set {
@@ -1148,6 +1185,26 @@ namespace Novaroma.Win.ViewModels {
 
                 _enableTvShowNextButton = value;
                 RaisePropertyChanged("EnableTvShowNextButton");
+            }
+        }
+
+        public bool EnableActivitiesPreviousButton {
+            get { return _enableActivitiesPreviousButton; }
+            set {
+                if (_enableActivitiesPreviousButton == value) return;
+
+                _enableActivitiesPreviousButton = value;
+                RaisePropertyChanged("EnableActivitiesPreviousButton");
+            }
+        }
+
+        public bool EnableActivitiesNextButton {
+            get { return _enableActivitiesNextButton; }
+            set {
+                if (_enableActivitiesNextButton == value) return;
+
+                _enableActivitiesNextButton = value;
+                RaisePropertyChanged("EnableActivitiesNextButton");
             }
         }
 

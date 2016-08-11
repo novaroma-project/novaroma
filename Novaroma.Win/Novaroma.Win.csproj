@@ -154,6 +154,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BaseConverter.cs" />
+    <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter .cs" />
     <Compile Include="Converters\DateToShortDateStringConverter.cs" />
     <Compile Include="Converters\EnumToEnumInfoConverter.cs" />

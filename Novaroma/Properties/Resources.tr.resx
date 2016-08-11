@@ -1084,4 +1084,7 @@
   <data name="UseTorrentDirectory" xml:space="preserve">
     <value>Torrent Klasörünü Kullan</value>
   </data>
+  <data name="TotalPage" xml:space="preserve">
+    <value>Toplam Sayfa</value>
+  </data>
 </root>

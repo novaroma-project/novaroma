@@ -1,4 +1,5 @@
-﻿using Novaroma.Interface.Model;
+﻿using System;
+using Novaroma.Interface.Model;
 
 namespace Novaroma.Model.Search {
 
@@ -29,6 +30,7 @@ namespace Novaroma.Model.Search {
 
                 _page = value;
                 RaisePropertyChanged("Page");
+                OnRefreshNeeded();
             }
         }
 
@@ -40,6 +42,14 @@ namespace Novaroma.Model.Search {
                 _notRead = value;
                 RaisePropertyChanged("NotRead");
             }
+        }
+
+        public int NotReadActivityCount { get; set; }
+
+        public event EventHandler RefreshNeeded;
+        protected virtual void OnRefreshNeeded() {
+            var handler = RefreshNeeded;
+            if (handler != null) handler(this, EventArgs.Empty);
         }
     }
 }

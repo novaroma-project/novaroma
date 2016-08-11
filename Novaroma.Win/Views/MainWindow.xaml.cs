@@ -155,5 +155,19 @@ namespace Novaroma.Win.Views {
         private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e) {
             Process.Start(e.Uri.ToString());
         }
+
+        private void ActivitiesPreviousButton_OnClick(object sender, RoutedEventArgs e) {
+            DisableActivitiesPagingButtons();
+            _viewModel.ActivitySearchModel.Page -= 1;
+        }
+
+        private void ActivitiesNextButton_OnClick(object sender, RoutedEventArgs e) {
+            DisableActivitiesPagingButtons();
+            _viewModel.ActivitySearchModel.Page += 1;
+        }
+
+        private void DisableActivitiesPagingButtons() {
+            _viewModel.EnableActivitiesPreviousButton = _viewModel.EnableActivitiesNextButton = false;
+        }
     }
 }

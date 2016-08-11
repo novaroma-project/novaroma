@@ -1229,6 +1229,8 @@ namespace Novaroma.Engine {
                         .OrderByDescending(a => a.ActivityDate)
                         .ToList();
 
+                    searchModel.NotReadActivityCount = query.Count(x => x.IsRead);
+
                     return new QueryResult<Activity>(results, inlineCount);
                 }
             });

@@ -2715,6 +2715,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Page.
+        /// </summary>
+        public static string TotalPage {
+            get {
+                return ResourceManager.GetString("TotalPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Turkish.
         /// </summary>
         public static string Turkish {

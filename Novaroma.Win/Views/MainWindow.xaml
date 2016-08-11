@@ -798,34 +798,66 @@
                         </Setter>
                     </Style>
                 </TabItem.Style>
-                <ScrollViewer Margin="0 10 5 5">
-                    <DataGrid ItemsSource="{Binding Activities.Results}" AutoGenerateColumns="False" IsReadOnly="True"
+                <StackPanel>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ActivitiesPreviousButton" Width="40" Height="40" Cursor="Hand" Style="{StaticResource MetroCircleButtonStyle}" 
+                                HorizontalAlignment="Left" Click="ActivitiesPreviousButton_OnClick" IsEnabled="{Binding EnableActivitiesPreviousButton}"  Grid.Column="0" >
+                                <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_navigate_previous}" 
+                                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
+                            </Button>
+                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Margin="0 0 5 0"  Grid.Column="1" HorizontalAlignment="Center">
+                                        <Run Text="{Binding ActivitySearchModel.Page}"/>
+                            </TextBlock>
+                            <Button Name="ActivitiesNextButton" Width="40" Height="40" Cursor="Hand" Click="ActivitiesNextButton_OnClick"
+                                Style="{StaticResource MetroCircleButtonStyle}" IsEnabled="{Binding EnableActivitiesNextButton}" Grid.Column="2">
+                                <userControls:IconUserControl Width="16" Height="16" Visual="{StaticResource ni_navigate_next}" 
+                                           Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                            </Button>
+                            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Margin="0 0 15 0"  Grid.Column="3" HorizontalAlignment="Center">
+                                        <Run Text="{Binding Source={StaticResource Resources}, Path=TotalPage, Mode=OneWay}"/> : 
+                                        <Run Text="{Binding ActivitiesMaxPage}"/>
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+                    <Grid>
+                        <ScrollViewer Margin="0 10 5 5" Visibility="{Binding IsActivitiesBusy, Converter={converters:InverseBooleanToVisibilityConverter}}" >
+                            <DataGrid ItemsSource="{Binding Activities.Results}" AutoGenerateColumns="False" IsReadOnly="True"
                               PreviewMouseWheel="DataGrid_PreviewMouseWheel">
-                        <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsRead}" Value="False">
-                                        <Setter Property="FontWeight" Value="Bold"></Setter>
-                                    </DataTrigger>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource AccentColorBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.RowStyle>
-                        <DataGrid.InputBindings>
-                            <MouseBinding MouseAction="LeftDoubleClick" 
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsRead}" Value="False">
+                                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                                            </DataTrigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource AccentColorBrush}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
+                                <DataGrid.InputBindings>
+                                    <MouseBinding MouseAction="LeftDoubleClick" 
                                           Command="{Binding ActivityPlayCommand}" 
                                           CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                        </DataGrid.InputBindings>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Description}" 
+                                </DataGrid.InputBindings>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Description}" 
                                                 Header="{Binding Source={StaticResource Resources}, Path=Description}" />
-                            <DataGridTextColumn Binding="{Binding ActivityDate}" 
+                                    <DataGridTextColumn Binding="{Binding ActivityDate}" 
                                                 Header="{Binding Source={StaticResource Resources}, Path=Date}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </ScrollViewer>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                        <Controls:ProgressRing Margin="5" IsActive="{Binding IsActivitiesBusy}" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>
