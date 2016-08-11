@@ -202,11 +202,11 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Background="{StaticResource TransparentWhiteBrush}" Foreground="{StaticResource BlackBrush}"
-                                  Command="{Binding ClearLogsAndActivitiesCommand}">
+                                  Command="{Binding ClearLogsCommand}">
                             <MenuItem.Icon>
                                 <StackPanel Orientation="Horizontal">
                                     <userControls:IconUserControl Height="20" Width="20" Margin="5 0 0 0" Visual="{StaticResource ni_clean}" Fill="{StaticResource BlackBrush}" />
-                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=ClearActvitiesAndLogs}" />
+                                    <TextBlock Margin="5 0 0 0" Text="{Binding Source={StaticResource Resources}, Path=ClearLogs}" />
                                 </StackPanel>
                             </MenuItem.Icon>
                         </MenuItem>
@@ -787,7 +787,7 @@
                                         <TextBlock Name="ActivitiesTabHeaderText" Text="{Binding Source={StaticResource Resources}, Path=Activities, Converter={converters:ToLowerConverter}}" />
                                         <Grid Grid.Column="1" Margin="1 0 0 0"
                                               Visibility="{Binding Path=DataContext.NotReadActivityCount,RelativeSource={RelativeSource AncestorType=Window},Converter={converters:IntegerToVisibilityConverter}}">
-                                            <Ellipse Width="18" Height="18" Fill="{StaticResource AccentColorBrush}" StrokeThickness="2" Stroke="{StaticResource GrayNormalBrush}" />
+                                            <Ellipse Width="Auto" Height="18" Fill="{StaticResource AccentColorBrush}" StrokeThickness="2" Stroke="{StaticResource GrayNormalBrush}" />
                                             <TextBlock Text="{Binding Path=DataContext.NotReadActivityCount,RelativeSource={RelativeSource AncestorType=Window}}" 
                                                    FontSize="10" VerticalAlignment="Center" FontWeight="Bold"
                                                    HorizontalAlignment="Center" Foreground="{StaticResource WhiteBrush}"/>
@@ -802,6 +802,8 @@
                     <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -824,6 +826,10 @@
                                         <Run Text="{Binding Source={StaticResource Resources}, Path=TotalPage, Mode=OneWay}"/> : 
                                         <Run Text="{Binding ActivitiesMaxPage}"/>
                             </TextBlock>
+                            <Button Margin="0 0 10 0" MinWidth="60" Height="30" Content="{Binding Source={StaticResource Resources}, Path=ClearOnlyReadActivities}" 
+                                     Command="{Binding Path=DataContext.ClearReadActivitiesCommand, RelativeSource={RelativeSource AncestorType=Grid}}" Grid.Column="4" />
+                            <Button Margin="0 0 10 0" MinWidth="60" Height="30" Content="{Binding Source={StaticResource Resources}, Path=ClearAllActivities}" 
+                                    Command="{Binding Path=DataContext.ClearAllActivitiesCommand, RelativeSource={RelativeSource AncestorType=Grid}}" Grid.Column="5"/>
                         </Grid>
                     </StackPanel>
                     <Grid>

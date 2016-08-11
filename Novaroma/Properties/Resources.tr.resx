@@ -690,8 +690,8 @@
   <data name="DownloadEventHandler" xml:space="preserve">
     <value>İndirme Olay İşleyici</value>
   </data>
-  <data name="ClearActvitiesAndLogs" xml:space="preserve">
-    <value>Aktivite ve Log Temizle</value>
+  <data name="ClearLogs" xml:space="preserve">
+    <value> Bütün Logları Sil</value>
   </data>
   <data name="MovieSubtitleNotFound" xml:space="preserve">
     <value>'{0}' altyazısı bulunamadı</value>
@@ -1086,5 +1086,11 @@
   </data>
   <data name="TotalPage" xml:space="preserve">
     <value>Toplam Sayfa</value>
+  </data>
+  <data name="ClearAllActivities" xml:space="preserve">
+    <value>Bütün Aktiviteleri Sil</value>
+  </data>
+  <data name="ClearOnlyReadActivities" xml:space="preserve">
+    <value>Sadece Okunmuş Aktiviteleri Sil</value>
   </data>
 </root>

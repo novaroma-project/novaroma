@@ -36,7 +36,7 @@ namespace Novaroma.Win.ViewModels {
         private readonly RelayCommand _executeTvShowUpdatesCommand;
         private readonly RelayCommand _backupDatabaseCommand;
         private readonly RelayCommand _manageRuntimeServicesCommand;
-        private readonly RelayCommand _clearLogsAndActivitiesCommand;
+        private readonly RelayCommand _clearLogsCommand;
         private readonly MovieSearchModel _movieSearchModel;
         private readonly TvShowSearchModel _tvShowSearchModel;
         private readonly ActivitySearchModel _activitySearchModel;
@@ -73,6 +73,8 @@ namespace Novaroma.Win.ViewModels {
         private readonly RelayCommand _allSeasonDownloadCheckCommand;
         private readonly RelayCommand _episodeDownloadCheckCommand;
         private readonly RelayCommand _movieDownloadCheckCommand;
+        private readonly RelayCommand _clearAllActivitiesCommand;
+        private readonly RelayCommand _clearReadActivitiesCommand;
         private readonly IEnumerable<EnumInfo<VideoQuality>> _videoQualityEnumInfo;
         private bool _updateAvailable;
         private QueryResult<Movie> _movies;
@@ -124,7 +126,7 @@ namespace Novaroma.Win.ViewModels {
             _executeTvShowUpdatesCommand = new RelayCommand(ExecuteTvShowUpdates);
             _backupDatabaseCommand = new RelayCommand(DoBackupDatabase);
             _manageRuntimeServicesCommand = new RelayCommand(ManageRuntimeServices);
-            _clearLogsAndActivitiesCommand = new RelayCommand(DoClearLogsAndActivities);
+            _clearLogsCommand = new RelayCommand(DoClearLogs);
 
             _saveSearchModelCommand = new RelayCommand(DoSaveSearchModel);
             _movieSearchCommand = new RelayCommand(DoGetMovies);
@@ -153,7 +155,10 @@ namespace Novaroma.Win.ViewModels {
             _tvShowEpisodeSubtitleDownloadCommand = new RelayCommand(DoDownloadTvShowEpisodeSubtitle);
             _tvShowDiscoverFilesCommand = new RelayCommand(DiscoverTvShowFiles);
             _tvShowGoToDirectoryCommand = new RelayCommand(GoToTvShowDirectory);
+
             _activityPlayCommand = new RelayCommand(PlayActivity);
+            _clearAllActivitiesCommand = new RelayCommand(() => DoClearActivities());
+            _clearReadActivitiesCommand = new RelayCommand(() => DoClearActivities(true));
 
             _sendASmileCommand = new RelayCommand(SendASmile);
             _sendAFrownCommand = new RelayCommand(SendAFrown);
@@ -243,13 +248,12 @@ namespace Novaroma.Win.ViewModels {
             new ScriptServicesWindow(_engine, DialogService).ShowDialog();
         }
 
-        private async void DoClearLogsAndActivities() {
-            await ClearLogsAndActivities();
+        private async void DoClearLogs() {
+            await ClearLogs();
         }
 
-        private async Task ClearLogsAndActivities() {
+        private async Task ClearLogs() {
             await _logger.Clear();
-            await _engine.ClearActivities();
         }
 
         #endregion
@@ -312,8 +316,7 @@ namespace Novaroma.Win.ViewModels {
             await GetActivities();
         }
 
-        private async Task GetActivities()
-        {
+        private async Task GetActivities() {
             IsActivitiesBusy = true;
             Activities = await _engine.GetActivities(_activitySearchModel);
             IsActivitiesBusy = false;
@@ -725,6 +728,18 @@ namespace Novaroma.Win.ViewModels {
                 Process.Start(path, args);
         }
 
+        private async Task ClearActivities(bool onlyRead = false) {
+            IsActivitiesBusy = true;
+            await _engine.ClearActivities(onlyRead);
+            ActivitySearchModel.Page = 1;
+            DoGetActivities();
+            IsActivitiesBusy = false;
+        }
+
+        private async void DoClearActivities(bool onlyRead = false) {
+            await ClearActivities(onlyRead);
+        }
+
         private void SendASmile() {
             new FeedbackWindow(_exceptionHandler, _logger, DialogService, false).ShowDialog();
         }
@@ -816,8 +831,8 @@ namespace Novaroma.Win.ViewModels {
             get { return _manageRuntimeServicesCommand; }
         }
 
-        public RelayCommand ClearLogsAndActivitiesCommand {
-            get { return _clearLogsAndActivitiesCommand; }
+        public RelayCommand ClearLogsCommand {
+            get { return _clearLogsCommand; }
         }
 
         public MovieSearchModel MovieSearchModel {
@@ -962,6 +977,14 @@ namespace Novaroma.Win.ViewModels {
 
         public RelayCommand MovieDownloadCheckCommand {
             get { return _movieDownloadCheckCommand; }
+        }
+
+        public RelayCommand ClearAllActivitiesCommand {
+            get { return _clearAllActivitiesCommand; }
+        }
+
+        public RelayCommand ClearReadActivitiesCommand {
+            get { return _clearReadActivitiesCommand; }
         }
 
         #endregion

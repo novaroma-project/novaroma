@@ -86,7 +86,7 @@ namespace Novaroma.Interface {
         Task<bool> DownloadSubtitle(string filePath);
 
         Task BackupDatabase(string path);
-        Task ClearActivities();
+        Task ClearActivities(bool onlyRead = false);
 
         bool SubtitlesNeeded(Language? videoLanguage);
         bool SubtitlesEnabled { get; }

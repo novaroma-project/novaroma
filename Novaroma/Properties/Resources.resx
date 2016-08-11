@@ -727,8 +727,8 @@
   <data name="SubtitleDownloader" xml:space="preserve">
     <value>Subtitle Downloader</value>
   </data>
-  <data name="ClearActvitiesAndLogs" xml:space="preserve">
-    <value>Clear Actvities and Logs</value>
+  <data name="ClearLogs" xml:space="preserve">
+    <value>Clear Logs</value>
   </data>
   <data name="MovieSubtitleNotFound" xml:space="preserve">
     <value>'{0}' subtitle could not be found</value>
@@ -1135,5 +1135,11 @@
   </data>
   <data name="TotalPage" xml:space="preserve">
     <value>Total Page</value>
+  </data>
+  <data name="ClearAllActivities" xml:space="preserve">
+    <value>Clear All Activities</value>
+  </data>
+  <data name="ClearOnlyReadActivities" xml:space="preserve">
+    <value>Clear Only Read Activities</value>
   </data>
 </root>

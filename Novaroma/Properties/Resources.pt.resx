@@ -240,8 +240,8 @@
   <data name="Clear" xml:space="preserve">
     <value>Limpar</value>
   </data>
-  <data name="ClearActvitiesAndLogs" xml:space="preserve">
-    <value>Limpar Atividades e Registos</value>
+  <data name="ClearLogs" xml:space="preserve">
+    <value>Limpar Registos</value>
   </data>
   <data name="Column" xml:space="preserve">
     <value>Coluna</value>

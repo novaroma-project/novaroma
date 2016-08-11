@@ -1218,7 +1218,9 @@ namespace Novaroma.Engine {
                 using (var context = _contextFactory.CreateContext()) {
                     IQueryable<Activity> query = context.Activities.OrderByDescending(a => a.ActivityDate);
 
-                    if (searchModel.NotRead.HasValue)
+                    searchModel.NotReadActivityCount = query.Count(x => !x.IsRead);
+
+                    if (searchModel.NotRead.HasValue) 
                         query = searchModel.NotRead.Value ? query.Where(a => !a.IsRead) : query.Where(a => a.IsRead);
 
                     var inlineCount = query.Count();
@@ -1229,7 +1231,6 @@ namespace Novaroma.Engine {
                         .OrderByDescending(a => a.ActivityDate)
                         .ToList();
 
-                    searchModel.NotReadActivityCount = query.Count(x => x.IsRead);
 
                     return new QueryResult<Activity>(results, inlineCount);
                 }
@@ -1310,7 +1311,7 @@ namespace Novaroma.Engine {
 
                 var languages = SubtitleLanguages.ToArray();
                 foreach (var subtitleDownloader in Settings.SubtitleDownloaders.SelectedItems) {
-                    var result = await subtitleDownloader.DownloadForMovie(movie.OriginalTitle, movie.FilePath, languages,Settings.UseTorrentDirectory, movie.ImdbId);
+                    var result = await subtitleDownloader.DownloadForMovie(movie.OriginalTitle, movie.FilePath, languages, Settings.UseTorrentDirectory, movie.ImdbId);
                     if (!result) continue;
 
                     MovieSubtitleDownloaded(movie, Settings.UseTorrentDirectory);
@@ -1342,7 +1343,7 @@ namespace Novaroma.Engine {
 
                 var languages = SubtitleLanguages.ToArray();
                 foreach (var subtitleDownloader in Settings.SubtitleDownloaders.SelectedItems) {
-                    var result = await subtitleDownloader.DownloadForTvShowEpisode(show.OriginalTitle, season.Season, episode.Episode, episode.FilePath, languages,Settings.UseTorrentDirectory, show.ImdbId);
+                    var result = await subtitleDownloader.DownloadForTvShowEpisode(show.OriginalTitle, season.Season, episode.Episode, episode.FilePath, languages, Settings.UseTorrentDirectory, show.ImdbId);
                     if (!result) continue;
 
                     EpisodeSubtitleDownloaded(episode);
@@ -1548,10 +1549,10 @@ namespace Novaroma.Engine {
             }
         }
 
-        public Task ClearActivities() {
+        public Task ClearActivities(bool onlyRead = false) {
             return Task.Run(() => {
                 using (var context = _contextFactory.CreateContext()) {
-                    var activities = context.Activities.ToList();
+                    var activities = context.Activities.Where(x => !onlyRead || x.IsRead == onlyRead).ToList();
                     activities.ForEach(context.Delete);
                     context.SaveChanges();
 

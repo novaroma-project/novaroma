@@ -430,11 +430,29 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear Actvities and Logs.
+        ///   Looks up a localized string similar to Clear All Activities.
         /// </summary>
-        public static string ClearActvitiesAndLogs {
+        public static string ClearAllActivities {
             get {
-                return ResourceManager.GetString("ClearActvitiesAndLogs", resourceCulture);
+                return ResourceManager.GetString("ClearAllActivities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Logs.
+        /// </summary>
+        public static string ClearLogs {
+            get {
+                return ResourceManager.GetString("ClearLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Only Read Activities.
+        /// </summary>
+        public static string ClearOnlyReadActivities {
+            get {
+                return ResourceManager.GetString("ClearOnlyReadActivities", resourceCulture);
             }
         }
         
