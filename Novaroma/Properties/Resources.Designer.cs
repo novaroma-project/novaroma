@@ -178,6 +178,15 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allowed Extensions.
+        /// </summary>
+        public static string AllowedExtensions {
+            get {
+                return ResourceManager.GetString("AllowedExtensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Any.
         /// </summary>
         public static string Any {
@@ -264,6 +273,15 @@ namespace Novaroma.Properties {
         public static string BackupDatabase {
             get {
                 return ResourceManager.GetString("BackupDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Banned Extensions.
+        /// </summary>
+        public static string BannedExtensions {
+            get {
+                return ResourceManager.GetString("BannedExtensions", resourceCulture);
             }
         }
         

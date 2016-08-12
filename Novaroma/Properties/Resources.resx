@@ -1142,4 +1142,10 @@
   <data name="ClearOnlyReadActivities" xml:space="preserve">
     <value>Clear Only Read Activities</value>
   </data>
+  <data name="AllowedExtensions" xml:space="preserve">
+    <value>Allowed Extensions</value>
+  </data>
+  <data name="BannedExtensions" xml:space="preserve">
+    <value>Banned Extensions</value>
+  </data>
 </root>

@@ -13,6 +13,8 @@ namespace Novaroma.Services {
         private string _userName = "novaroma";
         private string _password = "421337";
         private int? _port = 8080;
+        private string _allowedExtensions;
+        private string _bannedExtensions;
         private bool _deleteCompletedTorrents = true;
         private readonly SettingMultiSelection<ITorrentMovieProvider> _movieProviderSelection;
         private readonly SettingMultiSelection<ITorrentTvShowProvider> _tvShowProviderSelection;
@@ -25,6 +27,7 @@ namespace Novaroma.Services {
         private int? _defaultMinSize;
         private int? _defaultMaxSize;
         private int? _defaultMinSeed;
+        
 
         protected TorrentDownloaderSettingsBase(IEnumerable<ITorrentMovieProvider> movieProviders, IEnumerable<ITorrentTvShowProvider> tvShowProviders) {
             _movieProviderSelection = new SettingMultiSelection<ITorrentMovieProvider>(movieProviders);
@@ -64,6 +67,28 @@ namespace Novaroma.Services {
 
                 _port = value;
                 RaisePropertyChanged("Port");
+            }
+        }
+
+        [Display(Name = "AllowedExtensions", ResourceType = typeof(Resources))]
+        public string AllowedExtensions {
+            get { return _allowedExtensions; }
+            set {
+                if (_allowedExtensions == value) return;
+
+                _allowedExtensions = value;
+                RaisePropertyChanged("AllowedExtensions");
+            }
+        }
+
+        [Display(Name = "BannedExtensions", ResourceType = typeof(Resources))]
+        public string BannedExtensions {
+            get { return _bannedExtensions; }
+            set {
+                if (_bannedExtensions == value) return;
+
+                _bannedExtensions = value;
+                RaisePropertyChanged("AllowedExtensions");
             }
         }
 

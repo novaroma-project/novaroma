@@ -1087,6 +1087,12 @@
   <data name="TotalPage" xml:space="preserve">
     <value>Toplam Sayfa</value>
   </data>
+  <data name="AllowedExtensions" xml:space="preserve">
+    <value>İzin Verilen Uzantılar</value>
+  </data>
+  <data name="BannedExtensions" xml:space="preserve">
+    <value>Yasaklı Uzantılar</value>
+  </data>
   <data name="ClearAllActivities" xml:space="preserve">
     <value>Bütün Aktiviteleri Sil</value>
   </data>

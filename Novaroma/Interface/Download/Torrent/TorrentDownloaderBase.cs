@@ -107,11 +107,16 @@ namespace Novaroma.Interface.Download.Torrent {
                                                      string excludeKeywords, int? minSize, int? maxSize, int? minSeed) {
             var resultList = await SearchMovie(name, year, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize, minSeed);
 
-            var results = resultList.OrderByDescending(r => r.Seed);
-            var result = results.FirstOrDefault();
+            var results = resultList.OrderByDescending(r => r.Seed).Take(2);
 
-            if (result != null)
-                return await Download(path, result);
+            foreach (var result in results) {
+                var downloadKey = await Download(path, result);
+
+                if (string.IsNullOrEmpty(downloadKey))
+                    continue;
+                else
+                    return downloadKey;
+            }
 
             return string.Empty;
         }
@@ -125,11 +130,16 @@ namespace Novaroma.Interface.Download.Torrent {
                                                              string extraKeywords, string excludeKeywords, int? minSize, int? maxSize, int? minSeed) {
             var resultList = await SearchTvShowEpisode(name, season, episode, episodeName, imdbId, videoQuality, extraKeywords, excludeKeywords, minSize, maxSize, minSeed);
 
-            var results = resultList.OrderByDescending(r => r.Seed);
-            var result = results.FirstOrDefault();
+            var results = resultList.OrderByDescending(r => r.Seed).Take(2);
 
-            if (result != null)
-                return await Download(path, result);
+            foreach (var result in results) {
+                var downloadKey = await Download(path, result);
+
+                if (string.IsNullOrEmpty(downloadKey))
+                    continue;
+                else
+                    return downloadKey;
+            }
 
             return string.Empty;
         }

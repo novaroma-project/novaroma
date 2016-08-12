@@ -30,7 +30,32 @@ namespace Novaroma.Services.UTorrent {
             var result = await client.AddUrlTorrentAsync(uri, searchResult.Name);
             if (result.Error != null) throw result.Error;
 
+            if (IsFileExtensionBanned(result)) {
+                await client.DeleteTorrentAsync(result.AddedTorrent.Hash);
+            }
+
             return result.AddedTorrent.Hash;
+        }
+
+        private bool IsFileExtensionBanned(AddUrlResponse result) {
+            if (!string.IsNullOrWhiteSpace(_settings.AllowedExtensions) ||
+                !string.IsNullOrWhiteSpace(_settings.BannedExtensions)) {
+                var files = result.Result.Files.Values.SelectMany(x => x);
+                var file = files.Where(x => Helper.IsVideoFile(x.Name)).OrderByDescending(x => x.Size).FirstOrDefault();
+                if (file != null) {
+                    var fileExtension = Path.GetExtension(file.Name);
+                    var allowedExtensions = _settings.AllowedExtensions.Replace(".", "").Split(';');
+                    var bannedExtensions = _settings.BannedExtensions.Replace(".", "").Split(';');
+
+                    if ((!string.IsNullOrWhiteSpace(_settings.AllowedExtensions) &&
+                        !allowedExtensions.Contains(fileExtension)) ||
+                        (string.IsNullOrWhiteSpace(_settings.BannedExtensions) &&
+                        bannedExtensions.Contains(fileExtension))) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public override async Task Refresh(bool downloadOnly) {
@@ -67,7 +92,7 @@ namespace Novaroma.Services.UTorrent {
 
                     Process.Start(installPath, "/minimized");
                     Thread.Sleep(5000);
-                } 
+                }
             }
 
             return Settings.Port.HasValue
@@ -76,7 +101,7 @@ namespace Novaroma.Services.UTorrent {
         }
 
         public override Task<IEnumerable<ITorrentSearchResult>> SearchMovie(string name, int? year, string imdbId, VideoQuality videoQuality = VideoQuality.Any,
-                                                                            string extraKeywords = null, string excludeKeywords = null, 
+                                                                            string extraKeywords = null, string excludeKeywords = null,
                                                                             int? minSize = null, int? maxSize = null, int? minSeed = null) {
             if (videoQuality == VideoQuality.Any)
                 videoQuality = Settings.DefaultMovieVideoQuality.SelectedItem.Item;
@@ -150,7 +175,7 @@ namespace Novaroma.Services.UTorrent {
         public string InstallPath {
             get {
                 var registryExePath = (Registry.GetValue(@"HKEY_CLASSES_ROOT\uTorrent\shell\open\command", "", null)
-                                      ?? Registry.GetValue(@"HKEY_CLASSES_ROOT\bittorrent\shell\open\command", "", null)) as string; 
+                                      ?? Registry.GetValue(@"HKEY_CLASSES_ROOT\bittorrent\shell\open\command", "", null)) as string;
                 if (registryExePath == null) return string.Empty;
 
                 var idx1 = registryExePath.IndexOf('"') + 1;
@@ -179,7 +204,7 @@ namespace Novaroma.Services.UTorrent {
         }
 
         public void DeserializeSettings(string settings) {
-           Settings.Deserialize(settings);
+            Settings.Deserialize(settings);
         }
 
         #endregion
