@@ -1148,4 +1148,10 @@
   <data name="BannedExtensions" xml:space="preserve">
     <value>Banned Extensions</value>
   </data>
+  <data name="DisableAutoDownload" xml:space="preserve">
+    <value>Disable Auto Download</value>
+  </data>
+  <data name="DisableAutoDownloadDescription" xml:space="preserve">
+    <value>Disable auto download for tv shows and subtitles.</value>
+  </data>
 </root>

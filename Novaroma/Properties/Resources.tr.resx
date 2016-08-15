@@ -1099,4 +1099,10 @@
   <data name="ClearOnlyReadActivities" xml:space="preserve">
     <value>Sadece Okunmuş Aktiviteleri Sil</value>
   </data>
+  <data name="DisableAutoDownload" xml:space="preserve">
+    <value>Otomatik İndirmeyi Kapat</value>
+  </data>
+  <data name="DisableAutoDownloadDescription" xml:space="preserve">
+    <value>Bütün dizi ve altyazılar için otomatik indirmeleri kapatılır.</value>
+  </data>
 </root>

@@ -32,6 +32,7 @@ namespace Novaroma.Engine {
         private readonly SettingMultiSelection<ISubtitleDownloader> _subtitleDownloaders;
         private readonly SettingMultiSelection<IDownloadEventHandler> _downloadEventHandlers;
         private bool _makeSpecialFolder = true;
+        private bool _disableAutoDownload = false;
         private int _downloadInterval;
         private int _subtitleDownloadInterval;
         private string _deleteExtensions = ".nfo;.srt";
@@ -147,6 +148,17 @@ namespace Novaroma.Engine {
         [Display(Name = "SubtitleLanguages", GroupName = "Main", ResourceType = typeof(Resources))]
         public SettingMultiSelection<EnumInfo<Language>> SubtitleLanguages {
             get { return _subtitleLanguages; }
+        }
+
+        [Display(Name = "DisableAutoDownload", Description = "DisableAutoDownloadDescription", GroupName = "Main", ResourceType = typeof(Resources))]
+        public bool DisableAutoDownload {
+            get { return _disableAutoDownload; }
+            set {
+                if (_makeSpecialFolder == value) return;
+
+                _disableAutoDownload = value;
+                RaisePropertyChanged("DisableAutoDownload");
+            }
         }
 
         [Display(Name = "DeleteDirectoriesAlso", Description = "DeleteDirectoriesAlsoDescription", GroupName = "Main", ResourceType = typeof(Resources))]

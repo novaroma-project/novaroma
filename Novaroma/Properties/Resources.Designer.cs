@@ -710,6 +710,24 @@ namespace Novaroma.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable Auto Download.
+        /// </summary>
+        public static string DisableAutoDownload {
+            get {
+                return ResourceManager.GetString("DisableAutoDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable auto download for tv shows and subtitles..
+        /// </summary>
+        public static string DisableAutoDownloadDescription {
+            get {
+                return ResourceManager.GetString("DisableAutoDownloadDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discover.
         /// </summary>
         public static string Discover {

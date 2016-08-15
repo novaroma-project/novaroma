@@ -89,6 +89,35 @@ namespace Novaroma.Engine {
             foreach (var downloader in Settings.Downloader.Items)
                 downloader.DownloadCompleted += DownloaderOnDownloadCompleted;
 
+            if (!Settings.DisableAutoDownload)
+                ScheduleAutoDownloadJob(scheduler);
+
+            Settings.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == "DisableAutoDownload") {
+                    if(Settings.DisableAutoDownload)
+                        scheduler.Clear();
+                    else
+                        ScheduleAutoDownloadJob(scheduler);
+                }
+            };
+
+            Settings.LanguageSelection.PropertyChanged += (sender, args) => {
+                if (args.PropertyName == "SelectedItem") {
+                    var language = Settings.LanguageSelection.SelectedItem.Item;
+                    Helper.SetCulture(language);
+                    OnLanguageChanged(language);
+                }
+            };
+            Settings.MovieDirectory.PropertyChanged += async (sender, args) => {
+                await WatchDirectory(Settings.MovieDirectory.Path);
+            };
+            Settings.TvShowDirectory.PropertyChanged += async (sender, args) => {
+                await WatchDirectory(Settings.TvShowDirectory.Path);
+            };
+        }
+
+        private void ScheduleAutoDownloadJob(IScheduler scheduler) {
             var downloadJob = JobBuilder.Create<DownloadJob>().WithIdentity(DownloadJobName).Build();
             var downloadJobTrigger = CreateIntervalTrigger(DownloadJobDefaultTriggerName, Settings.DownloadInterval, 1);
             scheduler.ScheduleJob(downloadJob, downloadJobTrigger);
@@ -100,8 +129,6 @@ namespace Novaroma.Engine {
             var tvShowUpdateJob = JobBuilder.Create<TvShowUpdateJob>().WithIdentity(TvShowUpdateJobName).Build();
             var tvShowUpdateJobTrigger = CreateIntervalTrigger(TvShowUpdateJobDefaultTriggerName, Settings.TvShowUpdateInterval * 60, 5);
             scheduler.ScheduleJob(tvShowUpdateJob, tvShowUpdateJobTrigger);
-
-            scheduler.Start();
 
             Settings.PropertyChanged += (sender, args) => {
                 if (args.PropertyName == "DownloadInterval") {
@@ -116,19 +143,6 @@ namespace Novaroma.Engine {
                     var newTrigger = CreateIntervalTrigger(TvShowUpdateJobDefaultTriggerName, Settings.TvShowUpdateInterval * 60, 0);
                     scheduler.RescheduleJob(new TriggerKey(TvShowUpdateJobDefaultTriggerName), newTrigger);
                 }
-            };
-            Settings.LanguageSelection.PropertyChanged += (sender, args) => {
-                if (args.PropertyName == "SelectedItem") {
-                    var language = Settings.LanguageSelection.SelectedItem.Item;
-                    Helper.SetCulture(language);
-                    OnLanguageChanged(language);
-                }
-            };
-            Settings.MovieDirectory.PropertyChanged += async (sender, args) => {
-                await WatchDirectory(Settings.MovieDirectory.Path);
-            };
-            Settings.TvShowDirectory.PropertyChanged += async (sender, args) => {
-                await WatchDirectory(Settings.TvShowDirectory.Path);
             };
         }
 
@@ -1220,7 +1234,7 @@ namespace Novaroma.Engine {
 
                     searchModel.NotReadActivityCount = query.Count(x => !x.IsRead);
 
-                    if (searchModel.NotRead.HasValue) 
+                    if (searchModel.NotRead.HasValue)
                         query = searchModel.NotRead.Value ? query.Where(a => !a.IsRead) : query.Where(a => a.IsRead);
 
                     var inlineCount = query.Count();
