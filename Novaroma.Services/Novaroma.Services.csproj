@@ -86,6 +86,8 @@
     <Compile Include="OpenSubtitles\OpenSubtitleDownloader.cs" />
     <Compile Include="OpenSubtitles\OpenSubtitleSearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rarbg\RarbgSettings.cs" />
+    <Compile Include="Rarbg\RarbgTorrentProvider.cs" />
     <Compile Include="ServiceNames.cs" />
     <Compile Include="ThePirateBay\ThePirateBaySettings.cs" />
     <Compile Include="ThePirateBay\ThePirateBayTorrentProvider.cs" />

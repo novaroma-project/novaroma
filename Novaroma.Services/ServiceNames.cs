@@ -12,5 +12,6 @@
         public const string UTorrent = "bittorrent/utorrent";
         public const string ThePirateBay = "thepiratebay";
         public const string Transmission = "transmission";
+        public const string Rarbg = "rarbg";
     }
 }
