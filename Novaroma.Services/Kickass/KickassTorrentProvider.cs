@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AngleSharp;
+using AngleSharp.Parser.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
@@ -88,7 +89,7 @@ namespace Novaroma.Services.Kickass {
                     throw;
                 }
 
-                var document = DocumentBuilder.Html(html);
+                var document = new HtmlParser(html).Parse();
                 var items = document.All
                     .Where(n => n.TagName == "TR" && (n.ClassName == "even" || n.ClassName == "odd"));
 

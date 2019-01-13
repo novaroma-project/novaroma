@@ -8,7 +8,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using AngleSharp;
-using AngleSharp.DOM;
+using AngleSharp.Dom;
+using AngleSharp.Parser.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
@@ -52,7 +53,7 @@ namespace Novaroma.Services.Imdb {
                         client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                     documentStr = await client.DownloadStringTaskAsync(url);
                 }
-                var document = DocumentBuilder.Html(documentStr);
+                var document = new HtmlParser(documentStr).Parse();
 
                 var items = document.All.Where(n => n.TagName == "TR" && (n.ClassName == "findResult even" || n.ClassName == "findResult odd"));
 
@@ -128,7 +129,7 @@ namespace Novaroma.Services.Imdb {
                         client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                     documentStr = await client.DownloadStringTaskAsync(url);
                 }
-                var document = DocumentBuilder.Html(documentStr);
+                var document = new HtmlParser(documentStr).Parse();
 
                 var items = document.All.Where(n => n.ClassName == "lister-item mode-advanced");
 
@@ -243,7 +244,7 @@ namespace Novaroma.Services.Imdb {
                         client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                     documentStr = await client.DownloadStringTaskAsync(url);
                 }
-                var document = DocumentBuilder.Html(documentStr);
+                var document = new HtmlParser(documentStr).Parse();
 
                 using (var client = new NovaromaWebClient()) {
                     return await GetTitle(client, document, id);
@@ -275,7 +276,7 @@ namespace Novaroma.Services.Imdb {
             var overviewNode = document.QuerySelector("div[class='title-overview']");
 
             var titleBarNode = overviewNode.QuerySelector("div[class='title_bar_wrapper']");
-            var title = titleBarNode.QuerySelector("h1[itemprop='name']").TextContent.Trim();
+            var title = titleBarNode.QuerySelector("h1").TextContent.Trim();
             var originalTitleNode = titleBarNode.QuerySelector("div[class='originalTitle']");
             string originalTitle = null;
             if (originalTitleNode != null) {
@@ -333,7 +334,7 @@ namespace Novaroma.Services.Imdb {
                             descriptionClient.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                         descriptionHtmlStr = await descriptionClient.DownloadStringTaskAsync(descUrl);
                     }
-                    var descriptionHtml = DocumentBuilder.Html(descriptionHtmlStr);
+                    var descriptionHtml = new HtmlParser(descriptionHtmlStr).Parse();
                     var plotSummaryNode = descriptionHtml.QuerySelectorAll("div[class='plotSummary']").FirstOrDefault();
                     if (plotSummaryNode != null)
                         description = plotSummaryNode.TextContent.Trim();
@@ -363,7 +364,7 @@ namespace Novaroma.Services.Imdb {
             if (detailsNode != null) {
                 var languageLabel = detailsNode.QuerySelectorAll("h4[class='inline']").FirstOrDefault(h => h.TextContent == "Language:");
                 if (languageLabel != null)
-                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.Text());
+                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.TextContent);
             }
 
             var mediaUrl = string.Format(TITLE_URL, id);
@@ -440,7 +441,7 @@ namespace Novaroma.Services.Imdb {
                             descriptionClient.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                         descriptionHtmlStr = await descriptionClient.DownloadStringTaskAsync(descUrl);
                     }
-                    var descriptionHtml = DocumentBuilder.Html(descriptionHtmlStr);
+                    var descriptionHtml = new HtmlParser(descriptionHtmlStr).Parse();
                     var plotSummaryNode = descriptionHtml.QuerySelectorAll("p[class='plotSummary']").FirstOrDefault();
                     if (plotSummaryNode != null)
                         description = plotSummaryNode.TextContent.Trim();
@@ -473,7 +474,7 @@ namespace Novaroma.Services.Imdb {
             if (detailsNode != null) {
                 var languageLabel = detailsNode.QuerySelectorAll("h4[class='inline']").FirstOrDefault(h => h.TextContent == "Language:");
                 if (languageLabel != null)
-                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.Text());
+                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.TextContent);
             }
 
             var mediaUrl = string.Format(TITLE_URL, id);

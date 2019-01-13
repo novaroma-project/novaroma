@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AngleSharp;
+using AngleSharp.Parser.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
@@ -98,11 +99,11 @@ namespace Novaroma.Services.ThePirateBay {
                 : excludeKeywords.Split(' ').Select(e => e.Trim()).Where(e => !string.IsNullOrEmpty(e)).Distinct().ToList();
 
             var results = new List<TorrentSearchResult>();
-            var url = Helper.CombineUrls(Settings.BaseUrl, "search", search);
+            var url = Helper.CombineUrls(Settings.BaseUrl, "index.php?q=", search);
             using (var client = new NovaromaWebClient()) {
                 var html = await client.DownloadStringTaskAsync(url);
 
-                var document = DocumentBuilder.Html(html);
+                var document = new HtmlParser(html).Parse();
                 var items = document.QuerySelectorAll("table[id='searchResult'] tr");
 
                 foreach (var item in items) {
