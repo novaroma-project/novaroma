@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using AngleSharp;
-using AngleSharp.DOM;
+using AngleSharp.Dom;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
@@ -275,7 +275,7 @@ namespace Novaroma.Services.Imdb {
             var overviewNode = document.QuerySelector("div[class='title-overview']");
 
             var titleBarNode = overviewNode.QuerySelector("div[class='title_bar_wrapper']");
-            var title = titleBarNode.QuerySelector("h1[itemprop='name']").TextContent.Trim();
+            var title = titleBarNode.QuerySelector("h1").TextContent.Trim();
             var originalTitleNode = titleBarNode.QuerySelector("div[class='originalTitle']");
             string originalTitle = null;
             if (originalTitleNode != null) {
@@ -363,7 +363,7 @@ namespace Novaroma.Services.Imdb {
             if (detailsNode != null) {
                 var languageLabel = detailsNode.QuerySelectorAll("h4[class='inline']").FirstOrDefault(h => h.TextContent == "Language:");
                 if (languageLabel != null)
-                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.Text());
+                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.TextContent);
             }
 
             var mediaUrl = string.Format(TITLE_URL, id);
@@ -473,7 +473,7 @@ namespace Novaroma.Services.Imdb {
             if (detailsNode != null) {
                 var languageLabel = detailsNode.QuerySelectorAll("h4[class='inline']").FirstOrDefault(h => h.TextContent == "Language:");
                 if (languageLabel != null)
-                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.Text());
+                    titleLanguage = GetLanguage(languageLabel.NextElementSibling.TextContent);
             }
 
             var mediaUrl = string.Format(TITLE_URL, id);
