@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using AngleSharp;
 using AngleSharp.Dom;
+using AngleSharp.Parser.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Novaroma.Interface;
@@ -52,7 +53,7 @@ namespace Novaroma.Services.Imdb {
                         client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                     documentStr = await client.DownloadStringTaskAsync(url);
                 }
-                var document = DocumentBuilder.Html(documentStr);
+                var document = new HtmlParser(documentStr).Parse();
 
                 var items = document.All.Where(n => n.TagName == "TR" && (n.ClassName == "findResult even" || n.ClassName == "findResult odd"));
 
@@ -128,7 +129,7 @@ namespace Novaroma.Services.Imdb {
                         client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                     documentStr = await client.DownloadStringTaskAsync(url);
                 }
-                var document = DocumentBuilder.Html(documentStr);
+                var document = new HtmlParser(documentStr).Parse();
 
                 var items = document.All.Where(n => n.ClassName == "lister-item mode-advanced");
 
@@ -243,7 +244,7 @@ namespace Novaroma.Services.Imdb {
                         client.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                     documentStr = await client.DownloadStringTaskAsync(url);
                 }
-                var document = DocumentBuilder.Html(documentStr);
+                var document = new HtmlParser(documentStr).Parse();
 
                 using (var client = new NovaromaWebClient()) {
                     return await GetTitle(client, document, id);
@@ -333,7 +334,7 @@ namespace Novaroma.Services.Imdb {
                             descriptionClient.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                         descriptionHtmlStr = await descriptionClient.DownloadStringTaskAsync(descUrl);
                     }
-                    var descriptionHtml = DocumentBuilder.Html(descriptionHtmlStr);
+                    var descriptionHtml = new HtmlParser(descriptionHtmlStr).Parse();
                     var plotSummaryNode = descriptionHtml.QuerySelectorAll("div[class='plotSummary']").FirstOrDefault();
                     if (plotSummaryNode != null)
                         description = plotSummaryNode.TextContent.Trim();
@@ -440,7 +441,7 @@ namespace Novaroma.Services.Imdb {
                             descriptionClient.Headers.Add("X-FORWARDED-FOR", "199.254.254.254");
                         descriptionHtmlStr = await descriptionClient.DownloadStringTaskAsync(descUrl);
                     }
-                    var descriptionHtml = DocumentBuilder.Html(descriptionHtmlStr);
+                    var descriptionHtml = new HtmlParser(descriptionHtmlStr).Parse();
                     var plotSummaryNode = descriptionHtml.QuerySelectorAll("p[class='plotSummary']").FirstOrDefault();
                     if (plotSummaryNode != null)
                         description = plotSummaryNode.TextContent.Trim();
