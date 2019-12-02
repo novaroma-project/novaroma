@@ -99,7 +99,7 @@ namespace Novaroma.Services.ThePirateBay {
                 : excludeKeywords.Split(' ').Select(e => e.Trim()).Where(e => !string.IsNullOrEmpty(e)).Distinct().ToList();
 
             var results = new List<TorrentSearchResult>();
-            var url = Helper.CombineUrls(Settings.BaseUrl, "index.php?q=", search);
+            var url = Helper.CombineUrls(Settings.BaseUrl, "", search);
             using (var client = new NovaromaWebClient()) {
                 var html = await client.DownloadStringTaskAsync(url);
 
